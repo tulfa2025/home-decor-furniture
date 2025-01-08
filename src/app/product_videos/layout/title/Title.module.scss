@@ -1,0 +1,24 @@
+@use '@/styles/shared/variables';
+
+.title_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, space-between, center);
+    padding: 20px 50px;
+    align-self: stretch;
+
+    .title_heading {
+        /* STYLE */
+        @include variables.setCallOutGradient();
+
+        /* TYPOGRAPHY */
+        @include variables.setTypography(86px, normal, 600, normal);
+    }
+
+    .title_span {
+        /* STYLE */
+        color: variables.$primaryColor;
+
+        /* TYPOGRAPHY */
+        @include variables.setTypography(24px, normal, 600, normal);
+    }
+}

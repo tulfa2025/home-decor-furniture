@@ -1,0 +1,62 @@
+@use '@/styles/shared/variables';
+
+.color_left {
+    /* LAYOUT */
+    position: relative;
+    overflow: hidden;
+    @include variables.setLayout(flex, center);
+    width: 50%;
+    height: 90%;
+
+    .color_left_image {
+        /* LAYOUT */
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+}
+
+.color_right {
+    overflow: hidden;
+    /* LAYOUT */
+    @include variables.setLayout(flex);
+    width: 50%;
+    
+    /* STYLE */
+    background-color: variables.$gray;
+
+    .color_right_image {
+        /* LAYOUT */
+        transform: scale(2) translateY(25%);
+        object-fit: contain;
+        overflow: hidden;
+    }
+}
+
+.color_left_filter {
+    /* LAYOUT */
+    position: absolute;
+    bottom: 7%;
+    left: 25%;
+    @include variables.setLayout(flex, center, center, 7.64px);
+    transform: translate(-50%);
+    padding: 11.754px;
+
+    button {
+        /* LAYOUT */
+        @include variables.setLayout(flex, flex-start, end);
+        border-radius: 50%;
+        width: 26px;
+        height: 26px;
+    
+        div {
+            /* LAYOUT */
+            width: 100%;
+            height: 50%;
+    
+            /* STYLE */
+            border-bottom-left-radius: 100px;
+            border-bottom-right-radius: 100px;
+        }
+    }
+}

@@ -1,0 +1,110 @@
+@use '@/styles/shared/variables';
+
+.video_scene_container {
+    width: 100vw;
+    height: 100v;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 300;
+
+    .video_scene_container_inner {
+
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 1);
+        position: relative;
+        z-index: 1;
+
+        .showcase_container {
+            position: absolute;
+            bottom: 10vh;
+            width: 100%;
+            display: flex;
+            justify-items: center;
+
+            @include variables.sm {
+                bottom: 15vh;
+                left: 5%;
+            }
+
+
+            @include variables.md {
+                left: 20%;
+                bottom: 10vh;
+            }
+
+            @include variables.lg {
+                left: 15%;
+            }
+
+            @include variables.xl {
+                left: 30%;
+            }
+
+
+        }
+    }
+}
+
+
+
+.tracker_bar_container {
+    height: 100%;
+    width: 2px;
+    background-color: #979797;
+
+    .tracker_bar_left {
+        background-color: white;
+        width: 4px;
+        position: absolute;
+        height: 40px;
+
+        @include variables.sm {
+            top: 25vh
+        }
+        @include variables.md {
+            top: 0
+        }
+    };
+
+    
+
+    
+}
+.selected_text_container {
+    
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+
+    @include variables.sm {
+        height: 50%;
+        overflow: hidden;
+        top:25vh;
+    }
+
+    @include variables.md {
+        height: 100%;
+        top: 0 
+    }
+
+    .selected_text {
+
+        @include variables.sm {
+            @include variables.setTypography(16px, normal, 600, normal)
+        }
+        @include variables.md {
+            @include variables.setTypography(12px, normal, 600, normal)
+        };
+        width: 100%;
+        text-align: left;
+        padding-left: 10px;
+    
+    }
+}
+
+

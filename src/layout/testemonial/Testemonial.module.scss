@@ -1,0 +1,102 @@
+@use '@/styles/shared/variables';
+
+.testemonial_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, center, center);
+    background-color: variables.$light;
+    height: 100vh;
+
+    .testemonial_content {
+        /* LAYOUT */
+        @include variables.setLayout(flex, center, start, 20.18px, column);
+        width: 664px;
+        height: 419.075px;
+
+        .testemonial_content_icon {
+            /* LAYOUT */
+            background: url("/images/testemonial/like.svg") no-repeat center/contain;
+            width: 134.667px;
+            height: 33.149px;
+            flex-shrink: 0;
+        }
+
+        .testemonial_content_card {
+            /* LAYOUT */
+            position: relative;
+            @include variables.setLayout(flex, space-between);
+            width: 664px;
+            height: 327.333px;
+            padding: 0 26.26px 0 46px;
+            flex-shrink: 0;
+
+            /* STYLE */
+            border-radius: 16px;
+            background-color: variables.$testemonialCard;
+            box-shadow: 0px 62.667px 133.333px 0px variables.$testemonialCardBorder;
+
+            .testemonial_content_card_icon {
+                /* LAYOUT */
+                position: absolute;
+                top: 184.67px;
+                left: 178.67px;
+                background: url("/images/testemonial/double_quotes.svg") no-repeat center/contain;
+                width: 69.333px;
+                height: 69.333px;
+                flex-shrink: 0;
+            }
+
+            .testemonial_content_card_left {
+                /* LAYOUT */
+                @include variables.setLayout(flex, center, start, 59.33px, column);
+
+                .testemonial_content_card_left_paragraph {
+                    /* LAYOUT */
+                    width: 265.333px;
+
+                    /* STYLE */
+                    color: variables.$primaryColor;
+
+                    /* TYPOGRAPHY */
+                    @include variables.setTypography(16px, normal, 500, 26.656px);
+                }
+
+                div {
+                    /* LAYOUT */
+                    @include variables.setLayout(flex, center, start, 2.67px, column);
+
+                    .testemonial_content_card_left_heading {
+                        /* STYLE */
+                        @include variables.setBackgroundClip(variables.$testemonialCardHeadingGradient);
+
+                        /* TYPOGRAPHY */
+                        @include variables.setTypography(21.333px, normal, 500, normal);
+                    }
+
+                    .testemonial_content_card_left_span {
+                        /* STYLE */
+                        color: variables.$testemonialCardSpanGradient;
+
+                        /* TYPOGRAPHY */
+                        @include variables.setTypography(9.333px, normal, 400, normal);
+                    }
+                }
+
+            }
+
+            .testemonial_content_card_right {
+                .testemonial_content_card_right_image {
+                    /* LAYOUT */
+                    position: relative;
+                    top: -71.332px;
+                    background: variables.$testemonialCardImageGradient;
+                    width: 279.736px;
+                    height: 419.075px;
+                    flex-shrink: 0;
+
+                    /* STYLE */
+                    border-radius: 16px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,194 @@
+@use '@/styles/shared/variables';
+
+.subheader_style_1 {
+
+    /* STYLE */
+    background-color: variables.$headerColorOne;
+}
+
+.subheader_style_2 {
+
+    /* STYLE */
+    background-color: white;
+}
+
+.subheader_style_2 {
+
+    /* STYLE */
+    background-color: transparent;
+}
+
+.subheader_font_color_1 {
+    
+    color: white
+    
+}
+
+.subheader_font_color_2 {
+   
+    color:  variables.$headerColorOne
+    
+}
+
+.subheader_nav_activated_1 {
+    /* TYPOGRAPHY */
+    color: variables.$primaryColor;
+}
+
+.subheader_nav_disabled_1 {
+    /* TYPOGRAPHY */
+    color: variables.$subHeaderTextDisabledOne;
+    text-align: center;
+}
+
+.subheader_nav_activated_2 {
+    /* TYPOGRAPHY */
+    color:white;
+}
+
+.subheader_nav_disabled_2 {
+    /* TYPOGRAPHY */
+    color: white;
+    text-align: center;
+}
+
+.dropdown_bar_1{
+    /* LAYOUT */
+    background-color: variables.$headerColorOne;
+}
+.dropdown_bar_2{
+    /* LAYOUT */
+    background-color: transparent;
+}
+
+.subheader_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, center, center);
+    height: 65px;
+    padding: var(--item-spacing-10, 10px) 100px;
+    width: 100vw;
+    position: fixed;
+    top: 0px;
+    left: 0;
+
+    /* STYLE */
+    z-index: 2000;
+
+    .subheader_inner_container {
+
+        /* LAYOUT */
+        @include variables.setLayout(flex, space-between, center);
+
+        @include variables.sm {
+            width: 300px;            
+        }
+
+        @include variables.md {
+            width: 400px;
+        }
+
+        @include variables.lg {
+            max-width: 75%;
+            min-width: 50%;
+        }
+
+        @include variables.breakpoint(1020px){
+            max-width: 1440px;
+            min-width: 100%;
+        }
+
+        @include variables.xl {
+            max-width: 1440px;
+            min-width: 100%;
+        }
+
+        .subheader_heading {
+            /* DESKTOP - 1920 x 1080/SF Pro Display/Title 3 (semi-bolder) */
+            @include variables.setTypography(20px, normal, 400, normal);
+        }
+
+        .subheader_nav {
+            /* LAYOUT */
+            @include variables.setLayout(flex, flex-end, center, 20px);
+            
+            @include variables.sm {
+                width: 50%;
+            }
+
+            @include variables.md {
+                width: 740px;
+            }
+
+            div {
+                /* LAYOUT */
+                @include variables.setLayout(flex, flex-end, center, 20px);
+                width: 100%;
+
+
+                a {
+                    /* TYPOGRAPHY */
+                    /* DESKTOP - 1920 x 1080/SF Pro Display/Subheadline */
+                    @include variables.setTypography(12px, normal, 400, normal);
+                }
+            }
+
+            .dropdown_arrow {
+                /* LAYOUT */
+                justify-self: flex-end;
+                width: 30px;
+                height: 30px;
+            }
+           
+            .book_demo{
+                /* LAYOUT */
+                width: 120px;
+                padding: var(--item-spacing-5, 5px) 10px;
+
+                /* STYLE */
+                border-radius: 10px;
+                background: variables.$quaternaryColor;
+
+                /* TYPOGRAPHY */
+                color: variables.$secondaryColor;
+                text-align: center;
+                /* DESKTOP - 1920 x 1080/SF Pro Display/Footnote */
+                @include variables.setTypography(12px, normal, 400, normal);
+            }
+        }
+    }
+}
+
+.dropdown_bar {
+    /* LAYOUT */
+    @include variables.setLayout(flex, space-around, center);
+    flex-direction: column;
+    width: 100vw;
+    position: absolute;
+    left: 0;
+    z-index: -1;
+
+    .link_container_style {
+        text-align: left;
+        height: 50px;
+        display:flex; 
+        align-items: center;
+        
+
+        @include variables.sm {
+            min-width: 90%;
+            max-width: 100%;
+            
+        }
+
+        @include variables.md {
+            min-width: 90%;
+            max-width: 100%;
+        }
+
+        @include variables.xl {
+            max-width: 1440px;
+            min-width: 100%;
+        }
+    }
+
+}

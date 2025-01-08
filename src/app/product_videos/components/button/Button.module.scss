@@ -1,0 +1,11 @@
+@use '@/styles/shared/variables';
+
+.button_container {
+    /* LAYOUT */
+    background: url("/images/pages/product/button.svg") no-repeat center/contain;
+    width: 166px;
+    height: 35px;
+
+    /* STYLE */
+    border-radius: 10px;
+}

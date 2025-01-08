@@ -1,0 +1,102 @@
+@use '@/styles/shared/variables';
+
+.callout_style_1 {
+
+    position: absolute;
+    .call_heading {
+        @include variables.setCallOutHeadingTypography();
+        color: variables.$light;
+        
+        
+    }
+}
+
+.callout_style_2 {
+
+    position: relative;
+    .call_heading {
+        @include variables.setCallOutGradient();
+
+        @include variables.xs {
+            @include variables.setCallOutHeadingTypography(36px);
+        }
+
+        @include variables.md {
+            @include variables.setCallOutHeadingTypography(40px);
+        }
+
+        @include variables.lg {
+            @include variables.setCallOutHeadingTypography(70px);
+        }
+        
+    }
+    
+}
+
+.callout_style_3 {
+    height: 30vh;
+    .call_paragraph {
+        @include variables.setTypography(26px, normal, 400, normal);
+        color: variables.$primaryColor;
+        text-align: center;
+    }
+}
+
+.call_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    z-index: 20;
+
+    .call_paragraph {
+        @include variables.xs {
+            @include variables.setTypography(12px, normal, 400, normal);
+            max-width: 300px
+        }
+        @include variables.md {
+            @include variables.setTypography(14px, normal, 400, normal);
+            max-width: 400px
+        }
+        @include variables.lg {
+            @include variables.setTypography(18px, normal, 400, normal);
+            max-width: 400px
+        }
+
+        // @include variables.md {
+        //     @include variables.setTypography(22px, normal, 400, normal);
+        //     max-width: 400px
+        // }
+    
+    
+        // @include variables.lg {
+        //     @include variables.setTypography(38px, normal, 400, normal);
+        //     max-width: 960px
+        // }
+        
+        color: variables.$primaryColor;
+    }
+}
+
+/* MODIFIES */
+
+.mw-928 {
+    /* LAYOUT */
+    max-width: 928px;
+}
+
+.mw-768 {
+    /* LAYOUT */
+    max-width: 768px;
+}
+
+.mw-623 {
+    /* LAYOUT */
+    max-width: 623px;
+}
+
+.mw-563 {
+    /* LAYOUT */
+    max-width: 563px;
+}

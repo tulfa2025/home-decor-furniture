@@ -1,0 +1,46 @@
+@use '@/styles/shared/variables';
+
+.carousel_container {
+    /* LAYOUT */
+    position: relative;
+    width: 100%;
+    height: 125vh;
+
+    .background_image {
+        position: absolute;
+        width: 100%;
+        height: auto;
+        z-index: 0
+    }
+
+    .carousel_arrows {
+        /* LAYOUT */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 66.67px;
+        @include variables.setLayout(flex, center, center, 33.33px, column);
+
+
+        button {
+            /* LAYOUT */
+            @include variables.setLayout(flex, center, center, 0, column);
+            width: 47.302px;
+            height: 47.302px;
+            flex-shrink: 0;
+
+            /* STYLE */
+            @include variables.setBorder(47.302px, 1.419px, solid, variables.$light);
+
+            svg {
+                /* LAYOUT */
+                width: 28.381px;
+                height: 28.381px;
+                flex-shrink: 0;
+
+                /* STYLE */
+                color: variables.$light;
+            }
+        }
+    }
+}

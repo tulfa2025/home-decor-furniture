@@ -1,0 +1,11 @@
+@use '@/styles/shared/variables';
+
+.possibilities_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, center, center, 75px, column);
+    padding: 100px 0;
+    align-self: stretch;
+
+    /* STYLE */
+    background: variables.$light;
+}

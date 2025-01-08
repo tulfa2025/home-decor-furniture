@@ -1,0 +1,81 @@
+@use '@/styles/shared/variables';
+
+.cta_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, center, center, 0, column);
+    height: 100%;
+    background-color: white;
+    position: 'relative';
+    
+    .cta_content {
+        /* LAYOUT */
+        @include variables.setLayout(flex, center, center, 10px);
+        padding-bottom: 100px;
+
+        .cta_content_paragraph {
+            /* LAYOUT */
+            flex-shrink: 0;
+
+            .text_group {
+
+                @include variables.xs {
+                    @include variables.setTypography(48px, normal, 600, normal);
+                }
+
+                @include variables.md {
+                    @include variables.setTypography(80px, normal, 600, normal);
+                   
+                }
+
+                @include variables.lg{
+                    @include variables.setTypography(86px, normal, 600, normal);
+                }
+
+            }
+
+            /* LAYOUT */
+            @include variables.sm {
+                width: 348px;
+            }
+
+            @include variables.md {
+                width: 540px
+            }
+            @include variables.lg{
+                width: 742px;
+            }
+            
+
+            span {
+                color: variables.$ctaTertiaryTextDisabled;
+                transition: color ease 0.5s;
+            }
+
+            .cta_content_paragraph_activated {
+                /* STYLE  */
+                color: variables.$primaryColor;
+            }
+        }
+    }
+    .cta_image_container{
+
+        /*LAYOUT*/
+        min-height: 100vh; 
+        width: 100%;
+        overflow: hidden;
+        @include variables.xs {
+            width: 175vw
+        }
+        @include variables.md {
+            width: 100vw
+        }
+        .cta_image {
+            /* LAYOUT */
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    
+}

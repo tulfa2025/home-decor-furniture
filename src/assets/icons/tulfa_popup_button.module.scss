@@ -1,0 +1,9 @@
+@use '@/styles/shared/variables';
+
+.text_style {
+    @include variables.setTypography(14px, normal, 400, normal);
+    color: variables.$light;
+    position: absolute;
+    top: 40%;
+    left: 30%;
+}

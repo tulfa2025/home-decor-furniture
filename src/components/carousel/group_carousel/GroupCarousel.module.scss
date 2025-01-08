@@ -1,0 +1,7 @@
+@use '@/styles/shared/variables';
+
+.carousel_container {
+    // background: url("/images/group_shots/entrance.png") variables.$fallback center / cover no-repeat;
+    width: 100%;
+    height: 100vh;
+}

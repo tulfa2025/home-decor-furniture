@@ -1,0 +1,22 @@
+@use '@/styles/shared/variables';
+
+.carousel_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, start, start, 30px);
+    height: 100%;
+    position: relative;
+    z-index: 500;
+
+    .slider_image_container {
+      height: 100%;
+      overflow: hidden;
+      border-radius: 50px;
+
+      .slider_carousel_image {
+        width: 100%;
+        height: auto;
+        position: relative;
+        
+      }
+    }
+}

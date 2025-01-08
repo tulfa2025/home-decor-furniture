@@ -1,0 +1,86 @@
+@use '@/styles/shared/variables';
+
+.product_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, start, center, 0, column);
+
+    .product_mattres {
+        /* LAYOUT */
+        overflow: hidden;
+        position: relative;
+        @include variables.setLayout(flex, start, center, 0, column);
+        width: 100%;
+        height: 1509px;
+
+        div {
+            /* LAYOUT */
+            position: absolute;
+            width: 1300px;
+            height: 1300px;
+            flex-shrink: 0;
+        }
+
+        .product_mattres_layer_one {
+            /* LAYOUT */
+            z-index: 8;
+            top: -30%;
+            position: absolute;
+        }
+
+        .product_mattres_layer_two {
+            /* LAYOUT */
+            z-index: 7;
+            top: -20%;
+            position: absolute;
+            
+        }
+
+        .product_mattres_layer_three {
+            /* LAYOUT */
+            z-index: 6;
+            top: -10%;
+            position: absolute;
+            
+        }
+
+        .product_mattres_layer_four {
+            /* LAYOUT */
+            z-index: 5;
+            top: 0%;
+            position: absolute;
+           
+        }
+
+        .product_mattres_layer_five {
+            /* LAYOUT */
+            z-index: 4;
+            top: 10%;
+            position: absolute;
+            
+        }
+
+        .product_mattres_layer_six {
+            /* LAYOUT */
+            z-index: 3;
+            top: 20%;
+            position: absolute;
+           
+        }
+
+        .product_mattres_layer_seven {
+            /* LAYOUT */
+            z-index: 2;
+            top: 30%;
+            position: absolute;
+            
+        }
+
+        .product_mattres_layer_eight {
+            /* LAYOUT */
+            z-index: 1;
+            top: 40%;
+            position: absolute;
+          
+        }
+    }
+}

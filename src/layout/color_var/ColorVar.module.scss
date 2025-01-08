@@ -1,0 +1,65 @@
+@use '@/styles/shared/variables';
+
+.color_container {
+    /* LAYOUT */
+    position: relative;
+    overflow: hidden;
+    @include variables.setLayout(flex, center);
+    max-height: 100vh;
+
+        
+}
+
+
+
+
+.color_left_filter_one {
+    /* STYLE */
+    background-color: variables.$colorFilterOne;
+
+    .first_semicircle {
+        /* STYLE */
+        background-color: variables.$colorFilterFirstSemiCircle;
+    }
+}
+
+.color_left_filter_two {
+    /* STYLE */
+    background-color: variables.$colorFilterTwo;
+
+    .second_semicircle {
+        /* STYLE */
+        background-color: variables.$colorFilterSecondSemiCircle;
+    }
+}
+
+.color_left_filter_three {
+    /* STYLE */
+    background-color: variables.$colorFilterThree;
+
+    .third_semicircle {
+        /* STYLE */
+        background-color: variables.$colorFilterThirdSemiCircle;
+    }
+}
+
+.color_left_filter_four {
+    /* STYLE */
+    background-color: variables.$colorFilterFour;
+
+    .fourth_semicircle {
+        /* STYLE */
+        background-color: variables.$colorFilterFourthSemiCircle;
+    }
+}
+
+.color_left_filter_five {
+    /* STYLE */
+    background-color: variables.$colorFilterFive;
+
+    .fifth_semicircle {
+        /* STYLE */
+        background-color: variables.$colorFilterFifthSemiCircle;
+    }
+}
+

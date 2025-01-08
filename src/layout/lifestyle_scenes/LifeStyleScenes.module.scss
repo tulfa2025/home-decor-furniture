@@ -1,0 +1,29 @@
+@use '@/styles/shared/variables';
+
+.scroll_container {
+    height: 150vh;
+    width: 100%;
+    position: relative
+}
+
+.lifestyle_container {
+    /* LAYOUT */
+    height: 100%;
+    position: relative
+}
+
+.lifestyle_image {
+    position:absolute;
+    height: 110%;
+    width: auto;
+    object-fit: cover;
+}
+
+.lifestyle_button_container {
+    position: sticky;
+    z-index: 120;
+    bottom: 5vh;
+    left: calc(50vw - 100px);
+    width: 400px;
+    height: 60px
+}

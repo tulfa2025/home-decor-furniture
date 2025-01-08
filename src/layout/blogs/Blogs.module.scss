@@ -1,0 +1,57 @@
+@use '@/styles/shared/variables';
+
+.blogs_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, center, center);
+    padding: 57.333px 20%;
+    height: 90vh;
+    width: 100%;
+    position: relative;
+    top: 60px;
+
+    .blogs_content {
+        /* LAYOUT */
+        @include variables.setLayout(flex, start, start, 33.333px, column);
+        height: 100%;
+        width: 100%;
+
+        .blogs_content_heading {
+            /* STYLE */
+            @include variables.setBackgroundClip(variables.$secondGradient);
+
+            /* TYPOGRAPHY */
+            justify-content: flex-end;
+
+            @include variables.xs {
+                @include variables.setTypography(30px, normal, 500, normal);
+            }
+
+            @include variables.lg {
+                @include variables.setTypography(64px, normal, 500, normal);
+            }
+
+        }
+
+        .blogs_content_cards {
+            @include variables.setLayout(flex, start, center, 33.333px);
+          
+            height: 75%;
+            width: 100%;
+            
+       
+        }
+    }
+}
+
+.blog_card_container {
+    height: clamp(300px, 75%, 75%);
+
+    @include variables.md{
+        width: 300px
+    }
+    @include variables.lg{
+        width: calc(100% / 3)
+    }
+    
+    
+}

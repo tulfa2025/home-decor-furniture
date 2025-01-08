@@ -1,0 +1,54 @@
+@use '@/styles/shared/variables';
+
+.visual_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, start, center, 0, column);
+    align-self: stretch;
+
+    .visual_video {
+        /* LAYOUT */
+        @include variables.setLayout(flex, center, center);
+        margin: 50px;
+        align-self: stretch;
+
+        /* STYLE */
+        border-radius: 20px;
+    }
+
+    .visual_content {
+        /* LAYOUT */
+        @include variables.setLayout(flex, center, start, 30px);
+        padding: 69px 0;
+
+        .visual_content_left {
+            /* LAYOUT */
+            width: 300px;
+            flex-shrink: 0;
+
+            /* STYLE */
+            @include variables.setCallOutGradient();
+
+            /* TYPOGRAPHY */
+            @include variables.setTypography(32px, normal, 500, normal);
+        }
+
+        .visual_content_right {
+            /* LAYOUT */
+            @include variables.setLayout(flex, center, start, 10px, column);
+            width: 350px;
+            flex-shrink: 0;
+
+            .visual_content_right_text {
+                /* LAYOUT */
+                align-self: stretch;
+
+                /* STYLE */
+                color: variables.$primaryColor;
+
+                /* TYPOGRAPHY */
+                /* DESKTOP - 1920 x 1080/SF Pro Display/Body */
+                @include variables.setTypography(16px, normal, 400, normal);
+            }
+        }
+    }
+}

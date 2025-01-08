@@ -1,0 +1,36 @@
+@use '@/styles/shared/variables';
+
+.image_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, center, center);
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    pointer-events: "none";
+    z-index: 20;
+
+    /* STYLE */
+    background: var(--color-white-solid, variables.$light);
+
+    .background_image {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.closeup_button_container {
+    position: absolute;
+    z-index: 20;
+    bottom: 15vh;
+    width: 400px;
+    height: 60px;
+
+    @include variables.xs {
+        left: calc(50vw - 150px);
+    }
+
+    @include variables.lg {
+        left: calc(50vw - 175px);
+    }
+}

@@ -1,0 +1,36 @@
+@use '@/styles/shared/variables';
+
+.functionality_container {
+    /* LAYOUT */
+    height: 100vh;
+    padding: 79px 0px;
+
+    .functionality_content {
+        /* LAYOUT */
+        @include variables.setLayout(flex, space-between, center, 0, column);
+        height: 100%;
+        padding: 80.667px 0;
+        position: relative;
+
+        .functionality_render {
+            height: 80%;
+            width: auto;
+            position: absolute;
+            top: 50px
+        }
+
+        .functionality_content_heading {
+            @include variables.setCallOutGradient();
+            @include variables.setCallOutHeadingTypography();
+            z-index: 1;
+            transform: translateY(-50px)
+        }
+
+        .functionality_button {
+            position: relative;
+            transform: translateY(100%);
+        }
+    }
+
+  
+}

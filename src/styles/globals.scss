@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    box-sizing: border-box;
+    font-family: 'SF Pro Display', sans-serif;
+    // overflow: hidden;
+}
+
+/* STANDARD CSS RESETS */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  // scroll-behavior: auto !important;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}

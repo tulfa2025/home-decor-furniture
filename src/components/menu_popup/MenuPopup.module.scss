@@ -1,0 +1,51 @@
+@use '@/styles/shared/variables';
+
+.menu_popup_container {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left:0;
+    z-index: 21;
+    pointer-events: none;
+
+    .menu_popup_container_inner{
+        position: absolute;
+        bottom: 5vh;
+        right: 10vh;
+        z-index: 21;
+        pointer-events: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        .slide_container {
+            min-height: 350px;
+            max-height: 450px;
+            overflow: scroll;
+            flex-direction: column;
+            background-color: rgba(0,0,0,0.7);
+            position: relative;
+            z-index: 21;
+            color: white;
+            align-items: flex-end;
+            padding: 20px;
+            border-radius: 15px;
+
+            .button_container {
+
+                @include variables.xs {
+                    padding-top: 10px;
+                    padding-right: 5px
+                }
+
+                @include variables.lg {
+                    padding-top: 5px;
+                    padding-right: 5px
+                }
+                
+            }
+
+        }
+    }
+}

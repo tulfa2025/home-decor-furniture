@@ -1,0 +1,81 @@
+@mixin setBackgroundClip($background) {
+    background: $background;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin setBorder($radius, $width, $style, $color) {
+    border-radius: $radius;
+    border: $width $style $color;
+}
+
+@mixin setBorderNoColor($radius, $width, $style) {
+    border-radius: $radius;
+    border-width: $width;
+    border-style: $style;
+}
+
+@mixin setCallOutGradient() {
+    @include setBackgroundClip($firstGradient)
+}
+
+
+
+/* PUBLIC COLORS */
+
+$primaryColor: #2a266a;
+$secondaryColor: #433e99;
+$tertiaryColor: #ef4b32;
+$quaternaryColor: #FFD222;
+$light: #FFF;
+$gray: #F0F3FB;
+
+$headerColorOne: #CDCDCD;
+
+$firstGradient: linear-gradient(90deg, #433E99 0%, #EF4B32 100%);
+$secondGradient: linear-gradient(90deg, #2A266A 0%, #EF4B32 100%);
+
+/* FILTERS */
+
+$fallback: lightgray;
+$lifeStyleDark: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%);
+$testemonialCardImageGradient: linear-gradient(0deg, rgba(67, 62, 153, 0.20) 0%, rgba(67, 62, 153, 0.20) 100%);
+
+/* COMPONENT COLORS */
+
+$subHeader: rgba(245, 245, 247, 0.902);
+$subHeaderBorder: rgba(42, 38, 106, 0.40);
+$subHeaderText: $secondaryColor;
+$subHeaderTextDisabledOne: #807DBD;
+$subHeaderButton: $tertiaryColor;
+$subHeaderButtonText: #eeeeee;
+
+$popUpButton: rgba(30, 30, 30, 0.60);
+
+/* LAYOUT COLORS */
+
+$ctaSecondaryGradient: linear-gradient(90deg, #433E98 0%, #643B9B 100%);
+
+$ctaTertiaryTextActivated: $primaryColor;
+$ctaTertiaryTextDisabled: rgba(42, 38, 106, 0.6);
+
+$colorFilterOne: rgb(147, 107, 90, .5);
+$colorFilterFirstSemiCircle: #936b5a;
+$colorFilterTwo: rgb(167, 207, 236, .5);
+$colorFilterSecondSemiCircle: #a7cfec;
+$colorFilterThree: rgb(189, 108, 21, .5);
+$colorFilterThirdSemiCircle: #bd6c15;
+$colorFilterFour: rgb(77, 93, 76, .5);
+$colorFilterFourthSemiCircle: #4d5d4c;
+$colorFilterFive: rgb(203, 82, 89, .5);
+$colorFilterFifthSemiCircle: #cb5259;
+
+$materialArrows: #f5f5f7;
+
+$testemonialCard: #f9faff;
+$testemonialCardBorder: rgba(42, 38, 106, 0.15);
+$testemonialCardHeadingGradient: linear-gradient(270deg, #EF4B32 0%, #524BD0 100%);
+$testemonialCardSpanGradient: rgba(67, 62, 153, 0.80);
+
+$cardShadow: rgba(0, 0, 0, 0.25);

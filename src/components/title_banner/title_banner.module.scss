@@ -1,0 +1,31 @@
+@use '@/styles/shared/variables';
+.large_slide_inner_container{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+    .callout_container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 10px;
+        
+        @include variables.xs{
+            padding: 0 30px;
+        }
+        @include variables.md{
+            padding: 0 50px;
+        }
+        @include variables.lg{
+            padding: 0 100px;
+        }
+    }
+}
+
+.callout_paragraph {
+    justify-self: flex-end;
+    text-align: start;
+}
+
+.callout_header {
+    justify-self: flex-start;
+}

@@ -1,0 +1,27 @@
+@use '@/styles/shared/variables';
+
+.close_container {
+    /* LAYOUT */
+    height: 100%;
+    position: relative;  
+}
+.close_background {
+    position: absolute;
+    height: 110%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.closeup_button_container {
+    position: sticky;
+    z-index: 120;
+    bottom: 5vh;
+    left: calc(50vw - 110px);
+    width: 400px;
+    height: 60px
+}
+
+.scroll_container {
+    height: 150vh;
+    width: 100%
+}

@@ -1,0 +1,28 @@
+@use '@/styles/shared/variables';
+
+.image_container {
+    height: 100%;
+    width: 101%;
+    position: relative;
+    top: 60px;
+    display: grid;
+
+    overflow: hidden;
+
+
+    @include variables.xs {
+        grid-template-columns: repeat(2, 50%) ;
+        grid-template-rows: repeat(3, 1fr);
+    }
+    @include variables.md {
+        grid-template-columns: repeat(3, 1fr) ;
+        grid-template-rows: repeat(2, 50%);
+    }
+
+    
+
+    .image_container_style {
+        width: 33%;
+        height: 50%
+    }
+}

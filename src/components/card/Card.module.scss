@@ -1,0 +1,84 @@
+@use '@/styles/shared/variables';
+
+.card_container {
+    /* LAYOUT */
+    overflow: hidden;
+    @include variables.setLayout(flex, start, start, 13.333px, column);
+    height: 100%;
+    width: 100%;
+    padding-bottom: 33.333px;
+    flex-shrink: 0;
+
+    /* STYLE */
+    border-radius: 13.333px;
+    background: variables.$light;
+    box-shadow: 0px 0px 6.667px 0px variables.$cardShadow;
+
+    .card_image {
+        /* LAYOUT */
+        width:100%;
+        height: auto
+    }
+
+    .card_header {
+        /* LAYOUT */
+        @include variables.setLayout(flex, space-between, center);
+        width: 100%;
+        padding: 0px 20px;
+
+        .card_header_heading {
+            /* STYLE */
+            color: variables.$secondaryColor;
+
+            /* TYPOGRAPHY */
+            @include variables.setTypography(12px, normal, 600, normal);
+        }
+
+        .card_header_date {
+            /* LAYOUT */
+            @include variables.setLayout(flex, center, center, 6.667px);
+
+            .card_header_date_icon {
+                /* LAYOUT */
+                background: url("/images/blogs/calendar.png") no-repeat center/cover;
+                width: 13.333px;
+                height: 13.333px;
+            }
+
+            .card_header_date_written {
+                /* STYLE */
+                color: variables.$secondaryColor;
+
+                /* TYPOGRAPHY */
+                @include variables.setTypography(7.333px, normal, 600, normal);
+            }
+        }
+    }
+
+    .card_paragraph {
+        /* LAYOUT */
+        height: 72.667px;
+        align-self: stretch;
+        padding: 0px 20px;
+
+        /* STYLE */
+        color: variables.$primaryColor;
+        ;
+
+        /* TYPOGRAPHY */
+        text-overflow: ellipsis;
+
+        @include variables.xs {
+            @include variables.setTypography(12px, normal, 500, normal);
+        }
+
+        @include variables.md {
+            @include variables.setTypography(14px, normal, 500, normal);
+        }
+
+        @include variables.lg {
+            @include variables.setTypography(16px, normal, 500, normal);
+        }
+        
+    }
+}

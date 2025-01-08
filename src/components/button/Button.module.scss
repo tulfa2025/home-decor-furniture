@@ -1,0 +1,117 @@
+@use '@/styles/shared/variables';
+
+.button_two_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, space-between, center);
+    
+    position: relative;
+
+    /* STYLE */
+    @include variables.sm {
+        @include variables.setBorderNoColor(66.667px, 2px, solid);
+        width: 170px;
+    }
+
+    @include variables.md {
+        @include variables.setBorderNoColor(66.667px, 2px, solid);
+        width: 170px;
+    }
+    @include variables.lg {
+        @include variables.setBorderNoColor(66.667px, 2px, solid);
+        width: 220px;
+    }
+    
+    transition: transform 0.2s ease;
+    transition: background-color 0.5s ease, color 0.5s ease;
+
+    /* TYPOGRAPHY */
+    @include variables.sm {
+        @include variables.setTypography(12px, normal, 600, normal);
+        text-align: center;
+        padding: 10px 20px;
+    }
+    @include variables.md {
+        @include variables.setTypography(12px, normal, 600, normal);
+        text-align: center;
+        padding: 10px 20px;
+    }
+    @include variables.lg {
+        @include variables.setTypography(16px, normal, 600, normal);
+        text-align: center;
+        padding: 13.333px 30px;
+    }
+    
+
+    .button_icon {
+        /* LAYOUT */
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+    }
+}
+
+.button_one_container {
+    
+    /* LAYOUT */
+    @include variables.setLayout(flex, start, center, 20px);
+    height: 50px;
+    padding: 6.667px 13.333px;
+    flex-shrink: 0;
+    position: relative;
+
+    /* STYLE */
+    background: variables.$popUpButton;
+    border-radius: 133.333px;
+    backdrop-filter: blur(3.3333334922790527px);
+    transition: transform 0.2s ease;
+    transition: background-color 0.5s ease, color 0.5s ease;
+
+    .pop_span {
+        /* STYLE */
+        color: variables.$light;
+
+        /* TYPOGRAPHY */
+        @include variables.setTypography(13.333px, normal, 400, normal);
+    }
+
+    .pop_circle {
+        /* LAYOUT */
+        @include variables.setLayout(flex, center, center, 6.667px);
+        width: 33.333px;
+        height: 33.333px;
+        padding: 8px;
+
+        /* STYLE */
+        border-radius: 20px;
+        background: variables.$tertiaryColor;
+
+        .pop_circle_icon {
+            /* LAYOUT */
+            width: 16.667px;
+            height: 16.667px;
+            flex-shrink: 0;
+
+            /* STYLE */
+            color: variables.$light;
+        }
+    }
+    
+}
+
+/* MODIFIES */
+
+.l-color {
+    color: variables.$light;
+    border-color: variables.$light;
+}
+
+.p-color {
+    color: variables.$primaryColor;
+    border-color: variables.$primaryColor;
+}
+
+.button_two_hovered {
+    transform: translate(-1px, -1px);
+    background-color: #2A266A;    
+    color: white
+}

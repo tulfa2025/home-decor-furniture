@@ -1,0 +1,51 @@
+@use '@/styles/shared/variables';
+
+.slide_container {
+    
+    top: 10vh;
+    position: relative;
+    height: 120vh;
+    width: 100%;
+    background-color: white;
+
+
+
+    .marketing_container {
+        /* LAYOUT */
+        @include variables.setLayout(flex, end, start, 35px, column);
+        height: 100%;
+        padding-bottom: 41.333px;
+
+
+    }
+    
+}
+
+.callout_container{
+    height: 50vh;
+    width: 100%
+}
+
+.carousel_container {
+    height: 70vh;
+    width: 100%
+}
+
+.callout_paragraph {
+    justify-self: flex-end;
+    text-align: start;
+}
+
+.callout_header {
+    justify-self: flex-start;
+}
+
+.callout_container_inner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 10%;
+    width: 100%
+
+    
+}
+    

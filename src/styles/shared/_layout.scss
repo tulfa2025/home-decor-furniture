@@ -1,0 +1,7 @@
+@mixin setLayout($display, $justifyContent: flex-start, $alignItems: stretch, $gap: 0, $flexFlow: row) {
+    display: $display;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+    flex-flow: $flexFlow;
+    gap: $gap;
+}

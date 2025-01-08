@@ -1,0 +1,46 @@
+@use '@/styles/shared/variables';
+
+.showcase {
+    /* LAYOUT */
+    position: relative;
+    @include variables.setLayout(flex, start, center);
+    width: 50%;
+    height: 100%;
+
+    .showcase_heading {
+        /* LAYOUT */
+        width: 100%;
+        flex-shrink: 0;
+        position: relative;
+        z-index: 1000;
+        flex-wrap: wrap;
+
+        /* STYLES */
+        color: variables.$light;
+
+        /* TYPOGRAPHY */
+
+        @include variables.sm {
+            @include variables.setTypography(48px, normal, 600, normal);
+            margin-left: 50px;
+        }
+
+        @include variables.md {
+            @include variables.setTypography(60px, normal, 600, normal);
+            margin-left: 120px;
+        }
+
+        @include variables.lg {
+            @include variables.setTypography(64px, normal, 600, normal);
+        }
+       
+        text-transform: capitalize;
+    }
+
+    .showcase_pop {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

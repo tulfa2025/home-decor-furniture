@@ -1,0 +1,69 @@
+@use '@/styles/shared/variables';
+
+.material_container {
+    /* LAYOUT */
+    position: relative;
+    @include variables.setLayout(flex, center, center);
+    height: 100vh;
+
+    .image_container {
+
+        height: 100%; 
+        width: auto
+
+    }
+    .material_image {
+        /* LAYOUT */
+        width: auto;
+        height: 100%;
+    }
+
+    .material_content {
+        /* LAYOUT */
+        position: absolute;
+        bottom: 36px;
+        @include variables.setLayout(flex, space-between, center);
+        width: 86%;
+
+        .material_content_span {
+            /* STYLE */
+            @include variables.setBackgroundClip(variables.$firstGradient);
+
+            /* TYPOGRAPHY */
+            /* DESKTOP - 1280 x 832/Body */
+            @include variables.setTypography(16px, normal, 400, normal);
+        }
+
+        .material_content_arrows {
+            /* LAYOUT */
+            @include variables.setLayout(flex, flex-start, center, 10px);
+
+            button {
+                /* LAYOUT */
+                @include variables.setLayout(flex, center, center, 0, column);
+                width: 40px;
+                height: 40px;
+
+                /* STYLE */
+                border-radius: 40px;
+                background-color: variables.$materialArrows;
+
+                svg {
+                    /* LAYOUT */
+                    width: 100%;
+                    height: 100%;
+                    flex-shrink: 0;
+
+                    /* STYLE */
+                    border-radius: 40px;
+                    color: variables.$secondaryColor;
+                }
+            }
+
+            .material_content_arrow_disabled {
+                /* STYLE */
+                opacity: .6;
+            }
+        }
+    }
+}

@@ -1,0 +1,86 @@
+@use '@/styles/shared/variables';
+
+.variation_left {
+    /* LAYOUT */
+    @include variables.setLayout(flex, center);
+    width: 55.6%;
+    flex-shrink: 0;
+
+}
+
+.variation_right {
+    /* LAYOUT */
+    position: relative;
+    @include variables.setLayout(flex);
+    width: 44.4%;
+    flex-shrink: 0;
+}
+
+.variation_left_image {
+    width: 100%
+}
+
+.variation_right_image {
+    width: 100%
+}
+
+.variation_selection_box {
+    /* LAYOUT */
+    position: absolute;
+    right: 0;
+    @include variables.setLayout(flex, flex-start, start, 0, column);
+    width: 350px;
+
+    button {
+        /* LAYOUT */
+        @include variables.setLayout(flex, space-between, center, 0);
+        height: 80px;
+        padding: 1px 0px 1px 20px;
+        align-self: stretch;
+        overflow: hidden;
+
+        /* STYLES */
+        background-color: variables.$light;
+
+        .variation_choice_name_container{
+
+            width: 50%;
+            height: 100%;
+            @include variables.setLayout(flex, center, center, 0);
+            flex-direction: column;
+            
+    
+            .variation_span {
+                /* STYLES */
+                color: variables.$primaryColor;
+        
+                /* TYPOGRAPHY */
+                @include variables.setTypography(16px, normal, 400, normal);
+            }
+    
+        }
+        
+    
+        .variation_figure {
+            /* LAYOUT */
+            // width: 5cm;
+            height: 100%;
+            @include variables.setLayout(flex, flex-end, center, 0);
+            align-self: stretch;
+
+            
+            
+    
+            & div {
+                /* LAYOUT */
+                height: 100%;
+            }
+
+            
+    
+            
+        }
+    }
+
+    
+}

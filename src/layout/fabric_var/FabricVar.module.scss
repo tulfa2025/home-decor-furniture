@@ -1,0 +1,7 @@
+@use '@/styles/shared/variables';
+
+.variation_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex);
+    height: 100vh;
+}

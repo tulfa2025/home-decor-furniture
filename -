@@ -1,0 +1,2 @@
+*.mp4==>-) --max-size=50M
+git filter-repo --path-glob * --invert-paths --replace-text <(echo *.mp4==

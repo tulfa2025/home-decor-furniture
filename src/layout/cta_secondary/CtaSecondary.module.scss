@@ -1,0 +1,101 @@
+@use '@/styles/shared/variables';
+
+.cta_container {
+    /* LAYOUT */
+    position: relative;
+    background-color: white;
+    overflow: hidden;
+    min-height: 100vh;
+    width: 100vw;
+    z-index: 1;
+
+    .virtual_product_gradient_container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        animation: moveSlide 10s ease infinite;
+        position: absolute;
+    }
+
+    @keyframes moveSlide {
+        0%{
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(calc(-100vh/7 * 5.5))
+        }
+        100% {
+            transform: translateY(0)
+        }
+    }
+
+    .gradient_one,
+    .gradient_two,
+    .gradient_three,
+    .gradient_four,
+    .gradient_five,
+    .gradient_six,
+    .gradient_seven {
+        width: 100%;
+        height: calc(100vh/7 + 10px);
+        border: 0px
+    }
+
+    .gradient_one {
+        background-image: linear-gradient(180deg, #643B9B, #813599);
+    }
+    .gradient_two {
+        background-image: linear-gradient(180deg, #813599, #9C2C93);
+    }
+    .gradient_three {
+        background-image: linear-gradient(180deg, #9C2C93, #B4228A);
+    }
+    .gradient_four {
+        background-image: linear-gradient(180deg, #B4228A, #C8187D);
+    }
+    .gradient_five {
+        background-image: linear-gradient(180deg, #C8187D, #E5245C);
+    }
+    .gradient_six {
+        background-image: linear-gradient(180deg, #E5245C, #ED3749);
+    }
+    .gradient_seven {
+        background-image: linear-gradient(180deg, #ED3749, #F04C33);
+    } 
+
+    .cta_heading {
+        /* LAYOUT */
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%) ;
+        width: 100%;
+        height: 100vh;
+        z-index: 1;
+
+        /* TYPOGRAPHY */
+        @include variables.setTypography(100px, normal, 600, normal);
+        text-align: center;
+
+        /* STYLE */
+        background-color: white;
+        mix-blend-mode: screen;
+    }
+
+    .image_container {
+        overflow: hidden;
+        height: 100%;
+        position: absolute;
+        z-index:2;
+        .cta_image {
+            /* LAYOUT */
+            z-index: 2;
+            position: relative;
+            flex-shrink: 0;
+            transform: translateY(-15%);
+            
+        }
+    }
+
+    
+}

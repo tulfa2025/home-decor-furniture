@@ -1,0 +1,44 @@
+@use '@/styles/shared/variables';
+
+.pop_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, start, center, 20px);
+    height: 50px;
+    padding: 6.667px 13.333px;
+    flex-shrink: 0;
+
+    /* STYLE */
+    // background: variables.$popUpButton;
+    border-radius: 133.333px;
+    backdrop-filter: blur(3.3333334922790527px);
+
+    .pop_span {
+        /* STYLE */
+        color: variables.$light;
+
+        /* TYPOGRAPHY */
+        @include variables.setTypography(13.333px, normal, 400, normal);
+    }
+
+    .pop_circle {
+        /* LAYOUT */
+        @include variables.setLayout(flex, center, center, 6.667px);
+        width: 33.333px;
+        height: 33.333px;
+        padding: 8px;
+
+        /* STYLE */
+        border-radius: 20px;
+        background: variables.$tertiaryColor;
+
+        .pop_circle_icon {
+            /* LAYOUT */
+            width: 16.667px;
+            height: 16.667px;
+            flex-shrink: 0;
+
+            /* STYLE */
+            color: variables.$light;
+        }
+    }
+}

@@ -1,0 +1,11 @@
+@mixin setTypography($fontSize, $fontStyle, $fontWeight, $lineHeight) {
+    font-size: $fontSize;
+    font-style: $fontStyle;
+    font-weight: $fontWeight;
+    line-height: $lineHeight;
+}
+
+@mixin setCallOutHeadingTypography($fs: 64px) {
+    @include setTypography($fs, normal, 600, normal);
+    text-transform: capitalize;
+}

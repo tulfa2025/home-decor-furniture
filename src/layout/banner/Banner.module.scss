@@ -1,0 +1,13 @@
+@use '@/styles/shared/variables';
+
+.banner_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, center, center);
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    z-index: 20;
+
+    /* STYLE */
+    background: var(--color-white-solid, variables.$light);
+}
