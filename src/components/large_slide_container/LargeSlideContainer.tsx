@@ -101,8 +101,10 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
     {
-      damping: 40,
-    }
+        damping: viewportSize.width > 768
+        ? 40
+        : 100,
+      }
   );
 
   return (
@@ -119,7 +121,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     >
       <motion.div
         style={{
-          y: transformShowcaseAnimationThree,
+          y: springyTransformShowcaseAnimationThree,
         }}
         className={styles.large_slide_container}
         ref={inViewRef}

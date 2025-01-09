@@ -121,7 +121,9 @@ const ProductVariation = ({
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
     {
-      damping: 40,
+      damping: viewportSize.width > 768
+      ? 40
+      : 100,
     }
   );
 
@@ -143,7 +145,7 @@ const ProductVariation = ({
             position: "fixed",
             height: "140vh",
             width: "100vw",
-            y: transformShowcaseAnimationThree,
+            y: springyTransformShowcaseAnimationThree,
           }}
           ref={inViewRef}
         >
