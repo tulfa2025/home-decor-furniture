@@ -44,7 +44,7 @@ const ProductVariation = ({
 
   const scrollHeight = calculateScrollHeight(
     viewportSize.height,
-    viewportSize.width > 960 ? 5 : 7
+    viewportSize.width > 960 ? 5 : 3
   );
 
   /* ANIMATION START AND END POSITION */

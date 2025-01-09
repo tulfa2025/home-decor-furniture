@@ -39,7 +39,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
 
   const scrollHeight = calculateScrollHeight(
     viewportSize.height,
-    viewportSize.width > 960 ? 4 : 6
+    viewportSize.width > 960 ? 4 : 2
   );
 
   /* ANIMATION START AND END POSITION */
