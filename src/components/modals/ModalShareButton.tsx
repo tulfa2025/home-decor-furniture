@@ -31,9 +31,9 @@ const ModalShareButton = ({urlLink, handleIsToastOpen, appliedFilter}) => {
   const [isOptionsActive, setIsOptionsActive] = useState(false);
 
   const shareData = {
-    title: "MDN",
-    text: "Learn web development on MDN!",
-    url: "https://developer.mozilla.org",
+    title: "Tulfa, Inc - Home, Decor, & Furniture.",
+    text: "L",
+    url: urlLink,
   };
 
   const handleOnClick = async () => {
