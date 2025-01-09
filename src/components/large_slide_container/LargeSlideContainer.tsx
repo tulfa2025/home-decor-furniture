@@ -84,7 +84,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
       yPosition + viewportSize.height + scrollHeight * 0.35,
       viewportSize.width > 768
         ? yPosition + viewportSize.height + scrollHeight * 0.85
-        : yPosition + viewportSize.height + scrollHeight * 0.35,
+        : yPosition + viewportSize.height + scrollHeight * 0.45,
       yPosition + viewportSize.height + scrollHeight,
     ],
     [
