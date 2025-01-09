@@ -82,8 +82,12 @@ const ProductVariation = ({
   /* POPP ANIMATION */
   const transformPopupAnimationOne = useTransform(
     scrollY,
-    [0, yPosition + scrollHeight * 0.4, yPosition + scrollHeight * 0.45],
-    [viewportSize.height * 1.2, viewportSize.height * 1.2, 0]
+    [0, yPosition + scrollHeight * 0.55, yPosition + scrollHeight * 0.6],
+    [
+      viewportSize.height * 1.2, 
+      viewportSize.height * 1.2, 
+      0
+    ]
   );
 
   const springyTransformPopupAnimationOne = useSpring(

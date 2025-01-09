@@ -61,7 +61,7 @@ const SiloImages: React.FC<LayoutProps> = ({
   }, [isInView]);
 
   const scrollHeight = calculateScrollHeight(viewportSize.height, 
-    viewportSize.width > 960 ? 4 : 3);
+    viewportSize.width > 960 ? 4 : 2);
 
   /* MODAL TRIGGER */
   const [isModalOpen, setIsModalOpen] = useState(false);

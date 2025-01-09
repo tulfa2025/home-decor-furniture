@@ -28,7 +28,12 @@
 }
 
 .product_variation_content_container {
-    height: 40vh;
+    @include variables.xs {
+        height: 75vh;
+    }
+    @include variables.md {
+        height: 47vh;
+    }
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -50,18 +55,21 @@
     
     @include variables.xs {
         flex-direction: column;
-        height: max-content;
+        height: 100%;
         row-gap: 40px;
+        overflow-y: scroll;
+        
     }
     @include variables.md {
         flex-direction: row;
         height: 100%;
         column-gap: 20px;
+        overflow-y: unset;
     }
 
     .indiv_image_container {
         @include variables.xs {
-            height: 40vh;
+            min-height: 40vh;
             width: 100vw;
         }
         @include variables.md {
@@ -82,7 +90,7 @@
             top:0;
             left: 0;
             border-radius: 10px;
-            overflow: hidden;
+            
 
            
         }
@@ -95,7 +103,6 @@
             top:0;
             left: 0;
             border-radius: 10px;
-            overflow: hidden;
         
             
         }
