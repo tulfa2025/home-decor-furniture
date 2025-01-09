@@ -36,7 +36,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
 
   // Get scroll height
   const viewportSize = useWindowSize();
-  const scrollHeight = calculateScrollHeight(viewportSize.height, (viewportSize.width > 960 ? 10 : 10))
+  const scrollHeight = calculateScrollHeight(viewportSize.height, (viewportSize.width > 960 ? 10 : 5))
 
   /* ANIMATION START AND END POSITION */
   const [yPosition, setYPosition] = useState(null);
@@ -135,7 +135,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
 
   const springyTranslateAnimationTwo = useSpring(translateAnimationTwo, {
     damping: 40,
-    stiffness: 100
+    stiffness: 150
   });
 
   /* PAGE TRANSFORM */
