@@ -11,13 +11,21 @@
 
     .menu_popup_container_inner{
         position: absolute;
-        bottom: 5vh;
-        right: 10vh;
+        
         z-index: 21;
         pointer-events: auto;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+
+        @include variables.xs{
+            bottom: 10vh;
+            right: 5vh;
+        }
+        @include variables.md {
+            bottom: 5vh;
+        right: 10vh;
+        }
 
         .slide_container {
             min-height: 350px;

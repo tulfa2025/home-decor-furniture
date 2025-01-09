@@ -13,9 +13,13 @@
     background: var(--color-white-solid, variables.$light);
 
     .image_fit {
+        @include variables.xs {
+            object-position: 50% 3%;
+            transform: scale(0.9)
+        }
         @include variables.md {
             object-position: 0% 45%;
-            transform: scale(1.2)
+            transform: scale(1)
         }
         @include variables.lg {
             transform: scale(1);

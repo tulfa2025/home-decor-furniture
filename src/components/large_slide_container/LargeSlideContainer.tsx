@@ -48,7 +48,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   // Function to get the Y position of the element
   const getElementYPosition = () => {
     if (scrollTargetRef.current) {
-      const yPos = scrollTargetRef.current.offsetTop;
+      const yPos = scrollTargetRef.current.offsetTop ;
       setYPosition(yPos); // Update state with the Y position
     }
   };
@@ -78,7 +78,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     scrollY,
     [
       0,
-      yPosition,
+      yPosition - viewportSize.height,
       yPosition + viewportSize.height,
       yPosition + viewportSize.height + scrollHeight * 0.1,
       yPosition + viewportSize.height + scrollHeight * 0.35,
@@ -94,7 +94,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
       0,
       -viewportSize.height * 0.4 - 60,
       -viewportSize.height * 0.4 - 60,
-      -viewportSize.height * 4.8,
+      -viewportSize.height * 2.4,
     ]
   );
 

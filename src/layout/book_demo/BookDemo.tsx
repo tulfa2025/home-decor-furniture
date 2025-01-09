@@ -35,7 +35,7 @@ const BookDemo = ({
         }
     }, [isInView])
 
-    const scrollHeight = calculateScrollHeight(viewportSize.height,  3);
+    const scrollHeight = calculateScrollHeight(viewportSize.height,  2);
 
     /* ANIMATION START AND END POSITION */
     const [yPosition, setYPosition] = useState(null);

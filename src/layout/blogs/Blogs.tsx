@@ -36,7 +36,7 @@ const Blogs: React.FC<LayoutProps> = ({
         }
     }, [isInView])
 
-    const scrollHeight = calculateScrollHeight(viewportSize.height, 3);
+    const scrollHeight = calculateScrollHeight(viewportSize.height, 2);
 
     /* ANIMATION START AND END POSITION */
     const [yPosition, setYPosition] = useState(null);
@@ -63,7 +63,7 @@ const Blogs: React.FC<LayoutProps> = ({
         scrollY,
         [
             0,
-            yPosition - viewportSize.height * 3,
+            yPosition - viewportSize.height,
             yPosition ,
             yPosition + viewportSize.height + (scrollHeight * 0.5),
             yPosition + viewportSize.height + scrollHeight,

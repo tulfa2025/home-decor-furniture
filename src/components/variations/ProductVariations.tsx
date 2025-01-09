@@ -53,7 +53,7 @@ const ProductVariation = ({
   // Function to get the Y position of the element
   const getElementYPosition = () => {
     if (scrollTargetRef.current) {
-      const yPos = scrollTargetRef.current.offsetTop;
+      const yPos = scrollTargetRef.current.offsetTop ;
       setYPosition(yPos); // Update state with the Y position
     }
   };
@@ -102,7 +102,7 @@ const ProductVariation = ({
     scrollY,
     [
       0,
-      yPosition,
+      yPosition - viewportSize.height /2 ,
       yPosition + viewportSize.height,
       yPosition + viewportSize.height + scrollHeight * 0.2,
       yPosition + viewportSize.height + scrollHeight * 0.25,
@@ -118,7 +118,7 @@ const ProductVariation = ({
       0,
       -viewportSize.height * 0.4,
       -viewportSize.height * 0.4,
-      -viewportSize.height * 4.8,
+      -viewportSize.height * 2.4,
     ]
   );
 

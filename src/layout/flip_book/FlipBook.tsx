@@ -85,17 +85,17 @@ const FlipBook = ({
         scrollY,
         [
             0,
-            yPosition,
+            yPosition - viewportSize.height,
             yPosition + viewportSize.height,
             yPosition + viewportSize.height + (scrollHeight * 0.7),
-            yPosition + viewportSize.height + scrollHeight,
+            yPosition + viewportSize.height + scrollHeight * 0.1,
           ],
           [
             viewportSize.height * 2.4,
             viewportSize.height * 2.4,
             0,
             0,
-            -viewportSize.height * 4.8,
+            -viewportSize.height * 2.4,
           ]
     )
 

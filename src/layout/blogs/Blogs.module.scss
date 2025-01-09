@@ -52,7 +52,8 @@
 
             }
             @include variables.md {
-                flex-direction: row
+                flex-direction: row;
+                height: 75%
             }
             
             
