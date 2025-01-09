@@ -75,7 +75,8 @@ const BookDemo = ({
     )
 
     const springyTransformShowcaseAnimationThree = useSpring(transformShowcaseAnimationThree, {
-        damping: 40
+        damping: 40,
+        stiffness: 150
     })
     return (
         <motion.div

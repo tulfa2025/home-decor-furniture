@@ -72,7 +72,8 @@ const Blogs: React.FC<LayoutProps> = ({
     )
 
     const springyTransformShowcaseAnimationThree = useSpring(transformShowcaseAnimationThree, {
-        damping: 40
+        damping: 40,
+        stiffness: 150
     })
 
     return (

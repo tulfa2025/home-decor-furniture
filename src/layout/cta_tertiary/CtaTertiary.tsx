@@ -36,7 +36,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
 
   // Get scroll height
   const viewportSize = useWindowSize();
-  const scrollHeight = calculateScrollHeight(viewportSize.height, (viewportSize.width > 960 ? 5 : 10))
+  const scrollHeight = calculateScrollHeight(viewportSize.height, (viewportSize.width > 960 ? 10 : 10))
 
   /* ANIMATION START AND END POSITION */
   const [yPosition, setYPosition] = useState(null);
@@ -110,7 +110,8 @@ const CtaTertiary: React.FC<LayoutProps> = ({
     [viewportSize.height * 3, -viewportSize.height * 3]
   );
   const springyTranslateAnimationOne = useSpring(translateAnimationOne, {
-    damping: 40,
+    damping: 35,
+    stiffness: 300
   });
 
   // CHAIR
@@ -134,6 +135,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
 
   const springyTranslateAnimationTwo = useSpring(translateAnimationTwo, {
     damping: 40,
+    stiffness: 100
   });
 
   /* PAGE TRANSFORM */
@@ -158,7 +160,8 @@ const CtaTertiary: React.FC<LayoutProps> = ({
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
     {
-      damping: 20,
+      damping: 40,
+      stiffness: 80
     }
   );
 

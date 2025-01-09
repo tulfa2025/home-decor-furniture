@@ -119,6 +119,7 @@ const SiloImages: React.FC<LayoutProps> = ({
     transformShowcaseAnimationThree,
     {
       damping: 40,
+      stiffness: 150
     }
   );
 

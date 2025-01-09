@@ -71,6 +71,7 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, handleChangeSlide, zIndex }
     transformShowcaseAnimationThree,
     {
       damping: 40,
+      stiffness: 150
     }
   );
 

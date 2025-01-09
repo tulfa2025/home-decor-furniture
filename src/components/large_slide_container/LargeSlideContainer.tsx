@@ -102,8 +102,10 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     transformShowcaseAnimationThree,
     {
         damping: viewportSize.width > 768
-        ? 40
+        ? 35
         : 120,
+        stiffness: 150
+   
       }
   );
 
