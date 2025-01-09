@@ -122,7 +122,7 @@ const ProductVariation = ({
     transformShowcaseAnimationThree,
     {
       damping: 35,
-      stiffness: 80
+      stiffness: viewportSize.width > 960 ? 80 : 125
     }
   );
 
