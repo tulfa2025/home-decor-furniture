@@ -123,7 +123,7 @@ const ProductVariation = ({
     {
       damping: viewportSize.width > 768
       ? 40
-      : 100,
+      : 120,
     }
   );
 

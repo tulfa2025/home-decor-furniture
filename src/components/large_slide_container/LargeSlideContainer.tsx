@@ -103,7 +103,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     {
         damping: viewportSize.width > 768
         ? 40
-        : 100,
+        : 120,
       }
   );
 
