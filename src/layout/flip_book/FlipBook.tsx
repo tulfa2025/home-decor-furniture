@@ -36,7 +36,7 @@ const FlipBook = ({
         }
     }, [isInView])
 
-    const scrollHeight = calculateScrollHeight(viewportSize.height, (viewportSize.height > 960 ? 3 : 6));
+    const scrollHeight = calculateScrollHeight(viewportSize.height, 3);
 
     /* ANIMATION START AND END POSITION */
     const [yPosition, setYPosition] = useState(null);
@@ -100,7 +100,8 @@ const FlipBook = ({
     )
 
     const springyTransformShowcaseAnimationThree = useSpring(transformShowcaseAnimationThree, {
-        damping: 40
+        damping: 40,
+        stiffness: 100
     })
     return (
         <motion.div
