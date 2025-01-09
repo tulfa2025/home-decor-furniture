@@ -81,7 +81,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
       yPosition,
       yPosition + viewportSize.height,
       yPosition + viewportSize.height + scrollHeight * 0.1,
-      yPosition + viewportSize.height + scrollHeight * 0.25,
+      yPosition + viewportSize.height + scrollHeight * 0.35,
       viewportSize.width > 768
         ? yPosition + viewportSize.height + scrollHeight * 0.85
         : yPosition + viewportSize.height + scrollHeight * 0.45,
@@ -104,7 +104,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
         damping: viewportSize.width > 768
         ? 35
         : 120,
-        stiffness: 150
+        stiffness: 125
    
       }
   );
