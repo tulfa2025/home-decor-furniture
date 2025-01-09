@@ -119,7 +119,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     >
       <motion.div
         style={{
-          y: springyTransformShowcaseAnimationThree,
+          y: transformShowcaseAnimationThree,
         }}
         className={styles.large_slide_container}
         ref={inViewRef}

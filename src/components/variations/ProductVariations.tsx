@@ -143,7 +143,7 @@ const ProductVariation = ({
             position: "fixed",
             height: "140vh",
             width: "100vw",
-            y: springyTransformShowcaseAnimationThree,
+            y: transformShowcaseAnimationThree,
           }}
           ref={inViewRef}
         >
