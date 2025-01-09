@@ -36,7 +36,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
 
   // Get scroll height
   const viewportSize = useWindowSize();
-  const scrollHeight = calculateScrollHeight(viewportSize.height, (viewportSize.width > 960 ? 10 : 5))
+  const scrollHeight = calculateScrollHeight(viewportSize.height, (viewportSize.width > 960 ? 10 : 3))
 
   /* ANIMATION START AND END POSITION */
   const [yPosition, setYPosition] = useState(null);
