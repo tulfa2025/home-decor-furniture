@@ -26,7 +26,7 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({
   layoutName,
   handleLayoutLoad,
   handleChangeSlide,
-  zIndex
+  zIndex,
 }) => {
   const pathName = usePathname();
   /*  MODAL RELATED LOGIC */
@@ -66,10 +66,8 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({
           if (!isPopupVisible) setIsPopupVisible(true);
         }
       } else if (e instanceof TouchEvent) {
-        // For touch events (e.g., touchmove), check the vertical movement
-        if (e.touches[0].clientY > e.changedTouches[0].clientY) {
-          if (!isPopupVisible) setIsPopupVisible(true);
-        }
+        // If taps slide then triggers popup
+        if (!isPopupVisible) setIsPopupVisible(true);
       }
     };
 
@@ -78,7 +76,7 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({
       setPopupVisibleLifestyle
     );
     scrollTargetRef.current.removeEventListener(
-      "touchmove",
+      "touchend",
       setPopupVisibleLifestyle
     );
 
@@ -88,7 +86,7 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({
         setPopupVisibleLifestyle
       );
       scrollTargetRef.current.removeEventListener(
-        "touchmove",
+        "touchend",
         setPopupVisibleLifestyle
       );
 
@@ -97,7 +95,7 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({
         setPopupVisibleLifestyle
       );
       scrollTargetRef.current.addEventListener(
-        "touchmove",
+        "touchend",
         setPopupVisibleLifestyle
       );
     }
@@ -108,7 +106,7 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({
           setPopupVisibleLifestyle
         );
         scrollTargetRef.current.removeEventListener(
-          "touchmove",
+          "touchend",
           setPopupVisibleLifestyle
         );
       }
@@ -145,16 +143,16 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({
         <motion.div
           className={styles.closeup_button_container}
           initial={{
-            opacity:0 
+            opacity: 0,
           }}
           whileInView={{
             opacity: isPopupVisible ? 1 : 0,
             transition: {
-              duration: 0.5
-            }
+              duration: 0.5,
+            },
           }}
           viewport={{
-            amount: 0.5
+            amount: 0.5,
           }}
         >
           {isPopupVisible && (
@@ -178,7 +176,9 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({
           selectionArray={[]}
           differentSizes={true}
           random={false}
-          urlLink={`${window.location.protocol}//${window.location.host}${pathName}?comp=${layoutName + 1}`}
+          urlLink={`${window.location.protocol}//${
+            window.location.host
+          }${pathName}?comp=${layoutName + 1}`}
         />
       )}
     </>

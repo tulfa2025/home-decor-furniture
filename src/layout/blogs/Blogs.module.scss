@@ -4,10 +4,17 @@
     /* LAYOUT */
     @include variables.setLayout(flex, center, center);
     padding: 57.333px 20%;
-    height: 90vh;
     width: 100%;
     position: relative;
     top: 60px;
+    overflow: scroll;
+
+    @include variables.xs{
+       height: 90vh;
+    }
+    @include variables.md{
+        height: 90vh;
+    }
 
     .blogs_content {
         /* LAYOUT */
@@ -23,20 +30,31 @@
             justify-content: flex-end;
 
             @include variables.xs {
-                @include variables.setTypography(30px, normal, 500, normal);
+                @include variables.setTypography(48px, normal, 500, normal);
+                margin-bottom: 20px;
             }
 
             @include variables.lg {
                 @include variables.setTypography(64px, normal, 500, normal);
+                margin-bottom: 0px;
             }
 
         }
 
         .blogs_content_cards {
-            @include variables.setLayout(flex, start, center, 33.333px);
-          
-            height: 75%;
-            width: 100%;
+
+            @include variables.xs {
+                @include variables.setLayout(flex, start, center, 33.333px);
+                flex-direction: column;
+                height: max-content;
+                width: 100%;
+
+
+            }
+            @include variables.md {
+                flex-direction: row
+            }
+            
             
        
         }

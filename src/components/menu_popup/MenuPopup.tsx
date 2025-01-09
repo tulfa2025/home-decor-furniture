@@ -26,20 +26,21 @@ const MenuPopup = ({ layoutCollection, scrollDetails }) => {
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const viewportSize = useWindowSize()
+  const viewportSize = useWindowSize();
   useEffect(() => {
     if (isActive) {
       setTimeout(() => {
-        let scrollDistance;      
+        let scrollDistance;
 
-        if(currentSlide === 0){
-          scrollDistance = 0
+        if (currentSlide === 0) {
+          scrollDistance = 0;
         } else {
-          scrollDistance=scrollDetails.scrollPositions[currentSlide] + viewportSize.height;
+          scrollDistance =
+            scrollDetails.scrollPositions[currentSlide] + viewportSize.height;
         }
 
         window.scrollTo({
-          top: scrollDistance ,
+          top: scrollDistance,
           behavior: "smooth",
         });
       }, 250);
@@ -56,10 +57,16 @@ const MenuPopup = ({ layoutCollection, scrollDetails }) => {
           }}
           animate={{
             opacity: isActive ? 1 : 0,
-            display: isActive ? 'flex' : 'none'
+            display: isActive ? "flex" : "none",
           }}
         >
           {slidesList.map((componentDetails, index) => {
+            if (
+              componentDetails[0].toLowerCase() === "banner" ||
+              componentDetails[0].toLowerCase() === "book a demo"
+            ) {
+              return <></>;
+            }
             return (
               <motion.button
                 key={index}

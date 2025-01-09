@@ -71,10 +71,8 @@ const NewMarketingImages: React.FC<LayoutProps> = ({
         if (!isPopupVisible) setIsPopupVisible(true);
       }
     } else if (e instanceof TouchEvent) {
-      // For touch events (e.g., touchmove), check the vertical movement
-      if (e.touches[0].clientY > e.changedTouches[0].clientY) {
-        if (!isPopupVisible) setIsPopupVisible(true);
-      } 
+      if (!isPopupVisible) setIsPopupVisible(true);
+      
     }
     };
 
@@ -83,7 +81,7 @@ const NewMarketingImages: React.FC<LayoutProps> = ({
       setPopupVisibleLifestyle
     );
     scrollTargetRef.current.removeEventListener(
-      "touchmove",
+      "touchend",
       setPopupVisibleLifestyle
     );
 
@@ -93,7 +91,7 @@ const NewMarketingImages: React.FC<LayoutProps> = ({
         setPopupVisibleLifestyle
       );
       scrollTargetRef.current.removeEventListener(
-        "touchmove",
+        "touchend",
         setPopupVisibleLifestyle
       );
 
@@ -102,7 +100,7 @@ const NewMarketingImages: React.FC<LayoutProps> = ({
         setPopupVisibleLifestyle
       );
       scrollTargetRef.current.addEventListener(
-        "touchmove",
+        "touchend",
         setPopupVisibleLifestyle
       );
     }
@@ -113,7 +111,7 @@ const NewMarketingImages: React.FC<LayoutProps> = ({
           setPopupVisibleLifestyle
         );
         scrollTargetRef.current.removeEventListener(
-          "touchmove",
+          "touchend",
           setPopupVisibleLifestyle
         );
       }

@@ -36,7 +36,7 @@ const Blogs: React.FC<LayoutProps> = ({
         }
     }, [isInView])
 
-    const scrollHeight = calculateScrollHeight(viewportSize.height, 5);
+    const scrollHeight = calculateScrollHeight(viewportSize.height, 3);
 
     /* ANIMATION START AND END POSITION */
     const [yPosition, setYPosition] = useState(null);
@@ -92,7 +92,7 @@ const Blogs: React.FC<LayoutProps> = ({
                 position: 'fixed',
                 height: '100vh',
                 width: '100vw',
-                y: springyTransformShowcaseAnimationThree
+                y: springyTransformShowcaseAnimationThree,
             }}
             ref={inViewRef}
         >

@@ -28,7 +28,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({
   layoutName,
   handleLayoutLoad,
   handleChangeSlide,
-  zIndex
+  zIndex,
 }) => {
   /*  MODAL RELATED LOGIC */
   //Scroll Block context
@@ -63,19 +63,14 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({
       if (!isInView) return;
 
       // For touch events or wheel events, check the deltaY or y position
-    if (e instanceof WheelEvent) {
-      // For wheel events, deltaY will indicate scroll direction
-      if (e.deltaY > 0) {
+      if (e instanceof WheelEvent) {
+        // For wheel events, deltaY will indicate scroll direction
+        if (e.deltaY > 0) {
+          if (!isPopupVisible) setIsPopupVisible(true);
+        }
+      } else if (e instanceof TouchEvent) {
         if (!isPopupVisible) setIsPopupVisible(true);
       }
-    } else if (e instanceof TouchEvent) {
-      // For touch events (e.g., touchmove), check the vertical movement
-      if (e.touches[0].clientY > e.changedTouches[0].clientY) {
-        if (!isPopupVisible) setIsPopupVisible(true);
-      } 
-    }
-
-      
     };
 
     scrollTargetRef.current.removeEventListener(
@@ -83,7 +78,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({
       setPopupVisibleLifestyle
     );
     scrollTargetRef.current.removeEventListener(
-      "touchmove",
+      "touchend",
       setPopupVisibleLifestyle
     );
 
@@ -93,7 +88,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({
         setPopupVisibleLifestyle
       );
       scrollTargetRef.current.removeEventListener(
-        "touchmove",
+        "touchend",
         setPopupVisibleLifestyle
       );
 
@@ -102,7 +97,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({
         setPopupVisibleLifestyle
       );
       scrollTargetRef.current.addEventListener(
-        "touchmove",
+        "touchend",
         setPopupVisibleLifestyle
       );
     }
@@ -113,7 +108,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({
           setPopupVisibleLifestyle
         );
         scrollTargetRef.current.removeEventListener(
-          "touchmove",
+          "touchend",
           setPopupVisibleLifestyle
         );
       }
@@ -152,17 +147,17 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({
         <motion.div
           className={styles.closeup_button_container}
           initial={{
-            opacity:0 
+            opacity: 0,
           }}
           whileInView={{
             opacity: isPopupVisible ? 1 : 0,
             transition: {
               delay: 0.5,
-              duration: 0.1
-            }
+              duration: 0.1,
+            },
           }}
           viewport={{
-            amount: 0.5
+            amount: 0.5,
           }}
         >
           {isPopupVisible && (
