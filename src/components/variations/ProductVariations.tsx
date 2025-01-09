@@ -44,7 +44,7 @@ const ProductVariation = ({
 
   const scrollHeight = calculateScrollHeight(
     viewportSize.height,
-    viewportSize.width > 960 ? 5 : 3
+    viewportSize.width > 960 ? 4 : 3
   );
 
   /* ANIMATION START AND END POSITION */
@@ -121,9 +121,7 @@ const ProductVariation = ({
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
     {
-      damping: viewportSize.width > 768
-      ? 35
-      : 120,
+      damping: 35,
       stiffness: 80
     }
   );

@@ -101,9 +101,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
     {
-        damping: viewportSize.width > 768
-        ? 35
-        : 120,
+        damping: 35,
         stiffness: 125
    
       }
