@@ -1,5 +1,5 @@
 "use client";
-import styles from "./NewLIfeStyleScenes.module.scss";
+import styles from "./NewMarketingImages.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useContext, useRef, useState, useEffect } from "react";
@@ -9,8 +9,6 @@ import { usePathname } from "next/navigation";
 
 /* CUSTOM PROPS */
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
-import backgroundImage from "../../../assets/images/lifestyle_scenes/placeholder/image_two.png";
-import { modalSelectionArrayLifestyle } from "@/utils/constants";
 const ModalContainer = dynamic(
   () => import("@/components/modals/ModalContainer"),
   {
@@ -22,9 +20,13 @@ import useFilter from "@/hooks/use_filter";
 import useInView from "@/hooks/use_inview";
 
 /* IMAGES */
-import modalImageSet from "../lifestyle_scenes_images";
+import modalImageSet from "../marketing_images";
+import backgroundImageOne from '../../../assets/images/marketing_images/kv2.jpg'
+import backgroundImageTwo from '../../../assets/images/marketing_images/mockup revista 2.jpg'
+import backgroundImageThree from '../../../assets/images/marketing_images/mockup laptop.jpg'
 
-const NewLifeStyleScenes: React.FC<LayoutProps> = ({
+
+const NewMarketingImages: React.FC<LayoutProps> = ({
   layoutName,
   handleLayoutLoad,
   handleChangeSlide,
@@ -74,8 +76,6 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({
         if (!isPopupVisible) setIsPopupVisible(true);
       } 
     }
-
-      
     };
 
     scrollTargetRef.current.removeEventListener(
@@ -128,23 +128,38 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({
         layoutName={layoutName}
         handleLayoutLoad={handleLayoutLoad}
         handleChangeSlide={handleChangeSlide}
-        title="Lifestyle Scenes"
-        paragraph="Showcase your furniture in thousands of beautifully designed room setups - without moving a thing or touching a camera."
+        title="Marketing Images"
+        paragraph="Lorem ipsum dolor sit amet sonsectetur. Id lacus enim amet aliquet phasellus porta notaque."
         zIndex={zIndex}
       >
         <motion.section
           className={styles.image_container}
-          ref={inViewRef}
+          ref={scrollTargetRef}
           style={{
             filter: isModalOpen ? "blur(10px)" : "",
           }}
         >
           <Image
-            src={backgroundImage}
+            src={backgroundImageOne}
             alt=""
             priority
-            className={styles.background_image}
-            ref={scrollTargetRef}
+            className={styles.background_image_top}
+            
+            ref={inViewRef}
+          />
+          <Image
+            src={backgroundImageTwo}
+            alt=""
+            priority
+            className={styles.background_image_bottom_left}
+            
+          />
+          <Image
+            src={backgroundImageThree}
+            alt=""
+            priority
+            className={styles.background_image_bottom_right}
+            
           />
         </motion.section>
 
@@ -176,14 +191,14 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({
           )}
         </motion.div>
       </LargeSlideContainer>
-      {/* LIFESTYLE SCENES Modal */}
+      {/* Marketing IMages SCENES Modal */}
       {isModalOpen && (
         <ModalContainer
           ref={modalRef}
           handleModalClose={handleModalClose}
           isModalOpen={isModalOpen}
           imageSet={modalImageSet}
-          selectionArray={modalSelectionArrayLifestyle}
+          selectionArray={[]}
           differentSizes={true}
           random={false}
           filter={filter}
@@ -194,4 +209,4 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({
   );
 };
 
-export default NewLifeStyleScenes;
+export default NewMarketingImages;

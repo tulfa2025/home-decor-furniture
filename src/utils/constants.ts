@@ -4,7 +4,6 @@ export const modalSelectionArraySilo = [
     "Outdoor",
     "Tabletop",
     "Kitchen",
-    "Bedding",
     "Bath",
     'Decor',
     'Rugs',

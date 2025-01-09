@@ -9,7 +9,6 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 
 import useInView from "@/hooks/use_inview";
 import useWindowSize from "@/hooks/use_window_size";
-import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 
 /* MARKETiNG IMAGES */
 import marketingOneImage from '../../assets/images/marketing_images/first_source.png'

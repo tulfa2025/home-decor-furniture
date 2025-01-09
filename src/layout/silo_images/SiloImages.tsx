@@ -143,18 +143,6 @@ const SiloImages: React.FC<LayoutProps> = ({
     }
   });
 
-  /* BUTTON ANIMATION */
-  const transformOpacityAnimationTwo = useTransform(
-    scrollY,
-    [
-      yPosition,
-      yPosition + scrollHeight * 0.15,
-      yPosition + scrollHeight * 0.5,
-      yPosition + scrollHeight,
-    ],
-    [0, 1, 1, 0]
-  );
-
   return (
     <motion.div
       style={{
@@ -228,7 +216,7 @@ const SiloImages: React.FC<LayoutProps> = ({
           selectionArray={modalSelectionArraySilo}
           random={false}
           filter={filter}
-          urlLink={`${window.location.protocol}//${window.location.host}${pathName}?comp=${layoutName + 1}`}
+          urlLink={`${window.location.protocol}//${window.location.host}${pathName}?comp=${layoutName}`}
         />}
       </motion.div>
     </motion.div>

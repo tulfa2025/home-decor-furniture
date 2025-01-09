@@ -3,18 +3,6 @@ type ModalImageSet = {
   [key: string]: Array<StaticImageData>;
 };
 
-/*MODAL IMAGES */
-import modalImageOne from "../../assets/images/silo_images/nitavparikh_A_cute_pink_and_blue_patterned_chair_with_wooden_le_9245e8ad-d4a7-435c-b977-d570358625ce.png";
-import modalImageTwo from "../../assets/images/silo_images/nitavparikh_A_high-definition_product_photography_shot_of_a_m_67fb44b4-1bb2-460a-8f61-7a9de7145563_1.png";
-import modalImageThree from "../../assets/images/silo_images/nitavparikh_A_realistic_and_high-definition_photograph_of_a_m_135c757e-8076-414c-bb64-9cd8423e85d1_1.png";
-import modalImageFour from "../../assets/images/silo_images/nitavparikh_Design_an_armchair_with_embroidery_and_patchwork_in_6ecb3c2d-e588-4c28-9552-79431b70100c.png";
-import modalImageFive from "../../assets/images/silo_images/nitavparikh_Design_an_armchair_with_embroidery_and_patchwork_in_b52f9e76-aed5-4aa6-995e-a8af6951b9b3.png";
-import modalImageSix from "../../assets/images/silo_images/nitavparikh_httpss.mj.run4-y-CPHhM7M_Create_a_hyper-realistic_e_63b54fa9-878e-48bc-b117-a39a4b047cbe.png";
-import modalImageSeven from "../../assets/images/silo_images/nitavparikh_httpss.mj.run8qkuHT_yC-A_A_product_white_background_20d7e17c-8a07-4470-81b8-a1dd77ab0de5.png";
-import modalImageEight from "../../assets/images/silo_images/nitavparikh_httpss.mj.runSKl6n5p8DHM_teradactyl_ceramic_planter_5f248636-1d6c-4f59-b317-170b4e8bc123.png";
-import modalImageNine from "../../assets/images/silo_images/nitavparikh_httpss.mj.runZOIhfyJ0g18_a_small_white_plaster_sc_baa2c578-ca0d-4313-9c8e-d9d559640f0b_2.png";
-import modalImageTen from "../../assets/images/silo_images/nitavparikh_httpss.mj.runjSaRhLUK358_White_dachshund-shaped_pla_2db67f20-39b3-4bb6-8f09-a2371077ccfa.png";
-
 /* MODAL BANNER */
 import modalBanner from '../../assets/images/silo_images/silo/Banner/0_0.png'
 
@@ -149,7 +137,6 @@ import windowNineImage from '../../assets/images/silo_images/silo/Window - Curta
 import windowTenImage from '../../assets/images/silo_images/silo/Window - Curtain/nitavparikh_Modern_striped_curtains_in_alternating_panels_of_iv_6947889d-2134-4f8a-86de-28a81ed388bd.png'
 import windowElevenImage from '../../assets/images/silo_images/silo/Window - Curtain/nitavparikh_Modern_striped_curtains_in_alternating_panels_of_iv_d0d2706f-4ec1-47a5-8235-79794789cdda.png'
 import windowTwelveImage from '../../assets/images/silo_images/silo/Window - Curtain/nitavparikh_Modern_striped_curtains_in_alternating_panels_of_iv_ea0c84b1-9819-4f17-9175-8bfb41e4b183.png'
-import windowThirteenImage from '../../assets/images/silo_images/silo/Window - Curtain/nitavparikh_Modern_striped_curtains_in_alternating_panels_of_iv_ea0c84b1-9819-4f17-9175-8bfb41e4b183.png'
 import windowFourteenImage from '../../assets/images/silo_images/silo/Window - Curtain/nitavparikh_Natural_bamboo_shades_in_a_warm_honey_tone_featurin_5ea1ba2e-b688-40cb-95ed-88815ad03315.png'
 import windowFifteenImage from '../../assets/images/silo_images/silo/Window - Curtain/nitavparikh_httpss.mj.run-mvYoN4XovA_A_close-up_view_of_modern__b5d340c4-8b00-42b8-b9f1-7b86919ea36b.png'
 import windowSixteenImage from '../../assets/images/silo_images/silo/Window - Curtain/nitavparikh_httpss.mj.run5mUPQhLL_x0_Roman_blinds_in_a_light_gr_0a24d9ce-7262-499e-b515-ef19c5c92cd3.png'
@@ -222,7 +209,6 @@ const modalImageSet = {
     kitchenNineImage,
     
   ],
-  bedding: [],
   bath: [
     bathTwentyImage,
     bathTwentyOneImage,

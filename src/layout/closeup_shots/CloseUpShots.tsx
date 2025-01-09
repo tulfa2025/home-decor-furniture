@@ -30,6 +30,7 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 
 /*MODAL IMAGES */
 import modalImageSet from "./closeup_shots_images";
+import { usePathname } from "next/navigation";
 
 const CloseUpShots: React.FC<LayoutProps> = ({
   layoutName,
@@ -225,6 +226,8 @@ const CloseUpShots: React.FC<LayoutProps> = ({
     }
   );
 
+  const pathName = usePathname();
+
   return (
     <>
       <motion.div
@@ -327,7 +330,7 @@ const CloseUpShots: React.FC<LayoutProps> = ({
         </motion.div>
       </motion.div>
 
-      {/* LIFESTYLE SCENES Modal */}
+      {/* CLose Up Shots Modal */}
       <ModalContainer
         ref={modalRef}
         handleModalClose={handleModalClose}
@@ -336,6 +339,7 @@ const CloseUpShots: React.FC<LayoutProps> = ({
         selectionArray={[]}
         differentSizes={true}
         random={false}
+        urlLink={`${window.location.protocol}//${window.location.host}${pathName}?comp=${layoutName}`}
       />
     </>
   );
