@@ -1,12 +1,13 @@
 "use client";
 import styles from "./Banner.module.scss";
-import { motion, useSpring, useTransform, useScroll } from "framer-motion";
+import { motion, useSpring, useTransform, useScroll, useMotionValueEvent } from "framer-motion";
 import VideoPlayer from "@/components/video/VideoPlayer";
 // import CtaPrimary from "@/layout/cta_primary/CtaPrimary";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useContext } from "react";
 import useInView from "../../hooks/use_inview";
 import useWindowSize from "@/hooks/use_window_size";
 import calculateScrollHeight from "@/utils/calculate_scrollheight";
+import SubheaderStyleContext from "@/context/subHeaderStyle";
 
 const Banner: React.FC<LayoutProps> = ({ layoutName, handleChangeSlide, zIndex }) => {
   // Get scroll height
@@ -20,18 +21,6 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, handleChangeSlide, zIndex }
   const { scrollY } = useScroll({
     target: scrollTargetRef,
   });
-
-  useEffect(() => {
-    if (isInView) {
-      handleChangeSlide(layoutName);
-    }
-  }, [isInView]);
-
-  useEffect(()=>{
-    setTimeout(()=>{
-      handleChangeSlide(layoutName);
-    }, 700)
-  }, [])
 
   const scrollHeight = calculateScrollHeight(viewportSize.height, 2);
 
@@ -74,6 +63,21 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, handleChangeSlide, zIndex }
       stiffness: 150
     }
   );
+
+  const setHeaderStyle = useContext(SubheaderStyleContext)
+
+  /* SET HEADER STYLE AT DIFFERNT INTERVALS */
+  useMotionValueEvent(scrollY, 'change', (v)=>{
+    if(isInView){
+      if(v > 0){
+        setHeaderStyle(2)
+      }
+    }
+  })
+
+  useEffect(()=>{
+    setHeaderStyle(2)
+  },[])
 
   // Trigger move to next slide programmatically??
   return (

@@ -22,6 +22,7 @@ const DimensionImages: React.FC<LayoutProps> = ({
             handleLayoutLoad={handleLayoutLoad}
             title="Dimension Images"
             paragraph="Give your customers a clear view of how your furniture fits into their space with precise dimensions and scale indicators."
+            dynamicHeader={false}
         >
             <div
                 className={styles.flex_container}

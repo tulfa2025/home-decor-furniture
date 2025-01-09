@@ -1,6 +1,12 @@
 "use client";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import { useEffect, useState, useRef, useContext } from "react";
 import styles from "./LargeSlideContainer.module.scss";
 
 /* CUSTOM HOOKS */
@@ -8,6 +14,7 @@ import useInView from "@/hooks/use_inview";
 import useWindowSize from "@/hooks/use_window_size";
 import calculateScrollHeight from "@/utils/calculate_scrollheight";
 
+import SubheaderStyleContext from "@/context/subHeaderStyle";
 /* CUSTOM COMPONENTS */
 import TitleBanner from "../title_banner/title_banner";
 
@@ -18,7 +25,10 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   children,
   paragraph,
   zIndex = 0,
+  dynamicHeader = false,
 }) => {
+  // Subheadr scroll
+  const setHeaderStyle = useContext(SubheaderStyleContext);
   // Get scroll height
   const viewportSize = useWindowSize();
 
@@ -48,7 +58,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   // Function to get the Y position of the element
   const getElementYPosition = () => {
     if (scrollTargetRef.current) {
-      const yPos = scrollTargetRef.current.offsetTop ;
+      const yPos = scrollTargetRef.current.offsetTop;
       setYPosition(yPos); // Update state with the Y position
     }
   };
@@ -101,11 +111,23 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
     {
-        damping: 35,
-        stiffness: 125
-   
-      }
+      damping: 35,
+      stiffness: 125,
+    }
   );
+
+  /* SET HEADER STYLE AT DIFFERNT INTERVALS */
+  useMotionValueEvent(scrollY, "change", (v) => {
+    if (!isInView) return;
+
+    if (!dynamicHeader) {
+      setHeaderStyle(0);
+    } else if (v > yPosition + viewportSize.height + scrollHeight * 0.4) {
+      setHeaderStyle(2);
+    } else {
+      setHeaderStyle(0);
+    }
+  });
 
   return (
     <motion.div

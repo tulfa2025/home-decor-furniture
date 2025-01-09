@@ -10,7 +10,7 @@ import {
   useSpring,
   useMotionValueEvent,
 } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import useWindowSize from "@/hooks/use_window_size";
 
 /* CUSTOM HOOKS */
@@ -18,6 +18,7 @@ import useInView from "@/hooks/use_inview";
 
 /* CUSTOM UTILS */
 import calculateScrollHeight from "@/utils/calculate_scrollheight";
+import SubheaderStyleContext from "@/context/subHeaderStyle";
 
 const CtaTertiary: React.FC<LayoutProps> = ({
   layoutName,
@@ -165,6 +166,17 @@ const CtaTertiary: React.FC<LayoutProps> = ({
     }
   );
 
+
+  const setHeaderStyle = useContext(SubheaderStyleContext)
+
+  /* SET HEADER STYLE AT DIFFERNT INTERVALS */
+  useMotionValueEvent(scrollY, 'change', (v)=>{
+    if(isInView){
+      if(v > yPosition - scrollHeight * 0.1){
+        setHeaderStyle(0)
+      }
+    }
+  })
   return (
     <motion.div
       animate={{

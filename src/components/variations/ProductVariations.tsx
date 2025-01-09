@@ -1,8 +1,14 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import useWindowSize from "@/hooks/use_window_size";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  useMotionValueEvent,
+} from "framer-motion";
 import Image from "next/image";
 import ImageContainer from "../image_container/ImageContainer";
 import styles from "./ProductVariations.module.scss";
@@ -13,6 +19,7 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 
 /* CUSTOM COMPONENTS */
 import TitleBanner from "../title_banner/title_banner";
+import SubheaderStyleContext from "@/context/subHeaderStyle";
 
 const ProductVariation = ({
   imageSet,
@@ -23,6 +30,7 @@ const ProductVariation = ({
   handleLayoutLoad,
   paragraph,
   zIndex = 0,
+  dynamicHeader = false,
 }) => {
   // Get scroll height
   const viewportSize = useWindowSize();
@@ -53,7 +61,7 @@ const ProductVariation = ({
   // Function to get the Y position of the element
   const getElementYPosition = () => {
     if (scrollTargetRef.current) {
-      const yPos = scrollTargetRef.current.offsetTop ;
+      const yPos = scrollTargetRef.current.offsetTop;
       setYPosition(yPos); // Update state with the Y position
     }
   };
@@ -83,11 +91,7 @@ const ProductVariation = ({
   const transformPopupAnimationOne = useTransform(
     scrollY,
     [0, yPosition + scrollHeight * 0.55, yPosition + scrollHeight * 0.6],
-    [
-      viewportSize.height * 1.2, 
-      viewportSize.height * 1.2, 
-      0
-    ]
+    [viewportSize.height * 1.2, viewportSize.height * 1.2, 0]
   );
 
   const springyTransformPopupAnimationOne = useSpring(
@@ -102,7 +106,7 @@ const ProductVariation = ({
     scrollY,
     [
       0,
-      yPosition - viewportSize.height /2 ,
+      yPosition - viewportSize.height / 2,
       yPosition + viewportSize.height,
       yPosition + viewportSize.height + scrollHeight * 0.2,
       yPosition + viewportSize.height + scrollHeight * 0.25,
@@ -126,9 +130,24 @@ const ProductVariation = ({
     transformShowcaseAnimationThree,
     {
       damping: 35,
-      stiffness: viewportSize.width > 960 ? 80 : 125
+      stiffness: viewportSize.width > 960 ? 80 : 125,
     }
   );
+
+  const setHeaderStyle = useContext(SubheaderStyleContext);
+
+  /* SET HEADER STYLE AT DIFFERNT INTERVALS */
+  useMotionValueEvent(scrollY, "change", (v) => {
+    if (!isInView) return;
+
+    if (!dynamicHeader) {
+      setHeaderStyle(0)
+    } else if (v > yPosition + viewportSize.height + scrollHeight * 0.3) {
+      setHeaderStyle(2);
+    } else {
+      setHeaderStyle(0);
+    }
+  });
 
   return (
     <>

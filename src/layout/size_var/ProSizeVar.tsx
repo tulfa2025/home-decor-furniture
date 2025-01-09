@@ -59,6 +59,7 @@ const ProSizeVar: React.FC<LayoutProps> = ({
             title="Size Variations"
             paragraph="Lorem ipsum dolor sit amet consectetur. Arcu sollicitudin cursus et aliquet at vestibulum quis."
             zIndex={zIndex}
+            dynamicHeader={true}
         />
     );
 }

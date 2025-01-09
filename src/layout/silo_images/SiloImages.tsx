@@ -31,6 +31,7 @@ import usePopupPosition from "@/utils/calculate_popupbutton.loc";
 /* Images */
 import backgroundImage from "../../assets/images/silo_images/Product silos banner.jpg";
 import modalImageSet from "./image_sources_silo";
+import SubheaderStyleContext from "@/context/subHeaderStyle";
 
 
 const SiloImages: React.FC<LayoutProps> = ({
@@ -144,6 +145,18 @@ const SiloImages: React.FC<LayoutProps> = ({
       }
     }
   });
+
+  const setHeaderStyle = useContext(SubheaderStyleContext)
+
+  /* SET HEADER STYLE AT DIFFERNT INTERVALS */
+  useMotionValueEvent(scrollY, 'change', (v)=>{
+    if(isInView){
+      if(v > yPosition){
+        setHeaderStyle(0)
+      }
+    }
+    
+  })
 
   return (
     <motion.div

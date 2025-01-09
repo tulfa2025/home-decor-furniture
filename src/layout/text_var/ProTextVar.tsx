@@ -59,6 +59,7 @@ const ProTextVar: React.FC<LayoutProps> = ({
             title="Texture Variations"
             paragraph="Lorem ipsum dolor sit amet consectetur. Arcu sollicitudin cursus et aliquet at vestibulum quis."
             zIndex={zIndex}
+            dynamicHeader={true}
     />
     );
 }

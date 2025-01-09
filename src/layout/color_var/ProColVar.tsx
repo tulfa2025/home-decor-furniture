@@ -61,6 +61,7 @@ const ProColVar: React.FC<LayoutProps> = ({
             title="Color Variations"
             paragraph="Lorem ipsum dolor sit amet consectetur. Arcu sollicitudin cursus et aliquet at vestibulum quis."
             zIndex={zIndex}
+            dynamicHeader={true}
         />
     );
 }

@@ -67,6 +67,7 @@ const GroupShots: React.FC<LayoutProps> = ({
             title="Group Shots"
             paragraph="Present your furniture items grouped together to show their compatibility and create a coherent look."
             zIndex={zIndex}
+            dynamicHeader={true}
         >
             <motion.section
                 className={styles.video_container}

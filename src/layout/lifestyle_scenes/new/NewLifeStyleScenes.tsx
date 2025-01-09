@@ -126,6 +126,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({
         title="Lifestyle Scenes"
         paragraph="Showcase your furniture in thousands of beautifully designed room setups - without moving a thing or touching a camera."
         zIndex={zIndex}
+        dynamicHeader={true}
       >
         <motion.section
           className={styles.image_container}
