@@ -15,7 +15,7 @@
     .image_fit {
         @include variables.xs {
             object-position: 50% 3%;
-            transform: scale(0.9)
+            transform: scale(1)
         }
         @include variables.md {
             object-position: 0% 45%;
