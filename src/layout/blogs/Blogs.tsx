@@ -63,8 +63,8 @@ const Blogs: React.FC<LayoutProps> = ({
         scrollY,
         [
             0,
-            yPosition - viewportSize.height,
-            yPosition ,
+            viewportSize.height > 768 ? yPosition - viewportSize.height / 2: yPosition ,
+            viewportSize.height > 768 ? yPosition + viewportSize.height / 2 : yPosition +viewportSize.height / 2,
             yPosition + viewportSize.height + (scrollHeight * 0.5),
             yPosition + viewportSize.height + scrollHeight,
           ],

@@ -49,7 +49,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
 
   const scrollHeight = calculateScrollHeight(
     viewportSize.height,
-    viewportSize.width > 960 ? 4 : 3
+    viewportSize.width > 960 ? 2 : 3
   );
 
   /* ANIMATION START AND END POSITION */
@@ -88,13 +88,13 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     scrollY,
     [
       0,
-      yPosition - viewportSize.height,
-      yPosition + viewportSize.height,
+      viewportSize.width > 768 ? yPosition - viewportSize.height : yPosition - viewportSize.height / 2,
+      viewportSize.width > 768 ? yPosition + viewportSize.height : yPosition,
       yPosition + viewportSize.height + scrollHeight * 0.1,
-      yPosition + viewportSize.height + scrollHeight * 0.35,
+      yPosition + viewportSize.height + scrollHeight * 0.55,
       viewportSize.width > 768
         ? yPosition + viewportSize.height + scrollHeight * 0.85
-        : yPosition + viewportSize.height + scrollHeight * 0.45,
+        : yPosition + viewportSize.height + scrollHeight * 0.55,
       yPosition + viewportSize.height + scrollHeight,
     ],
     [
@@ -102,8 +102,12 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
       viewportSize.height * 2.4,
       0,
       0,
-      -viewportSize.height * 0.4 - 60,
-      -viewportSize.height * 0.4 - 60,
+      viewportSize.width > 768
+        ? -viewportSize.height * 0.4 - 60
+        : -viewportSize.height * 0.2 - 60,
+      viewportSize.width > 768
+        ? -viewportSize.height * 0.4 - 60
+        : -viewportSize.height * 0.2 - 60,
       -viewportSize.height * 2.4,
     ]
   );
@@ -161,6 +165,8 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
             style={{
               height: "100%",
               width: "100%",
+              position: 'relative',
+              
             }}
           >
             {children}

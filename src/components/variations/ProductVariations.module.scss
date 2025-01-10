@@ -35,10 +35,10 @@
 
 .product_variation_content_container {
     @include variables.xs {
-        height: 75vh;
+        height: max-content;
     }
     @include variables.md {
-        height: 47vh;
+        height: 50vh;
     }
     width: 100%;
     display: flex;
@@ -61,10 +61,12 @@
     
     @include variables.xs {
         flex-direction: column;
-        height: 120%;
-        row-gap: 50px;
-        overflow-y: scroll;
+        height: max-content;
+        row-gap: 30px;
+        overflow-y: none;
         align-items: center;
+        justify-content: flex-start;
+        padding: 15px
         
     }
     @include variables.md {
@@ -76,8 +78,8 @@
 
     .indiv_image_container {
         @include variables.xs {
-            min-height: 40vh;
-            width: 70vw;
+            height: 35vh;
+            width: 60vw;
 
         }
         @include variables.md {

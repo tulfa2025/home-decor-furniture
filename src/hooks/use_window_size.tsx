@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import ScrollBasedValues from '@/utils/scroll_map_values';
 
 // Hook
 function useWindowSize() {
@@ -48,6 +49,10 @@ function useWindowSize() {
             // IF NOT MOBILE DEVICE
             // Only update window size if not in fullscreen mode
             if (!isFullscreen.current) {
+              ScrollBasedValues.updateViewportSize({
+                height: window.innerHeight,
+                width: window.innerWidth
+              })
               setWindowSize({
                 width: window.innerWidth,
                 height: window.innerHeight,
@@ -60,6 +65,10 @@ function useWindowSize() {
             // IF MOBILE DEVICE
             //Compute Layout shift n first load
             if(!mobileDeviceShifted.current){
+              ScrollBasedValues.updateViewportSize({
+                height: window.innerHeight,
+                width: window.innerWidth
+              })
               setWindowSize({
                 width: window.innerWidth,
                 height: window.innerHeight,
@@ -72,6 +81,10 @@ function useWindowSize() {
 
             // Only update window size if not in fullscreen mode and if it is a part of a fullscreen process
             if (!isFullscreen.current && isFullScreenResize.current) {
+              ScrollBasedValues.updateViewportSize({
+                height: window.innerHeight,
+                width: window.innerWidth
+              })
               setWindowSize({
                 width: window.innerWidth,
                 height: window.innerHeight,

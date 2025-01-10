@@ -3,10 +3,16 @@
 .large_slide_container {
     position: fixed;
     display: flex;
-    height: 150vh;
+    @include variables.xs {
+        height: 120vh;
+    }   
+    @include variables.md {
+        height: 140vh;
+    }
     width: 100vw;
     flex-direction: column;
     background-color: white;
+    z-index: 21;
     top: 60px;
     .large_slide_callout_container {
         @include variables.xs {
@@ -17,6 +23,7 @@
         }
         width: 100%;
         position: relative;
+        background-color: white;
     }
     .large_slide_content_container {
         height: 100vh;

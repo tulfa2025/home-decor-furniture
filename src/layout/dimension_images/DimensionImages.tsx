@@ -34,7 +34,7 @@ const DimensionImages: React.FC<LayoutProps> = ({
                     <Image
                         src={fauxTreeBlank}
                         alt=""
-                        className={`${styles.dimension_image} ${styles.measurement}`}
+                        className={styles.measurement}
                     />
                 </div>
                 <div
@@ -43,7 +43,7 @@ const DimensionImages: React.FC<LayoutProps> = ({
                     <Image
                         src={fauxTreeSetting}
                         alt=""
-                        className={styles.dimension_image}
+                        className={styles.setting}
                     />
                 </div>
 

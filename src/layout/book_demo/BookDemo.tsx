@@ -66,8 +66,8 @@ const BookDemo = ({
         scrollY,
         [
             0,
-            yPosition - (viewportSize.height),
-            yPosition,
+            viewportSize.width > 768 ? yPosition - viewportSize.height : yPosition - viewportSize.height / 2,
+            viewportSize.width > 768 ? yPosition: yPosition + viewportSize.height * 0.5,
             yPosition + viewportSize.height + (scrollHeight * 0.5),
             yPosition + viewportSize.height + (scrollHeight * 1),
           ],

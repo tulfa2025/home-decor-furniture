@@ -20,6 +20,8 @@
     }
 
     .image_container {
+        display: flex;
+        justify-content: center;
 
         @include variables.xs {
             width: 100%;
@@ -30,7 +32,7 @@
             height: 100%;
         }
 
-        .dimension_image {
+        .setting {
             height: 100%;
             width: 100%;
             object-fit: cover;
@@ -43,9 +45,12 @@
         }
 
         .measurement {
+            height: 100%;
+            width: 100%;
 
             @include variables.xs{
-                object-position: 50% 80%;
+                width: 70%;
+                object-position: 20% 80%;
                 transform: scale(1);
                 object-fit: cover;
 

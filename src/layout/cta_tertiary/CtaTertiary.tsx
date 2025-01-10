@@ -37,7 +37,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
 
   // Get scroll height
   const viewportSize = useWindowSize();
-  const scrollHeight = calculateScrollHeight(viewportSize.height, 3)
+  const scrollHeight = calculateScrollHeight(viewportSize.height, viewportSize.width > 960 ? 3 : 2)
 
   /* ANIMATION START AND END POSITION */
   const [yPosition, setYPosition] = useState(null);
@@ -105,32 +105,37 @@ const CtaTertiary: React.FC<LayoutProps> = ({
   const translateAnimationOne = useTransform(
     scrollY,
     [
-      yPosition - scrollHeight * 0.15, 
-      yPosition + scrollHeight * 1.5
+      yPosition + viewportSize.height * 0.5, 
+      yPosition + scrollHeight
     ],
-    [viewportSize.height * 3, -viewportSize.height * 3]
+    [
+      viewportSize.width > 960 ? viewportSize.height * 1 : viewportSize.height * 1.5, 
+      -viewportSize.height * 2
+    ]
   );
   const springyTranslateAnimationOne = useSpring(translateAnimationOne, {
     damping: 35,
     stiffness: 300
   });
 
+
+
   // CHAIR
   const translateAnimationTwo = useTransform(
     scrollY,
     [
       0, 
-      yPosition - scrollHeight * 1,
-      yPosition - scrollHeight * 0.9,
-      yPosition + scrollHeight * 0.7,
-      yPosition + scrollHeight * 2
+      yPosition,
+      yPosition + viewportSize.height,
+      yPosition + scrollHeight * 0.8,
+      yPosition + scrollHeight
     ],
     [
-      -viewportSize.height / 2,
-      -viewportSize.height / 2,
       viewportSize.height / 3,
       viewportSize.height / 3,
-      -viewportSize.height / 2,
+      viewportSize.height / 2,
+      viewportSize.height / 2,
+      -viewportSize.height / 3,
     ]
   );
 
@@ -144,10 +149,10 @@ const CtaTertiary: React.FC<LayoutProps> = ({
     scrollY,
     [
       0,
-      yPosition - scrollHeight * 0.5,
-      yPosition - scrollHeight * 0.1,
+      yPosition - scrollHeight,
+      yPosition - scrollHeight * 0.9,
       yPosition + viewportSize.height + (scrollHeight * 0.5),
-      yPosition + viewportSize.height + (scrollHeight * 2),
+      yPosition + viewportSize.height + scrollHeight,
     ],
     [
       viewportSize.height * 2.4,

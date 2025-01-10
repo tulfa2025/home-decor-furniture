@@ -52,7 +52,7 @@ const ProductVariation = ({
 
   const scrollHeight = calculateScrollHeight(
     viewportSize.height,
-    viewportSize.width > 960 ? 4 : 3
+    viewportSize.width > 768? 3 : 4
   );
 
   /* ANIMATION START AND END POSITION */
@@ -90,8 +90,17 @@ const ProductVariation = ({
   /* POPP ANIMATION */
   const transformPopupAnimationOne = useTransform(
     scrollY,
-    [0, yPosition + scrollHeight * 0.55, yPosition + scrollHeight * 0.6],
-    [viewportSize.height * 1.2, viewportSize.height * 1.2, 0]
+    [0, 
+      viewportSize.width > 768 ? yPosition + scrollHeight * 0.8 : yPosition + scrollHeight * 0.50, 
+      viewportSize.width > 768 ? yPosition + scrollHeight * 0.85 : yPosition + scrollHeight * 0.5,
+      viewportSize.width > 768 ? yPosition + scrollHeight * 0.85 : yPosition + scrollHeight * 0.75,
+    ],
+    [
+      viewportSize.width > 768 ? viewportSize.height * 1.2 : scrollHeight, 
+      viewportSize.width > 768 ? viewportSize.height * 1.2 : scrollHeight, 
+      viewportSize.width > 768 ? 0: scrollHeight * 0.35,
+      viewportSize.width > 768 ? 0: 0
+    ]
   );
 
   const springyTransformPopupAnimationOne = useSpring(
@@ -106,23 +115,33 @@ const ProductVariation = ({
     scrollY,
     [
       0,
-      yPosition - viewportSize.height / 2,
+      yPosition,
       yPosition + viewportSize.height,
+      yPosition + viewportSize.height + scrollHeight * 0.1,
       yPosition + viewportSize.height + scrollHeight * 0.2,
-      yPosition + viewportSize.height + scrollHeight * 0.25,
       viewportSize.width > 768
-        ? yPosition + viewportSize.height + scrollHeight * 0.85
-        : yPosition + viewportSize.height + scrollHeight * 0.55,
+        ? yPosition + viewportSize.height + scrollHeight * 0.9
+        : yPosition + viewportSize.height + scrollHeight * 0.75,
       yPosition + viewportSize.height + scrollHeight,
     ],
     [
       viewportSize.height * 2.4,
       viewportSize.height * 2.4,
-      0,
-      0,
-      -viewportSize.height * 0.4,
-      -viewportSize.height * 0.4,
-      -viewportSize.height * 2.4,
+      viewportSize.width > 768
+        ? 0
+        : 60,
+      viewportSize.width > 768
+        ? 0
+        : 60,
+      viewportSize.width > 768
+        ? -viewportSize.height * 0.4 - 60
+        : -viewportSize.height * 0.2,
+      viewportSize.width > 768
+        ? -viewportSize.height * 0.4 - 60
+        : -viewportSize.height * 0.2,
+        viewportSize.width > 768
+        ? -viewportSize.height * 2.4
+        : -viewportSize.height * 1.2,
     ]
   );
 
