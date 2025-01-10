@@ -52,7 +52,7 @@ const ProductVariation = ({
 
   const scrollHeight = calculateScrollHeight(
     viewportSize.height,
-    viewportSize.width > 768? 3 : 4
+    viewportSize.width > 768 ? 3 : 4
   );
 
   /* ANIMATION START AND END POSITION */
@@ -90,16 +90,23 @@ const ProductVariation = ({
   /* POPP ANIMATION */
   const transformPopupAnimationOne = useTransform(
     scrollY,
-    [0, 
-      viewportSize.width > 768 ? yPosition + scrollHeight * 0.8 : yPosition + scrollHeight * 0.50, 
-      viewportSize.width > 768 ? yPosition + scrollHeight * 0.85 : yPosition + scrollHeight * 0.5,
-      viewportSize.width > 768 ? yPosition + scrollHeight * 0.85 : yPosition + scrollHeight * 0.75,
+    [
+      0,
+      viewportSize.width > 768
+        ? yPosition + scrollHeight * 0.8
+        : yPosition + scrollHeight * 0.5,
+      viewportSize.width > 768
+        ? yPosition + scrollHeight * 0.85
+        : yPosition + scrollHeight * 0.5,
+      viewportSize.width > 768
+        ? yPosition + scrollHeight * 0.85
+        : yPosition + scrollHeight * 0.75,
     ],
     [
-      viewportSize.width > 768 ? viewportSize.height * 1.2 : scrollHeight, 
-      viewportSize.width > 768 ? viewportSize.height * 1.2 : scrollHeight, 
-      viewportSize.width > 768 ? 0: scrollHeight * 0.35,
-      viewportSize.width > 768 ? 0: 0
+      viewportSize.width > 768 ? viewportSize.height * 1.2 : scrollHeight,
+      viewportSize.width > 768 ? viewportSize.height * 1.2 : scrollHeight,
+      viewportSize.width > 768 ? 0 : scrollHeight * 0.35,
+      viewportSize.width > 768 ? 0 : 0,
     ]
   );
 
@@ -107,7 +114,10 @@ const ProductVariation = ({
     transformPopupAnimationOne,
     {
       damping: 40,
-      stiffness: 150
+      stiffness: 150,
+      mass: 0.2, // Lighter = quicker stop
+      velocity: 0, // No initial speed
+      restDelta: 0.01, // Stops when close to the target
     }
   );
 
@@ -128,19 +138,15 @@ const ProductVariation = ({
     [
       viewportSize.height * 2.4,
       viewportSize.height * 2.4,
-      viewportSize.width > 768
-        ? 0
-        : 60,
-      viewportSize.width > 768
-        ? 0
-        : 60,
+      viewportSize.width > 768 ? 0 : 60,
+      viewportSize.width > 768 ? 0 : 60,
       viewportSize.width > 768
         ? -viewportSize.height * 0.4 - 60
         : -viewportSize.height * 0.2,
       viewportSize.width > 768
         ? -viewportSize.height * 0.4 - 60
         : -viewportSize.height * 0.2,
-        viewportSize.width > 768
+      viewportSize.width > 768
         ? -viewportSize.height * 2.4
         : -viewportSize.height * 2,
     ]
@@ -161,7 +167,7 @@ const ProductVariation = ({
     if (!isInView) return;
 
     if (!dynamicHeader) {
-      setHeaderStyle(0)
+      setHeaderStyle(0);
     } else if (v > yPosition + viewportSize.height + scrollHeight * 0.3) {
       setHeaderStyle(2);
     } else {
@@ -185,7 +191,7 @@ const ProductVariation = ({
           style={{
             top: 0,
             position: "fixed",
-            height: viewportSize.width > 768 ? "140vh" : '120vh',
+            height: viewportSize.width > 768 ? "140vh" : "120vh",
             width: "100vw",
             y: springyTransformShowcaseAnimationThree,
           }}
