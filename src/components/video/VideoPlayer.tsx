@@ -27,13 +27,13 @@ const VideoPlayer = memo(({ src, type, altText, onVideoComplete, loop, styleOver
     >
       <video 
       ref={videoRef}
-        controls={false} 
         muted  
         preload='metadata' 
         autoPlay={autoplay}
         onEnded={onVideoComplete ?? null}
         loop={loop}
         className={styles.video}
+        playsInline
       >
         <source src={src} type={type} />
         Your browser does not support the video tag.

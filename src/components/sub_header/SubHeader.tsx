@@ -45,7 +45,7 @@ export default function SubHeader({
             headerLinkDisabled = styles.subheader_nav_disabled_1;
             headerDropdownBar  = styles.dropdown_bar_1;
             TulfaIcon = TulfaSubheaderStyleOne;
-            arrowFill = '#CDCDCD'
+            arrowFill = 'transparent'
             arrowColor = '#2A266A'
 
             break
@@ -103,7 +103,7 @@ export default function SubHeader({
                     <motion.div
                         className={styles.subheader_heading_container}
                         animate={{
-                            transform: (headerActivated && viewportSize.width < 1020 && viewportSize.width > 500) ? `translateX(-20vw)` : null
+                            transform: (headerActivated && viewportSize.width < 1020 && viewportSize.width > 768) ? `translateX(-20vw)` : null
                         }}
                     >
                         <h3 className={
@@ -122,7 +122,7 @@ export default function SubHeader({
                     <motion.nav
                         className={styles.subheader_nav}
                         animate={{
-                            transform: (headerActivated && viewportSize.width < 1020 && viewportSize.width > 500) ? `translateX(15vw)` : null
+                            transform: (headerActivated && viewportSize.width < 1020 && viewportSize.width > 768) ? `translateX(15vw)` : null
                         }}
                     >
 

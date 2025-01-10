@@ -57,7 +57,9 @@
 
 .dropdown_bar_1{
     /* LAYOUT */
-    background-color: variables.$headerColorOne;
+    background-color: rgba(226,226,226,0.5);
+    backdrop-filter: blur(10px);          /* Frosted glass blur */
+    -webkit-backdrop-filter: blur(10px);  
 }
 .dropdown_bar_2{
     /* LAYOUT */
@@ -68,11 +70,18 @@
     /* LAYOUT */
     @include variables.setLayout(flex, center, center);
     height: 65px;
-    padding: var(--item-spacing-10, 10px) 100px;
+    
     width: 100vw;
     position: fixed;
     top: 0px;
     left: 0;
+
+    @include variables.xs {
+        padding: var(--item-spacing-10, 10px) 10px;
+    }
+    @include variables.md {
+        padding: var(--item-spacing-10, 10px) 200px;
+    }
 
     /* STYLE */
     z-index: 2000;
@@ -83,11 +92,11 @@
         @include variables.setLayout(flex, space-between, center);
 
         @include variables.sm {
-            width: 300px;            
+            width: 100%;            
         }
 
         @include variables.md {
-            width: 400px;
+            width: 100%;
         }
 
         @include variables.lg {
@@ -169,12 +178,13 @@
     position: absolute;
     left: 0;
     z-index: -1;
-
+    
     .link_container_style {
         text-align: left;
         height: 50px;
         display:flex; 
         align-items: center;
+
         
 
         @include variables.sm {

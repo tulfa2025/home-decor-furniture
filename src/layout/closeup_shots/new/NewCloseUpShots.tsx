@@ -53,64 +53,10 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.1);
+  const isInView = useInView(inViewRef, 0.5);
   /*POPUPBUTTON ANIMATION */
   useEffect(() => {
-    const setPopupVisibleLifestyle = (e) => {
-      if (!isInView) return;
-
-      // For touch events or wheel events, check the deltaY or y position
-      if (e instanceof WheelEvent) {
-        // For wheel events, deltaY will indicate scroll direction
-        if (e.deltaY > 0) {
-          if (!isPopupVisible) setIsPopupVisible(true);
-        }
-      } else if (e instanceof TouchEvent) {
-        // If taps slide then triggers popup
-        if (!isPopupVisible) setIsPopupVisible(true);
-      }
-    };
-
-    scrollTargetRef.current.removeEventListener(
-      "wheel",
-      setPopupVisibleLifestyle
-    );
-    scrollTargetRef.current.removeEventListener(
-      "touchend",
-      setPopupVisibleLifestyle
-    );
-
-    if (scrollTargetRef.current) {
-      scrollTargetRef.current.removeEventListener(
-        "wheel",
-        setPopupVisibleLifestyle
-      );
-      scrollTargetRef.current.removeEventListener(
-        "touchend",
-        setPopupVisibleLifestyle
-      );
-
-      scrollTargetRef.current.addEventListener(
-        "wheel",
-        setPopupVisibleLifestyle
-      );
-      scrollTargetRef.current.addEventListener(
-        "touchend",
-        setPopupVisibleLifestyle
-      );
-    }
-    return () => {
-      if (scrollTargetRef.current) {
-        scrollTargetRef.current.removeEventListener(
-          "wheel",
-          setPopupVisibleLifestyle
-        );
-        scrollTargetRef.current.removeEventListener(
-          "touchend",
-          setPopupVisibleLifestyle
-        );
-      }
-    };
+    setIsPopupVisible(true)
   }, [isInView]);
 
   return (

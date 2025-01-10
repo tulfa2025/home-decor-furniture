@@ -47,7 +47,7 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, handleChangeSlide, zIndex }
     [
       0,
       yPosition + scrollHeight * 0.2,
-      yPosition + scrollHeight + viewportSize.height * 0.7,
+      yPosition + scrollHeight,
     ],
     [
       0,

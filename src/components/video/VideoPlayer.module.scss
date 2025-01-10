@@ -12,7 +12,13 @@
         width: 100%;
         object-fit: cover;
         position: absolute;
-        z-index: -1
+        z-index: -1;
+
+        // Prevent native double-tap zoom
+        touch-action: manipulation;
+        -webkit-touch-callout: none; /* Disable long-press options */
+        -webkit-user-select: none; /* Disable text selection */
+        
       }
 
 }
