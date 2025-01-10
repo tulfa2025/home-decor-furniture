@@ -107,6 +107,7 @@ const ProductVariation = ({
     transformPopupAnimationOne,
     {
       damping: 40,
+      stiffness: 150
     }
   );
 
@@ -141,7 +142,7 @@ const ProductVariation = ({
         : -viewportSize.height * 0.2,
         viewportSize.width > 768
         ? -viewportSize.height * 2.4
-        : -viewportSize.height * 1.2,
+        : -viewportSize.height * 2,
     ]
   );
 
