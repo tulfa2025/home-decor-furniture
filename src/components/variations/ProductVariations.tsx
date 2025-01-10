@@ -114,7 +114,7 @@ const ProductVariation = ({
     transformPopupAnimationOne,
     {
       damping: 40,
-      stiffness: 150,
+      stiffness: viewportSize.width > 768 ? 150: 300,
       mass: 0.2, // Lighter = quicker stop
       velocity: 0, // No initial speed
       restDelta: 0.01, // Stops when close to the target
@@ -157,6 +157,9 @@ const ProductVariation = ({
     {
       damping: 35,
       stiffness: viewportSize.width > 960 ? 80 : 125,
+      mass: 0.2, // Lighter = quicker stop
+      velocity: 0, // No initial speed
+      restDelta: 0.01, // Stops when close to the target
     }
   );
 
