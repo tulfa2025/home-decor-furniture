@@ -4,19 +4,19 @@
     height: 100%;
     width: 101%;
     position: relative;
-    top: 60px;
     display: grid;
-
     overflow: hidden;
 
 
     @include variables.xs {
         grid-template-columns: repeat(2, 50%) ;
         grid-template-rows: repeat(3, 1fr);
+        top: 0;
     }
     @include variables.md {
         grid-template-columns: repeat(3, 1fr) ;
         grid-template-rows: repeat(2, 50%);
+        top: 60px;
     }
 
     

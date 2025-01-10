@@ -9,7 +9,12 @@
     background-color: white;
     top: 60px;
     .large_slide_callout_container {
-        height: 40vh;
+        @include variables.xs {
+            height: 20vh;
+        }   
+        @include variables.md {
+            height: 40vh;
+        }
         width: 100%;
         position: relative;
     }

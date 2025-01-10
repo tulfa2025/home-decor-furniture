@@ -22,15 +22,17 @@
 .closeup_button_container {
     position: absolute;
     z-index: 20;
-    bottom: 15vh;
+    
     width: 400px;
     height: 60px;
 
     @include variables.xs {
+        bottom: 40vh;
         left: calc(50vw - 150px);
     }
 
     @include variables.lg {
+        bottom: 15vh;
         left: calc(50vw - 175px);
     }
 }

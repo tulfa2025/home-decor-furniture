@@ -9,7 +9,12 @@
     height: 'max-content';
     width: 100%;
     position: relative;
-    top: 60px;
+    @include variables.xs {
+        top: 0;
+    }
+    @include variables.md {
+        top: 60px;
+    }
 
     .image_container {
         width: 100vw;

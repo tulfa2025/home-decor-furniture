@@ -165,7 +165,7 @@ const ProductVariation = ({
           style={{
             top: 0,
             position: "fixed",
-            height: "140vh",
+            height: viewportSize.width > 768 ? "140vh" : '120vh',
             width: "100vw",
             y: springyTransformShowcaseAnimationThree,
           }}

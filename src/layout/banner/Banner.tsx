@@ -22,7 +22,7 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, handleChangeSlide, zIndex }
     target: scrollTargetRef,
   });
 
-  const scrollHeight = calculateScrollHeight(viewportSize.height, 2);
+  const scrollHeight = calculateScrollHeight(viewportSize.height, 1);
 
   /* ANIMATION START AND END POSITION */
   const [yPosition, setYPosition] = useState(null);
@@ -47,7 +47,7 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, handleChangeSlide, zIndex }
     [
       0,
       yPosition + scrollHeight * 0.2,
-      yPosition + scrollHeight,
+      yPosition + scrollHeight * 0.8,
     ],
     [
       0,
