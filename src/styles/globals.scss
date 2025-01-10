@@ -6,7 +6,8 @@
 body {
     box-sizing: border-box;
     font-family: 'SF Pro Display', sans-serif;
-    // overflow: hidden;
+    overflow: scroll;
+    height: 100vh
 }
 
 /* STANDARD CSS RESETS */
