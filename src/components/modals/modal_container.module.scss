@@ -281,25 +281,39 @@
     z-index: 100;
     background-color: white;
     box-shadow: 0px -3px 100px rgba(0, 0, 0, 0.1);
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
 
     .selected_item_container {
-        padding: 10% 25%;
-        justify-self: flex-start;
         /**TYPOGRPAHY*/
         @include variables.setTypography(22px, normal, 400, normal);
-        color: variables.$primaryColor
+        color: variables.$primaryColor;
+        height: 100%;
+        padding-left: 10%;
+        display: flex;
+        align-items: center;
     }
 
     .arrow_selector_button {
-        justify-self: flex-end;
-        align-self: center;
-        position: relative;
-        right: 15%
+        position: absolute;
+        left: 0;
+        top:0;
+        background-color: transparent;
+        height: 100%;
+        width:100%
     }
 
 }
+
+.arrow_button_inner{
+    height: 100%;
+    width: 80vw;
+    position:absolute;
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
 
 .filter_bar {
     position: absolute;

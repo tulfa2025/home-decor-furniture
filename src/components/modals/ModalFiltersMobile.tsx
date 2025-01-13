@@ -23,16 +23,6 @@ const ModalFiltersMobile = ({
       </div>
 
       <motion.div
-        style={{
-          width: 40,
-          height: 40,
-        }}
-        initial={{
-          rotate: 0,
-        }}
-        animate={{
-          rotate: filterActivated ? 180 : 0,
-        }}
         className={styles.arrow_selector_button}
       >
         <TulfaDownArrow
@@ -44,6 +34,8 @@ const ModalFiltersMobile = ({
             setFilterActivated((prev) => !prev);
             handleIsScrollBlocked(!filterActivated, filterRef)
           }}
+          buttonStyles={styles.arrow_button_inner}
+          animate={filterActivated}
         />
       </motion.div>
 

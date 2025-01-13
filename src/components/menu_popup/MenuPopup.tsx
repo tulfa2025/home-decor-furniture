@@ -5,7 +5,12 @@ import { motion } from "framer-motion";
 import { useMemo, memo, useState, useEffect, useContext } from "react";
 import useWindowSize from "@/hooks/use_window_size";
 
-const MenuPopup = ({ layoutCollection, scrollDetails, scrollingContainersRef }) => {
+const MenuPopup = ({ 
+  layoutCollection, 
+  scrollDetails, 
+  scrollingContainersRef,
+  currentSlide
+}) => {
   /* FILTER OUT SLIDE NAMES */
   const slidesList = useMemo(() => {
     const slides = [];
@@ -24,7 +29,7 @@ const MenuPopup = ({ layoutCollection, scrollDetails, scrollingContainersRef }) 
 
   const [isActive, setIsActive] = useState(false);
 
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlideInternal, setCurrentSlide] = useState(0);
 
   const viewportSize = useWindowSize();
   useEffect(() => {
@@ -32,20 +37,20 @@ const MenuPopup = ({ layoutCollection, scrollDetails, scrollingContainersRef }) 
       setTimeout(() => {
         let scrollDistance;
 
-        if (currentSlide === 0) {
+        if (currentSlideInternal === 0) {
           scrollDistance = 0;
         } else {
           scrollDistance =
-            scrollDetails.scrollPositions[currentSlide] + viewportSize.height;
+            scrollDetails.scrollPositions[currentSlideInternal] + viewportSize.height;
         }
 
         window.scrollTo({
           top: scrollDistance,
           behavior: "smooth",
         });
-      }, 250);
+      }, 100);
     }
-  }, [currentSlide, scrollDetails]);
+  }, [currentSlideInternal, scrollDetails]);
 
   return (
     <motion.div 
@@ -69,7 +74,8 @@ const MenuPopup = ({ layoutCollection, scrollDetails, scrollingContainersRef }) 
           {slidesList.map((componentDetails, index) => {
             if (
               componentDetails[0].toLowerCase() === "banner" ||
-              componentDetails[0].toLowerCase() === "book a demo"
+              componentDetails[0].toLowerCase() === "book a demo" ||
+              !componentDetails[0]
             ) {
               return <></>;
             }
@@ -86,12 +92,18 @@ const MenuPopup = ({ layoutCollection, scrollDetails, scrollingContainersRef }) 
                     delay: index * 0.05,
                   },
                 }}
+                style={{
+                  color: componentDetails[1] === currentSlide ? '#433E99' : '#807DBD'
+                }}
                 whileHover={{
                   x: -10,
                 }}
                 className={styles.button_container}
                 onClick={() => {
                   setCurrentSlide(componentDetails[1]);
+                  setTimeout(()=>{
+                    setIsActive(false)
+                  }, 1000)
                 }}
               >
                 {componentDetails[0]}

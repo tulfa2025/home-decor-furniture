@@ -32,6 +32,14 @@
         width: 100%;
         object-fit: cover;
         border-radius: 20px;
+
+        @include variables.sm{
+            object-position: 40% 50%;
+        }
+        @include variables.md{
+            object-position: 50% 50%;
+        }
+        
     }
 
     .background_image_bottom_left {

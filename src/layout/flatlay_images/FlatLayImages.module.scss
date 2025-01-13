@@ -24,10 +24,25 @@
         top:0;
         left:0;
 
-        .dimension_image {
+        .first_image {
             height: 100%;
             width: 100%;
             object-fit: cover;
+            object-position:  75% 50%;
+        }
+
+        .second_image {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+
+            @include variables.sm {
+                object-position: 30% 50%;
+            }
+            @include variables.md {
+                object-position: 50% 50%;
+            }
+            
         }
 
     }

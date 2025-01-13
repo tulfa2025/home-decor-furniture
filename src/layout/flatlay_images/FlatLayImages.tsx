@@ -60,10 +60,7 @@ const FlatLayImages: React.FC<LayoutProps> = ({
           <Image
             src={flatlayOneImage}
             alt=""
-            className={styles.dimension_image}
-            style={{
-              objectPosition: "75% 50%",
-            }}
+            className={styles.first_image}
           />
         </motion.div>
         <motion.div
@@ -80,7 +77,7 @@ const FlatLayImages: React.FC<LayoutProps> = ({
           <Image
             src={flatlayTwoImage}
             alt=""
-            className={styles.dimension_image}
+            className={styles.second_image}
           />
         </motion.div>
       </div>

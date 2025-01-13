@@ -101,8 +101,9 @@
     
             @include variables.sm {
                 height: 100vh;
-                width: 100vw;
-                top: 4vh;
+                max-width: 100vw;
+                top: 12vh;
+                right: -1vw
                
             }
             @include variables.md {
@@ -124,13 +125,21 @@
             };
     
             .silo_image {
-                height: 100%;
-                width: 100%;
+               
                 object-fit: cover;
                 background-color: transparent;
 
                 @include variables.sm {
-                    object-position: 80% 50%;
+                    object-position:82% 50%;
+                    height: clamp(300px, 85%, 500px);
+                    max-width: 100vw;
+                }
+
+                @include variables.md {
+                    height: 100%;
+                    width: 100%;
+                    max-width: unset
+                   
                 }
             }
         }

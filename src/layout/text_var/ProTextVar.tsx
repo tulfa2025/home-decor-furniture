@@ -1,5 +1,5 @@
 'use client'
-import styles from "./ProColBar.module.scss";
+import styles from "./ProColVar.module.scss";
 import ProductVariation from "@/components/variations/ProductVariations";
 import {useMemo} from 'react'
 
@@ -38,6 +38,7 @@ const ProTextVar: React.FC<LayoutProps> = ({
 
         const dynamicImageSet: ImageSet = {
             background: backgroundImage,
+            backgroundStyling: styles.backgroundStyling,
             top: [
                 [MainImageOrange, "Orange Vermillion", HoverImageOrange],
                 [MainImageYellow, "Turner's Yellow", HoverImageYellow],

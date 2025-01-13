@@ -142,10 +142,10 @@ const ProductVariation = ({
       viewportSize.width > 768 ? 0 : 60,
       viewportSize.width > 768
         ? -viewportSize.height * 0.4
-        : -viewportSize.height * 0.2,
+        : -viewportSize.height * 0.2 + 20,
       viewportSize.width > 768
         ? -viewportSize.height * 0.4
-        : -viewportSize.height * 0.2,
+        : -viewportSize.height * 0.2 + 20,
       viewportSize.width > 768
         ? -viewportSize.height * 2.4
         : -viewportSize.height * 2,
@@ -214,10 +214,10 @@ const ProductVariation = ({
               className={styles.background_image_container}
             >
               <Image
-                src={imageSet["background"]}
+                src={imageSet.background}
                 alt=""
                 priority
-                className={styles.main_image}
+                className={imageSet.backgroundStyling}
                 quality={80}
               />
             </motion.div>

@@ -1,13 +1,20 @@
 @use '@/styles/shared/variables';
 
-.subheader_style_1 {
+.subheader_style_1::before {
 
     /* STYLE */
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 100%;
     background-color: rgba(226,226,226, 0.5);
-    backdrop-filter: blur(10px);          /* Frosted glass blur */
-    -webkit-backdrop-filter: blur(10px);  
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: -1;
     
 }
+
+
 
 .subheader_style_2 {
 
@@ -57,10 +64,21 @@
 
 .dropdown_bar_1{
     /* LAYOUT */
-    background-color: rgba(226,226,226,0.5);
-    backdrop-filter: blur(10px);          /* Frosted glass blur */
-    -webkit-backdrop-filter: blur(10px);  
+    
+
 }
+
+.dropdown_bar_1::before {
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(226,226,226,0.5);
+    z-index: -1;
+    
+  }
 .dropdown_bar_2{
     /* LAYOUT */
     background-color: transparent;

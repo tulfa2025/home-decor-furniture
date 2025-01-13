@@ -189,7 +189,7 @@ export default function SubHeader({
                     <motion.div
                         className={`${styles.dropdown_bar} ${headerDropdownBar}`}
                         animate={{
-                            transform: headerActivated ? `translateY(${((navLinks.length - 1) * 50) - 25}px)` : `translateY(-${(navLinks.length - 1) * 50}px)`,
+                            transform: headerActivated ? `translateY(${((navLinks.length - 1) * 50) - 20}px)` : `translateY(-${(navLinks.length - 1) * 50}px)`,
 
                         }}
                         transition={{

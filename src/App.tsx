@@ -32,9 +32,15 @@ export default function App() {
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Times how long until actuall current slide updates
+  const currentSlideRef = useRef(null)
+
   /* IDENIFIES CURRENT SLIDE IN VIEW */
   const handleChangeSlide = useCallback((slideIndex: number) => {
-    setCurrentSlide(slideIndex);
+    clearTimeout(currentSlideRef.current)
+    setTimeout(()=>{
+      setCurrentSlide(slideIndex);
+    }, 500)
   }, []);
 
   const handleSubheaderActive = useState(true);
@@ -117,6 +123,7 @@ export default function App() {
           layoutCollection={layoutCollection}
           scrollDetails={scrollDetails}
           scrollingContainersRef={scrollingContainersRef}
+          currentSlide={currentSlide}
         />
       </SubheaderActiveContext.Provider>
     </SubheaderStyleContext.Provider>

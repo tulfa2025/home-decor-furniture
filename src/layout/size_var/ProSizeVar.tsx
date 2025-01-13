@@ -17,7 +17,7 @@ import twelveLightsHover from "../../assets/images/size_var/12set_light_on.webp"
 import { StaticImageData } from "next/image";
 
 /* BACKGROUN IMAGE */
-import backgroundImage from '../../assets/images/size_var/Chandelier_Lifestyle_website.webp'
+import backgroundImage from '../../assets/images/size_var/Chandelier_Lifestyle_website_new.png'
 
 
 const ProSizeVar: React.FC<LayoutProps> = ({
@@ -30,7 +30,8 @@ const ProSizeVar: React.FC<LayoutProps> = ({
     /* Images under different categories */
     type ImageSet = {
         [key: string]: Array<[StaticImageData, string]>
-        background: StaticImageData
+        background: StaticImageData,
+        backgroundStyling: string
     };
 
     const imageSet = useMemo(()=>{
@@ -38,6 +39,7 @@ const ProSizeVar: React.FC<LayoutProps> = ({
 
         const dynamicImageSet: ImageSet = {
             background: backgroundImage,
+            backgroundStyling: styles.backgroundStyling,
             top: [
                 [sixLights, "Six Lights", sixLightsHover],
                 [eightLights, "Eight Lights", eightLightsHover],
