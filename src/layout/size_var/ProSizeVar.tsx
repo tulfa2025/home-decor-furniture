@@ -4,20 +4,20 @@ import ProductVariation from "@/components/variations/ProductVariations";
 import {useMemo} from 'react'
 
 /* PRODUCT SIZE IMAGES */
-import sixLights from "../../assets/images/size_var/6set_light_off.png";
-import eightLights from "../../assets/images/size_var/8set_light_off.png";
-import tenLights from "../../assets/images/size_var/10set_light_off.png";
-import twelveLights from "../../assets/images/size_var/12set_light_off.png";
+import sixLights from "../../assets/images/size_var/6set_light_off.webp";
+import eightLights from "../../assets/images/size_var/8set_light_off.webp";
+import tenLights from "../../assets/images/size_var/10set_light_off.webp";
+import twelveLights from "../../assets/images/size_var/12set_light_off.webp";
 
 /* HOVER IMAGES */
-import sixLightsHover from "../../assets/images/size_var/6set_light_on.png";
-import eightLightsHover from "../../assets/images/size_var/8set_light_on.png";
-import tenLightsHover from "../../assets/images/size_var/10set_light_on.png";
-import twelveLightsHover from "../../assets/images/size_var/12set_light_on.png";
+import sixLightsHover from "../../assets/images/size_var/6set_light_on.webp";
+import eightLightsHover from "../../assets/images/size_var/8set_light_on.webp";
+import tenLightsHover from "../../assets/images/size_var/10set_light_on.webp";
+import twelveLightsHover from "../../assets/images/size_var/12set_light_on.webp";
 import { StaticImageData } from "next/image";
 
 /* BACKGROUN IMAGE */
-import backgroundImage from '../../assets/images/size_var/Chandelier_Lifestyle_website.png'
+import backgroundImage from '../../assets/images/size_var/Chandelier_Lifestyle_website.webp'
 
 
 const ProSizeVar: React.FC<LayoutProps> = ({

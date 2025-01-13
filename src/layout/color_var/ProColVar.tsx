@@ -6,10 +6,10 @@ import {useMemo} from 'react'
 /* PRODUCT COLOR IMAGES */
 
 /* MAIN IMAGES */
-import MainImageRed from "../../assets/images/color_var/Red Organic.png";
-import MainImageBrown from "../../assets/images/color_var/Brown.png";
-import MainImageLGrey from "../../assets/images/color_var/Light Grey.png";
-import MainImageOrganic from "../../assets/images/color_var/Organic.png";
+import MainImageRed from "../../assets/images/color_var/Red Organic.webp";
+import MainImageBrown from "../../assets/images/color_var/Brown.webp";
+import MainImageLGrey from "../../assets/images/color_var/Light Grey.webp";
+import MainImageOrganic from "../../assets/images/color_var/Organic.webp";
 
 /* HOVER IMAGES */
 import HoverImageRed from "../../assets/images/color_var/Red Organic_B.webp";

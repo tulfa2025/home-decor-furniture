@@ -6,20 +6,20 @@ import {useMemo} from 'react'
 /* PRODUCT COLOR IMAGES */
 
 /* MAIN IMAGES */
-import MainImageOrange from "../../assets/images/fabric_var/Fabric_Variation_01_Lifestyle.png";
-import MainImageYellow from "../../assets/images/fabric_var/Fabric_Variation_04_Lifestyle.png";
-import MainImagePorpoise from "../../assets/images//fabric_var/Fabric_Variation_02_Lifestyle.png";
-import MainImageCaramel from "../../assets/images/fabric_var/Fabric_Variation_03_Lifestyle.png";
+import MainImageOrange from "../../assets/images/fabric_var/Fabric_Variation_01_Lifestyle.webp";
+import MainImageYellow from "../../assets/images/fabric_var/Fabric_Variation_04_Lifestyle.webp";
+import MainImagePorpoise from "../../assets/images//fabric_var/Fabric_Variation_02_Lifestyle.webp";
+import MainImageCaramel from "../../assets/images/fabric_var/Fabric_Variation_03_Lifestyle.webp";
 
 /* HOVER IMAGES */
-import HoverImageOrange from "../../assets/images/fabric_var/Fabric_01_DarkOrange_Closeup.png";
-import HoverImageYellow from "../../assets/images/fabric_var/Fabric_02_Yellow_Closeup.png";
-import HoverImageCaramel from "../../assets/images/fabric_var/Fabric_03_Beige_Closeup.png";
-import HoverImagePorpoise from "../../assets/images/fabric_var/Fabric_04_white_fur010000.png";
+import HoverImageOrange from "../../assets/images/fabric_var/Fabric_01_DarkOrange_Closeup.webp";
+import HoverImageYellow from "../../assets/images/fabric_var/Fabric_02_Yellow_Closeup.webp";
+import HoverImageCaramel from "../../assets/images/fabric_var/Fabric_03_Beige_Closeup.webp";
+import HoverImagePorpoise from "../../assets/images/fabric_var/Fabric_04_white_fur010000.webp";
 import { StaticImageData } from "next/image";
 
 /**BACKGROUND IMAGE */
-import backgroundImage from '../../assets/images/fabric_var/Fabrics_Silo .png'
+import backgroundImage from '../../assets/images/fabric_var/Fabrics_Silo .webp'
 
 const ProTextVar: React.FC<LayoutProps> = ({
     layoutName,

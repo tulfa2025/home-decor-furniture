@@ -55,6 +55,7 @@ const ModalImageContainerMobile = memo(({ imageSet, differentSizes, random, allI
                     fullscreenToggle={true}
                     isFocusOverlay={true}
                     blur={true}
+                    quality={50}
 
                 />
             </div>

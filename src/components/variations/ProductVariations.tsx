@@ -141,10 +141,10 @@ const ProductVariation = ({
       viewportSize.width > 768 ? 0 : 60,
       viewportSize.width > 768 ? 0 : 60,
       viewportSize.width > 768
-        ? -viewportSize.height * 0.4 - 60
+        ? -viewportSize.height * 0.4
         : -viewportSize.height * 0.2,
       viewportSize.width > 768
-        ? -viewportSize.height * 0.4 - 60
+        ? -viewportSize.height * 0.4
         : -viewportSize.height * 0.2,
       viewportSize.width > 768
         ? -viewportSize.height * 2.4
@@ -218,7 +218,7 @@ const ProductVariation = ({
                 alt=""
                 priority
                 className={styles.main_image}
-                quality={100}
+                quality={80}
               />
             </motion.div>
 
@@ -258,6 +258,7 @@ const ProductVariation = ({
                         imageStyles={{}}
                         imageClassName={styles.indiv_image_var}
                         blur={true}
+                        quality={1}
                       />
 
                       <p className={styles.image_text}>{imageSource[1]}</p>

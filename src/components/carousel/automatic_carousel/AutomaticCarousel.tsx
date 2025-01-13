@@ -17,15 +17,17 @@ interface AutomaticCarouaProps {
   imageSet: ImageSet;
   changeDelay: number;
   transition: {};
+  paused: boolean
 }
 
 const AutomaticCarousel: React.FC<AutomaticCarouaProps> = memo(
-  ({ imageSet, changeDelay, transition }) => {
+  ({ imageSet, changeDelay, transition, paused }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const timeoutRef = useRef(null);
 
     useEffect(() => {
+      if(paused)return
       clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
         setCurrentIndex((prev) => {
@@ -38,7 +40,7 @@ const AutomaticCarousel: React.FC<AutomaticCarouaProps> = memo(
           }
         });
       }, changeDelay);
-    }, [currentIndex]);
+    }, [currentIndex, paused]);
 
     return (
       <AnimatePresence initial={true}>

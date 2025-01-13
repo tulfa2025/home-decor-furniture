@@ -15,6 +15,7 @@ const ImageContainer = memo(
     hoverImageSrc,
     isFocusOverlay = false,
     blur = false,
+    quality=75
   }) => {
     const elementRef = useRef<HTMLDivElement | null>(null);
     const safariElementStyleRef = useRef(null);
@@ -164,6 +165,7 @@ const ImageContainer = memo(
             alt=""
             className={`${styles.indiv_image} ${imageClassName}`}
             placeholder={blur ? "blur" : undefined}
+            quality={quality}
           />
 
           <CloseButton
@@ -185,6 +187,7 @@ const ImageContainer = memo(
             className={`${imageClassName} ${styles.indiv_image_hover}`}
             onClick={toggleFullscreen}
             placeholder={blur ? "blur" : undefined}
+            quality={quality}
           />
         ) : null}
 

@@ -32,7 +32,7 @@ const ModalShareButton = ({urlLink, handleIsToastOpen, appliedFilter}) => {
 
   const shareData = {
     title: "Tulfa, Inc - Home, Decor, & Furniture.",
-    text: "L",
+    text: "",
     url: urlLink,
   };
 

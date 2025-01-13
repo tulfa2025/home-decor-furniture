@@ -125,6 +125,7 @@ const ModalImageContainer = memo(({ imageSet, differentSizes, random, allImages,
                     fullscreenToggle={true}
                     isFocusOverlay={true}
                     blur={true}
+                    quality={70}
 
                 />
             </div>
