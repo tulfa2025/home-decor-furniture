@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useState, useEffect, useRef } from "react";
-import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import { motion } from "motion/react";
 
 /* CUSTOM COMPONENTS */
 import SubHeader from "@/components/sub_header/SubHeader";
@@ -8,16 +8,14 @@ import useGoTo from "@/hooks/use_goto";
 import SubheaderActiveContext from "@/context/subHeader";
 import SubheaderStyleContext from "./context/subHeaderStyle";
 import ScrollContext from "./context/scrollContext";
-import layoutCollection from "@/layout/layout_collection";
+import layoutCollection from "@/layout/layout_collection_product_images";
 import MenuPopup from "./components/menu_popup/MenuPopup";
 import useWindowSize from "./hooks/use_window_size";
 
 export default function App() {
   // Layout Collection
   const [headerStyle, setHeaderStyle] = useState(2);
-
   const scrollingContainersRef = useRef([]);
-
   const handleIsScrollBlocked = (flag = false, elementRef = null) => {
     if (elementRef) {
       if (!flag) {
@@ -32,7 +30,7 @@ export default function App() {
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Times how long until actuall current slide updates
+  // Times how long until actual current slide updates
   const currentSlideRef = useRef(null)
 
   /* IDENIFIES CURRENT SLIDE IN VIEW */
