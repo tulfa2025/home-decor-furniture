@@ -1,0 +1,48 @@
+@use '@/styles/shared/variables';
+
+.video_scene_container {
+    width: 100vw;
+    height: 100v;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 300;
+
+    .video_scene_container_inner {
+
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 1);
+        position: relative;
+        z-index: 1;
+
+        .showcase_container {
+            position: absolute;
+            bottom: 10vh;
+            width: 100%;
+            display: flex;
+            justify-items: center;
+
+            @include variables.sm {
+                bottom: 15vh;
+                left: 5%;
+            }
+
+
+            @include variables.md {
+                left: 0
+            }
+
+            @include variables.lg {
+                left: 0;
+            }
+
+            @include variables.xl {
+                left: 0;
+            }
+
+
+        }
+    }
+}
+

@@ -1,0 +1,270 @@
+@use '@/styles/shared/variables';
+
+.silo_container {
+    /* LAYOUT */
+    position: relative;
+    height: 100vh;
+    padding: 0 0;
+    background-color: white;
+
+    @include variables.sm {
+        @include variables.setLayout(flex, center, center);
+        flex-direction: column;
+    }
+    @include variables.md {
+        @include variables.setLayout(flex, flex-start, center);
+        flex-direction: row;
+    }
+
+    .silo_content {
+        width: 'max-content';
+        
+        @include variables.sm {
+            /* LAYOUT */
+            @include variables.setLayout(flex, center, flex-start, 26.667px, column);
+            justify-self: flex-start;
+            position: relative;
+            z-index: 10;
+            align-items: center;
+            top: 12vh;
+            
+        };
+        
+
+        @include variables.md {
+            /* LAYOUT */
+            top: 0;
+            position: relative;
+            align-items: flex-start;
+            left: 100px;
+        };
+        .silo_content_heading {
+            /* LAYOUT */
+            align-self: stretch;
+            position: relative;
+            z-index: 1;
+            white-space: nowrap;
+            
+
+            /* TYPOGRAPHY */
+            @include variables.sm {
+                @include variables.setTypography(48px, normal, 700, normal);
+            }
+            @include variables.md {
+                @include variables.setTypography(50px, normal, 700, normal);
+            }
+            @include variables.lg {
+                @include variables.setTypography(64px, normal, 700, normal);
+            }
+           
+
+            /* STYLE */
+            @include variables.setBackgroundClip(variables.$firstGradient);
+        }
+
+        .silo_content_text {
+            /* LAYOUT */
+            position: absolute;
+            z-index: 1;
+            color: variables.$primaryColor;
+            overflow-wrap: break-word;
+            
+
+            /* TYPOGRAPHY */
+            @include variables.xs {
+                @include variables.setTypography(16px, normal, 400, normal);
+                bottom: -48px;
+            }
+        
+        }
+    }
+
+    .silo_image_container {
+
+        max-width: 100vw;
+        height: 100vh;
+        right: 0vw;
+
+        @include variables.xs{
+            position: relative;
+        }
+
+        @include variables.md {
+            position: absolute;
+        }
+
+        .silo_image_container_inner {
+            /* LAYOUT */
+            position: relative;
+            background-color: transparent;
+    
+            @include variables.sm {
+                height: 100vh;
+                max-width: 100vw;
+                top: 12vh;
+                right: -1vw
+               
+            }
+            @include variables.md {
+                height: 100vh;
+                width: 105vw;
+                right: -1vw;
+                top: 2vh
+            }
+            @include variables.lg {
+                width: 110vw;
+                right:5vw;
+                top: 2vh
+            };
+            @include variables.xl {
+                width: 130vw;
+                right:-1vw;
+                top: 5vh;
+                height: 100vh;
+                
+            };
+    
+            .silo_image {
+               
+                object-fit: cover;
+                background-color: transparent;
+
+                @include variables.sm {
+                    object-position:82% 50%;
+                    height: clamp(300px, 85%, 500px);
+                    width: 100vw;
+                }
+
+                @include variables.md {
+                    object-position:90% 50%;
+                    height: 100%;
+                    width: 100%;
+                                   
+                }
+            }
+        }
+
+    }
+
+    
+}
+
+.popup_button_container {
+    position: absolute;
+    
+    @include variables.xs {
+        left: calc(50vw - 150px);
+        bottom: 5vh;
+    }
+
+    @include variables.lg {
+        left: calc(50vw - 175px);
+  
+    }
+}
+
+.silo_modal_container {
+    position: absolute;
+    top: 0;
+    left: 15vw;
+    height: 90vh;
+    width: 70vw;
+    background-color: transparent;
+    z-index: 200;
+
+    .silo_card_container {
+        position: relative;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.3);
+        z-index: 2;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        background-color: white;
+
+        .silo_handle_close {
+            position: absolute;
+            background-color: #2A266A;
+            opacity: 0.8;
+            color: white;
+            right: 10%;
+            top: 10%;
+            border-radius: 25px;
+            font-size: 25px
+        }
+
+        .silo_text_container {
+            display: flex;
+            background-image: linear-gradient(90deg, #2A266A, #524BD0);
+            justify-content: center;
+            align-items: center;
+            max-width: 65%;
+            margin-left: 10%;
+            border: white 10px solid;
+           
+
+            .silo_text {
+                @include variables.sm {
+                    @include variables.setTypography(20px, medium, 500, normal);
+                }
+                @include variables.md {
+                    @include variables.setTypography(26px, medium, 500, normal);
+                }
+                @include variables.lg {
+                    @include variables.setTypography(32px, medium, 500, normal);
+                }
+                font-weight: medium;
+                // color: #524BD0;
+                mix-blend-mode: screen;
+                background-color: white;
+                padding-left: 10%;
+                border: white 10px solid;
+            }
+        }
+
+        .silo_carousel_container {
+            height: 50%;
+            padding-left: 17%;
+            min-width: 100vw;
+            position: relative;
+            display: flex;
+            margin-top: 20px;
+            column-gap: 20px;
+            align-items: flex-start;
+            justify-content: flex-start;
+            overflow: hidden;
+
+        }
+
+        .button_container {
+
+            height: 5vh;
+            width: 7vw;
+            align-self: flex-end;
+            display: flex;
+            justify-content: space-between;
+            
+
+            @include variables.sm {
+                width: 20vw;
+                transform: translateX(-5vw) translateY(2vh);
+            }
+            @include variables.md {
+                width: 15vw;
+                transform: translateX(-5vw) translateY(5vh);
+            }
+            @include variables.lg {
+                width: 7vw;
+                transform: translateX(-5vw) translateY(5vh);
+            }
+        
+
+        }
+        
+    }
+}

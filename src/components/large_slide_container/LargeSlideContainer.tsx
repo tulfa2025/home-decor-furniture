@@ -18,9 +18,11 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 /* CUSTOM COMPONENTS */
 import TitleBanner from "../title_banner/title_banner";
 
+/* CONTEXT */
+import SlideContext from "@/context/changeSlide";
+
 const LargeSlideContainer: React.FC<LayoutProps> = ({
   layoutName,
-  handleChangeSlide,
   title,
   children,
   paragraph,
@@ -28,7 +30,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   dynamicHeader = false,
 }) => {
   // Subheadr scroll
-  const setHeaderStyle = useContext(SubheaderStyleContext);
+  const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
   // Get scroll height
   const viewportSize = useWindowSize();
 
@@ -41,6 +43,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     target: scrollTargetRef,
   });
 
+  const handleChangeSlide = useContext(SlideContext)
   useEffect(() => {
     if (isInView) {
       handleChangeSlide(layoutName);

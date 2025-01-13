@@ -9,17 +9,16 @@ import useWindowSize from "@/hooks/use_window_size";
 import { TulfaDownArrow } from "@/assets/icons/tulfa_nav_arrows";
 
 import SubheaderActiveContext from "@/context/subHeader";
+import SubheaderStyleContext from "@/context/subHeaderStyle";
 
 
 
 type SubHeaderProps = {
     activePage: "/" | "/product_videos" | "/immersive_experience" | "/happiest_costumers";
-    headerStyleType: 0 | 1 | 2;
 }
 
 export default function SubHeader({
-    activePage,
-    headerStyleType
+    activePage
 }: SubHeaderProps) {
     const navLinks = [
         { href: "/", label: "Product Images" },
@@ -27,6 +26,10 @@ export default function SubHeader({
         { href: "/immersive_experience", label: "Immersive Experience" },
         { href: "/happiest_costumers", label: "Happiest Costumers" },
     ];
+
+    const [headerStyleType, setHeaderStyle] = useContext(SubheaderStyleContext)
+
+
 
     let headerStyle = "";
     let headerFontColor = "";
@@ -76,8 +79,10 @@ export default function SubHeader({
     /* DEVICE SIZE  */
     const viewportSize = useWindowSize();
 
+    /* Is dropdownactivated */
     const [headerActivated, setHeaderActivated] = useState(false);
 
+    /* Is header visible */
     const [isActive, setIsActive] = useContext(SubheaderActiveContext)
 
     return (

@@ -21,13 +21,13 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 import TitleBanner from "../title_banner/title_banner";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 
+/* CONTEXT */
+import SlideContext from "@/context/changeSlide";
+
 const ProductVariation = ({
   imageSet,
-  headerImage,
   title,
-  handleChangeSlide,
   layoutName,
-  handleLayoutLoad,
   paragraph,
   zIndex = 0,
   dynamicHeader = false,
@@ -44,6 +44,7 @@ const ProductVariation = ({
     target: scrollTargetRef,
   });
 
+  const handleChangeSlide = useContext(SlideContext)
   useEffect(() => {
     if (isInView) {
       handleChangeSlide(layoutName);
@@ -163,7 +164,7 @@ const ProductVariation = ({
     }
   );
 
-  const setHeaderStyle = useContext(SubheaderStyleContext);
+  const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
 
   /* SET HEADER STYLE AT DIFFERNT INTERVALS */
   useMotionValueEvent(scrollY, "change", (v) => {

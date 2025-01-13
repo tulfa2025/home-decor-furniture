@@ -1,4 +1,4 @@
-import PopUp from "@/components/pop_up/PopUp";
+/* SIMPLE TITLE COMPONENT*/
 import { motion } from 'framer-motion'
 
 import styles from "./ShowCase.module.scss";
@@ -23,7 +23,6 @@ export default function ShowCase({ heading, animationValues, style }: ShowCasePr
         >
             {heading && <h3 className={styles.showcase_heading}>{heading}</h3>}
             <div className={styles.showcase_pop}>
-                {/* <PopUp /> */}
             </div>
         </motion.div>
     );

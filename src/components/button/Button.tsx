@@ -1,11 +1,11 @@
 import { FaPlus } from "react-icons/fa";
 import { LuExpand } from "react-icons/lu";
-import { useRef } from "react";
+import { ReactElement, useRef } from "react";
 
 import styles from "./Button.module.scss";
 
 type ButtonProps = {
-  text: "Take a closer look" | "Schedule a Demo";
+  text: "Take a closer look" | "Book a Demo";
   modifier: keyof typeof styles;
   buttonType?: number;
   onClick: () => void;
@@ -21,7 +21,7 @@ export default function Button({
   containerStyles,
   externalLink,
 }: ButtonProps) {
-  let CustomButton: React.FC;
+  let CustomButton: ReactElement;
 
   switch (buttonType) {
     case 1:
@@ -48,7 +48,7 @@ export default function Button({
   );
 }
 
-function ButtonOne({ text, modifier, onClick }: ButtonProps) {
+function ButtonOne({ text, modifier, onClick, externalLink }: ButtonProps) {
   // Toggle hover - prevent re renders
   const buttonRef = useRef(null);
   return (
@@ -56,9 +56,6 @@ function ButtonOne({ text, modifier, onClick }: ButtonProps) {
       ref={buttonRef}
       className={`${styles.button_one_container} ${styles[modifier]}`}
       onClick={onClick}
-      // onMouseEnter={() => {
-      //     buttonRef.current.classList.add(`${styles['button-hovered']}`)
-      // }}
     >
       <span className={styles.pop_span}>
         {externalLink ? (

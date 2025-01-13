@@ -4,7 +4,7 @@ import React from "react";
 
 
 
-const structureLayouts = (layoutCollection: Array<[React.FC | React.ExoticComponent, number, string]>): LayoutSet =>{
+const structureLayouts = (layoutCollection: Array<[React.FC | React.ExoticComponent, string]>): LayoutSet =>{
 
     const layoutStructure: LayoutSet = {
         order: []        
@@ -14,10 +14,8 @@ const structureLayouts = (layoutCollection: Array<[React.FC | React.ExoticCompon
         layoutStructure.order.push(i);
         layoutStructure[i] = {
             layoutName: i,
-            layoutRendered: false,
             component: layoutCollection[i][0],
-            subheaderStyle: layoutCollection[i][1],
-            layoutTag: layoutCollection[i][2]
+            layoutTag: layoutCollection[i][1]
         }
     }
 
