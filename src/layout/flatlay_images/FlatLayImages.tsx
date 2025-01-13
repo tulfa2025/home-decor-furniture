@@ -23,39 +23,18 @@ const FlatLayImages: React.FC<LayoutProps> = ({
   const [direction, setDirection] = useState(0);
   const containerRef = useRef(null);
 
-  const changeImage = (e) => {
-    if (!isInView) return;
-    // For touch events or wheel events, check the deltaY or y position
-    if (e instanceof WheelEvent) {
-      // For wheel events, deltaY will indicate scroll direction
-      if (e.deltaY > 0) {
-        setDirection(1); // Scroll down
-      } else {
-        setDirection(0); // Scroll up
-      }
-    } else if (e instanceof TouchEvent) {
-      // For touch events (e.g., touchmove), check the vertical movement
-      if (e.touches[0].clientY < e.changedTouches[0].clientY) {
-        setDirection(0); // Scroll up
-      } else {
-        setDirection(1); // Scroll down
-      }
+  const changeTrackRef = useRef(null);
+  const isTrackInView = useInView(inViewRef, 0.85);
+
+  useEffect(()=>{
+    if(isTrackInView){
+      setDirection(1)
+    } else {
+      setDirection(0)
     }
-  };
+    
+  }, [isTrackInView])
 
-  useEffect(() => {
-    containerRef.current.removeEventListener("wheel", changeImage);
-    containerRef.current.removeEventListener("touchmove", changeImage);
-    // Attach the event listener
-    containerRef.current.addEventListener("wheel", changeImage, { passive: true }); // For mouse wheel scroll
-    containerRef.current.addEventListener("touchmove", changeImage, { passive: true }); // For touch scrolling
-
-    // Cleanup the event listener
-    return () => {
-      containerRef.current.removeEventListener("wheel", changeImage);
-      containerRef.current.removeEventListener("touchmove", changeImage);
-    };
-  }, [isInView]);
 
   return (
     <LargeSlideContainer
@@ -96,6 +75,7 @@ const FlatLayImages: React.FC<LayoutProps> = ({
             duration: 0.5,
             delay: 0.2,
           }}
+          ref={changeTrackRef}
         >
           <Image
             src={flatlayTwoImage}

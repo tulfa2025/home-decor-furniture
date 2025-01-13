@@ -2,10 +2,10 @@
 import TulfaMenuButton from "@/assets/icons/tulfa_menu_button";
 import styles from "./MenuPopup.module.scss";
 import { motion } from "framer-motion";
-import { useMemo, memo, useState, useEffect } from "react";
+import { useMemo, memo, useState, useEffect, useContext } from "react";
 import useWindowSize from "@/hooks/use_window_size";
 
-const MenuPopup = ({ layoutCollection, scrollDetails }) => {
+const MenuPopup = ({ layoutCollection, scrollDetails, scrollingContainersRef }) => {
   /* FILTER OUT SLIDE NAMES */
   const slidesList = useMemo(() => {
     const slides = [];
@@ -48,7 +48,13 @@ const MenuPopup = ({ layoutCollection, scrollDetails }) => {
   }, [currentSlide, scrollDetails]);
 
   return (
-    <div className={styles.menu_popup_container}>
+    <motion.div 
+      className={styles.menu_popup_container}
+      animate={{
+        position: scrollingContainersRef.current.length > 0 ? 'relative' : 'fixed'
+      }}
+      
+      >
       <motion.div className={styles.menu_popup_container_inner}>
         <motion.div
           className={styles.slide_container}
@@ -101,7 +107,7 @@ const MenuPopup = ({ layoutCollection, scrollDetails }) => {
           }}
         />
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

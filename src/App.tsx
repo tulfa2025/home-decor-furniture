@@ -116,6 +116,7 @@ export default function App() {
         <MenuPopup
           layoutCollection={layoutCollection}
           scrollDetails={scrollDetails}
+          scrollingContainersRef={scrollingContainersRef}
         />
       </SubheaderActiveContext.Provider>
     </SubheaderStyleContext.Provider>
