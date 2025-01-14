@@ -10,10 +10,10 @@ import useWindowSize from "@/hooks/use_window_size";
 /*  CUSTOM COMPONENTS */
 import BlurredBackdrop from "../backdrops/Blur";
 import TulfaCloseButton from "@/assets/icons/tulfa_close_button";
-import ImageContainer from "../image_container/ImageContainer";
 import ModalFilters from "./ModalSelector";
 import ModalShareButton from "./ModalShareButton";
 import ModalFiltersMobile from "./ModalFiltersMobile";
+import FullscreenImageContainer from "../image_container/fullscreen_image_container/FullscreenImageContainer";
 
 /* DYNAMICALLY LOADED HEAVY COMPONENTS */
 const ModalImageContainer = dynamic(() => import("./ModalImageContainer"), {
@@ -32,7 +32,6 @@ const ModalContainer = ({
   handleModalClose,
   isModalOpen,
   imageSet,
-  imageNo,
   selectionArray,
   differentSizes = false,
   random = false,
@@ -150,9 +149,8 @@ const ModalContainer = ({
               <div className={styles.closeup_modal_header}>
                 {/* HEADER IMAGE CONTAINER */}
                 <div className={styles.closeup_modal_header_image}>
-                  <ImageContainer
+                  <FullscreenImageContainer
                     imageSrc={imageSet.background}
-                    priority={true}
                     imageStyle={{
                       height: "100%",
                       width: "100%",

@@ -23,8 +23,14 @@
     }
 
     .background_image_container {
-        height: 100vh;
         width: 100%;
+
+        @include variables.xs {
+            height: 70vh
+        }
+        @include variables.md {
+            height: 100vh
+        }
     }
 }
 

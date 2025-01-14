@@ -2,16 +2,18 @@
 
 import Button from "@/components/button/Button";
 import Image from 'next/image';
-import bookDemoImage from "../../../assets/images/book_demo/sector.png"
 import { motion, useSpring, useTransform, useScroll } from 'framer-motion'
-import { useRef, useEffect, useState, useContext } from "react";
+import { useRef, useEffect, useState, useContext, useMemo } from "react";
 import useInView from "@/hooks/use_inview";
 import useWindowSize from "@/hooks/use_window_size";
 import calculateScrollHeight from "@/utils/calculate_scrollheight";
-
 import SlideContext from "@/context/changeSlide";
-
 import styles from "./BookDemo.module.scss";
+
+import bookDemoImage from "../../../assets/images/book_demo/book.webp"
+import bookDemoImageMob from "../../../assets/images/book_demo/book_mobile.webp"
+
+
 const BookDemo = ({
     layoutName,
     zIndex
@@ -19,6 +21,16 @@ const BookDemo = ({
 
     // Get scroll height
     const viewportSize = useWindowSize();
+
+    // DETERMINE BACKGROUND IMAGE BASED ON VIEWPORT SIZE
+    const backgroundImage = useMemo(()=>{
+
+        if(viewportSize.width > 768){
+            return bookDemoImage
+        } else {
+            return bookDemoImageMob
+        }
+    }, [viewportSize])
 
     // Detect when the user is in viewport for triggering events
     const inViewRef = useRef(null);
@@ -105,7 +117,9 @@ const BookDemo = ({
                     <div className={styles.book_content}>
                         <Image
                             alt=''
-                            src={bookDemoImage}
+                            src={
+                                backgroundImage
+                            }
                             priority
                             className={styles.book_demo_image}
                         />

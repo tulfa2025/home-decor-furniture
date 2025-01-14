@@ -1,8 +1,8 @@
 'use client'
 import styles from './modal_container.module.scss';
 import useWindowSize from '@/hooks/use_window_size';
-import { memo, useMemo } from 'react';
-import ImageContainer from '../image_container/ImageContainer';
+import { memo } from 'react';
+import FullscreenImageContainer from '../image_container/fullscreen_image_container/FullscreenImageContainer';
 
 const ModalImageContainerMobile = memo(({ imageSet, differentSizes, random, allImages, isFilter=false }) => {
 
@@ -46,7 +46,7 @@ const ModalImageContainerMobile = memo(({ imageSet, differentSizes, random, allI
                 key={i}
                 className={styles.modal_indiv_image_container}
             >
-                <ImageContainer
+                <FullscreenImageContainer
                     alt=""
                     imageSrc={imageArray[imageIndex]}
                     imageClassName=""

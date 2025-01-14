@@ -1,0 +1,34 @@
+@use '@/styles/shared/variables';
+
+.indiv_image {
+
+    height: 100%;
+    width: 100%;
+    z-index: 300;
+    position: relative;
+    pointer-events: auto;
+
+}
+
+
+.hover_overlay {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out; // Fade in/out transition for the overlay
+    border-radius: 8px;
+    z-index: 305;
+    background: radial-gradient(circle,
+            rgba(0, 0, 0, 0) 50%,
+            /* Black center */
+            rgba(0, 0, 0, 0.6) 99%,
+            /* White transition */
+            rgba(0, 0, 0, 0.05) 100%
+            /* Almost imperceptible thin black outer edges */
+        );
+
+}

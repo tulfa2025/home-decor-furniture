@@ -1,6 +1,5 @@
 'use client'
 /* IMAGES */
-import ImageContainer from "@/components/image_container/ImageContainer"
 import imageSeven from '../../../assets/images/installation_images/7.png'
 import styles from './FlipBook.module.scss'
 
@@ -12,6 +11,7 @@ import { useRef, useEffect, useState, useContext } from "react";
 import { motion, useSpring, useTransform, useScroll } from 'framer-motion'
 
 import SlideContext from "@/context/changeSlide";
+import Image from 'next/image';
 
 const FlipBook = ({
     layoutName,
@@ -135,9 +135,10 @@ const FlipBook = ({
                         scale: springyTransformScaleAnimationOne
                     }}
                 >
-                    <ImageContainer
-                        imageSrc={imageSeven}
-                        imageClassName={styles.image_fit}
+                    <Image
+                        alt=''
+                        src={imageSeven}
+                        className={styles.image_fit}
                     />
                 </motion.section>
             </motion.div>

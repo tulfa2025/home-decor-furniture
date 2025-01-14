@@ -10,7 +10,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import Image from "next/image";
-import ImageContainer from "../image_container/ImageContainer";
+import VariationImageContainer from "../image_container/variation_image_container/VariationImageContainer";
 import styles from "./ProductVariations.module.scss";
 
 /*CUSTOM HOOKS */
@@ -57,7 +57,7 @@ const ProductVariation = ({
   );
 
   /* ANIMATION START AND END POSITION */
-  const [yPosition, setYPosition] = useState(null);
+  const [yPosition, setYPosition] = useState(0);
 
   // Function to get the Y position of the element
   const getElementYPosition = () => {
@@ -95,18 +95,18 @@ const ProductVariation = ({
       0,
       viewportSize.width > 768
         ? yPosition + scrollHeight * 0.8
-        : yPosition + scrollHeight * 0.5,
+        : yPosition + scrollHeight * 0.2,
       viewportSize.width > 768
         ? yPosition + scrollHeight * 0.85
         : yPosition + scrollHeight * 0.5,
       viewportSize.width > 768
         ? yPosition + scrollHeight * 0.85
-        : yPosition + scrollHeight * 0.75,
+        : yPosition + scrollHeight * 0.9,
     ],
     [
-      viewportSize.width > 768 ? viewportSize.height * 1.2 : scrollHeight,
-      viewportSize.width > 768 ? viewportSize.height * 1.2 : scrollHeight,
-      viewportSize.width > 768 ? 0 : scrollHeight * 0.35,
+      viewportSize.width > 768 ? viewportSize.height * 1.2 : scrollHeight * 0.4,
+      viewportSize.width > 768 ? viewportSize.height * 1.2 : scrollHeight * 0.4,
+      viewportSize.width > 768 ? viewportSize.height * 1.2 : scrollHeight * 0.35,
       viewportSize.width > 768 ? 0 : 0,
     ]
   );
@@ -128,7 +128,7 @@ const ProductVariation = ({
     [
       0,
       yPosition,
-      yPosition + viewportSize.height,
+      yPosition + viewportSize.height / 4,
       yPosition + viewportSize.height + scrollHeight * 0.1,
       yPosition + viewportSize.height + scrollHeight * 0.2,
       viewportSize.width > 768
@@ -143,10 +143,10 @@ const ProductVariation = ({
       viewportSize.width > 768 ? 0 : 60,
       viewportSize.width > 768
         ? -viewportSize.height * 0.4
-        : -viewportSize.height * 0.2 + 20,
+        : -viewportSize.height * 0.2,
       viewportSize.width > 768
         ? -viewportSize.height * 0.4
-        : -viewportSize.height * 0.2 + 20,
+        : -viewportSize.height * 0.2,
       viewportSize.width > 768
         ? -viewportSize.height * 2.4
         : -viewportSize.height * 2,
@@ -195,7 +195,7 @@ const ProductVariation = ({
           style={{
             top: 0,
             position: "fixed",
-            height: viewportSize.width > 768 ? "140vh" : "120vh",
+            height: viewportSize.width > 768 ? "140vh" : "100vh",
             width: "100vw",
             y: springyTransformShowcaseAnimationThree,
           }}
@@ -250,12 +250,10 @@ const ProductVariation = ({
                         duration: 0.5,
                       }}
                     >
-                      <ImageContainer
+                      <VariationImageContainer
                         imageSrc={imageSource[0]}
                         hoverImageSrc={imageSource[2]}
                         alt={imageSource[1]}
-                        priority={false}
-                        fullscreenToggle={false}
                         imageStyles={{}}
                         imageClassName={styles.indiv_image_var}
                         blur={true}

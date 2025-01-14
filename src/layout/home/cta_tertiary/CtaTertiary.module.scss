@@ -35,11 +35,15 @@
 
             /* LAYOUT */
             @include variables.sm {
-                width: 348px;
+                padding-left: 2%;
+                padding-right: 2%;
+                width: 300px;
             }
 
             @include variables.md {
-                width: 540px
+                width: 540px;
+                padding-left: unset;
+                padding-right: unset;
             }
             @include variables.lg{
                 width: 742px;
