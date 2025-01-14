@@ -89,7 +89,7 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
             <motion.div>
               <VideoPlayer
-                src="/videos/lifestyle.mp4"
+                src="/videos/product_videos/Kitchen-3D-Rendering_compressed.mp4"
                 type="video/mp4"
                 loop={true}
                 styleOverride={{
@@ -97,7 +97,7 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                   position: "absolute",
                   opacity: 0.7,
                 }}
-                isInView={isInView}
+                // isInView={isInView}
                 autoplay={viewportSize.width > 768 ? true : false}
               ></VideoPlayer>
             </motion.div>

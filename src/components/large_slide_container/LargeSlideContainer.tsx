@@ -56,7 +56,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   );
 
   /* ANIMATION START AND END POSITION */
-  const [yPosition, setYPosition] = useState(null);
+  const [yPosition, setYPosition] = useState(0);
 
   // Function to get the Y position of the element
   const getElementYPosition = () => {
