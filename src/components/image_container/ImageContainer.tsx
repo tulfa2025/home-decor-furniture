@@ -11,30 +11,54 @@ const ImageContainer = memo(
     fullscreenToggle,
     imageStyles,
     imageClassName,
-    priority,
     hoverImageSrc,
     isFocusOverlay = false,
     blur = false,
-    quality=75
+    quality = 75,
   }) => {
     const elementRef = useRef<HTMLDivElement | null>(null);
     const safariElementStyleRef = useRef(null);
     const fullscreenRef = useRef<boolean>(false);
 
-    // Function to handle fullscreen changes (without re-rendering the component)
-    const handleFullscreenChange = () => {
-      if (document.fullscreenElement) {
-        fullscreenRef.current = true;
+    // Toggle fullscreen mode based on current state. First function fired on click
+    const toggleFullscreen = () => {
+      if (!fullscreenToggle) return;
+      setIsHovered(false);
+      if (fullscreenRef.current) {
+        setIsFullscreen(false);
+        setTimeout(()=>{
+          exitFullscreen();
+        }, 200)
       } else {
-        fullscreenRef.current = false;
+        setIsFullscreen(true);
+        enterFullscreen();
       }
-    };
+    }
+  
 
     // Request fullscreen mode with vendor prefixes (same as before)
     const enterFullscreen = () => {
       if (elementRef.current) {
         if (elementRef.current.requestFullscreen) {
-          elementRef.current.requestFullscreen();
+          // elementRef.current.requestFullscreen();
+
+          // Fallback: Simulate fullscreen with CSS
+          elementRef.current.style.position = "fixed";
+          elementRef.current.style.top = 0;
+          elementRef.current.style.left = 0;
+          elementRef.current.style.width = "100vw";
+          elementRef.current.style.height = "100vh";
+          elementRef.current.style.zIndex = 1500;
+          elementRef.current.style.pointerEvents = "auto";
+
+          //Move modal away
+          const modalFilter = document.getElementById('modal-filter-mobile');
+          if(modalFilter){
+            modalFilter.style.position = 'relative'
+          }
+
+          // TOGGLE FULL SCREEN REF
+          fullscreenRef.current = true;
         } else if (elementRef.current.mozRequestFullScreen) {
           // Firefox
           elementRef.current.mozRequestFullScreen();
@@ -45,15 +69,6 @@ const ImageContainer = memo(
           // IE/Edge
           elementRef.current.msRequestFullscreen();
         } else {
-          // Store previous stylings
-          safariElementStyleRef.current = {
-            position: elementRef.current.style.position,
-            top: elementRef.current.style.top,
-            left: elementRef.current.style.left,
-            width: elementRef.current.style.width,
-            height: elementRef.current.style.height,
-            zIndex: elementRef.current.style.zIndex,
-          };
 
           // Fallback: Simulate fullscreen with CSS
           elementRef.current.style.position = "fixed";
@@ -61,7 +76,17 @@ const ImageContainer = memo(
           elementRef.current.style.left = 0;
           elementRef.current.style.width = "100vw";
           elementRef.current.style.height = "100vh";
-          elementRef.current.style.zIndex = 300;
+          elementRef.current.style.zIndex = 1500;
+          elementRef.current.style.pointerEvents = "auto";
+
+          //Move modal away
+          const modalFilter = document.getElementById('modal-filter-mobile');
+          if(modalFilter){
+            modalFilter.style.position = 'relative'
+          }
+
+          // TOGGLE FULL SCREEN REF
+          fullscreenRef.current = true;
         }
       }
     };
@@ -69,7 +94,27 @@ const ImageContainer = memo(
     // Exit fullscreen mode (same as before)
     const exitFullscreen = () => {
       if (document.exitFullscreen) {
-        document.exitFullscreen();
+        // document.exitFullscreen();
+        // Restore previous styles
+
+        elementRef.current.style.top = "unset";
+        elementRef.current.style.top = "unset";
+        elementRef.current.style.left = "unset";
+        elementRef.current.style.width = "100%";
+        elementRef.current.style.height = "100%";
+        elementRef.current.style.position = "relative";
+        elementRef.current.style.pointerEvents = "auto";
+        elementRef.current.style.zIndex = 300;
+
+        //Move modal away
+        const modalFilter = document.getElementById('modal-filter-mobile');
+        if(modalFilter){
+          modalFilter.style.position = 'fixed'
+        }
+
+        elementRef.current.offsetHeight
+
+        fullscreenRef.current = false;
       } else if (document.mozCancelFullScreen) {
         // Firefox
         document.mozCancelFullScreen();
@@ -81,29 +126,35 @@ const ImageContainer = memo(
         document.msExitFullscreen();
       } else {
         // Restore previous styles
-        const prev = safariElementStyleRef.current;
-        elementRef.current.style.position = prev.position;
-        elementRef.current.style.top = prev.top;
-        elementRef.current.style.left = prev.left;
-        elementRef.current.style.width = prev.width;
-        elementRef.current.style.height = prev.height;
-        elementRef.current.style.zIndex = prev.zIndex;
-    }
+        elementRef.current.style.top = "unset";
+        elementRef.current.style.top = "unset";
+        elementRef.current.style.left = "unset";
+        elementRef.current.style.width = "100%";
+        elementRef.current.style.height = "100%";
+        elementRef.current.style.position = "relative";
+        elementRef.current.style.pointerEvents = "auto";
+        elementRef.current.style.zIndex = 300;
+
+        //Move modal away
+        const modalFilter = document.getElementById('modal-filter-mobile');
+        if(modalFilter){
+          modalFilter.style.position = 'fixed'
+        }
+
+        elementRef.current.offsetHeight
+
+        fullscreenRef.current = false;
+      }
     };
 
-    // Toggle fullscreen mode based on current state
-    const toggleFullscreen = useCallback(() => {
-      if (!fullscreenToggle) return;
-
-      setIsHovered(false);
-      if (fullscreenRef.current) {
-        setIsFullscreen(false);
-        exitFullscreen();
+    // Function to handle fullscreen changes (without re-rendering the component)
+    const handleFullscreenChange = () => {
+      if (document.fullscreenElement) {
+        fullscreenRef.current = true;
       } else {
-        setIsFullscreen(true);
-        enterFullscreen();
+        fullscreenRef.current = false;
       }
-    }, []);
+    };
 
     // Set up fullscreen change listener
     // Setup fullscreen event listeners without affecting component state
@@ -157,6 +208,7 @@ const ImageContainer = memo(
           }}
           onMouseLeave={() => {
             if (!hoverImageSrc && !isFocusOverlay) return;
+            if (fullscreenRef.current) return;
             setIsHovered(false);
           }}
         >
@@ -215,6 +267,8 @@ const ImageContainer = memo(
 ImageContainer.displayName = "image container";
 
 const CloseButton = ({ isFullScreen, toggleFullscreen }) => {
+
+  console.log(isFullScreen)
   return (
     <motion.div
       style={{
@@ -222,6 +276,7 @@ const CloseButton = ({ isFullScreen, toggleFullscreen }) => {
         bottom: "10%",
         left: "50vw",
         zIndex: 400,
+        pointerEvents: "auto",
       }}
       animate={{
         opacity: isFullScreen ? 1 : 0,

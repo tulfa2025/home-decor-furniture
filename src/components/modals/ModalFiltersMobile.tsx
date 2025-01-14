@@ -17,7 +17,7 @@ const ModalFiltersMobile = ({
   const filterRef = useRef(null)
 
   return (
-    <div className={styles.modal_filters_mobile_container}>
+    <div className={styles.modal_filters_mobile_container} id='modal-filter-mobile'>
       <div className={styles.selected_item_container}>
         {selectionArray[selectedIndex]}
       </div>
