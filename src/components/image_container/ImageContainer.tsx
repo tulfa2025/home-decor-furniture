@@ -268,7 +268,6 @@ ImageContainer.displayName = "image container";
 
 const CloseButton = ({ isFullScreen, toggleFullscreen }) => {
 
-  console.log(isFullScreen)
   return (
     <motion.div
       style={{
