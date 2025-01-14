@@ -114,8 +114,6 @@ const FlipBook = ({
                 top: 0,
                 overflow: 'auto',
                 zIndex:isInView ? zIndex : -1
-                
-
             }}
             ref={scrollTargetRef}
         >

@@ -13,6 +13,9 @@
     background: var(--color-white-solid, variables.$light);
 
     .image_fit {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
         @include variables.xs {
             object-position: 50% 3%;
             transform: scale(1)

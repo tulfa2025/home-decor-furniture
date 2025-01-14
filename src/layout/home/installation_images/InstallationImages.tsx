@@ -19,6 +19,7 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     height: "100%",
     width: "100%",
     scale: 1.05,
+    objectFit: 'cover'
   };
 
   return (
