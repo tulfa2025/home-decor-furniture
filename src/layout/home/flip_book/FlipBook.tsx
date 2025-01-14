@@ -69,10 +69,10 @@ const FlipBook = ({
       0,
       yPosition,
       yPosition + viewportSize.height,
-      yPosition + viewportSize.height + scrollHeight * 0.4, 
+      yPosition + viewportSize.height + scrollHeight * 0.4 - 60, 
       yPosition + viewportSize.height + scrollHeight, 
     ],
-    [1, 1, 1.5, 1.5, 1]
+    [1, 1, 1.2, 1.2, 1]
   );
   const springyTransformScaleAnimationOne = useSpring(
     transformScaleAnimationOne,
@@ -88,17 +88,17 @@ const FlipBook = ({
         scrollY,
         [
             0,
-            viewportSize.width > 768 ? yPosition - viewportSize.height : yPosition - scrollHeight * 0.7,
+            viewportSize.width > 768 ? yPosition - viewportSize.height : yPosition - scrollHeight * 0.65,
             viewportSize.width > 768 ? yPosition : yPosition - viewportSize.height,
             yPosition + viewportSize.height + scrollHeight * 0.7,
             yPosition + viewportSize.height + scrollHeight * 1.1,
           ],
           [
-            viewportSize.height * 2.4,
-            viewportSize.height * 2.4,
+            viewportSize.height * 2,
+            viewportSize.height * 2,
             0,
             0,
-            -viewportSize.height * 2.4,
+            -viewportSize.height * 2,
           ]
     )
 

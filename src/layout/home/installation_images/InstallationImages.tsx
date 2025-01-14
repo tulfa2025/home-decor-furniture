@@ -12,6 +12,8 @@ import imageSix from "../../../assets/images/installation_images/6.png";
 
 import Image from "next/image";
 
+import useWindowSize from "@/hooks/use_window_size";
+
 const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const image_container_style = {
     position: "relative",
@@ -19,8 +21,10 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     height: "100%",
     width: "100%",
     scale: 1.05,
-    objectFit: 'cover'
+    objectFit: "cover",
   };
+
+  const viewportSize = useWindowSize();
 
   return (
     <>
@@ -59,20 +63,25 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
               ...image_container_style,
             }}
           />
-          <Image
-            alt=""
-            src={imageFour}
-            style={{
-              ...image_container_style,
-            }}
-          />
-          <Image
-            alt=""
-            src={imageOne}
-            style={{
-              ...image_container_style,
-            }}
-          />
+
+          {viewportSize.width > 768 ? (
+            <>
+              <Image
+                alt=""
+                src={imageFour}
+                style={{
+                  ...image_container_style,
+                }}
+              />
+              <Image
+                alt=""
+                src={imageOne}
+                style={{
+                  ...image_container_style,
+                }}
+              />
+            </>
+          ) : null}
         </div>
       </LargeSlideContainer>
     </>
