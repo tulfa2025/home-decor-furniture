@@ -70,14 +70,15 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
   useMotionValueEvent(scrollY, 'change', (v)=>{
     if(isInView){
       
-      setHeaderStyle(2)
+      if(headerStyle !== 2) setHeaderStyle(2)
       
     }
   })
 
   useEffect(()=>{
-    setHeaderStyle(2)
-  },[])
+    if(!isInView) return
+    if(headerStyle !== 2)  setHeaderStyle(2)
+  },[isInView])
 
   // Trigger move to next slide programmatically??
   return (
