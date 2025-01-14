@@ -6,13 +6,17 @@
 
     .callout_container {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
         column-gap: 10px;
         
         @include variables.xs{
+            grid-template-rows: repeat(2, 1fr);
+            justify-content: center;
             padding: 0 30px;
         }
         @include variables.md{
+            grid-template-rows: unset;
+            justify-content: unset;
+            grid-template-columns: repeat(2, 1fr);
             padding: 0 50px;
         }
         @include variables.lg{
@@ -22,10 +26,27 @@
 }
 
 .callout_paragraph {
-    justify-self: flex-end;
-    text-align: start;
+    @include variables.xs{
+        justify-self: center;
+        text-align: center;
+        align-self: center;
+    }
+    @include variables.md{
+        text-align: unset;
+        justify-self: flex-end;
+    }
 }
 
 .callout_header {
-    justify-self: flex-start;
+
+
+    @include variables.xs{
+        justify-self: center;
+        align-self: flex-end;
+    }
+    @include variables.md{
+        justify-self: flex-start;
+        align-self: unset;
+    }
+    
 }

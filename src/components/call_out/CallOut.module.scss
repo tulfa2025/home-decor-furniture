@@ -53,29 +53,19 @@
 
     .call_paragraph {
         @include variables.xs {
-            @include variables.setTypography(12px, normal, 400, normal);
-            max-width: 300px
+            @include variables.setTypography(14px, normal, 400, normal);
+            max-width: 400px;
+
         }
         @include variables.md {
             @include variables.setTypography(14px, normal, 400, normal);
-            max-width: 400px
+            max-width: 400px;
         }
         @include variables.lg {
             @include variables.setTypography(18px, normal, 400, normal);
             max-width: 400px
         }
 
-        // @include variables.md {
-        //     @include variables.setTypography(22px, normal, 400, normal);
-        //     max-width: 400px
-        // }
-    
-    
-        // @include variables.lg {
-        //     @include variables.setTypography(38px, normal, 400, normal);
-        //     max-width: 960px
-        // }
-        
         color: variables.$primaryColor;
     }
 }
