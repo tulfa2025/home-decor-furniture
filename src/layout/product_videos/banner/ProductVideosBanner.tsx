@@ -6,6 +6,7 @@ import { useScroll, useSpring, useTransform } from "framer-motion";
 /* CUSTOM COMPONENTS */
 import ShowCase from "@/components/showcase/ShowCase";
 import VideoPlayer from "@/components/video/VideoPlayer";
+import CallOut from "@/components/call_out/CallOut";
 
 /* CUSTOM HOOKS */
 import useWindowSize from "@/hooks/use_window_size";
@@ -25,7 +26,7 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     target: scrollTargetRef,
   });
 
-  const scrollHeight = calculateScrollHeight(viewportSize.height, 1);
+  const scrollHeight = calculateScrollHeight(viewportSize.height, 1.5);
 
   /* ANIMATION START AND END POSITION */
   const [yPosition, setYPosition] = useState(0);
@@ -47,7 +48,7 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   /* WHOLE PAGE TRANSLATOIN */
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
-    [0, yPosition + scrollHeight * 0.2, yPosition + scrollHeight * 0.8],
+    [0, yPosition + scrollHeight * 0.5, yPosition + scrollHeight],
     [0, 0, -viewportSize.height * 2.4]
   );
 
@@ -97,11 +98,21 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                   position: "absolute",
                   opacity: 0.7,
                 }}
-                // isInView={isInView}
+                isInView={isInView}
                 autoplay={viewportSize.width > 768 ? true : false}
               ></VideoPlayer>
             </motion.div>
           </motion.div>
+
+          {/* CONTENT */}
+          <div className={styles.callout_container}>
+            <CallOut
+              calloutStyleType={2}
+              paragraph="Lorem ipsum dolor sit amet consectetur. Duis tincidunt ultrices dictum eget ullamcorper."
+              overrideStyles={styles.callout_container_inner}
+              overrideParagraphStyle={styles.callout_paragraph}
+            />
+          </div>
         </motion.section>
       </motion.div>
     </motion.div>

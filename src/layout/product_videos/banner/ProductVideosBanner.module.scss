@@ -44,5 +44,41 @@
 
         }
     }
+
+    .callout_container {
+        position: relative;
+        height: clamp(150px, 50vh, 350px);
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        background-color: white;
+        align-items: center;
+
+        .callout_container_inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .callout_paragraph {
+
+                @include variables.xs {
+                    @include variables.setTypography(24px, normal, 500, normal);
+                    max-width: 300px
+                }
+
+                @include variables.md {
+                    @include variables.setTypography(32px, normal, 500, normal);
+                    max-width: 928px
+                }
+
+            }
+        }
+    }
+    
 }
+
+
+
 
