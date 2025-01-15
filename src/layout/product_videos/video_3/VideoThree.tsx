@@ -9,7 +9,9 @@ const VideoThree = ({
     layoutName,
     zIndex
 })=>{
-    return(<><VideoDemo   layoutName={layoutName}
+    return(<><VideoDemo   
+        posterSrc='videos/product/gaming_chair.jpg'
+        layoutName={layoutName}
         zIndex={zIndex}
         videoSourceRef={installationVidRef}/></>)
 }

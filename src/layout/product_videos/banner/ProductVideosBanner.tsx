@@ -100,6 +100,7 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                 }}
                 isInView={viewportSize.width > 768 ? isInView : false}
                 autoplay={false}
+                poster="/videos/product/Kitchen-3D-Rendering_compressed.jpg"
               ></VideoPlayer>
             </motion.div>
           </motion.div>

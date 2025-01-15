@@ -11,6 +11,7 @@ const VideoOne = ({
     return(
     <>
         <VideoDemo
+        posterSrc='videos/product/Dresser.jpg'
             layoutName={layoutName}
             zIndex={zIndex}
             videoSourceRef={installationVidRef}

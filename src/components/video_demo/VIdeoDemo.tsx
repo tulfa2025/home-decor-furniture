@@ -13,7 +13,7 @@ import SlideContext from "@/context/changeSlide";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 import CallOut from "../call_out/CallOut";
 
-const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef }) => {
+const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
   // Subheadr scroll
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
   // Get scroll height
@@ -141,6 +141,7 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef }) => {
               }}
               isInView={isInView}
               autoplay={false}
+              poster={posterSrc}
             />
           </motion.div>
           {/* VIDEO WRITTEN CONTENT GOES HERE */}

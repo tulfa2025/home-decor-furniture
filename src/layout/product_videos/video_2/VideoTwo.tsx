@@ -11,6 +11,7 @@ const VideoTwo = ({
   return (
     <>
       <VideoDemo
+        posterSrc='videos/product/Sofa exploded with lifestyle_compressed.jpg'
         layoutName={layoutName}
         zIndex={zIndex}
         videoSourceRef={installationVidRef}
