@@ -23,7 +23,7 @@ for file in "$DIRECTORY"/*.{mp4,mkv,avi}; do
     output="${file%.*}_compressed.mp4"
     
     # Compress video using ffmpeg (H.264 codec, CRF 28, preset 'fast')
-    ffmpeg -i "$file" -vcodec libx264 -crf 20 -preset slower -c:a copy "$output"
+ffmpeg -i "$file" -vcodec libx264 -profile:v high -level 4.2 -pix_fmt yuv420p -crf 22 -preset veryslow -movflags +faststart -an "$output"
     
     echo "Compressed $file to $output"
   fi

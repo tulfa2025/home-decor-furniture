@@ -104,7 +104,7 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
       >
         <motion.section className={styles.banner_container} ref={inViewRef}>
           <VideoPlayer
-            src="/videos/sofa_video_compressed.mp4"
+            src="/videos/banner/sofa_video_compressed.mp4"
             type="video/mp4"
             altText=""
             loop={false}

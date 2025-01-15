@@ -77,7 +77,7 @@ const MenuPopup = ({
               componentDetails[0].toLowerCase() === "book a demo" ||
               !componentDetails[0]
             ) {
-              return <></>;
+              return false;
             }
             return (
               <motion.button

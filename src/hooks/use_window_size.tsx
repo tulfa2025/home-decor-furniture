@@ -37,7 +37,7 @@ function useWindowSize() {
     if (typeof window !== 'undefined') {
 
       // SET WHETHER DEVICE IS MOBILE OR NOT
-      mobileDeviceRef.current = window.innerWidth < 960;
+      mobileDeviceRef.current = window.innerWidth < 767;
 
       function handleResize() {
         // Clear the previous timeout to debounce resize events

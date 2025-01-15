@@ -82,22 +82,18 @@ const NewMarketingImages: React.FC<LayoutProps> = ({
           <Image
             src={backgroundImageOne}
             alt=""
-            priority
             className={styles.background_image_top}
-            
             ref={inViewRef}
           />
           <Image
             src={backgroundImageTwo}
             alt=""
-            priority
             className={styles.background_image_bottom_left}
             
           />
           <Image
             src={backgroundImageThree}
             alt=""
-            priority
             className={styles.background_image_bottom_right}
             
           />

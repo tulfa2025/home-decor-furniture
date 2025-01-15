@@ -75,10 +75,10 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef }) => {
     scrollY,
     [
       0,
-      yPosition - viewportSize.height * 1.5,
+      yPosition - viewportSize.height,
       yPosition,
-      yPosition + scrollHeight * 0.5,
-      yPosition + scrollHeight * 0.65,
+      yPosition + scrollHeight * 0.6,
+      yPosition + scrollHeight * 0.7,
       yPosition + scrollHeight,
     ],
     [
@@ -86,7 +86,7 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef }) => {
       viewportSize.height * 1.2,
       0,
       0,
-      -viewportSize.height * 1.2,
+      -viewportSize.height * 1.5,
       -viewportSize.height * 2.4,
     ]
   );

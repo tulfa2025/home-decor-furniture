@@ -2,7 +2,7 @@
 import VideoDemo from "@/components/video_demo/VIdeoDemo"
 
 /* VIDEOS */
-const installationVidRef = 'videos/product_videos/Tulfa - 3D Modeling _ CGI - Home Décore & Furniture_compressed.mp4'
+const installationVidRef = 'videos/product/gaming_chair.mp4'
 
 
 const VideoThree = ({

@@ -1,5 +1,8 @@
-import React, { memo, useRef, useEffect } from "react";
+"use client";
+import React, { memo, useRef, useEffect, useState } from "react";
 import styles from "./VideoPlayer.module.scss";
+import { usePathname } from 'next/navigation'
+
 
 const VideoPlayer = memo(
   ({
@@ -14,21 +17,35 @@ const VideoPlayer = memo(
   }) => {
     // Create a reference to the video element
     const videoRef = useRef(null);
+    const pathname = usePathname()
 
     useEffect(() => {
       if (videoRef.current && isInView) {
         videoRef.current.play();
       } else if (videoRef.current && !isInView) {
         videoRef.current.pause();
+        videoRef.current.load(); // Apparently resets buffer
       }
     }, [isInView]);
+
+
+    useEffect(() => {
+      
+      return (()=>{
+        if (videoRef.current) {
+          videoRef.current.pause();
+          videoRef.current.load(); // Apparently resets buffer
+          videoRef.current.remove()
+        }
+      })
+    }, [pathname]);
 
     return (
       <div className={styles.video_container} style={styleOverride}>
         <video
           ref={videoRef}
           muted
-          preload="metadata"
+          preload="none"
           autoPlay={autoplay}
           onEnded={onVideoComplete ?? null}
           loop={loop}

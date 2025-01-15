@@ -108,7 +108,7 @@ export default function SubHeader({
                     <motion.div
                         className={styles.subheader_heading_container}
                         animate={{
-                            transform: (headerActivated && viewportSize.width < 1020 && viewportSize.width > 768) ? `translateX(-20vw)` : null
+                            transform: (headerActivated && viewportSize.width < 1024 && viewportSize.width > 768) ? `translateX(-15vw)` : null
                         }}
                     >
                         <h3 className={
@@ -127,12 +127,12 @@ export default function SubHeader({
                     <motion.nav
                         className={styles.subheader_nav}
                         animate={{
-                            transform: (headerActivated && viewportSize.width < 1020 && viewportSize.width > 768) ? `translateX(15vw)` : null
+                            transform: (headerActivated && viewportSize.width < 1024 && viewportSize.width > 768) ? `translateX(12vw)` : null
                         }}
                     >
 
                         {/* LAPTOPS */}
-                        {viewportSize.width > 1020 && <div>
+                        {viewportSize.width > 1024 && <div>
                             {navLinks.map(({ href, label }) => (
                                 <Link
                                     key={href}
@@ -143,6 +143,7 @@ export default function SubHeader({
                                             : headerLinkDisabled
                                     }
                                     tabIndex={-1}
+                                    rel="prefetch"
                                 >
                                     {label}
                                 </Link>
@@ -151,7 +152,7 @@ export default function SubHeader({
                         }
 
                         {/* MOBILE DEVICES */}
-                        {viewportSize.width < 1020 &&
+                        {viewportSize.width <= 1024 &&
 
                             <>
                                 <motion.div

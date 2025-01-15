@@ -53,7 +53,7 @@ const ProductVariation = ({
 
   const scrollHeight = calculateScrollHeight(
     viewportSize.height,
-    viewportSize.width > 768 ? 3 : 4
+    viewportSize.width > 960 ? 3 : 4
   );
 
   /* ANIMATION START AND END POSITION */
@@ -93,21 +93,21 @@ const ProductVariation = ({
     scrollY,
     [
       0,
-      viewportSize.width > 768
+      viewportSize.width > 960
         ? yPosition + scrollHeight * 0.8
         : yPosition + scrollHeight * 0.2,
-      viewportSize.width > 768
+      viewportSize.width > 960
         ? yPosition + scrollHeight * 0.85
         : yPosition + scrollHeight * 0.5,
-      viewportSize.width > 768
+      viewportSize.width > 960
         ? yPosition + scrollHeight * 0.85
         : yPosition + scrollHeight * 0.9,
     ],
     [
-      viewportSize.width > 768 ? viewportSize.height * 1.2 : scrollHeight * 0.4,
-      viewportSize.width > 768 ? viewportSize.height * 1.2 : scrollHeight * 0.4,
-      viewportSize.width > 768 ? viewportSize.height * 1.2 : scrollHeight * 0.35,
-      viewportSize.width > 768 ? 0 : 0,
+      viewportSize.width > 960 ? viewportSize.height * 1.2 : scrollHeight * 0.4,
+      viewportSize.width > 960 ? viewportSize.height * 1.2 : scrollHeight * 0.4,
+      viewportSize.width > 960 ? viewportSize.height * 1.2 : scrollHeight * 0.35,
+      viewportSize.width > 960 ? 0 : 0,
     ]
   );
 
@@ -115,7 +115,7 @@ const ProductVariation = ({
     transformPopupAnimationOne,
     {
       damping: 40,
-      stiffness: viewportSize.width > 768 ? 150: 300,
+      stiffness: viewportSize.width > 960 ? 150: 300,
       mass: 0.2, // Lighter = quicker stop
       velocity: 0, // No initial speed
       restDelta: 0.01, // Stops when close to the target
@@ -131,7 +131,7 @@ const ProductVariation = ({
       yPosition + viewportSize.height / 4,
       yPosition + viewportSize.height + scrollHeight * 0.1,
       yPosition + viewportSize.height + scrollHeight * 0.2,
-      viewportSize.width > 768
+      viewportSize.width > 960
         ? yPosition + viewportSize.height + scrollHeight * 0.9
         : yPosition + viewportSize.height + scrollHeight * 0.75,
       yPosition + viewportSize.height + scrollHeight,
@@ -139,15 +139,15 @@ const ProductVariation = ({
     [
       viewportSize.height * 2.4,
       viewportSize.height * 2.4,
-      viewportSize.width > 768 ? 0 : 60,
-      viewportSize.width > 768 ? 0 : 60,
-      viewportSize.width > 768
+      viewportSize.width > 960 ? 0 : 60,
+      viewportSize.width > 960 ? 0 : 60,
+      viewportSize.width > 960
         ? -viewportSize.height * 0.4
         : -viewportSize.height * 0.2,
-      viewportSize.width > 768
+      viewportSize.width > 960
         ? -viewportSize.height * 0.4
         : -viewportSize.height * 0.2,
-      viewportSize.width > 768
+      viewportSize.width > 960
         ? -viewportSize.height * 2.4
         : -viewportSize.height * 2,
     ]
@@ -195,7 +195,7 @@ const ProductVariation = ({
           style={{
             top: 0,
             position: "fixed",
-            height: viewportSize.width > 768 ? "140vh" : "100vh",
+            height: viewportSize.width > 768 ? "140vh" : "130vh",
             width: "100vw",
             y: springyTransformShowcaseAnimationThree,
           }}

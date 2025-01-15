@@ -1,5 +1,8 @@
 @use '@/styles/shared/variables';
 
+
+
+
 .silo_container {
     /* LAYOUT */
     position: relative;
@@ -12,9 +15,17 @@
         flex-direction: column;
     }
     @include variables.md {
-        @include variables.setLayout(flex, flex-start, center);
+        @include variables.setLayout(flex, flex-start, center); 
         flex-direction: row;
+        
     }
+    @include variables.lg {
+        @media (orientation: portrait) {
+            flex-direction: column;
+        }
+    }
+
+    
 
     .silo_content {
         width: 'max-content';
@@ -29,14 +40,28 @@
             top: 12vh;
             
         };
-        
 
         @include variables.md {
+            /* LAYOUT */
+            top: clamp(-100px, -15vh, 0px);
+            position: relative;
+            align-items: flex-start;
+            left: 25px;
+           
+        };
+        
+
+        @include variables.lg {
             /* LAYOUT */
             top: 0;
             position: relative;
             align-items: flex-start;
             left: 100px;
+
+            @media (orientation: portrait){
+                top: 7vh;
+                left: 0%;
+            }
         };
         .silo_content_heading {
             /* LAYOUT */
@@ -107,21 +132,30 @@
             }
             @include variables.md {
                 height: 100vh;
-                width: 105vw;
-                right: -1vw;
-                top: 2vh
+                width: 100vw;
+                right: -15vw;
+                top: clamp(10px, 3vh, 50px)
             }
             @include variables.lg {
-                width: 110vw;
-                right:5vw;
-                top: 2vh
+                
+                @media (orientation: landscape){
+                    width: 90vw;
+                    right:-9vw;
+                    top: 2vh;
+                }
+
+                @media (orientation: portrait){
+                    right: -5vw
+                }
             };
             @include variables.xl {
-                width: 130vw;
-                right:-1vw;
-                top: 5vh;
-                height: 100vh;
-                
+                @media (orientation: landscape){
+                    width: 130vw;
+                    right:-2vw;
+                    top: 5vh;
+                    height: 100vh;
+                }
+              
             };
     
             .silo_image {
@@ -136,10 +170,14 @@
                 }
 
                 @include variables.md {
-                    object-position:90% 50%;
-                    height: 100%;
+                    object-position:86% 50%;
+                    height: clamp(300px, 85%, 800px);
                     width: 100%;
-                                   
+                                 
+                }
+                @include variables.lg {
+                    width: 100%;
+                    height: 100%;
                 }
             }
         }
@@ -150,15 +188,21 @@
 }
 
 .popup_button_container {
-    position: absolute;
+    position: fixed;
     
     @include variables.xs {
         left: calc(50vw - 150px);
-        bottom: 5vh;
+        top: 90vh;
+    }
+
+    @include variables.md {
+        left: calc(50vw - 150px);
+        top: clamp(500px, 75vh, 768px);
     }
 
     @include variables.lg {
         left: calc(50vw - 175px);
+        top: 90vh;
   
     }
 }

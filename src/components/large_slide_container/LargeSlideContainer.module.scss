@@ -3,11 +3,16 @@
 .large_slide_container {
     position: fixed;
     display: flex;
+
+    /*OPTIMISTAION*/
+    content-visibility: auto;
     @include variables.xs {
         height: 120vh;
     }   
-    @include variables.md {
-        height: 140vh;
+    @include variables.lg {
+        @media (orientation: landscape){
+            height: 140vh;
+        }
     }
     width: 100vw;
     flex-direction: column;
@@ -18,8 +23,10 @@
         @include variables.xs {
             height: 20vh;
         }   
-        @include variables.md {
-            height: 40vh;
+        @include variables.lg {
+            @media (orientation: landscape){
+                height: 40vh;
+            }
         }
         width: 100%;
         position: relative;

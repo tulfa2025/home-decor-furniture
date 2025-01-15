@@ -95,7 +95,7 @@
     left: 0;
 
     @include variables.xs {
-        padding: var(--item-spacing-10, 10px) 10px;
+        padding: var(--item-spacing-10, 10px) 50px;
     }
     @include variables.md {
         padding: var(--item-spacing-10, 10px) 200px;

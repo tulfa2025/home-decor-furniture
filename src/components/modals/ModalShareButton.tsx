@@ -44,7 +44,6 @@ const ModalShareButton = ({urlLink, handleIsToastOpen, appliedFilter}) => {
       } catch (err) {
         /* ON ERROR HANDLER */
         setIsOptionsActive((prev) => !prev);
-        console.log(err);
       }
     } else {
       setIsOptionsActive((prev) => !prev);
@@ -60,7 +59,7 @@ const ModalShareButton = ({urlLink, handleIsToastOpen, appliedFilter}) => {
         
       } catch (err) {
         /* ON ERROR HANDLER */
-        console.log(err);
+
       }
     }
   };

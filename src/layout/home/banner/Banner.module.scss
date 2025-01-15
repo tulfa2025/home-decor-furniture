@@ -10,4 +10,7 @@
 
     /* STYLE */
     background: var(--color-white-solid, variables.$light);
+
+    /*OPTIMISATION*/
+    content-visibility: auto;
 }

@@ -91,13 +91,13 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     scrollY,
     [
       0,
-      viewportSize.width > 768 ? yPosition - viewportSize.height : yPosition - viewportSize.height / 2,
-      viewportSize.width > 768 ? yPosition + viewportSize.height : yPosition,
+      viewportSize.width > 960 ? yPosition - viewportSize.height : yPosition - viewportSize.height / 2,
+      viewportSize.width > 960 ? yPosition + viewportSize.height : yPosition,
       yPosition + viewportSize.height + scrollHeight * 0.1,
-      viewportSize.width > 768
+      viewportSize.width > 960
       ? yPosition + viewportSize.height + scrollHeight * 0.55
       : yPosition + viewportSize.height + scrollHeight * 0.25,
-      viewportSize.width > 768
+      viewportSize.width > 960
         ? yPosition + viewportSize.height + scrollHeight * 0.85
         : yPosition + viewportSize.height + scrollHeight * 0.55,
       yPosition + viewportSize.height + scrollHeight,
@@ -107,10 +107,10 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
       viewportSize.height * 2.4,
       0,
       0,
-      viewportSize.width > 768
+      viewportSize.width > 960
         ? -viewportSize.height * 0.4 - 60
         : -viewportSize.height * 0.2 - 60,
-      viewportSize.width > 768
+      viewportSize.width > 960
         ? -viewportSize.height * 0.4 - 60
         : -viewportSize.height * 0.2 - 60,
       -viewportSize.height * 2.4,

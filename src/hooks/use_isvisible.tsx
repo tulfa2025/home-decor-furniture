@@ -7,7 +7,6 @@ const useIsVisible = (ref) => {
     const checkOpacity = () => {
       if (ref.current) {
         const opacity = window.getComputedStyle(ref.current).opacity;
-        console.log(ref.current, opacity)
         setIsVisible(parseFloat(opacity) > 0); // Set to true if opacity is greater than 0
       }
     };

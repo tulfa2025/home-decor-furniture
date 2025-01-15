@@ -8,10 +8,10 @@ import LargeSlideContainer from "@/components/large_slide_container/LargeSlideCo
 
 /* IMAGES */
 import AutomaticCarousel from '@/components/carousel/automatic_carousel/AutomaticCarousel';
-import groupShoteOne from '../../../assets/images/group_shots/Group-shot_Plates_scene_1.webp'
-import groupShoteTwo from '../../../assets/images/group_shots/Group-shot_Plates_scene_2.webp'
-import groupShoteThree from '../../../assets/images/group_shots/Group-shot_Plates_scene_3.webp'
-import groupShoteFour from '../../../assets/images/group_shots/Group-shot_Plates_scene_4.webp'
+import groupShoteOne from '../../../assets/images/group_shots/Group-shot_Plates_scene_1.jpg'
+import groupShoteTwo from '../../../assets/images/group_shots/Group-shot_Plates_scene_2.jpg'
+import groupShoteThree from '../../../assets/images/group_shots/Group-shot_Plates_scene_3.jpg'
+import groupShoteFour from '../../../assets/images/group_shots/Group-shot_Plates_scene_4.jpg'
 
 type ImageSet = {
     order: string[];
