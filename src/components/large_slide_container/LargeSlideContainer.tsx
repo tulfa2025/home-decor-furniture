@@ -43,7 +43,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     target: scrollTargetRef,
   });
 
-  const handleChangeSlide = useContext(SlideContext)
+  const handleChangeSlide = useContext(SlideContext);
   useEffect(() => {
     if (isInView) {
       handleChangeSlide(layoutName);
@@ -91,14 +91,16 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     scrollY,
     [
       0,
-      viewportSize.width > 960 ? yPosition - viewportSize.height : yPosition - viewportSize.height / 2,
+      viewportSize.width > 960
+        ? yPosition - viewportSize.height / 2
+        : yPosition,
       viewportSize.width > 960 ? yPosition + viewportSize.height : yPosition,
       yPosition + viewportSize.height + scrollHeight * 0.1,
       viewportSize.width > 960
-      ? yPosition + viewportSize.height + scrollHeight * 0.55
-      : yPosition + viewportSize.height + scrollHeight * 0.25,
+        ? yPosition + viewportSize.height + scrollHeight * 0.55
+        : yPosition + viewportSize.height + scrollHeight * 0.25,
       viewportSize.width > 960
-        ? yPosition + viewportSize.height + scrollHeight * 0.85
+        ? yPosition + viewportSize.height + scrollHeight * 0.90
         : yPosition + viewportSize.height + scrollHeight * 0.55,
       yPosition + viewportSize.height + scrollHeight,
     ],
@@ -170,8 +172,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
             style={{
               height: "100%",
               width: "100%",
-              position: 'relative',
-              
+              position: "relative",
             }}
           >
             {children}

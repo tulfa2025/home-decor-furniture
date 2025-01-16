@@ -44,7 +44,7 @@ const ProductVariation = ({
     target: scrollTargetRef,
   });
 
-  const handleChangeSlide = useContext(SlideContext)
+  const handleChangeSlide = useContext(SlideContext);
   useEffect(() => {
     if (isInView) {
       handleChangeSlide(layoutName);
@@ -106,7 +106,9 @@ const ProductVariation = ({
     [
       viewportSize.width > 960 ? viewportSize.height * 1.2 : scrollHeight * 0.4,
       viewportSize.width > 960 ? viewportSize.height * 1.2 : scrollHeight * 0.4,
-      viewportSize.width > 960 ? viewportSize.height * 1.2 : scrollHeight * 0.35,
+      viewportSize.width > 960
+        ? viewportSize.height * 1.2
+        : scrollHeight * 0.35,
       viewportSize.width > 960 ? 0 : 0,
     ]
   );
@@ -115,7 +117,7 @@ const ProductVariation = ({
     transformPopupAnimationOne,
     {
       damping: 40,
-      stiffness: viewportSize.width > 960 ? 150: 300,
+      stiffness: viewportSize.width > 960 ? 150 : 300,
       mass: 0.2, // Lighter = quicker stop
       velocity: 0, // No initial speed
       restDelta: 0.01, // Stops when close to the target
@@ -128,12 +130,14 @@ const ProductVariation = ({
     [
       0,
       yPosition,
-      yPosition + viewportSize.height / 4,
+      viewportSize.width > 960
+        ? yPosition + viewportSize.height
+        : yPosition + viewportSize.height / 3,
       yPosition + viewportSize.height + scrollHeight * 0.1,
       yPosition + viewportSize.height + scrollHeight * 0.2,
       viewportSize.width > 960
         ? yPosition + viewportSize.height + scrollHeight * 0.9
-        : yPosition + viewportSize.height + scrollHeight * 0.75,
+        : yPosition + viewportSize.height + scrollHeight * 0.69,
       yPosition + viewportSize.height + scrollHeight,
     ],
     [

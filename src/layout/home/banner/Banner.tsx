@@ -46,13 +46,11 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
     scrollY,
     [
       0,
-      yPosition + scrollHeight * 0.2,
-      yPosition + scrollHeight * 0.8,
+      scrollHeight
     ],
     [
       0,
-      0,
-      -viewportSize.height * 2.4,
+      -viewportSize.height * 1.2,
     ]
   );
 

@@ -29,8 +29,6 @@ const FullscreenImageContainer = memo(
     const enterFullscreen = () => {
       if (elementRef.current) {
 
-        console.log(deviceType)
-
         elementRef.current.style.position = "fixed";
         elementRef.current.style.top = deviceType === 'iOS' ? '-5vh' : 0;
         elementRef.current.style.left = deviceType === 'iOS' ? '-5vw' : 0;
