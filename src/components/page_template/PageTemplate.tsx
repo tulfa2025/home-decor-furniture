@@ -1,3 +1,6 @@
+'use client'
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 

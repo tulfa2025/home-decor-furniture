@@ -16,7 +16,7 @@ const FullScreenCarousel = memo(({
   appliedFilter
 }) => {
   const [currentImageIndex, setImageIndex] = useState(fullscreenIndex);
-  const imageSetLengthRef = useRef(0)
+  const imageSetLengthRef = useRef(0);
 
   const handleSetCurrentIndex = useCallback(
     (direction: number) => {
@@ -32,17 +32,12 @@ const FullScreenCarousel = memo(({
   );
 
   const memoizedImageSet = useMemo(() => {
-
     if(appliedFilter === 'all'){
-
         if(imageSet['top'].length > 0){
-
             imageSetLengthRef.current = imageSet['top'].length
             return imageSet['top']
         } else {
-
             let imageArray = [];
-
             const imageSetNames = Object.keys(imageSet);
             for (let imageSetName of imageSetNames) {
               if (imageSetName === "order" || imageSetName === "background") continue;
@@ -57,20 +52,10 @@ const FullScreenCarousel = memo(({
         imageSetLengthRef.current = imageSet[appliedFilter].length
         return  imageSet[appliedFilter]
     }
-    ;
   }, [imageSet]);
   return (
     <motion.div 
         className={styles.fullscreen_container}
-        initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{
-            delay: 0.1,
-          }}
     >
       <Image
         className={styles.fullscreen_image}
