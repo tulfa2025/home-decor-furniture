@@ -60,6 +60,7 @@ type ModalImageSet = {
 
 const modalImageSet = {
     background: bathImageOne,
+    top:[],
     bathrooms: [
       bathImageOne,
       bathImageTwo,
