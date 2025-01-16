@@ -24,25 +24,21 @@ import useInView from "@/hooks/use_inview";
 /* IMAGES */
 import modalImageSet from "./lifestyle_scenes_images";
 
-const NewLifeStyleScenes: React.FC<LayoutProps> = ({
-  layoutName,
-  zIndex,
-}) => {
+const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   /*  MODAL RELATED LOGIC */
   //Scroll Block context
-  const handleIsScrollBlocked = useContext(ScrollContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const filter = useFilter(setIsModalOpen, layoutName);
 
   const modalRef = useRef(null);
   const handleModalOpen = () => {
-    handleIsScrollBlocked(true, modalRef);
+    setIsPopupVisible(false);
     setIsModalOpen(true);
   };
 
   const handleModalClose = () => {
-    handleIsScrollBlocked(false, modalRef);
+    setIsPopupVisible(true);
     setIsModalOpen(false);
   };
 
@@ -57,7 +53,11 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({
   const isInView = useInView(inViewRef, 0.5);
   /*POPUPBUTTON ANIMATION */
   useEffect(() => {
-    setIsPopupVisible(true)
+    if (isInView) {
+      setIsPopupVisible(true);
+    } else {
+      setIsPopupVisible(false);
+    }
   }, [isInView]);
 
   const pathName = usePathname();
@@ -86,36 +86,39 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({
             ref={scrollTargetRef}
           />
         </motion.section>
-
-        {/* BUTTON TRIGGER */}
-        <motion.div
-          className={styles.closeup_button_container}
-          initial={{
-            opacity: 0,
-          }}
-          whileInView={{
-            opacity: isPopupVisible ? 1 : 0,
-            transition: {
-              delay: 0.5,
-              duration: 0.1,
-            },
-          }}
-          viewport={{
-            amount: 0.5,
-          }}
-        >
-          {isPopupVisible && (
-            <TulfaPopupButton
-              timer={0}
-              height={60}
-              width={300}
-              text={"Take a closer look"}
-              onClick={handleModalOpen}
-            />
-          )}
-        </motion.div>
       </LargeSlideContainer>
       {/* LIFESTYLE SCENES Modal */}
+      {/* BUTTON TRIGGER */}
+      <motion.div
+        className={styles.closeup_button_container}
+        initial={{
+          opacity: 0,
+
+        }}
+        style={{
+          display: isPopupVisible ? 'block' : 'none',
+        }}
+        whileInView={{
+          opacity: isPopupVisible ? 1 : 0,
+          transition: {
+            delay: 0.5,
+            duration: 0.1,
+          },
+        }}
+        viewport={{
+          amount: 0.5,
+        }}
+      >
+        {isPopupVisible && (
+          <TulfaPopupButton
+            timer={0}
+            height={60}
+            width={300}
+            text={"Take a closer look"}
+            onClick={handleModalOpen}
+          />
+        )}
+      </motion.div>
       {isModalOpen && (
         <ModalContainer
           ref={modalRef}

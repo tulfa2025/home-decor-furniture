@@ -2,8 +2,7 @@
 import styles from "./NewMarketingImages.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useContext, useRef, useState, useEffect } from "react";
-import ScrollContext from "@/context/scrollContext";
+import { useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 
@@ -21,30 +20,25 @@ import useInView from "@/hooks/use_inview";
 
 /* IMAGES */
 import modalImageSet from "./marketing_images";
-import backgroundImageOne from '../../../assets/images/marketing_images/kv2.jpg'
-import backgroundImageTwo from '../../../assets/images/marketing_images/mockup revista 2.jpg'
-import backgroundImageThree from '../../../assets/images/marketing_images/mockup laptop.jpg'
+import backgroundImageOne from "../../../assets/images/marketing_images/kv2.jpg";
+import backgroundImageTwo from "../../../assets/images/marketing_images/mockup revista 2.jpg";
+import backgroundImageThree from "../../../assets/images/marketing_images/mockup laptop.jpg";
 
-
-const NewMarketingImages: React.FC<LayoutProps> = ({
-  layoutName,
-  zIndex
-}) => {
+const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   /*  MODAL RELATED LOGIC */
   //Scroll Block context
-  const handleIsScrollBlocked = useContext(ScrollContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const filter = useFilter(setIsModalOpen, layoutName);
 
   const modalRef = useRef(null);
   const handleModalOpen = () => {
-    handleIsScrollBlocked(true, modalRef);
+    setIsPopupVisible(false);
     setIsModalOpen(true);
   };
 
   const handleModalClose = () => {
-    handleIsScrollBlocked(false, modalRef);
+     setIsPopupVisible(true);
     setIsModalOpen(false);
   };
 
@@ -59,7 +53,13 @@ const NewMarketingImages: React.FC<LayoutProps> = ({
   const isInView = useInView(inViewRef, 0.4);
   /*POPUPBUTTON ANIMATION */
   useEffect(() => {
-    setIsPopupVisible(true)
+
+    if(isInView){
+      setIsPopupVisible(true);
+    } else {
+      setIsPopupVisible(false)
+    }
+    
   }, [isInView]);
 
   const pathName = usePathname();
@@ -89,45 +89,45 @@ const NewMarketingImages: React.FC<LayoutProps> = ({
             src={backgroundImageTwo}
             alt=""
             className={styles.background_image_bottom_left}
-            
           />
           <Image
             src={backgroundImageThree}
             alt=""
             className={styles.background_image_bottom_right}
-            
           />
         </motion.section>
-
-        {/* BUTTON TRIGGER */}
-        <motion.div
-          className={styles.closeup_button_container}
-          initial={{
-            opacity:0 
-          }}
-          whileInView={{
-            opacity: isPopupVisible ? 1 : 0,
-            transition: {
-              delay: 0.5,
-              duration: 0.1
-            }
-          }}
-          viewport={{
-            amount: 0.5
-          }}
-        >
-          {isPopupVisible && (
-            <TulfaPopupButton
-              timer={0}
-              height={60}
-              width={300}
-              text={"Take a closer look"}
-              onClick={handleModalOpen}
-            />
-          )}
-        </motion.div>
       </LargeSlideContainer>
       {/* Marketing IMages SCENES Modal */}
+      {/* BUTTON TRIGGER */}
+      <motion.div
+        className={styles.closeup_button_container}
+        initial={{
+          opacity: 0,
+        }}
+        style={{
+          display: isPopupVisible ? 'block' : 'none',
+        }}
+        whileInView={{
+          opacity: isPopupVisible ? 1 : 0,
+          transition: {
+            delay: 0.5,
+            duration: 0.1,
+          },
+        }}
+        viewport={{
+          amount: 0.5,
+        }}
+      >
+        {isPopupVisible && (
+          <TulfaPopupButton
+            timer={0}
+            height={60}
+            width={300}
+            text={"Take a closer look"}
+            onClick={handleModalOpen}
+          />
+        )}
+      </motion.div>
       {isModalOpen && (
         <ModalContainer
           ref={modalRef}

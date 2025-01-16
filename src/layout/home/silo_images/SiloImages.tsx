@@ -7,18 +7,20 @@ import {
   useTransform,
   useMotionValueEvent,
 } from "framer-motion";
-import { useRef, useState, useCallback, useEffect, useContext } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import styles from "./SiloImages.module.scss";
 import { modalSelectionArraySilo } from "@/utils/constants";
-import ScrollContext from "@/context/scrollContext";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
 /*CUSTOM COMPONENTS */
-const ModalContainer = dynamic(() => import("@/components/modals/ModalContainer"), {
-  ssr: false,
-});
+const ModalContainer = dynamic(
+  () => import("@/components/modals/ModalContainer"),
+  {
+    ssr: false,
+  }
+);
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 
 /* CUSTOM HOOKS */
@@ -32,22 +34,16 @@ import usePopupPosition from "@/utils/calculate_popupbutton.loc";
 import backgroundImage from "../../../assets/images/silo_images/Product silos banner.jpg";
 import modalImageSet from "./image_sources_silo";
 
-
 /* CONTEXT */
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 import SlideContext from "@/context/changeSlide";
 
-
-const SiloImages: React.FC<LayoutProps> = ({
-  layoutName,
-  zIndex
-}) => {
+const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Get scroll height
   const viewportSize = useWindowSize();
   const pathName = usePathname();
 
   //Scroll Block context
-  const handleIsScrollBlocked = useContext(ScrollContext);
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
@@ -59,7 +55,7 @@ const SiloImages: React.FC<LayoutProps> = ({
   });
 
   /* CHANGE SLIDE CONTEXT */
-  const handleChangeSlide = useContext(SlideContext)
+  const handleChangeSlide = useContext(SlideContext);
 
   useEffect(() => {
     if (isInView) {
@@ -67,22 +63,24 @@ const SiloImages: React.FC<LayoutProps> = ({
     }
   }, [isInView]);
 
-  const scrollHeight = calculateScrollHeight(viewportSize.height, 
-    viewportSize.width > 960 ? 2 : 2);
+  const scrollHeight = calculateScrollHeight(
+    viewportSize.height,
+    viewportSize.width > 960 ? 2 : 2
+  );
 
   /* MODAL TRIGGER */
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const modalRef = useRef(null);
   const handleModalOpen = () => {
-    handleIsScrollBlocked(true, modalRef);
+    setIsPopupVisible(false);
     setIsModalOpen(true);
   };
 
-  const handleModalClose = useCallback(() => {
-    handleIsScrollBlocked(false, modalRef);
+  const handleModalClose = () => {
+    setIsPopupVisible(true);
     setIsModalOpen(false);
-  }, [modalRef]);
+  };
 
   /* Filters set for this modal */
   const filter = useFilter(setIsModalOpen, layoutName);
@@ -110,7 +108,7 @@ const SiloImages: React.FC<LayoutProps> = ({
     [
       0,
       yPosition - viewportSize.height / 2,
-      yPosition ,
+      yPosition,
       yPosition + viewportSize.height + scrollHeight * 0.9,
       yPosition + viewportSize.height + scrollHeight,
     ],
@@ -127,7 +125,7 @@ const SiloImages: React.FC<LayoutProps> = ({
     transformShowcaseAnimationThree,
     {
       damping: 40,
-      stiffness: 150
+      stiffness: 150,
     }
   );
 
@@ -137,32 +135,24 @@ const SiloImages: React.FC<LayoutProps> = ({
 
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
-  useMotionValueEvent(scrollY, "change", (v) => {
-    if (
-      v > yPosition + scrollHeight * 0.1 &&
-      v < scrollHeight + viewportSize.height
-    ) {
-      if (!isPopupVisible) {
-        setIsPopupVisible(true);
-      }
+  useEffect(() => {
+    if (isInView) {
+      setIsPopupVisible(true);
     } else {
-      if (isPopupVisible) {
-        setIsPopupVisible(false);
+      setIsPopupVisible(false);
+    }
+  }, [isInView]);
+
+  const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
+
+  /* SET HEADER STYLE AT DIFFERNT INTERVALS */
+  useMotionValueEvent(scrollY, "change", (v) => {
+    if (isInView) {
+      if (v > yPosition) {
+        setHeaderStyle(0);
       }
     }
   });
-
-  const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext)
-
-  /* SET HEADER STYLE AT DIFFERNT INTERVALS */
-  useMotionValueEvent(scrollY, 'change', (v)=>{
-    if(isInView){
-      if(v > yPosition){
-        setHeaderStyle(0)
-      }
-    }
-    
-  })
 
   return (
     <motion.div
@@ -171,7 +161,7 @@ const SiloImages: React.FC<LayoutProps> = ({
         position: "relative",
         top: 0,
         overflow: "auto",
-        zIndex: isInView ? zIndex : -1
+        zIndex: isInView ? zIndex : -1,
       }}
       ref={scrollTargetRef}
       id="silo_images"
@@ -195,50 +185,48 @@ const SiloImages: React.FC<LayoutProps> = ({
             </p>
           </div>
 
-          <div className={styles.silo_image_container}
+          <div
+            className={styles.silo_image_container}
             style={{
-              filter: isModalOpen ? 'blur(10px)' : ''
+              filter: isModalOpen ? "blur(10px)" : "",
             }}
           >
-            <motion.div 
-              className={styles.silo_image_container_inner}
-              
-            >
+            <motion.div className={styles.silo_image_container_inner}>
               <Image
                 src={backgroundImage}
                 alt=""
                 className={styles.silo_image}
                 quality={80}
-                
               />
             </motion.div>
           </div>
-
-          {/* BUTTON TRIGGER */}
-          <motion.div className={styles.popup_button_container} s>
-            {isPopupVisible && (
-              <TulfaPopupButton
-                timer={0}
-                height={60}
-                width={300}
-                textStyle={popupPosition.textStyle}
-                text={"Take a closer look"}
-                onClick={handleModalOpen}
-              />
-            )}
-          </motion.div>
         </motion.section>
         {/* MODAL CONTAINER */}
-        {isModalOpen && <ModalContainer
-          ref={modalRef}
-          handleModalClose={handleModalClose}
-          isModalOpen={isModalOpen}
-          imageSet={modalImageSet}
-          selectionArray={modalSelectionArraySilo}
-          random={false}
-          filter={filter}
-          urlLink={`${window.location.protocol}//${window.location.host}${pathName}?comp=${layoutName}`}
-        />}
+        {/* BUTTON TRIGGER */}
+        <motion.div className={styles.popup_button_container} s>
+          {isPopupVisible && (
+            <TulfaPopupButton
+              timer={0}
+              height={60}
+              width={300}
+              textStyle={popupPosition.textStyle}
+              text={"Take a closer look"}
+              onClick={handleModalOpen}
+            />
+          )}
+        </motion.div>
+        {isModalOpen && (
+          <ModalContainer
+            ref={modalRef}
+            handleModalClose={handleModalClose}
+            isModalOpen={isModalOpen}
+            imageSet={modalImageSet}
+            selectionArray={modalSelectionArraySilo}
+            random={false}
+            filter={filter}
+            urlLink={`${window.location.protocol}//${window.location.host}${pathName}?comp=${layoutName}`}
+          />
+        )}
       </motion.div>
     </motion.div>
   );

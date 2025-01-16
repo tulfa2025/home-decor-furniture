@@ -2,8 +2,7 @@
 import styles from "./NewCloseUpShots.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useContext, useRef, useState, useEffect } from "react";
-import ScrollContext from "@/context/scrollContext";
+import { useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 
@@ -22,24 +21,20 @@ import useInView from "@/hooks/use_inview";
 import backgroundImage from "../../../assets/images/closeup_shots/rug_one.png";
 import modalImageSet from "./closeup_shots_images";
 
-const NewCloseUpShots: React.FC<LayoutProps> = ({
-  layoutName,
-  zIndex,
-}) => {
+const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const pathName = usePathname();
   /*  MODAL RELATED LOGIC */
   //Scroll Block context
-  const handleIsScrollBlocked = useContext(ScrollContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const modalRef = useRef(null);
   const handleModalOpen = () => {
-    handleIsScrollBlocked(true, modalRef);
+    setIsPopupVisible(false);
     setIsModalOpen(true);
   };
 
   const handleModalClose = () => {
-    handleIsScrollBlocked(false, modalRef);
+    setIsPopupVisible(true);
     setIsModalOpen(false);
   };
 
@@ -54,7 +49,13 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({
   const isInView = useInView(inViewRef, 0.5);
   /*POPUPBUTTON ANIMATION */
   useEffect(() => {
-    setIsPopupVisible(true)
+
+    if(isInView){
+      setIsPopupVisible(true);
+    } else {
+      setIsPopupVisible(false)
+    }
+    
   }, [isInView]);
 
   return (
@@ -80,35 +81,37 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({
             ref={scrollTargetRef}
           />
         </motion.section>
-
-        {/* BUTTON TRIGGER */}
-        <motion.div
-          className={styles.closeup_button_container}
-          initial={{
-            opacity: 0,
-          }}
-          whileInView={{
-            opacity: isPopupVisible ? 1 : 0,
-            transition: {
-              duration: 0.5,
-            },
-          }}
-          viewport={{
-            amount: 0.5,
-          }}
-        >
-          {isPopupVisible && (
-            <TulfaPopupButton
-              timer={0}
-              height={60}
-              width={300}
-              text={"Take a closer look"}
-              onClick={handleModalOpen}
-            />
-          )}
-        </motion.div>
       </LargeSlideContainer>
       {/* LIFESTYLE SCENES Modal */}
+      {/* BUTTON TRIGGER */}
+      <motion.div
+        className={styles.closeup_button_container}
+        initial={{
+          opacity: 0,
+        }}
+        style={{
+          display: isPopupVisible ? 'block' : 'none',
+        }}
+        whileInView={{
+          opacity: isPopupVisible ? 1 : 0,
+          transition: {
+            duration: 0.5,
+          },
+        }}
+        viewport={{
+          amount: 0.5,
+        }}
+      >
+        {isPopupVisible && (
+          <TulfaPopupButton
+            timer={0}
+            height={60}
+            width={300}
+            text={"Take a closer look"}
+            onClick={handleModalOpen}
+          />
+        )}
+      </motion.div>
       {isModalOpen && (
         <ModalContainer
           ref={modalRef}
