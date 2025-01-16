@@ -24,9 +24,11 @@ const PageTemplate = ({ children, layoutCollection, activePagePath }) => {
   const handleIsScrollBlocked = (flag = false, elementRef = null) => {
     if (elementRef) {
       if (!flag) {
+        // REMOVE TOPMOST SCROLLING ELEMENT
         scrollingContainersRef.current.shift();
         // setCurrentScrollTarget(scrollingContainersRef.current[0])
       } else {
+        // ADD TOPMOST SCROLLING ELEMENT
         scrollingContainersRef.current.unshift(elementRef.current);
         // setCurrentScrollTarget(scrollingContainersRef.current[0])
       }

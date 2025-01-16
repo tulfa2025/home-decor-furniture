@@ -327,6 +327,7 @@
     border-top-left-radius: 25px;
     bottom: 50px;
     box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+    overscroll-behavior: contain;
 
     .filter_button{
         /**TYPOGRPAHY*/
