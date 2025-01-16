@@ -10,7 +10,7 @@
     z-index: 10000;
     background-color: rgba(0,0,0,0.8);
     backdrop-filter: blur(8px);
-    pointer-events: auto;
+    pointer-events: none;
     overscroll-behavior: contain;
     overflow: scroll;
 
@@ -18,7 +18,7 @@
         height:100%;
         width:100%;
         object-fit: contain;
-        pointer-events: auto;
+        pointer-events: none;
         overscroll-behavior: contain;
         overflow: scroll;
     }
@@ -30,4 +30,5 @@
     width: 100vw;
     display: flex;
     justify-content: space-between;
+    pointer-events: auto;
 }

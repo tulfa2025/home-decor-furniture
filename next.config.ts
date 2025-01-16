@@ -36,7 +36,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ['image/webp'],
-  },
+  }
 };
 
 export default nextConfig;

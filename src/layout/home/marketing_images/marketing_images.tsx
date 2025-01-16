@@ -16,7 +16,7 @@ import marketingThirteenImage from '../../../assets/images/marketing_images/work
 
 
 const modalImageSet = {
-    background: marketingOneImage,
+    background: marketingTenImage,
     top:[
         marketingOneImage,
         marketingTwoImage,
@@ -24,10 +24,9 @@ const modalImageSet = {
         marketingFourImage,
         marketingFiveImage,
         marketingSixImage,
-        marketingSevenImage,
         marketingEightImage,
+        
         marketingNineImage,
-        marketingTenImage,
         marketingElevenImage,
         marketingTwelveImage,
         marketingThirteenImage

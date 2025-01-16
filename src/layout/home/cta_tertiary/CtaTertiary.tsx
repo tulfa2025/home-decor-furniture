@@ -131,8 +131,9 @@ const CtaTertiary: React.FC<LayoutProps> = ({
       0, 
       yPosition,
       yPosition + viewportSize.height,
-      yPosition + scrollHeight * 0.8,
-      yPosition + scrollHeight
+      yPosition + viewportSize.height,
+      yPosition + viewportSize.height + scrollHeight * 0.4
+
     ],
     [
       viewportSize.height / 3,
@@ -155,8 +156,8 @@ const CtaTertiary: React.FC<LayoutProps> = ({
       0,
       yPosition - scrollHeight,
       yPosition - scrollHeight * 0.9,
-      yPosition + viewportSize.height + (scrollHeight * 0.5),
-      yPosition + viewportSize.height + scrollHeight,
+      yPosition + viewportSize.height + scrollHeight * 0.9,
+      yPosition + viewportSize.height + scrollHeight * 1.2,
     ],
     [
       viewportSize.height * 2.4,

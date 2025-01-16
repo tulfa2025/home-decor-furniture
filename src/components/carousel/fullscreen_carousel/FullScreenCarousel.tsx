@@ -16,7 +16,7 @@ const FullScreenCarousel = memo(({
   appliedFilter
 }) => {
   const [currentImageIndex, setImageIndex] = useState(fullscreenIndex);
-  const imageSetLengthRef = useRef(0);
+  const imageSetLengthRef = useRef(0)
 
   const handleSetCurrentIndex = useCallback(
     (direction: number) => {
@@ -42,7 +42,8 @@ const FullScreenCarousel = memo(({
             for (let imageSetName of imageSetNames) {
               if (imageSetName === "order" || imageSetName === "background") continue;
 
-              imageArray = [...imageArray, ...imageSet[imageSetName]]
+              const firstThreeImages = imageSet[imageSetName].slice(0, 3);
+              imageArray = [...imageArray, ...firstThreeImages]
             }
       
             imageSetLengthRef.current = imageArray.length

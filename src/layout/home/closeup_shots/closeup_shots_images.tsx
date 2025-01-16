@@ -27,7 +27,7 @@ type ModalImageSet = {
   const modalImageSet = {
     background: ImageOne,
     top: [
-      ImageOne, 
+
       ImageThree, 
       ImageTwo,
       ImageFour,
