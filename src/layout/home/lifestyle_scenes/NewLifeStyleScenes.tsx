@@ -3,7 +3,6 @@ import styles from "./NewLIfeStyleScenes.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useContext, useRef, useState, useEffect } from "react";
-import ScrollContext from "@/context/scrollContext";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 

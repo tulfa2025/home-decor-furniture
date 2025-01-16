@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import TulfaCloseButton from "@/assets/icons/tulfa_close_button";
 import DeviceContext from "@/context/deviceContext";
 
-
 const FullscreenImageContainer = memo(
   ({
     imageSrc,
@@ -16,6 +15,8 @@ const FullscreenImageContainer = memo(
     isFocusOverlay = false,
     blur = false,
     quality = 75,
+    handleFullscreenToggle,
+    imageIndex
   }) => {
     const elementRef = useRef<HTMLDivElement | null>(null);
     const fullscreenRef = useRef<boolean>(false);
@@ -23,17 +24,17 @@ const FullscreenImageContainer = memo(
     const [isHovered, setIsHovered] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
 
-    const deviceType = useContext(DeviceContext)
+    const deviceType = useContext(DeviceContext);
 
     // Request fullscreen mode with vendor prefixes (same as before)
     const enterFullscreen = () => {
       if (elementRef.current) {
-
         elementRef.current.style.position = "fixed";
-        elementRef.current.style.top = deviceType === 'iOS' ? '-5vh' : 0;
-        elementRef.current.style.left = deviceType === 'iOS' ? '-5vw' : 0;
-        elementRef.current.style.width = "100%";
-        elementRef.current.style.height = "100%";
+        elementRef.current.style.top = deviceType === "iOS" ? "-5vh" : 0;
+        elementRef.current.style.left = deviceType === "iOS" ? "-5vw" : 0;
+        elementRef.current.style.width = deviceType === "iOS" ? "105%" : "100%";
+        elementRef.current.style.height =
+          deviceType === "iOS" ? "105%" : "100%";
         elementRef.current.style.zIndex = 1500;
         elementRef.current.style.pointerEvents = "auto";
 
@@ -69,7 +70,6 @@ const FullscreenImageContainer = memo(
       elementRef.current.offsetHeight;
 
       fullscreenRef.current = false;
-
     };
 
     // Toggle fullscreen mode based on current state. First function fired on click
@@ -93,14 +93,17 @@ const FullscreenImageContainer = memo(
           ref={elementRef}
           style={{
             ...imageStyles,
-            
-            backgroundColor: isFullscreen ? 'rgba(0, 0, 0, 0.8)' : 'transparent',
-            backdropFilter: isFullscreen ? 'blur(10px)' : 'unset',           // Blur effect
-            WebkitBackdropFilter: isFullscreen ? 'blur(10px)' : 'unset' ,  
+
+            backgroundColor: isFullscreen
+              ? "rgba(0, 0, 0, 0.8)"
+              : "transparent",
+            backdropFilter: isFullscreen ? "blur(10px)" : "unset", // Blur effect
+            WebkitBackdropFilter: isFullscreen ? "blur(10px)" : "unset",
             transition: "opacity 0.2s ease-in",
           }}
           className={`${imageClassName} ${styles.indiv_image}`}
-          onClick={toggleFullscreen}
+          // onClick={toggleFullscreen}
+          onClick={()=>{handleFullscreenToggle(imageIndex)}}
           onMouseEnter={() => {
             if (!isFocusOverlay) return;
             if (fullscreenRef.current) return;
@@ -122,13 +125,14 @@ const FullscreenImageContainer = memo(
             placeholder={blur ? "blur" : undefined}
             quality={quality}
             style={{
-              objectFit: isFullscreen ? 'contain' : 'cover'
+              objectFit: isFullscreen ? "contain" : "cover",
             }}
           />
 
           <CloseButton
             isFullScreen={isFullscreen}
-            toggleFullscreen={toggleFullscreen}
+            // toggleFullscreen={toggleFullscreen}
+            handleFullScreen={()=>{handleFullscreenToggle(0)}}
           />
         </motion.div>
 
@@ -137,7 +141,7 @@ const FullscreenImageContainer = memo(
           <>
             <motion.div
               className={styles.hover_overlay}
-              style={{opacity: isHovered && isFocusOverlay ? 0 : 1}}
+              style={{ opacity: isHovered && isFocusOverlay ? 0 : 1 }}
               animate={{
                 opacity: isHovered && !fullscreenRef.current ? 1 : 0,
               }}
@@ -151,13 +155,13 @@ const FullscreenImageContainer = memo(
 
 FullscreenImageContainer.displayName = "fullscreen image container";
 
-const CloseButton = ({ isFullScreen, toggleFullscreen }) => {
+const CloseButton = ({ isFullScreen, toggleFullscreen, handleFullScreen }) => {
   return (
     <motion.div
       style={{
         position: "absolute",
         bottom: "10%",
-        left: "50vw",
+        left: "calc(50vw - 20px)",
         zIndex: 400,
         pointerEvents: "auto",
       }}
@@ -169,7 +173,12 @@ const CloseButton = ({ isFullScreen, toggleFullscreen }) => {
       }}
     >
       {isFullScreen && (
-        <TulfaCloseButton height={60} width={60} onClick={toggleFullscreen} />
+        <TulfaCloseButton 
+        height={40} 
+        width={40} 
+        // onClick={toggleFullscreen}
+        onClick={()=>{handleFullScreen(0)}} 
+        />
       )}
     </motion.div>
   );

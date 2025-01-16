@@ -36,6 +36,9 @@ const VariationImageContainer = memo(
           }}
         >
           <Image
+          style={{
+            ...imageStyles
+          }}
             src={imageSrc}
             alt=""
             className={`

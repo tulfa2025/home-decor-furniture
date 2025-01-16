@@ -32,6 +32,9 @@ const ProTextVar: React.FC<LayoutProps> = ({
         const dynamicImageSet: VariationsImageSet = {
             background: backgroundImage,
             backgroundStyling: styles.backgroundStyling,
+            imageStyles: {
+                objectFit: 'cover'
+            },
             top: [
                 [MainImageOrange, "Orange Vermillion", HoverImageOrange],
                 [MainImageYellow, "Turner's Yellow", HoverImageYellow],

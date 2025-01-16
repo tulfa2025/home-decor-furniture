@@ -6,19 +6,24 @@
     width: 100%;
     position: relative;
 
-    @include variables.xs {
+    @media (orientation: portrait){
         flex-direction: column;
+    }
+
+    @media (orientation: landscape){
+        flex-direction: row;
+    }
+
+    @include variables.xs {
         height: 100vh;
         align-items: center;
     }
     @include variables.lg {
-        @media (orientation: landscape){
-            flex-direction: row;
-            height: 100%;
+
+        flex-direction: row;
+        height: 100%;
         align-items: unset;
-        }
-        
-        
+    
     }
 
     .image_container {

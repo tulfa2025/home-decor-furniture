@@ -1,12 +1,14 @@
 "use client";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import useWindowSize from "@/hooks/use_window_size";
 
 /**
  * Custom hook to parse search params and apply changes to page
  */
 const useGoTo = (setCurrentSlide, scrollContainerRef, scrollDetails) => {
   const searchParams = useSearchParams();
+  const viewportSize = useWindowSize()
 
   useEffect(() => {
     if (searchParams) {
@@ -14,17 +16,14 @@ const useGoTo = (setCurrentSlide, scrollContainerRef, scrollDetails) => {
       const num = Number(component);
 
       if (component) {
-        setTimeout(() => {
-          setCurrentSlide(num);
+        setCurrentSlide(num);
 
-          const scrollDistance =
-            scrollDetails.scrollPositions[num];
+        const scrollDistance = scrollDetails.scrollPositions[num] + viewportSize.height;
 
-          window.scrollTo({
-            top: scrollDistance,
-            behavior: "smooth",
-          });
-        }, 200);
+        window.scrollTo({
+          top: scrollDistance,
+          behavior: "smooth",
+        });
       } else {
         return;
       }

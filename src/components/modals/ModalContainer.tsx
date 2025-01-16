@@ -1,7 +1,7 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./modal_container.module.scss";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import dynamic from "next/dynamic";
 import SubheaderActiveContext from "@/context/subHeader";
 import Toast from "./ShareToast";
@@ -26,6 +26,10 @@ const ModalImageContainerMobile = dynamic(
     ssr: false,
   }
 );
+
+const FullScreenCarousel = dynamic(() => import("../carousel/fullscreen_carousel/FullScreenCarousel"), {
+  ssr: false,
+});
 
 const ModalContainer = ({
   ref,
@@ -84,6 +88,14 @@ const ModalContainer = ({
   const handleIsToastOpen = (state) => {
     setIsToastOpen(state);
   };
+
+  /* FULSCREEN TRIGGER */
+  const [isFullScreen, setIsFullScreen ] = useState(false);
+  const [fullscreenIndex, setFullscreenIndex] = useState(0)
+  const handleFullscreenToggle = useCallback((imageIndex: number)=>{
+    setIsFullScreen(prev=>!prev)
+    setFullscreenIndex(imageIndex)
+  }, [fullscreenIndex])
 
   return (
     <>
@@ -251,6 +263,7 @@ const ModalContainer = ({
                 {/*Image Container */}
                 {isModalOpen && viewportSize.width > 768 ? (
                   <ModalImageContainer
+                    
                     imageSet={
                       selectionArray.length > 0 && appliedFilter !== "all"
                         ? imageSet[appliedFilter]
@@ -264,6 +277,7 @@ const ModalContainer = ({
                         : true
                     }
                     isFilter={selectionArray.length > 0 ? true : false}
+                    handleFullscreenToggle={handleFullscreenToggle}
                   />
                 ) : (
                   <ModalImageContainerMobile
@@ -280,6 +294,7 @@ const ModalContainer = ({
                         : true
                     }
                     isFilter={selectionArray.length > 0 ? true : false}
+                    handleFullscreenToggle={handleFullscreenToggle}
                   />
                 )}
               </div>
@@ -299,6 +314,20 @@ const ModalContainer = ({
           </motion.div>
         </div>
       </AnimatePresence>
+
+      {/* Fullscreen carousel */}
+      {
+        isFullScreen ? 
+        <FullScreenCarousel
+          fullscreenIndex={fullscreenIndex}
+          imageSet={imageSet}
+          appliedFilter={appliedFilter}
+          handleFullscreenToggle={handleFullscreenToggle }
+
+        >
+
+        </FullScreenCarousel> : <></>
+      }
     </>
   );
 };

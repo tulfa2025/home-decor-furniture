@@ -18,7 +18,7 @@
             width: 65%
             
         }
-        height: 65%;
+        height: 65vh;
         position: relative;
 
 
@@ -73,7 +73,7 @@
                 @include variables.md{
                     @include variables.setTypography(55px, normal, 600, normal);
                 }
-                @include variables.lg{
+                @include variables.xl{
                     @include variables.setTypography(72px, normal, 600, normal);
                 }
                 
@@ -91,7 +91,7 @@
                 @include variables.md {
                     width: 55%;
                 }
-                @include variables.lg {
+                @include variables.xl {
                     width: 50%;
                 }
                 
@@ -108,8 +108,8 @@
                 @include variables.md{
                     @include variables.setTypography(16px, normal, 300, normal);
                 }
-                @include variables.lg{
-                    @include variables.setTypography(22px, normal, 300, normal);
+                @include variables.xl{
+                    @include variables.setTypography(20px, normal, 300, normal);
                 }
                 
             }

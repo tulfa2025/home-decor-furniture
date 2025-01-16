@@ -33,13 +33,14 @@
     @include variables.md {
         @include variables.setTypography(12px, normal, 600, normal);
         text-align: center;
-        padding: 10px 20px;
+        padding: 7px 20px;
     }
     @include variables.lg {
         @include variables.setTypography(16px, normal, 600, normal);
         text-align: center;
-        padding: 13.333px 30px;
+        padding: 10px 30px;
     }
+
     
 
     .button_icon {

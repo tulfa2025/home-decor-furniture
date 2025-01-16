@@ -7,7 +7,11 @@
         margin: 0 10px;
     }
     @include variables.md{
-        margin: 0 auto;
+        margin: 0 50px;
+
+    }
+    @include variables.lg{
+        margin: 0 100px;
 
     }
     
@@ -21,7 +25,6 @@
     grid-template-rows: 60vh 45vh;
     column-gap: 10px;
     row-gap: 10px;
-    padding: 10px 10px;
 
     /* STYLE */
     background: var(--color-white-solid, variables.$light);
@@ -65,7 +68,7 @@
     height: 60px;
 
     @include variables.xs {
-        bottom:15vh;
+        bottom: 10vh;
         left: calc(50vw - 150px);
     }
 
