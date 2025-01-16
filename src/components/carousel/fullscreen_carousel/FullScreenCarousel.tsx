@@ -76,7 +76,7 @@ const FullScreenCarousel = memo(({
         className={styles.fullscreen_image}
         alt=""
         src={memoizedImageSet[currentImageIndex]}
-        quality={70}
+        quality={65}
       />
       <CloseButton handleFullscreenToggle={handleFullscreenToggle} />
       <motion.div
