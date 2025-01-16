@@ -1,26 +1,10 @@
 "use client";
 import Image from "next/image";
-import { memo, useRef, useState } from "react";
+import { memo, useRef, useState, useContext } from "react";
 import styles from "./fullscreen_image_container.module.scss";
 import { motion } from "framer-motion";
 import TulfaCloseButton from "@/assets/icons/tulfa_close_button";
-
-function getDeviceType() {
-  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-  // Check for iOS
-  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-    return 'iOS'; // It's an iOS device
-  }
-  
-  // Check for Android
-  if (/android/i.test(userAgent)) {
-    return 'Android'; // It's an Android device
-  }
-
-  // If neither iOS nor Android
-  return 'Other';
-}
+import DeviceContext from "@/context/deviceContext";
 
 
 const FullscreenImageContainer = memo(
@@ -39,17 +23,17 @@ const FullscreenImageContainer = memo(
     const [isHovered, setIsHovered] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
 
-    const userAgentRef = useRef(getDeviceType())  
+    const deviceType = useContext(DeviceContext)
 
     // Request fullscreen mode with vendor prefixes (same as before)
     const enterFullscreen = () => {
       if (elementRef.current) {
 
-        console.log(userAgentRef)
+        console.log(deviceType)
 
         elementRef.current.style.position = "fixed";
-        elementRef.current.style.top = userAgentRef.current === 'iOS' ? '-5vh' : 0;
-        elementRef.current.style.left = userAgentRef.current === 'iOS' ? '-5vw' : 0;
+        elementRef.current.style.top = deviceType === 'iOS' ? '-5vh' : 0;
+        elementRef.current.style.left = deviceType === 'iOS' ? '-5vw' : 0;
         elementRef.current.style.width = "100%";
         elementRef.current.style.height = "100%";
         elementRef.current.style.zIndex = 1500;
