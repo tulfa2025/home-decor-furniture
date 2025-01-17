@@ -60,6 +60,7 @@ const FullScreenCarousel = memo(
           quality={60}
           placeholder="blur"
           blurDataURL={memoizedImageSet[currentImageIndex][1]}
+          priority
         />
         <CloseButton handleFullscreenToggle={handleFullscreenToggle} />
         <motion.div
