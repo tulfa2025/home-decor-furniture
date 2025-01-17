@@ -97,8 +97,8 @@
     @include variables.xs {
         padding: var(--item-spacing-10, 10px) 50px;
     }
-    @include variables.md {
-        padding: var(--item-spacing-10, 10px) 200px;
+    @include variables.lg {
+        padding: var(--item-spacing-10, 10px) 100px;
     }
 
     /* STYLE */
@@ -117,20 +117,16 @@
             width: 100%;
         }
 
-        @include variables.lg {
-            max-width: 75%;
-            min-width: 50%;
-        }
 
-        @include variables.breakpoint(1020px){
-            max-width: 1440px;
-            min-width: 100%;
-        }
+        // @include variables.breakpoint(1020px){
+        //     max-width: 1440px;
+        //     min-width: 100%;
+        // }
 
-        @include variables.xl {
-            max-width: 1440px;
-            min-width: 100%;
-        }
+        // @include variables.xl {
+        //     max-width: 1440px;
+        //     min-width: 100%;
+        // }
 
         .subheader_heading {
             /* DESKTOP - 1920 x 1080/SF Pro Display/Title 3 (semi-bolder) */

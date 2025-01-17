@@ -48,7 +48,7 @@ type ModalImageSet = {
     background: ImageOne,
     top: [
 
-      [ImageThree,       blurImageThree,     ],
+      [ImageThree, blurImageThree],
       [ImageTwo, blurImageTwo],
       [ImageFour, blurImageFour],
       [ImageFive, blurImageFive],

@@ -107,9 +107,6 @@ export default function SubHeader({
                 >
                     <motion.div
                         className={styles.subheader_heading_container}
-                        animate={{
-                            transform: (headerActivated && viewportSize.width < 1024 && viewportSize.width > 768) ? `translateX(-15vw)` : null
-                        }}
                     >
                         <h3 className={
                             `${styles.subheader_heading} ${headerFontColor}`
@@ -126,9 +123,6 @@ export default function SubHeader({
 
                     <motion.nav
                         className={styles.subheader_nav}
-                        animate={{
-                            transform: (headerActivated && viewportSize.width < 1024 && viewportSize.width > 768) ? `translateX(12vw)` : null
-                        }}
                     >
 
                         {/* LAPTOPS */}

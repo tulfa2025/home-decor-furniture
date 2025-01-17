@@ -37,7 +37,7 @@ export default function Home() {
                   opacity: 0,
                 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: compName > 0 ? 2 : 0 }}
+                transition={{ duration: 1, delay: compName * 1.0 }}
                 style={{
                   height: "max-content",
                   minWidth: "100vw",
