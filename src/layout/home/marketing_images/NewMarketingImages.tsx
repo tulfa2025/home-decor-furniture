@@ -2,7 +2,7 @@
 import styles from "./NewMarketingImages.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 
@@ -25,6 +25,10 @@ import backgroundImageTwo from "../../../assets/images/marketing_images/mockup r
 import backgroundImageThree from "../../../assets/images/marketing_images/mockup laptop.jpg";
 
 const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
+
+  const memoizedImageSet = useMemo(()=>{
+    return modalImageSet
+  }, [])
   /*  MODAL RELATED LOGIC */
   //Scroll Block context
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -133,7 +137,7 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           ref={modalRef}
           handleModalClose={handleModalClose}
           isModalOpen={isModalOpen}
-          imageSet={modalImageSet}
+          imageSet={memoizedImageSet}
           selectionArray={[]}
           differentSizes={true}
           random={false}

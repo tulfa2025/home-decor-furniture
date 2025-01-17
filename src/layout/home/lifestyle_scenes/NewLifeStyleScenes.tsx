@@ -2,7 +2,7 @@
 import styles from "./NewLIfeStyleScenes.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useContext, useRef, useState, useEffect } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 
@@ -24,6 +24,9 @@ import useInView from "@/hooks/use_inview";
 import modalImageSet from "./lifestyle_scenes_images";
 
 const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
+  const memoizedImageSet = useMemo(()=>{
+    return modalImageSet
+  }, [])
   /*  MODAL RELATED LOGIC */
   //Scroll Block context
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -123,7 +126,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           ref={modalRef}
           handleModalClose={handleModalClose}
           isModalOpen={isModalOpen}
-          imageSet={modalImageSet}
+          imageSet={memoizedImageSet}
           selectionArray={modalSelectionArrayLifestyle}
           differentSizes={true}
           random={false}

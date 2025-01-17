@@ -7,7 +7,7 @@ import {
   useTransform,
   useMotionValueEvent,
 } from "framer-motion";
-import { useRef, useState, useEffect, useContext } from "react";
+import { useRef, useState, useEffect, useContext, useMemo } from "react";
 import styles from "./SiloImages.module.scss";
 import { modalSelectionArraySilo } from "@/utils/constants";
 import { usePathname } from "next/navigation";
@@ -154,6 +154,11 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     }
   });
 
+  // Memoize images
+  const memoizedImageSet = useMemo(()=>{
+    return modalImageSet
+  }, [])
+
   return (
     <motion.div
       style={{
@@ -220,7 +225,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             ref={modalRef}
             handleModalClose={handleModalClose}
             isModalOpen={isModalOpen}
-            imageSet={modalImageSet}
+            imageSet={memoizedImageSet}
             selectionArray={modalSelectionArraySilo}
             random={false}
             filter={filter}

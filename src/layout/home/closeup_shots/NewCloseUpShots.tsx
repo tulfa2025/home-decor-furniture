@@ -2,7 +2,7 @@
 import styles from "./NewCloseUpShots.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 
@@ -22,6 +22,9 @@ import backgroundImage from "../../../assets/images/closeup_shots/rug_one.png";
 import modalImageSet from "./closeup_shots_images";
 
 const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
+  const memoizedImageSet = useMemo(()=>{
+    return modalImageSet
+  }, [])
   const pathName = usePathname();
   /*  MODAL RELATED LOGIC */
   //Scroll Block context
@@ -117,7 +120,7 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           ref={modalRef}
           handleModalClose={handleModalClose}
           isModalOpen={isModalOpen}
-          imageSet={modalImageSet}
+          imageSet={memoizedImageSet}
           selectionArray={[]}
           differentSizes={true}
           random={false}

@@ -42,9 +42,6 @@ const ModalContainer = ({
   filter = "",
   urlLink = "",
 }) => {
-  const memoizedImageSet = useMemo(() => imageSet, [imageSet]);
-
-
   const viewportSize = useWindowSize();
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -166,7 +163,7 @@ const ModalContainer = ({
                 {/* HEADER IMAGE CONTAINER */}
                 <div className={styles.closeup_modal_header_image}>
                   <FullscreenImageContainer
-                    imageSrc={[memoizedImageSet.background, '']}
+                    imageSrc={[imageSet.background, '']}
                     imageStyle={{
                       height: "100%",
                       width: "100%",
@@ -270,8 +267,8 @@ const ModalContainer = ({
                     
                     imageSet={
                       selectionArray.length > 0 && appliedFilter !== "all"
-                        ? memoizedImageSet[appliedFilter]
-                        : memoizedImageSet
+                        ? imageSet[appliedFilter]
+                        : imageSet
                     }
                     differentSizes={differentSizes}
                     random={random}
@@ -287,8 +284,8 @@ const ModalContainer = ({
                   <ModalImageContainerMobile
                     imageSet={
                       selectionArray.length > 0 && appliedFilter !== "all"
-                        ? memoizedImageSet[appliedFilter]
-                        : memoizedImageSet
+                        ? imageSet[appliedFilter]
+                        : imageSet
                     }
                     differentSizes={differentSizes}
                     random={random}
@@ -324,7 +321,7 @@ const ModalContainer = ({
         isFullScreen ? 
         <FullScreenCarousel
           fullscreenIndex={fullscreenIndex}
-          imageSet={memoizedImageSet}
+          imageSet={imageSet}
           appliedFilter={appliedFilter}
           handleFullscreenToggle={handleFullscreenToggle }
 
