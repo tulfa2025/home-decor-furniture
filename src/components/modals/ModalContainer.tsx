@@ -97,6 +97,7 @@ const ModalContainer = ({
     setFullscreenIndex(imageIndex)
   }, [fullscreenIndex])
 
+
   return (
     <>
       <AnimatePresence initial={true}>

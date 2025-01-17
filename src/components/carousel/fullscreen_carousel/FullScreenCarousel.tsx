@@ -55,7 +55,7 @@ const FullScreenCarousel = memo(({
     }
   }, [imageSet]);
   return (
-    <motion.div 
+    <div 
         className={styles.fullscreen_container}
     >
       <Image
@@ -63,6 +63,9 @@ const FullScreenCarousel = memo(({
         alt=""
         src={memoizedImageSet[currentImageIndex]}
         quality={65}
+        placeholder="blur"
+        // blurDataURL={memoizedImageSet[currentImageIndex]}
+        
       />
       <CloseButton handleFullscreenToggle={handleFullscreenToggle} />
       <motion.div
@@ -95,7 +98,7 @@ const FullScreenCarousel = memo(({
           }}
         />
       </motion.div>
-    </motion.div>
+    </div>
   );
 });
 

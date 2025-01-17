@@ -13,6 +13,7 @@
     pointer-events: none;
     overscroll-behavior: contain;
     overflow: scroll;
+    content-visibility: auto;
 
     .fullscreen_image{
         height:100%;
@@ -21,6 +22,7 @@
         pointer-events: none;
         overscroll-behavior: contain;
         overflow: scroll;
+        content-visibility: auto;
     }
 }
 .arrow_container {
