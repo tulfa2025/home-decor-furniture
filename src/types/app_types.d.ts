@@ -18,13 +18,13 @@ declare global {
 
     /* Images under different categories */
     interface ImageSet {
-        [key: string]: Array<[StaticImageData, string]> | null
+        [key: string]: Array<[StaticImageData, StaticImageData, string]> | null
         background: StaticImageData,
         backgroundStyling: string
     };    
 
     interface VariationsImageSet extends ImageSet {
-        top: Array<[StaticImageData, string, StaticImageData]>  // Main Image, Description, Hover Image
+        top: Array<[StaticImageData, StaticImageData, string, StaticImageData, StaticImageData]>  // Main Image, blurred, Description, Hover Image, blurred
 
     }
 }

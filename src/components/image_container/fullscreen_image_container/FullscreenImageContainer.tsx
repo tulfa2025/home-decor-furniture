@@ -86,7 +86,6 @@ const FullscreenImageContainer = memo(
         enterFullscreen();
       }
     };
-
     return (
       <>
         <motion.div
@@ -116,7 +115,7 @@ const FullscreenImageContainer = memo(
           }}
         >
           <Image
-            src={imageSrc}
+            src={imageSrc[0]}
             alt=""
             className={`
               ${styles.indiv_image} 
@@ -127,6 +126,7 @@ const FullscreenImageContainer = memo(
             style={{
               objectFit: isFullscreen ? "contain" : "cover",
             }}
+            blurDataURL={imageSrc[1]}
           />
 
           <CloseButton

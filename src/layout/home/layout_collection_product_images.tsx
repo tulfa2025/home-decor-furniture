@@ -30,14 +30,14 @@ const layoutCollection: LayoutCollectionBase = [
     [ProColVar, 'Product Variations'],
     [ProTextVar, 'Product Variations'],
     [NewCloseUpShots, 'Close Up Shots'],
-    [GroupShots, 'Group Shots'],
-    [DimensionImages, 'Dimension Images'],
-    [InstallationImages, 'Installation Images'],
-    [FlipBook, ''],
-    [FlatLayImages, 'Flat Lay'],
-    [NewMarketingImages, 'Marketing Images'],
-    [BookDemo, 'Book a Demo'],
-    [Blogs, '']
+    // [GroupShots, 'Group Shots'],
+    // [DimensionImages, 'Dimension Images'],
+    // [InstallationImages, 'Installation Images'],
+    // [FlipBook, ''],
+    // [FlatLayImages, 'Flat Lay'],
+    // [NewMarketingImages, 'Marketing Images'],
+    // [BookDemo, 'Book a Demo'],
+    // [Blogs, '']
 ];
 
 const layoutCollectionMemoized = memoizeComponents(layoutCollection);

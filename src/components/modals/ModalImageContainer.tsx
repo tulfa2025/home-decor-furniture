@@ -18,6 +18,7 @@ const ModalImageContainer = memo(
     /* DETERMINE NUMBER OF IMAGES TO RENDER */
     let imageNo;
 
+
     if (allImages) {
       /* LOOP THROUGH ALL ARRAYS IN IMAGE SET TO EXTRACT IMAGE NO -- EXCEPT ORDER */
       const imageSetNames = Object.keys(imageSet);

@@ -29,8 +29,19 @@
     position: absolute;
     top: calc(50vh - 20px);
     left: 0;
-    width: 100vw;
+    min-width: 100vw;
     display: flex;
     justify-content: space-between;
     pointer-events: auto;
+
+    @include variables.xs {
+        padding: 0 5vw;
+    }
+
+    @include variables.lg {
+        padding: 0 15vw;
+    }
+    @include variables.xl {
+        padding: 0 25vw;
+    }
 }

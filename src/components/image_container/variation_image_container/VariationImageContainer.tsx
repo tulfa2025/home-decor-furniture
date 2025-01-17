@@ -6,15 +6,15 @@ import { motion } from "framer-motion";
 
 const VariationImageContainer = memo(
   ({
-    imageSrc,
+    imageSrc,  // MainIMage, blurred, des, hover, hover blurred
     imageStyles,
     imageClassName,
-    hoverImageSrc,
     blur = false,
     quality = 75,
   }) => {
     const elementRef = useRef<HTMLDivElement | null>(null);
     const [isHovered, setIsHovered] = useState(false);
+
 
     return (
       <>
@@ -22,16 +22,16 @@ const VariationImageContainer = memo(
           ref={elementRef}
           style={{
             ...imageStyles,
-            opacity: isHovered && hoverImageSrc ? 0 : 1,
+            opacity: isHovered && imageSrc[3] ? 0 : 1,
             transition: "opacity 0.2s ease-in",
           }}
           className={`${imageClassName} ${styles.indiv_image}`}
           onMouseEnter={() => {
-            if (!hoverImageSrc) return;
+            if (!imageSrc[3]) return;
             setIsHovered(true);
           }}
           onMouseLeave={() => {
-            if (!hoverImageSrc) return;
+            if (!imageSrc[3]) return;
             setIsHovered(false);
           }}
         >
@@ -39,7 +39,7 @@ const VariationImageContainer = memo(
           style={{
             ...imageStyles
           }}
-            src={imageSrc}
+            src={imageSrc[0]}
             alt=""
             className={`
               ${styles.indiv_image} 
@@ -47,13 +47,14 @@ const VariationImageContainer = memo(
             `}
             placeholder={blur ? "blur" : undefined}
             quality={quality}
+            blurDataURL={imageSrc[1]}
           />
         </motion.div>
 
         {/* If alternative image */}
-        {hoverImageSrc ? (
+        {imageSrc[3] ? (
           <Image
-            src={hoverImageSrc}
+            src={imageSrc[3]}
             alt=""
             style={{
               ...imageStyles,
@@ -63,6 +64,7 @@ const VariationImageContainer = memo(
             className={`${imageClassName} ${styles.indiv_image_hover}`}
             placeholder={blur ? "blur" : undefined}
             quality={quality}
+            blurDataURL={imageSrc[4]}
           />
         ) : null}
       </>

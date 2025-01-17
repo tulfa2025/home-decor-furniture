@@ -255,16 +255,14 @@ const ProductVariation = ({
                       }}
                     >
                       <VariationImageContainer
-                        imageSrc={imageSource[0]}
-                        hoverImageSrc={imageSource[2]}
-                        alt={imageSource[1]}
+                        imageSrc={imageSource}
                         imageStyles={imageSet.imageStyles}
                         imageClassName={styles.indiv_image_var}
                         blur={true}
                         quality={1}
                       />
 
-                      <p className={styles.image_text}>{imageSource[1]}</p>
+                      <p className={styles.image_text}>{imageSource[2]}</p>
                     </motion.div>
                   );
                 })}

@@ -15,6 +15,15 @@ import eightLightsHover from "../../../assets/images/size_var/8set_light_on.webp
 import tenLightsHover from "../../../assets/images/size_var/10set_light_on.webp";
 import twelveLightsHover from "../../../assets/images/size_var/12set_light_on.webp";
 
+const blursixLights = "/images/size_var/blur/6set_light_off.webp";
+const blureightLights = "/images/size_var/blur/8set_light_off.webp";
+const blurtenLights = "/images/size_var/blur/10set_light_off.webp";
+const blurtwelveLights = "/images/size_var/blur/12set_light_off.webp";
+const blursixLightsHover = "/images/size_var/blur/6set_light_on.webp";
+const blureightLightsHover = "/images/size_var/blur/8set_light_on.webp";
+const blurtenLightsHover = "/images/size_var/blur/10set_light_on.webp";
+const blurtwelveLightsHover = "/images/size_var/blur/12set_light_on.webp";
+
 /* BACKGROUN IMAGE */
 import backgroundImage from '../../../assets/images/size_var/Chandelier_Lifestyle_website.webp'
 
@@ -31,10 +40,10 @@ const ProSizeVar: React.FC<LayoutProps> = ({
             background: backgroundImage,
             backgroundStyling: styles.backgroundStyling,
             top: [
-                [sixLights, "Six Lights", sixLightsHover],
-                [eightLights, "Eight Lights", eightLightsHover],
-                [tenLights, "Ten Lights", tenLightsHover],
-                [twelveLights, "Twelve Lights", twelveLightsHover]
+                [sixLights, blursixLights,  "Six Lights", sixLightsHover, blursixLightsHover],
+                [eightLights, blureightLights, "Eight Lights", eightLightsHover, blureightLightsHover],
+                [tenLights, blurtenLights, "Ten Lights", tenLightsHover, blurtenLightsHover],
+                [twelveLights, blurtwelveLights, "Twelve Lights", twelveLightsHover, blurtwelveLightsHover]
             ]
         }
 

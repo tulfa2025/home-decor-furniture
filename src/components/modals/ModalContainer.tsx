@@ -163,7 +163,7 @@ const ModalContainer = ({
                 {/* HEADER IMAGE CONTAINER */}
                 <div className={styles.closeup_modal_header_image}>
                   <FullscreenImageContainer
-                    imageSrc={imageSet.background}
+                    imageSrc={[imageSet.background, '']}
                     imageStyle={{
                       height: "100%",
                       width: "100%",
@@ -174,7 +174,7 @@ const ModalContainer = ({
                     alt=""
                     imageClassName=""
                     fullscreenToggle={false}
-                    blur={true}
+                    blur={false}
                   />
 
                   {/* BUTTONS */}
