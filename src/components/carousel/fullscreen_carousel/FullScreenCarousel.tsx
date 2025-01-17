@@ -8,6 +8,7 @@ import {
   TulfaRightArrow,
   TulfaLeftArrow,
 } from "@/assets/icons/tulfa_nav_arrows";
+import ImagePreloader from "@/components/image_preloader/ImagePreloader";
 
 const FullScreenCarousel = ({ fullscreenIndex, imageSet, handleFullscreenToggle, appliedFilter }) => {
     const [currentImageIndex, setImageIndex] = useState(fullscreenIndex);
@@ -53,10 +54,11 @@ const FullScreenCarousel = ({ fullscreenIndex, imageSet, handleFullscreenToggle,
         imageSetLengthRef.current = imageSet[appliedFilter].length;
         return imageSet[appliedFilter];
       }
-    }, [imageSet]);
+    }, [imageSet, appliedFilter]);
 
     return (
       <div className={styles.fullscreen_container}>
+        <ImagePreloader imageSet={memoizedImageSet}/>
         <Image
           className={styles.fullscreen_image}
           alt=""

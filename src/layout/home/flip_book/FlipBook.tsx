@@ -33,7 +33,7 @@ const FlipBook = ({ layoutName, zIndex }) => {
     }
   }, [isInView]);
 
-  const scrollHeight = calculateScrollHeight(viewportSize.height, 3);
+  const scrollHeight = calculateScrollHeight(viewportSize.height, 2);
 
   /* ANIMATION START AND END POSITION */
   const [yPosition, setYPosition] = useState(0);
@@ -98,7 +98,7 @@ const FlipBook = ({ layoutName, zIndex }) => {
     transformShowcaseAnimationThree,
     {
       damping: 40,
-      stiffness: 150,
+      stiffness: 100,
     }
   );
   return (
