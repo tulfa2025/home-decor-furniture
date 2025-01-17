@@ -317,18 +317,26 @@ const ModalContainer = ({
       </AnimatePresence>
 
       {/* Fullscreen carousel */}
-      {
-        isFullScreen ? 
+      <div
+        style={{
+          zIndex: isFullScreen ? 1000 : -1,
+          width: '100%',
+          height: '100%',
+          position: 'relative',
+          opacity: isFullScreen ? 1 : 0 
+        }}
+      >
+
         <FullScreenCarousel
           fullscreenIndex={fullscreenIndex}
           imageSet={imageSet}
           appliedFilter={appliedFilter}
           handleFullscreenToggle={handleFullscreenToggle }
 
-        >
+        />
+      </div>
 
-        </FullScreenCarousel> : <></>
-      }
+    
     </>
   );
 };
