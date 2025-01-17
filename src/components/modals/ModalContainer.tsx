@@ -93,9 +93,12 @@ const ModalContainer = ({
   const [isFullScreen, setIsFullScreen ] = useState(false);
   const [fullscreenIndex, setFullscreenIndex] = useState(0)
   const handleFullscreenToggle = useCallback((imageIndex: number)=>{
-    setIsFullScreen(prev=>!prev)
     setFullscreenIndex(imageIndex)
-  }, [fullscreenIndex])
+    setTimeout(()=>{
+      setIsFullScreen(prev=>!prev)
+    }, 500)
+  }, [])
+
 
 
   return (

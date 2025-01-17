@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { useState, useMemo, useCallback, useRef, memo, Suspense } from "react";
+import { useState, useMemo, useCallback, useRef, memo, useEffect } from "react";
 import Image from "next/image";
 import styles from "./FullScreenCarousel.module.scss";
 import TulfaCloseButton from "@/assets/icons/tulfa_close_button";
@@ -9,9 +9,12 @@ import {
   TulfaLeftArrow,
 } from "@/assets/icons/tulfa_nav_arrows";
 
-const FullScreenCarousel = memo(
-  ({ fullscreenIndex, imageSet, handleFullscreenToggle, appliedFilter }) => {
+const FullScreenCarousel = ({ fullscreenIndex, imageSet, handleFullscreenToggle, appliedFilter }) => {
     const [currentImageIndex, setImageIndex] = useState(fullscreenIndex);
+    useEffect(() => {
+      setImageIndex(fullscreenIndex); // Update state when prop changes
+    }, [fullscreenIndex]); // Runs whenever fullscreenIndex changes
+    // Sync state with prop changes
     const imageSetLengthRef = useRef(0);
 
     const handleSetCurrentIndex = useCallback(
@@ -51,6 +54,7 @@ const FullScreenCarousel = memo(
         return imageSet[appliedFilter];
       }
     }, [imageSet]);
+
     return (
       <div className={styles.fullscreen_container}>
         <Image
@@ -95,9 +99,6 @@ const FullScreenCarousel = memo(
       </div>
     );
   }
-);
-
-FullScreenCarousel.displayName = "Fullscreen Carousel";
 
 const CloseButton = ({ handleFullscreenToggle }) => {
   return (
