@@ -123,7 +123,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     transformShowcaseAnimationThree,
     {
       damping: 35,
-      stiffness: 125,
+      stiffness: 150,
     }
   );
 

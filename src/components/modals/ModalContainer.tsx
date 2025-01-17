@@ -49,7 +49,6 @@ const ModalContainer = ({
 
   const handleSelectedIndex = (selectedIndex: number) => {
     setSelectedIndex(selectedIndex);
-    
   };
 
   useEffect(()=>{

@@ -98,7 +98,7 @@ const FlipBook = ({ layoutName, zIndex }) => {
     transformShowcaseAnimationThree,
     {
       damping: 40,
-      stiffness: 100,
+      stiffness: 150,
     }
   );
   return (
