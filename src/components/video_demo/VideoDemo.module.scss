@@ -16,12 +16,34 @@
     background-color: white;
     align-items: center;
 
+    @include variables.lg {
+        padding: 0px 100px;
+    }
+
     .written_content_header_container{
-        flex: 50%
+        flex: 50%;
+
+        .heading {
+            @include variables.xs {
+                @include variables.setTypography(32px, normal, 500, normal)
+            }
+        }
     }
 
     .written_content_text_container{
-        flex: 50%
+        flex: 50%;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        .written_content {
+            margin-bottom: 10px;
+            max-width: 75%;
+            color: variables.$primaryColor;
+            @include variables.xs {
+                @include variables.setTypography(16px, normal, 400, normal)
+
+            }
+        }
 
     }
 }

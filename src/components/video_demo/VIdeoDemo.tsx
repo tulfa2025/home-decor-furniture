@@ -12,6 +12,8 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 import SlideContext from "@/context/changeSlide";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 import CallOut from "../call_out/CallOut";
+import TulfaCloseButton from "@/assets/icons/tulfa_close_button";
+import Button from "../button/Button";
 
 const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
   // Subheadr scroll
@@ -38,7 +40,7 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
   });
 
   /* SCROLL HEIGHT OF PAGE */
-  const scrollHeight = calculateScrollHeight(viewportSize.height, 2.5);
+  const scrollHeight = calculateScrollHeight(viewportSize.height, 2);
 
   /* ANIMATION START POSITION */
   const [yPosition, setYPosition] = useState(0);
@@ -61,7 +63,7 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
   /* CONTENT ANIMATIONS */
   const videoContainerScale = useTransform(
     scrollY,
-    [0, yPosition + scrollHeight * 0.3, yPosition + scrollHeight * 0.4],
+    [0, yPosition + scrollHeight * 0.3, yPosition + scrollHeight * 0.35],
     [1.05, 1.05, 0.9]
   );
 
@@ -75,10 +77,11 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
     scrollY,
     [
       0,
-      yPosition - viewportSize.height,
-      yPosition,
-      yPosition + scrollHeight * 0.6,
+      yPosition - scrollHeight * 0.25,
+      yPosition + scrollHeight * 0.1,
+      yPosition + scrollHeight * 0.65,
       yPosition + scrollHeight * 0.7,
+      yPosition + scrollHeight * 0.85,
       yPosition + scrollHeight,
     ],
     [
@@ -86,7 +89,8 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
       viewportSize.height * 1.2,
       0,
       0,
-      -viewportSize.height * 1.5,
+      -viewportSize.height * 0.5,
+      -viewportSize.height * 0.5,
       -viewportSize.height * 2.4,
     ]
   );
@@ -107,8 +111,7 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
           position: "relative",
           top: 0,
           overflow: "auto",
-          //   backgroundColor: "transparent",
-          background: "white",
+          backgroundColor: "transparent",
           zIndex: isInView ? zIndex : -1,
         }}
         ref={scrollTargetRef}
@@ -146,24 +149,22 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
           </motion.div>
           {/* VIDEO WRITTEN CONTENT GOES HERE */}
           <div className={styles.written_content_container}>
-            <div
-              className={styles.written_content_header_container}
-            >
-              <CallOut calloutStyleType={1} heading="Lorem Ipsum" />
-
+            <div className={styles.written_content_header_container}>
+              <CallOut
+                calloutStyleType={1}
+                heading="Lorem ipsum dolor sit amet"
+                overrideHeaderStyle={styles.heading}
+              />
             </div>
-            
 
-            <div
-              className={styles.written_content_text_container}
-            >
-              Lorem ipsum dolor sit amet consectetur. Nibh pulvinar ut quis
-              sollicitudin etiam cursus tortor lorem. Lorem nunc facilisis
-              tristique amet. Elementum laoreet aenean quam phasellus imperdiet.
-              Bibendum faucibus id elementum risus. Pretium nunc accumsan
-              fringilla nibh vitae feugiat mattis nunc viverra. Lorem fringilla
-              turpis risus mauris faucibus. Integer senectus congue nullam est.
-              Dictum.
+            <div className={styles.written_content_text_container}>
+              <p className={styles.written_content}>
+              Lorem ipsum dolor sit amet consectetur. Nibh pulvinar ut quis sollicitudin etiam cursus tortor lorem. Lorem nunc facilisis tristique amet. Elementum laoreet aenean quam phasellus imperdiet. 
+              </p>
+              <Button
+                text='See More About It'
+                buttonType={3}
+              />
             </div>
           </div>
         </motion.div>

@@ -1,9 +1,34 @@
 @use '@/styles/shared/variables';
 
+.button_three_container {
+    @include variables.setLayout(flex, space-between, center);
+    position: relative;
+    background-color: variables.$primaryColor;
+    color: white;
+    padding: 10px 20px;
+
+    /* STYLE */
+    @include variables.sm {
+        @include variables.setBorderNoColor(10px, 2px, solid);
+        height: 35px;
+        width: 200px;
+    }
+
+    @include variables.md {
+        @include variables.setBorderNoColor(10px, 2px, solid);
+  
+    }
+    @include variables.lg {
+        @include variables.setBorderNoColor(10px, 2px, solid);
+        
+
+    }
+
+}
+
 .button_two_container {
     /* LAYOUT */
     @include variables.setLayout(flex, space-between, center);
-    
     position: relative;
 
     /* STYLE */

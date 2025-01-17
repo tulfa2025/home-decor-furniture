@@ -1,6 +1,7 @@
 import { FaPlus } from "react-icons/fa";
 import { LuExpand } from "react-icons/lu";
 import { ReactElement, useRef } from "react";
+import BasicArrow from "@/assets/icons/BasicArrow";
 
 import styles from "./Button.module.scss";
 
@@ -35,7 +36,25 @@ export default function Button({
       );
       break;
     case 2:
-      CustomButton = <ButtonTwo text={text} modifier={modifier} onClick={onClick} externalLink={externalLink} />;
+      CustomButton = (
+        <ButtonTwo
+          text={text}
+          modifier={modifier}
+          onClick={onClick}
+          externalLink={externalLink}
+        />
+      );
+      break;
+
+    case 3:
+      CustomButton = (
+        <ButtonThree
+          text={text}
+          modifier={modifier}
+          onClick={onClick}
+          externalLink={externalLink}
+        />
+      );
       break;
     default:
       break;
@@ -92,6 +111,28 @@ function ButtonTwo({ text, modifier, onClick, externalLink }: ButtonProps) {
       ) : (
         text
       )}
+    </button>
+  );
+}
+
+function ButtonThree({ text, modifier, onClick, externalLink }: ButtonProps) {
+  // Toggle hover - prevent re renders
+  const buttonRef = useRef(null);
+  return (
+    <button
+      ref={buttonRef}
+      className={`${styles.button_three_container} ${styles[modifier]}`}
+      onClick={onClick}
+    >
+      <span className={styles.pop_span}>
+        {externalLink ? (
+          <a href="https://www.tulfa.com/contact-us">{text}</a>
+        ) : (
+          text
+        )}
+      </span>
+      <BasicArrow />
+      
     </button>
   );
 }
