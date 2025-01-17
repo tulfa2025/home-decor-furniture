@@ -1,7 +1,7 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./modal_container.module.scss";
-import { useState, useEffect, useContext, useCallback } from "react";
+import { useState, useEffect, useContext, useCallback, useMemo } from "react";
 import dynamic from "next/dynamic";
 import SubheaderActiveContext from "@/context/subHeader";
 import Toast from "./ShareToast";
@@ -42,6 +42,9 @@ const ModalContainer = ({
   filter = "",
   urlLink = "",
 }) => {
+  const memoizedImageSet = useMemo(() => imageSet, [imageSet]);
+
+
   const viewportSize = useWindowSize();
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -163,7 +166,7 @@ const ModalContainer = ({
                 {/* HEADER IMAGE CONTAINER */}
                 <div className={styles.closeup_modal_header_image}>
                   <FullscreenImageContainer
-                    imageSrc={[imageSet.background, '']}
+                    imageSrc={[memoizedImageSet.background, '']}
                     imageStyle={{
                       height: "100%",
                       width: "100%",
@@ -267,8 +270,8 @@ const ModalContainer = ({
                     
                     imageSet={
                       selectionArray.length > 0 && appliedFilter !== "all"
-                        ? imageSet[appliedFilter]
-                        : imageSet
+                        ? memoizedImageSet[appliedFilter]
+                        : memoizedImageSet
                     }
                     differentSizes={differentSizes}
                     random={random}
@@ -284,8 +287,8 @@ const ModalContainer = ({
                   <ModalImageContainerMobile
                     imageSet={
                       selectionArray.length > 0 && appliedFilter !== "all"
-                        ? imageSet[appliedFilter]
-                        : imageSet
+                        ? memoizedImageSet[appliedFilter]
+                        : memoizedImageSet
                     }
                     differentSizes={differentSizes}
                     random={random}
@@ -321,7 +324,7 @@ const ModalContainer = ({
         isFullScreen ? 
         <FullScreenCarousel
           fullscreenIndex={fullscreenIndex}
-          imageSet={imageSet}
+          imageSet={memoizedImageSet}
           appliedFilter={appliedFilter}
           handleFullscreenToggle={handleFullscreenToggle }
 
