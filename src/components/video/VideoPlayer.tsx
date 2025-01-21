@@ -22,12 +22,12 @@ const VideoPlayer = memo(
 
     useEffect(() => {
       if (videoRef.current && isInView) {
-        videoRef.current.play();
+          videoRef.current.play();
       } else if (videoRef.current && !isInView) {
         videoRef.current.pause();
         videoRef.current.load(); // Apparently resets buffer
       }
-    }, [isInView]);
+    }, [isInView, src]);
 
 
     useEffect(() => {

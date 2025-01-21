@@ -131,7 +131,10 @@ function ButtonThree({ text, modifier, onClick, externalLink }: ButtonProps) {
           text
         )}
       </span>
-      <BasicArrow />
+      <BasicArrow 
+        height={25}
+        width={25}
+      />
       
     </button>
   );

@@ -6,13 +6,24 @@ import ProductVideosBanner from "./banner/ProductVideosBanner";
 import VideoOne from "./video_1/VideoOne";
 import VideoTwo from "./video_2/VideoTwo";
 import VideoThree from "./video_3/VideoThree";
+import VideoFour from "./video_4/VideoFour";
+import VideoFive from "./video_5/VideoFive";
+import Blogs from "@/layout/home/blogs/Blogs";
+import BookDemo from "@/layout/home/book_demo/BookDemo";
+import ARVid from "./ar_vid/ARVid";
 
 /* LAYOUT COLLECTION MUST BE IN DESIRED ORDER */
 const layoutCollection: LayoutCollectionBase = [
     [ProductVideosBanner, 'Banner'],
     [VideoOne, 'Video One'],
-    [VideoTwo, 'Video Two'],
     [VideoThree, 'Video Three'],
+    [VideoTwo, 'Video Two'],
+    [VideoFour, 'Video Four'],
+    [VideoFive, 'Video Five'],
+    [ARVid, 'TBC'],
+    [BookDemo, ''],
+    [Blogs, '']
+
 ];
 
 const layoutCollectionMemoized = memoizeComponents(layoutCollection);

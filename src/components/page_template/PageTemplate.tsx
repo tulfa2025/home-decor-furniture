@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 /* CUSTOM HOOKS */
 import useGoTo from "@/hooks/use_goto";
 import useWindowSize from "@/hooks/use_window_size";
+import getDeviceType from '@/utils/getDeviceContext';
 
 /* CUSTOM COMPONENTS */
 import MenuPopup from "@/components/menu_popup/MenuPopup";
@@ -17,6 +18,7 @@ import ScrollContext from "@/context/scrollContext";
 import SubheaderActiveContext from "@/context/subHeader";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 import SlideContext from "@/context/changeSlide";
+import DeviceContext from '@/context/deviceContext';
 
 const PageTemplate = ({ children, layoutCollection, activePagePath }) => {
   /* HEADER STYLE */
@@ -79,7 +81,19 @@ const PageTemplate = ({ children, layoutCollection, activePagePath }) => {
   /* DETERMINE WHICH SLIDE TO LOAD FIRST */
   useGoTo(setCurrentSlide, scrollContainerRef, scrollDetails);
 
+
+  /* DEVICE CONTEXT */
+  const [deviceType, setDeviceType] = useState("");
+
+  useEffect(() => {
+    if (window) {
+     
+      setDeviceType(getDeviceType());
+    }
+  }, []);
+
   return (
+    <DeviceContext.Provider value={deviceType}>
     <SubheaderStyleContext.Provider value={[headerStyle, setHeaderStyle]}>
       <SubheaderActiveContext.Provider value={handleSubheaderActive}>
         <ScrollContext.Provider value={handleIsScrollBlocked}>
@@ -111,6 +125,7 @@ const PageTemplate = ({ children, layoutCollection, activePagePath }) => {
         </ScrollContext.Provider>
       </SubheaderActiveContext.Provider>
     </SubheaderStyleContext.Provider>
+    </DeviceContext.Provider>
   );
 };
 

@@ -6,12 +6,14 @@
     background-color: variables.$primaryColor;
     color: white;
     padding: 10px 20px;
+    z-index: 300;
+    pointer-events: auto;
 
     /* STYLE */
     @include variables.sm {
         @include variables.setBorderNoColor(10px, 2px, solid);
         height: 35px;
-        width: 200px;
+        width: 170px;
     }
 
     @include variables.md {
@@ -24,12 +26,22 @@
 
     }
 
+    /* TYPOGRAPHY */
+    @include variables.sm {
+        @include variables.setTypography(12px, normal, 500, normal);
+    }
+    @include variables.md {
+        @include variables.setTypography(11px, normal, 500, normal);
+    }
+
 }
 
 .button_two_container {
     /* LAYOUT */
     @include variables.setLayout(flex, space-between, center);
     position: relative;
+    z-index: 300;
+    pointer-events: auto;
 
     /* STYLE */
     @include variables.sm {

@@ -7,25 +7,27 @@ import { useContext } from "react";
 /* VIDEOS */
 
 
-const VideoThree = ({
+const VideoFive = ({
     layoutName,
     zIndex
 })=>{
 
     const deviceOS = useContext(DeviceContext);
+
+  
     return(<><VideoDemo   
       posterSrc={
         deviceOS === "Other"
-          ? 'videos/product/gaming_chair.jpg'
-          : ""
+          ? "videos/product/Tulfa - 3D Modeling _ CGI Walkthrough_compressed.jpg"
+          : ''
       }
       layoutName={layoutName}
       zIndex={zIndex}
       videoSourceRef={
         deviceOS === "Other"
-          ? "videos/product/gaming_chair.mp4"
+          ? "videos/product/Tulfa - 3D Modeling _ CGI Walkthrough_compressed.mp4"
           : ""
       }/></>)
 }
 
-export default VideoThree;
+export default VideoFive;

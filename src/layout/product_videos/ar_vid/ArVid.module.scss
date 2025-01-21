@@ -1,0 +1,129 @@
+@use '@/styles/shared/variables';
+
+.ar_container {
+    
+    background-color: #F5F5F7;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include variables.xs {
+        width: calc(100vw -  40px);
+        height: calc(160vh -  180px);
+        padding: 50px 20px;
+    }
+
+    @include variables.md {
+        padding: 30px;
+        width: calc(100vw -  180px);
+        height: calc(100vh -  180px);
+        @media  (orientation: portrait){
+            padding: 50px
+        }
+    }
+    @include variables.lg {
+        width: calc(100vw -  200px);
+    height: calc(100vh -  200px);
+        padding: 50px;
+    }
+
+    .ar_container_inner {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        @include variables.xs {
+            width: 100%;
+            flex-direction: column;
+        }
+
+        @include variables.md {
+            width: 100%;
+            flex-direction: row;
+            @media (orientation: portrait){
+                flex-direction: column;
+            }
+        }
+
+        .ar_written_container {
+            flex: 35%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+
+            @include variables.md {
+                flex: 50%;
+                @media (orientation: portrait){
+                    padding: 0 0px;
+                    align-items: flex-start;
+                }
+            }
+            @include variables.lg {
+                flex:35%
+            }
+
+            .written_content {
+                margin-bottom: 10px;
+                
+                color: variables.$primaryColor;
+                @include variables.xs {
+                    @include variables.setTypography(16px, normal, 400, normal);
+                    text-align: justify;
+                    max-width: 100%;
+                }
+                @include variables.md {
+                    @include variables.setTypography(14px, normal, 400, normal);
+                    max-width: 500px;
+                    text-align: unset;
+                    max-width: 85%;
+                }
+                @include variables.lg {
+                    @include variables.setTypography(16px, normal, 400, normal)
+                }
+            }
+
+            .heading {
+                @include variables.xs {
+                    @include variables.setTypography(32px, normal, 500, normal)
+                }
+                @include variables.md {
+                    @include variables.setTypography(30px, normal, 500, normal)
+                }
+                @include variables.lg {
+                    @include variables.setTypography(32px, normal, 500, normal)
+                }
+            }
+
+            .heading_container {
+                background-color: transparent;
+                height: max-content;
+                align-items: flex-start;
+            }
+            
+
+           
+        }
+
+        .ar_graphic_container {
+            flex: 65%;
+            height: calc(100vh - 200px);
+        }
+
+    }
+}
+
+.button_container {
+    @include variables.xs {
+        display: flex;
+        justify-content: center;
+    }
+    @include variables.md {
+        display: unset;
+        justify-content: unset;
+    }
+}
+
+

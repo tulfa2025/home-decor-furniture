@@ -7,21 +7,12 @@ import layoutCollection from "@/layout/home/layout_collection_product_images";
 import PageTemplate from "@/components/page_template/PageTemplate";
 
 import DeviceContext from "@/context/deviceContext";
-import getDeviceType from "@/utils/getDeviceContext";
-import { useState, useEffect } from "react";
 
 export default function Home() {
-  /* DEVICE CONTEXT */
-  const [deviceType, setDeviceType] = useState("");
 
-  useEffect(() => {
-    if (window) {
-      setDeviceType(getDeviceType());
-    }
-  }, []);
   return (
     <Suspense>
-      <DeviceContext.Provider value={deviceType}>
+
         <PageTemplate layoutCollection={layoutCollection} activePagePath="/">
           {/* ALL PAGES */}
           {layoutCollection.order.map((compName) => {
@@ -52,7 +43,6 @@ export default function Home() {
             );
           })}
         </PageTemplate>
-      </DeviceContext.Provider>
     </Suspense>
   );
 }

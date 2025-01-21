@@ -1,12 +1,15 @@
 "use client";
 import { motion } from "framer-motion";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
+import getDeviceType from "@/utils/getDeviceContext";
 
 /* CUSTOM COMPONENTS */
 import layoutCollection from "@/layout/product_videos/layout_collection_product_videos";
 import PageTemplate from "@/components/page_template/PageTemplate";
 
 export default function ProductVideos() {
+
+   
 
 
     return (
@@ -34,6 +37,7 @@ export default function ProductVideos() {
                     height: "max-content",
                     minWidth: "100vw",
                     backgroundColor: "transparent",
+                    pointerEvents: 'none'
                   }}
                 >
                   <NextComp layoutName={compName} zIndex={compLength - compName} />

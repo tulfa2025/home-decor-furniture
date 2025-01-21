@@ -64,6 +64,9 @@
 
 .blog_card_container {
     height: clamp(300px, 75%, 350px);
+    z-index: 300;
+    pointer-events: auto;
+    position: relative;
 
     @include variables.md{
         width: 300px

@@ -13,6 +13,14 @@ import useWindowSize from "@/hooks/use_window_size";
 import useInView from "@/hooks/use_inview";
 import calculateScrollHeight from "@/utils/calculate_scrollheight";
 
+import DeviceContext from "@/context/deviceContext";
+import { useContext } from "react";
+
+/* VIDEOS */
+
+let installationVidRef = "";
+let posterSrc = "";
+
 const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Get scroll height
   const viewportSize = useWindowSize();
@@ -48,7 +56,15 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   /* WHOLE PAGE TRANSLATOIN */
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
-    [0, yPosition + scrollHeight * 0.5, yPosition + scrollHeight],
+    [
+      0,
+      viewportSize.width >= 768
+        ? yPosition + scrollHeight * 0.5
+        : yPosition + scrollHeight * 0.5,
+      viewportSize.width >= 768
+        ? yPosition + scrollHeight * 1.5
+        : yPosition + scrollHeight * 1.2,
+    ],
     [0, 0, -viewportSize.height * 2.4]
   );
 
@@ -59,6 +75,9 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       stiffness: 150,
     }
   );
+
+  const deviceOS = useContext(DeviceContext);
+
   return (
     <motion.div
       style={{
@@ -89,19 +108,31 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             </div>
 
             <motion.div>
-              <VideoPlayer
-                src="/videos/product/Kitchen-3D-Rendering_compressed.mp4"
-                type="video/mp4"
-                loop={true}
-                styleOverride={{
-                  zIndex: 0,
-                  position: "absolute",
-                  opacity: 0.7,
-                }}
-                isInView={viewportSize.width > 768 ? isInView : false}
-                autoplay={false}
-                poster="/videos/product/Kitchen-3D-Rendering_compressed.jpg"
-              ></VideoPlayer>
+              {deviceOS ? (
+                <VideoPlayer
+                  src={
+                    deviceOS === "Other"
+                      ? "/videos/product/Kitchen-3D-Rendering_compressed.mp4"
+                      : '"videos/product/Mobile/Kitchin_scene_vertical_view_compressed.mp4"'
+                  }
+                  type="video/mp4"
+                  loop={true}
+                  styleOverride={{
+                    zIndex: 0,
+                    position: "absolute",
+                    opacity: 0.7,
+                  }}
+                  isInView={isInView}
+                  autoplay={true}
+                  poster={
+                    deviceOS === "Other"
+                      ? "videos/product/Kitchen-3D-Rendering_compressed.jpg"
+                      : '"videos/product/Mobile/Kitchin_scene_vertical_view_compressed.mp4"'
+                  }
+                ></VideoPlayer>
+              ) : (
+                <></>
+              )}
             </motion.div>
           </motion.div>
 

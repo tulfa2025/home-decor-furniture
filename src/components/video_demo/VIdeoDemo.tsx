@@ -11,8 +11,9 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 /* CONTEXT */
 import SlideContext from "@/context/changeSlide";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
+
+
 import CallOut from "../call_out/CallOut";
-import TulfaCloseButton from "@/assets/icons/tulfa_close_button";
 import Button from "../button/Button";
 
 const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
@@ -20,6 +21,8 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
   // Get scroll height
   const viewportSize = useWindowSize();
+
+
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
@@ -63,8 +66,12 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
   /* CONTENT ANIMATIONS */
   const videoContainerScale = useTransform(
     scrollY,
-    [0, yPosition + scrollHeight * 0.3, yPosition + scrollHeight * 0.35],
-    [1.05, 1.05, 0.9]
+    [0, yPosition + scrollHeight * 0.5, yPosition + scrollHeight * 0.55],
+    [
+      viewportSize.width >= 768 ? 1.05 : 1.02, 
+      viewportSize.width >= 768 ? 1.05 : 1.02, 
+      viewportSize.width >= 768 ? 0.9 : 1.02
+    ]
   );
 
   const springyVideoContainerScale = useSpring(videoContainerScale, {
@@ -77,20 +84,20 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
     scrollY,
     [
       0,
-      yPosition - scrollHeight * 0.25,
-      yPosition + scrollHeight * 0.1,
-      yPosition + scrollHeight * 0.65,
-      yPosition + scrollHeight * 0.7,
+      viewportSize.width >= 768 ? yPosition - scrollHeight * 0.50 : yPosition - scrollHeight * 0.50 ,
+      yPosition,
+      viewportSize.width >=  768 ? yPosition + scrollHeight * 0.7 :yPosition + scrollHeight * 0.45,
+      viewportSize.width >=  768 ? yPosition + scrollHeight * 0.75 :yPosition + scrollHeight * 0.55 ,
       yPosition + scrollHeight * 0.85,
       yPosition + scrollHeight,
     ],
     [
-      viewportSize.height * 1.2,
-      viewportSize.height * 1.2,
+      viewportSize.height * 2.5,
+      viewportSize.height * 2.5,
       0,
       0,
-      -viewportSize.height * 0.5,
-      -viewportSize.height * 0.5,
+      viewportSize.width >=  768 ?-viewportSize.height * 0.5 : -viewportSize.height * 0.6,
+      viewportSize.width >=  768 ? -viewportSize.height * 0.5 : -viewportSize.height * 0.6,
       -viewportSize.height * 2.4,
     ]
   );
@@ -138,7 +145,7 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
               type="video/mp4"
               altText=""
               onVideoComplete={() => {}}
-              loop={false}
+              loop={true}
               styleOverride={{
                 width: "100vw",
               }}
@@ -154,6 +161,7 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
                 calloutStyleType={1}
                 heading="Lorem ipsum dolor sit amet"
                 overrideHeaderStyle={styles.heading}
+                overrideStyles={styles.header_container}
               />
             </div>
 

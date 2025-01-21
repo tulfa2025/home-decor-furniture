@@ -7,25 +7,27 @@ import { useContext } from "react";
 /* VIDEOS */
 
 
-const VideoThree = ({
+const VideoFour = ({
     layoutName,
     zIndex
 })=>{
 
     const deviceOS = useContext(DeviceContext);
+
+  
     return(<><VideoDemo   
       posterSrc={
         deviceOS === "Other"
-          ? 'videos/product/gaming_chair.jpg'
-          : ""
+          ? "videos/product/CHANDELIER-PROCESS-web-1_compressed.jpg"
+          : ''
       }
       layoutName={layoutName}
       zIndex={zIndex}
       videoSourceRef={
         deviceOS === "Other"
-          ? "videos/product/gaming_chair.mp4"
+          ? "videos/product/CHANDELIER-PROCESS-web-1_compressed.mp4"
           : ""
       }/></>)
 }
 
-export default VideoThree;
+export default VideoFour;

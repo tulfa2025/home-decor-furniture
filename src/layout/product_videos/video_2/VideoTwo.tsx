@@ -1,20 +1,29 @@
 "use client";
 import VideoDemo from "@/components/video_demo/VIdeoDemo";
 
-/* VIDEOS */
-const installationVidRef = 'videos/product/Sofa exploded with lifestyle_compressed.mp4'
+import DeviceContext from "@/context/deviceContext";
+import { useContext } from "react";
 
-const VideoTwo = ({
-    layoutName,
-    zIndex
-}) => {
+/* VIDEOS */
+
+const VideoTwo = ({ layoutName, zIndex }) => {
+  const deviceOS = useContext(DeviceContext);
+
   return (
     <>
       <VideoDemo
-        posterSrc='videos/product/Sofa exploded with lifestyle_compressed.jpg'
+        posterSrc={
+          deviceOS === "Other"
+            ? "videos/product/Sofa exploded with lifestyle_compressed.jpg"
+            : "videos/product/Mobile/2nd_Sofa_veritical view_compressed.jpg"
+        }
         layoutName={layoutName}
         zIndex={zIndex}
-        videoSourceRef={installationVidRef}
+        videoSourceRef={
+          deviceOS === "Other"
+            ? "videos/product/Sofa exploded with lifestyle_compressed.mp4"
+            : "videos/product/Mobile/2nd_Sofa_veritical view_compressed.mp4"
+        }
       />
     </>
   );

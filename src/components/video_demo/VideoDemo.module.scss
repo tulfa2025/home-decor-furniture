@@ -9,23 +9,64 @@
 
 .written_content_container {
     position: relative;
-    height: clamp(150px, 50vh, 350px);
+    margin-top: 5vh;
     width: 100vw;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     background-color: white;
-    align-items: center;
+    align-items: flex-start;
 
-    @include variables.lg {
+    @include variables.xs {
+        padding: 0px 20px;
+        flex-direction: column;
+        height: max-content;
+        row-gap: 20px;
+    }
+
+
+    @include variables.md {
         padding: 0px 100px;
+        flex-direction: row;
+        height: clamp(150px, 50vh, 350px);
+        row-gap: unset;
     }
 
     .written_content_header_container{
         flex: 50%;
+        display: flex;
+        width: 100%;
+
+        @include variables.xs {
+            flex-direction: column;
+            align-items: center
+        }
+
+        @include variables.md {
+            flex-direction: row;
+            align-items: unset
+        }
 
         .heading {
+            display: flex;
+            justify-content: center;
+            width: 100%;
             @include variables.xs {
-                @include variables.setTypography(32px, normal, 500, normal)
+                @include variables.setTypography(30px, normal, 500, normal);
+                text-align: center
+            
+            }
+            @include variables.md {
+                text-align: unset;
+                @include variables.setTypography(30px, normal, 500, normal);
+                padding-right: 50px;
+                @media (orientation: portrait){
+                   
+                    @include variables.setTypography(24px, normal, 500, normal);
+                }
+            }
+            @include variables.lg {
+                @include variables.setTypography(32px, normal, 500, normal);
+                padding-left: 50px
             }
         }
     }
@@ -34,16 +75,47 @@
         flex: 50%;
         display:flex;
         flex-direction: column;
-        justify-content: center;
+        row-gap: 20px;
+        @include variables.xs {
+           align-items: center
+
+        }
+        @include variables.md {
+            align-items: flex-start
+
+        }
+        
         .written_content {
             margin-bottom: 10px;
-            max-width: 75%;
+            
+            
             color: variables.$primaryColor;
             @include variables.xs {
-                @include variables.setTypography(16px, normal, 400, normal)
+                @include variables.setTypography(20px, normal, 400, normal);
+                padding: 0px 0px;
+                width: 100%;
+                text-align: center;
+
+            }
+            @include variables.md {
+                @include variables.setTypography(15px, normal, 400, normal);
+                padding-right: 0px;
+                justify-content: center;
+                max-width: 85%;
+                text-align: unset;
+
+            }
+            @include variables.lg {
+                @include variables.setTypography(16px, normal, 400, normal);
+                padding-right: 50px
 
             }
         }
 
     }
+}
+
+.header_container {
+    height: max-content;
+    
 }

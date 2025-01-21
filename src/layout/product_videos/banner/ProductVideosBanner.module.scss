@@ -61,14 +61,32 @@
             flex-direction: column;
             justify-content: center;
 
+            @include variables.xs {
+                padding: 0 20px;
+            }
+
+            @include variables.md {
+                padding: 0 100px;
+
+                @media (orientation: portrait){
+                    padding: 0 50px;
+                }
+            }
+
+
             .callout_paragraph {
 
                 @include variables.xs {
                     @include variables.setTypography(24px, normal, 500, normal);
-                    max-width: 300px
+                    max-width: 928px
                 }
 
                 @include variables.md {
+                    @include variables.setTypography(30px, normal, 500, normal);
+                    max-width: 928px
+                }
+
+                @include variables.lg {
                     @include variables.setTypography(32px, normal, 500, normal);
                     max-width: 928px
                 }

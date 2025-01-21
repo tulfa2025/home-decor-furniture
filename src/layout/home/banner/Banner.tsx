@@ -9,6 +9,9 @@ import useWindowSize from "@/hooks/use_window_size";
 import calculateScrollHeight from "@/utils/calculate_scrollheight";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 
+import DeviceContext from "@/context/deviceContext";
+
+
 const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
   // Get scroll height
   const viewportSize = useWindowSize();
@@ -78,6 +81,8 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
     if(headerStyle !== 2)  setHeaderStyle(2)
   },[isInView])
 
+  const deviceOS = useContext(DeviceContext)
+
   // Trigger move to next slide programmatically??
   return (
     <motion.div
@@ -102,8 +107,17 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
       >
         <motion.section className={styles.banner_container} ref={inViewRef}>
           <VideoPlayer
-            src="/videos/banner/sofa_video_compressed.mp4"
-            poster='/videos/banner/sofa_video_compressed.jpg'
+            src={
+              deviceOS === "Other"
+                ?  "videos/banner/sofa_video_compressed.mp4"
+                : 'videos/product/Mobile/Sofa_veritical view_compressed.mp4'
+            }
+            poster={
+              deviceOS === "Other"
+                ?  "videos/banner/sofa_video_compressed.jpg"
+                : 'videos/product/Mobile/Sofa_veritical view_compressed.jpg'
+            
+            }
             type="video/mp4"
             altText=""
             loop={false}

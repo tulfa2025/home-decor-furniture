@@ -95,10 +95,10 @@
     left: 0;
 
     @include variables.xs {
-        padding: var(--item-spacing-10, 10px) 50px;
+        padding: var(--item-spacing-10, 10px) 20px;
     }
     @include variables.lg {
-        padding: var(--item-spacing-10, 10px) 100px;
+        padding: var(--item-spacing-10, 10px) 50px;
     }
 
     /* STYLE */
