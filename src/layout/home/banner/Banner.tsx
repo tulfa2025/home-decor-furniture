@@ -120,9 +120,9 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
             }
             type="video/mp4"
             altText=""
-            loop={false}
-            autoplay={false}
-            isInView={viewportSize.width > 768 ? isInView : false}
+            loop={true}
+            autoplay={true}
+            isInView={isInView}
             onVideoComplete={() => {}}
           />
         </motion.section>
