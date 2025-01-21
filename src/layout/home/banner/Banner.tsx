@@ -110,12 +110,12 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
             src={
               deviceOS === "Other"
                 ?  "videos/banner/sofa_video_compressed.mp4"
-                : 'videos/product/Mobile/Sofa_veritical view_compressed-mobile.mp4'
+                : 'videos/product/Mobile/Sofa_veritical view_compressed.mp4'
             }
             poster={
               deviceOS === "Other"
                 ?  "videos/banner/sofa_video_compressed.jpg"
-                : 'videos/product/Mobile/Sofa_veritical view_compressed.jpg'
+                : 'videos/product/Mobile/Sofa_veritical view_compressed-mobile.jpg'
             
             }
             type="video/mp4"
