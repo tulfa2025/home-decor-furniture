@@ -15,7 +15,7 @@ const VideoTwo = ({ layoutName, zIndex }) => {
         posterSrc={
           deviceOS === "Other"
             ? "videos/product/Sofa exploded with lifestyle_compressed.jpg"
-            : "videos/product/Mobile/2nd_Sofa_veritical view_compressed.jpg"
+            : "videos/product/Mobile/2nd_Sofa_veritical view_compressed-mobile.jpg"
         }
         layoutName={layoutName}
         zIndex={zIndex}

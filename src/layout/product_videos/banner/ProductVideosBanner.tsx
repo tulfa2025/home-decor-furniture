@@ -113,7 +113,7 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                   src={
                     deviceOS === "Other"
                       ? "/videos/product/Kitchen-3D-Rendering_compressed.mp4"
-                      : '"videos/product/Mobile/Kitchin_scene_vertical_view_compressed.mp4"'
+                      : "videos/product/Mobile/Kitchin_scene_vertical_view_compressed.mp4"
                   }
                   type="video/mp4"
                   loop={true}
@@ -127,7 +127,7 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                   poster={
                     deviceOS === "Other"
                       ? "videos/product/Kitchen-3D-Rendering_compressed.jpg"
-                      : '"videos/product/Mobile/Kitchin_scene_vertical_view_compressed.mp4"'
+                      : "videos/product/Mobile/Kitchin_scene_vertical_view_compressed-mobile.jpg"
                   }
                 ></VideoPlayer>
               ) : (

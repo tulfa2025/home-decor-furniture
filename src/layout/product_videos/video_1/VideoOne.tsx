@@ -28,7 +28,7 @@ const VideoOne = ({ layoutName, zIndex }) => {
       <VideoDemo
         posterSrc={ deviceOS === "Other"
           ? "videos/product/Dresser.jpg"
-          : "videos/product/Mobile/Dresser_installaton_vertical view_compressed.jpg"
+          : "videos/product/Mobile/Dresser_installaton_vertical view_compressed-mobile.jpg"
       }
         layoutName={layoutName}
         zIndex={zIndex}

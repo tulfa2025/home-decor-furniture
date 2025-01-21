@@ -23,12 +23,16 @@ for video in "$VIDEO_DIR"/*.{mp4,mkv,avi}; do
     filename=$(basename "$video")
     filename_noext="${filename%.*}"
 
-    # Output poster image file in the specified output directory
-    output_poster="$POSTER_DIR/$filename_noext.jpg"
+    # Output poster file names for desktop and mobile sizes
+    output_poster_desktop="$POSTER_DIR/$filename_noext-desktop.jpg"
+    output_poster_mobile="$POSTER_DIR/$filename_noext-mobile.jpg"
 
-    # Generate the poster (first frame of the video)
-    ffmpeg -i "$video" -vframes 1 -an -s 1280x720 -f image2 "$output_poster"
-    
-    echo "Generated poster for $video at $output_poster"
+    # Generate the desktop-sized poster (1280x720)
+    ffmpeg -i "$video" -vframes 1 -an -s 1280x720 -f image2 "$output_poster_desktop"
+    echo "Generated desktop-sized poster for $video at $output_poster_desktop"
+
+    # Generate the mobile-sized poster (720x1280)
+    ffmpeg -i "$video" -vframes 1 -an -s 720x1280 -f image2 "$output_poster_mobile"
+    echo "Generated mobile-sized poster for $video at $output_poster_mobile"
   fi
 done
