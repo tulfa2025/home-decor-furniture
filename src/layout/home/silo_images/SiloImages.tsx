@@ -109,7 +109,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       0,
       yPosition,
       yPosition + viewportSize.height,
-      yPosition + viewportSize.height + scrollHeight * 0.9,
+      yPosition + viewportSize.height + scrollHeight * 0.75,
       yPosition + viewportSize.height + scrollHeight,
     ],
     [
