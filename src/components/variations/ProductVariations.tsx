@@ -130,12 +130,12 @@ const ProductVariation = ({
     [
       0,
       yPosition,
-      viewportSize.width > 960
+      viewportSize.width >= 960
         ? yPosition + viewportSize.height
-        : yPosition + viewportSize.height / 3,
+        : yPosition + viewportSize.height/2 ,
       yPosition + viewportSize.height + scrollHeight * 0.1,
       yPosition + viewportSize.height + scrollHeight * 0.2,
-      viewportSize.width > 960
+      viewportSize.width >= 960
         ? yPosition + viewportSize.height + scrollHeight * 0.9
         : yPosition + viewportSize.height + scrollHeight * 0.69,
       yPosition + viewportSize.height + scrollHeight,
@@ -143,15 +143,15 @@ const ProductVariation = ({
     [
       viewportSize.height * 2.4,
       viewportSize.height * 2.4,
-      viewportSize.width > 960 ? 0 : 60,
-      viewportSize.width > 960 ? 0 : 60,
-      viewportSize.width > 960
+      viewportSize.width >= 960 ? 0 : 60,
+      viewportSize.width >= 960 ? 0 : 60,
+      viewportSize.width >= 960
         ? -viewportSize.height * 0.4
         : -viewportSize.height * 0.2,
-      viewportSize.width > 960
+      viewportSize.width >= 960
         ? -viewportSize.height * 0.4
         : -viewportSize.height * 0.2,
-      viewportSize.width > 960
+      viewportSize.width >= 960
         ? -viewportSize.height * 2.4
         : -viewportSize.height * 2,
     ]
