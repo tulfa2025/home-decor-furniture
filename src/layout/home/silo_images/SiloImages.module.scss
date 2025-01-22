@@ -124,24 +124,29 @@
             background-color: transparent;
     
             @include variables.sm {
-                height: 100vh;
-                max-width: 100vw;
-                top: 12vh;
+                height: 100%;
+                width: 100%;
+                max-height: 500px;
+                min-height: 400px;
+                top: 15vh;
                 right: -1vw
                
             }
             @include variables.md {
-                height: 100vh;
-                width: 100vw;
-                right: -15vw;
+                height: 90%;
+                width: 90%;
+                min-height: 600px;
+                max-height: 700px;
+                right: -10vw;
                 top: clamp(10px, 3vh, 50px)
             }
             @include variables.lg {
-                
                 @media (orientation: landscape){
-                    width: 90vw;
-                    right:-9vw;
-                    top: 2vh;
+                    width: 100%;
+                    height: 100%;
+                    right:-10vw;
+                    top: 5vh;
+                    max-height: 850px
                 }
 
                 @media (orientation: portrait){
@@ -150,10 +155,11 @@
             };
             @include variables.xl {
                 @media (orientation: landscape){
-                    width: 130vw;
-                    right:-2vw;
-                    top: 5vh;
-                    height: 100vh;
+                    width: 110%;
+                    right: 2vw;
+                    top: 0vh;
+                    height: 110%;
+                    max-height: 1000px
                 }
               
             };
@@ -164,14 +170,14 @@
                 background-color: transparent;
 
                 @include variables.sm {
-                    object-position:82% 50%;
-                    height: clamp(300px, 85%, 500px);
-                    width: 100vw;
+                    object-position:50% 50%;
+                    height: 100%;
+                    width: 100%;
                 }
 
                 @include variables.md {
-                    object-position:86% 50%;
-                    height: clamp(300px, 85%, 800px);
+                    object-position:50% 50%;
+                    height:100%;
                     width: 100%;
                                  
                 }
