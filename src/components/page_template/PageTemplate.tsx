@@ -89,8 +89,17 @@ const PageTemplate = ({ children, layoutCollection, activePagePath }) => {
     if (window) {
      
       setDeviceType(getDeviceType());
+
+      
     }
   }, []);
+
+  // Set any loading  spinner to norma
+  useEffect(()=>{
+    if(document){
+      document.body.style.cursor = 'unset'
+    }
+  }, [])
 
   return (
     <DeviceContext.Provider value={deviceType}>
