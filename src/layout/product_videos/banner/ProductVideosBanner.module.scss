@@ -24,12 +24,13 @@
             justify-items: center;
 
             @include variables.sm {
-                bottom: 15vh;
-                left: 5%;
+                bottom: 30px;
+                left: 0;
             }
 
 
             @include variables.md {
+                bottom: 15vh;
                 left: 0
             }
 
@@ -53,6 +54,13 @@
         justify-content: center;
         background-color: white;
         align-items: center;
+
+        @include variables.xs {
+            height: 25vh;
+        }
+        @include variables.md {
+            height: clamp(150px, 50vh, 350px);
+        }
 
         .callout_container_inner {
             width: 100%;

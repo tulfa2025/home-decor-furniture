@@ -19,14 +19,14 @@ const VideoFour = ({
       posterSrc={
         deviceOS === "Other"
           ? "videos/product/CHANDELIER-PROCESS-web-1_compressed.jpg"
-          : ''
+          : 'videos/product/Mobile/Dinning Tabel_Vertical version_compressed-mobile.jpg'
       }
       layoutName={layoutName}
       zIndex={zIndex}
       videoSourceRef={
         deviceOS === "Other"
           ? "videos/product/CHANDELIER-PROCESS-web-1_compressed.mp4"
-          : ""
+          : "videos/product/Mobile/Dinning Tabel_Vertical version_compressed.mp4"
       }/></>)
 }
 

@@ -7,6 +7,14 @@
     width: 50%;
     height: 100%;
 
+    @include variables.sm {
+        width: 100%;
+    }
+
+    @include variables.md {
+        width: 50%;
+    }
+
     .showcase_heading {
         /* LAYOUT */
         width: 100%;
@@ -21,8 +29,8 @@
         /* TYPOGRAPHY */
 
         @include variables.sm {
-            @include variables.setTypography(48px, normal, 600, normal);
-            margin-left: 50px;
+            @include variables.setTypography(46px, normal, 600, normal);
+            margin-left: 7px;
         }
 
         @include variables.md {

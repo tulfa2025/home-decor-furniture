@@ -8,6 +8,7 @@ import {
   TulfaRightArrow,
   TulfaLeftArrow,
 } from "@/assets/icons/tulfa_nav_arrows";
+import toggleSpinner from "@/utils/toggle_spinner";
 // import ImagePreloader from "@/components/image_preloader/ImagePreloader";
 
 const FullScreenCarousel = ({ fullscreenIndex, imageSet, handleFullscreenToggle, appliedFilter }) => {
@@ -67,9 +68,7 @@ const FullScreenCarousel = ({ fullscreenIndex, imageSet, handleFullscreenToggle,
           quality={60}
           placeholder="blur"
           blurDataURL={memoizedImageSet[currentImageIndex][1]}
-          onLoad={()=>{
-            document.body.style.cursor = 'unset'
-          }}
+          onLoad={()=>{toggleSpinner(null)}}
         />
         <CloseButton handleFullscreenToggle={handleFullscreenToggle} />
         <motion.div
@@ -88,8 +87,8 @@ const FullScreenCarousel = ({ fullscreenIndex, imageSet, handleFullscreenToggle,
             height={40}
             width={40}
             className=""
-            onClick={() => {
-              document.body.style.cursor = 'wait'
+            onClick={(e) => {
+              toggleSpinner(e)
               handleSetCurrentIndex(-1);
             }}
           />
@@ -97,8 +96,8 @@ const FullScreenCarousel = ({ fullscreenIndex, imageSet, handleFullscreenToggle,
             height={40}
             width={40}
             className=""
-            onClick={() => {
-              document.body.style.cursor = 'wait'
+            onClick={(e) => {
+              toggleSpinner(e)
               handleSetCurrentIndex(1);
             }}
           />

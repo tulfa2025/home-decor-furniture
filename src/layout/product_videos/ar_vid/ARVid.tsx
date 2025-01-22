@@ -66,8 +66,8 @@ const ARVid = ({ zIndex = 0, layoutName }) => {
     scrollY,
     [
       0,
-      viewportSize.width >= 768 ? yPosition - scrollHeight * 0.5 : yPosition - scrollHeight * 0.25,
-      yPosition + scrollHeight * 0.1,
+      viewportSize.width >= 768 ? yPosition - scrollHeight * 0.5 : yPosition - scrollHeight * 0.5,
+      viewportSize.width >= 768 ? yPosition + scrollHeight * 0.1 : yPosition - scrollHeight * 0.17 ,
       yPosition + scrollHeight * 0.65,
       yPosition + scrollHeight * 0.7,
       viewportSize.width >= 768 ?  yPosition + scrollHeight * 0.85 : yPosition + scrollHeight,

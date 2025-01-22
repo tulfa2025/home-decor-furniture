@@ -47,3 +47,4 @@ logs/*
 
 # media 
 /public/images
+assets_to_convert/

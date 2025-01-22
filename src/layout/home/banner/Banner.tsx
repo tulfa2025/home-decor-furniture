@@ -80,6 +80,20 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
 
   const deviceOS = useContext(DeviceContext);
 
+
+  /* HIDE MENU BUTTON */
+  useEffect(()=>{
+
+    if(isInView){
+      const menu  = document.getElementById('menu')
+
+      menu.style.visibility = 'hidden'
+    } else {
+      const menu  = document.getElementById('menu');
+      menu.style.visibility = 'unset'
+    }
+  }, [isInView])
+
   // Trigger move to next slide programmatically??
   return (
     <motion.div

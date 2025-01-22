@@ -4,6 +4,7 @@ import { useScroll, useTransform, useSpring, motion } from "motion/react";
 import styles from "./VideoDemo.module.scss";
 /* CUSTOM COMPONENTS */
 import VideoPlayer from "../video/VideoPlayer";
+import TulfaPlayButton from "@/assets/icons/tulfa_play_button";
 /* CUSTOM HOOKS */
 import useWindowSize from "@/hooks/use_window_size";
 import useInView from "@/hooks/use_inview";
@@ -11,18 +12,22 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 /* CONTEXT */
 import SlideContext from "@/context/changeSlide";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
-
+import DeviceContext from "@/context/deviceContext";
 
 import CallOut from "../call_out/CallOut";
 import Button from "../button/Button";
 
-const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
+const VideoDemo = ({ 
+  zIndex = 0, 
+  layoutName, 
+  videoSourceRef, 
+  posterSrc,
+  videoId = 1041177363
+}) => {
   // Subheadr scroll
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
   // Get scroll height
   const viewportSize = useWindowSize();
-
-
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
@@ -68,9 +73,9 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
     scrollY,
     [0, yPosition + scrollHeight * 0.5, yPosition + scrollHeight * 0.55],
     [
-      viewportSize.width >= 768 ? 1.05 : 1.02, 
-      viewportSize.width >= 768 ? 1.05 : 1.02, 
-      viewportSize.width >= 768 ? 0.9 : 1.02
+      viewportSize.width >= 768 ? 1.05 : 1.02,
+      viewportSize.width >= 768 ? 1.05 : 1.02,
+      viewportSize.width >= 768 ? 0.9 : 1.02,
     ]
   );
 
@@ -84,11 +89,19 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
     scrollY,
     [
       0,
-      viewportSize.width >= 768 ? yPosition - scrollHeight * 0.50 : yPosition - scrollHeight * 0.50 ,
-      yPosition,
-      viewportSize.width >=  768 ? yPosition + scrollHeight * 0.7 :yPosition + scrollHeight * 0.45,
-      viewportSize.width >=  768 ? yPosition + scrollHeight * 0.75 :yPosition + scrollHeight * 0.55 ,
-      yPosition + scrollHeight * 0.85,
+      viewportSize.width >= 768
+        ? yPosition - scrollHeight * 0.5
+        : yPosition - scrollHeight * 0.5,
+      viewportSize.width >= 768 ? yPosition : yPosition - scrollHeight * 0.17,
+      viewportSize.width >= 768
+        ? yPosition + scrollHeight * 0.7
+        : yPosition + scrollHeight * 0.45,
+      viewportSize.width >= 768
+        ? yPosition + scrollHeight * 0.75
+        : yPosition + scrollHeight * 0.55,
+      viewportSize.width >= 768
+        ? yPosition + scrollHeight * 0.85
+        : yPosition + scrollHeight * 0.75,
       yPosition + scrollHeight,
     ],
     [
@@ -96,8 +109,12 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
       viewportSize.height * 2.5,
       0,
       0,
-      viewportSize.width >=  768 ?-viewportSize.height * 0.5 : -viewportSize.height * 0.6,
-      viewportSize.width >=  768 ? -viewportSize.height * 0.5 : -viewportSize.height * 0.6,
+      viewportSize.width >= 768
+        ? -viewportSize.height * 0.5
+        : -viewportSize.height * 0.6,
+      viewportSize.width >= 768
+        ? -viewportSize.height * 0.5
+        : -viewportSize.height * 0.6,
       -viewportSize.height * 2.4,
     ]
   );
@@ -109,6 +126,8 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
       stiffness: 125,
     }
   );
+
+  const deviceOS = useContext(DeviceContext);
 
   return (
     <>
@@ -153,6 +172,17 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
               autoplay={false}
               poster={posterSrc}
             />
+
+            {/* PLAY BUTTON ON MOBIL */}
+            <div
+              className={styles.play_container}
+            >
+            {deviceOS !== "Other" ? (
+              <TulfaPlayButton height={40} width={40} videoId={videoId}/>
+            ) : (
+              <></>
+            )}
+            </div>
           </motion.div>
           {/* VIDEO WRITTEN CONTENT GOES HERE */}
           <div className={styles.written_content_container}>
@@ -167,12 +197,12 @@ const VideoDemo = ({ zIndex = 0, layoutName, videoSourceRef, posterSrc }) => {
 
             <div className={styles.written_content_text_container}>
               <p className={styles.written_content}>
-              Lorem ipsum dolor sit amet consectetur. Nibh pulvinar ut quis sollicitudin etiam cursus tortor lorem. Lorem nunc facilisis tristique amet. Elementum laoreet aenean quam phasellus imperdiet. 
+                Lorem ipsum dolor sit amet consectetur. Nibh pulvinar ut quis
+                sollicitudin etiam cursus tortor lorem. Lorem nunc facilisis
+                tristique amet. Elementum laoreet aenean quam phasellus
+                imperdiet.
               </p>
-              <Button
-                text='See More About It'
-                buttonType={3}
-              />
+              <Button text="See More About It" buttonType={3} />
             </div>
           </div>
         </motion.div>

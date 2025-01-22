@@ -19,6 +19,7 @@ import SubheaderActiveContext from "@/context/subHeader";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 import SlideContext from "@/context/changeSlide";
 import DeviceContext from '@/context/deviceContext';
+import toggleSpinner from '@/utils/toggle_spinner';
 
 const PageTemplate = ({ children, layoutCollection, activePagePath }) => {
   /* HEADER STYLE */
@@ -97,7 +98,7 @@ const PageTemplate = ({ children, layoutCollection, activePagePath }) => {
   // Set any loading  spinner to norma
   useEffect(()=>{
     if(document){
-      document.body.style.cursor = 'unset'
+      toggleSpinner(null)
     }
   }, [])
 

@@ -6,26 +6,27 @@ import { useContext } from "react";
 
 /* VIDEOS */
 
-const VideoThree = ({ layoutName, zIndex }) => {
+const VideoSeven = ({ layoutName, zIndex }) => {
   const deviceOS = useContext(DeviceContext);
+
   return (
     <>
       <VideoDemo
         posterSrc={
           deviceOS === "Other"
-            ? "videos/product/gaming_chair.jpg"
-            : "videos/product/Mobile/Chair_Vertical_version_compressed-mobile.jpg"
+            ? "videos/product/Scene_2_compressed-desktop.jpg"
+            : ""
         }
         layoutName={layoutName}
         zIndex={zIndex}
         videoSourceRef={
           deviceOS === "Other"
-            ? "videos/product/gaming_chair.mp4"
-            : "videos/product/Mobile/Chair_Vertical_version_compressed.mp4"
+            ? "videos/product/Scene_2_compressed.mp4"
+            : ""
         }
       />
     </>
   );
 };
 
-export default VideoThree;
+export default VideoSeven;

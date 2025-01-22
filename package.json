@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "posters": "./generate_posters.sh ./assets_to_convert ./assets_to_convert",
+    "compress": "./compress_mp4.sh ./assets_to_convert"
   },
   "dependencies": {
     "autoprefixer": "^10.4.20",

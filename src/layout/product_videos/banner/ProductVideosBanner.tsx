@@ -78,6 +78,18 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const deviceOS = useContext(DeviceContext);
 
+  useEffect(()=>{
+
+    if(isInView){
+      const menu  = document.getElementById('menu')
+
+      menu.style.visibility = 'hidden'
+    } else {
+      const menu  = document.getElementById('menu');
+      menu.style.visibility = 'unset'
+    }
+  }, [isInView])
+
   return (
     <motion.div
       style={{

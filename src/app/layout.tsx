@@ -17,6 +17,7 @@ export default function RootLayout({
       <body>
         {/*  */}
         {children}
+        <div id='cursor'></div>
       </body>
     </html>
   );
