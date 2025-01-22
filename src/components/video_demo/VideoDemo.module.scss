@@ -1,10 +1,19 @@
 @use '@/styles/shared/variables';
 
 .video_player_container {
-    height: 100vh;
+    height: 80vh;
     width: 100vw;
     overflow: hidden;
-    border-radius: 15px
+
+    @include variables.xs {
+        border-radius: 0
+    }
+
+    @include variables.md {
+        height: 100vh;
+        border-radius: 15px
+    }
+    
 }
 
 .written_content_container {

@@ -1,6 +1,12 @@
 "use client";
 import styles from "./Banner.module.scss";
-import { motion, useSpring, useTransform, useScroll, useMotionValueEvent } from "framer-motion";
+import {
+  motion,
+  useSpring,
+  useTransform,
+  useScroll,
+  useMotionValueEvent,
+} from "framer-motion";
 import VideoPlayer from "@/components/video/VideoPlayer";
 // import CtaPrimary from "@/layout/cta_primary/CtaPrimary";
 import { useRef, useEffect, useState, useContext } from "react";
@@ -10,7 +16,6 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 
 import DeviceContext from "@/context/deviceContext";
-
 
 const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
   // Get scroll height
@@ -47,41 +52,33 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
   /* WHOLE PAGE TRANSLATOIN */
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
-    [
-      0,
-      scrollHeight
-    ],
-    [
-      0,
-      -viewportSize.height * 1.2,
-    ]
+    [0, scrollHeight],
+    [0, -viewportSize.height * 1.2]
   );
 
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
     {
       damping: 40,
-      stiffness: 150
+      stiffness: 150,
     }
   );
 
-  const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext)
+  const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
 
   /* SET HEADER STYLE AT DIFFERNT INTERVALS */
-  useMotionValueEvent(scrollY, 'change', (v)=>{
-    if(isInView){
-      
-      if(headerStyle !== 2) setHeaderStyle(2)
-      
+  useMotionValueEvent(scrollY, "change", (v) => {
+    if (isInView) {
+      if (headerStyle !== 2) setHeaderStyle(2);
     }
-  })
+  });
 
-  useEffect(()=>{
-    if(!isInView) return
-    if(headerStyle !== 2)  setHeaderStyle(2)
-  },[isInView])
+  useEffect(() => {
+    if (!isInView) return;
+    if (headerStyle !== 2) setHeaderStyle(2);
+  }, [isInView]);
 
-  const deviceOS = useContext(DeviceContext)
+  const deviceOS = useContext(DeviceContext);
 
   // Trigger move to next slide programmatically??
   return (
@@ -91,7 +88,7 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
         position: "relative",
         top: 0,
         overflow: "auto",
-        zIndex: zIndex
+        zIndex: zIndex,
       }}
       ref={scrollTargetRef}
     >
@@ -106,25 +103,28 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
         ref={inViewRef}
       >
         <motion.section className={styles.banner_container} ref={inViewRef}>
-          <VideoPlayer
-            src={
-              deviceOS === "Other"
-                ?  "videos/banner/sofa_video_compressed.mp4"
-                : 'videos/product/Mobile/Sofa_veritical view_compressed.mp4'
-            }
-            poster={
-              deviceOS === "Other"
-                ?  "videos/banner/sofa_video_compressed.jpg"
-                : 'videos/product/Mobile/Sofa_veritical view_compressed-mobile.jpg'
-            
-            }
-            type="video/mp4"
-            altText=""
-            loop={true}
-            autoplay={true}
-            isInView={isInView}
-            onVideoComplete={() => {}}
-          />
+          {deviceOS ? (
+            <VideoPlayer
+              src={
+                deviceOS === "Other"
+                  ? "videos/banner/sofa_video_compressed.mp4"
+                  : "videos/product/Mobile/Sofa_veritical view_compressed.mp4"
+              }
+              poster={
+                deviceOS === "Other"
+                  ? "videos/banner/sofa_video_compressed.jpg"
+                  : "videos/product/Mobile/Sofa_veritical view_compressed-mobile.jpg"
+              }
+              type="video/mp4"
+              altText=""
+              loop={true}
+              autoplay={true}
+              isInView={isInView}
+              onVideoComplete={() => {}}
+            />
+          ) : (
+            <></>
+          )}
         </motion.section>
       </motion.div>
     </motion.div>

@@ -135,13 +135,6 @@ const ARVid = ({ zIndex = 0, layoutName }) => {
                  Lorem ipsum dolor sit amet consectetur. Nibh pulvinar ut quis sollicitudin etiam cursus tortor lorem. Lorem nunc facilisis tristique amet. Elementum laoreet aenean quam phasellus imperdiet. Bibendum faucibus id elementum risus. Pretium nunc accumsan fringilla nibh vitae feugiat mattis nunc viverra. Lorem fringilla turpis risus mauris faucibus.
                  Integer senectus congue nullam est. Dictum.
                 </p>
-                <div
-                  className={styles.button_container}
-                >
-                  <Button 
-                    text="Take a closer look" 
-                    buttonType={3} />
-                </div>
               </div>
 
               {/* GRAPHICAL CONTENT */}
