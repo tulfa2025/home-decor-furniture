@@ -43,12 +43,14 @@
 .subheader_nav_activated_1 {
     /* TYPOGRAPHY */
     color: variables.$primaryColor;
+    @include variables.setTypography(12px, normal, 600, normal);
 }
 
 .subheader_nav_disabled_1 {
     /* TYPOGRAPHY */
     color: variables.$subHeaderTextDisabledOne;
     text-align: center;
+    @include variables.setTypography(12px, normal, 400, normal);
 }
 
 .subheader_nav_activated_2 {

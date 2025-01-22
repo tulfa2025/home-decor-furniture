@@ -8,7 +8,7 @@ import {
   TulfaRightArrow,
   TulfaLeftArrow,
 } from "@/assets/icons/tulfa_nav_arrows";
-import ImagePreloader from "@/components/image_preloader/ImagePreloader";
+// import ImagePreloader from "@/components/image_preloader/ImagePreloader";
 
 const FullScreenCarousel = ({ fullscreenIndex, imageSet, handleFullscreenToggle, appliedFilter }) => {
     const [currentImageIndex, setImageIndex] = useState(fullscreenIndex);
@@ -56,9 +56,10 @@ const FullScreenCarousel = ({ fullscreenIndex, imageSet, handleFullscreenToggle,
       }
     }, [imageSet, appliedFilter]);
 
+
     return (
       <div className={styles.fullscreen_container}>
-        <ImagePreloader imageSet={memoizedImageSet}/>
+        {/* <ImagePreloader imageSet={memoizedImageSet}/> */}
         <Image
           className={styles.fullscreen_image}
           alt=""
@@ -66,6 +67,9 @@ const FullScreenCarousel = ({ fullscreenIndex, imageSet, handleFullscreenToggle,
           quality={60}
           placeholder="blur"
           blurDataURL={memoizedImageSet[currentImageIndex][1]}
+          onLoad={()=>{
+            document.body.style.cursor = 'unset'
+          }}
         />
         <CloseButton handleFullscreenToggle={handleFullscreenToggle} />
         <motion.div
@@ -85,6 +89,7 @@ const FullScreenCarousel = ({ fullscreenIndex, imageSet, handleFullscreenToggle,
             width={40}
             className=""
             onClick={() => {
+              document.body.style.cursor = 'wait'
               handleSetCurrentIndex(-1);
             }}
           />
@@ -93,6 +98,7 @@ const FullScreenCarousel = ({ fullscreenIndex, imageSet, handleFullscreenToggle,
             width={40}
             className=""
             onClick={() => {
+              document.body.style.cursor = 'wait'
               handleSetCurrentIndex(1);
             }}
           />
