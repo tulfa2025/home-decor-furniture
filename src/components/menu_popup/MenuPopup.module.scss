@@ -20,7 +20,7 @@
 
         @include variables.xs{
             top: 85vh;
-            right: 5vh;
+            right: 10px;
         }
         @include variables.md {
             @media(orientation: landscape){

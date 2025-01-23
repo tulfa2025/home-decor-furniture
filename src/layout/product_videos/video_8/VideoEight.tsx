@@ -15,15 +15,16 @@ const VideoEight = ({ layoutName, zIndex }) => {
         posterSrc={
           deviceOS === "Other"
             ? "videos/product/Gross_compressed-desktop.jpg"
-            : ""
+            : "videos/product/Gross_compressed-desktop.jpg"
         }
         layoutName={layoutName}
         zIndex={zIndex}
         videoSourceRef={
           deviceOS === "Other"
             ? "videos/product/Gross_compressed.mp4"
-            : ""
+            : "videos/product/Gross_compressed.mp4"
         }
+        videoId={1024593444}
       />
     </>
   );
