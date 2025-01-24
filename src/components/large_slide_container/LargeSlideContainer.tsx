@@ -28,6 +28,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   paragraph,
   zIndex = 0,
   dynamicHeader = false,
+  bannerType = 'default'
 }) => {
   // Subheadr scroll
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
@@ -160,7 +161,11 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
         ref={inViewRef}
       >
         <motion.div className={styles.large_slide_callout_container}>
-          <TitleBanner title={title} paragraph={paragraph} />
+          <TitleBanner 
+            title={title} 
+            paragraph={paragraph} 
+            bannerType={bannerType}
+          />
         </motion.div>
         <motion.section
           className={styles.large_slide_content_container}

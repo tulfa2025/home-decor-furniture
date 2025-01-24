@@ -1,15 +1,16 @@
-import styles from './title_banner.module.scss'
-
+'use client'
 /* CUSTOM COMPONENTS */
-import CallOut from '../call_out/CallOut';
+import CallOut from "../call_out/CallOut";
+import styles from "./title_banner.module.scss";
 
-const TitleBanner = ({
-    title,
-    paragraph
-}) => {
-  return (
-    
-      <div className={styles.large_slide_inner_container}>
+
+
+const TitleBanner = ({ title, paragraph, bannerType }) => {
+  let Callout: JSX.Element = <></>;
+
+  switch (bannerType) {
+    case "default":
+      Callout = (
         <CallOut
           heading={title}
           calloutStyleType={1}
@@ -19,8 +20,29 @@ const TitleBanner = ({
           overrideParagraphStyle={styles.callout_paragraph}
           overrideHeaderStyle={styles.callout_header}
         />
-      </div>
+      );
+      break;
+    case 'main':
+      Callout = (
+        <CallOut
+          heading={title}
+          calloutStyleType={1}
+          paragraph={paragraph}
+          overrideStyles={styles.callout_container_main}
+          overrideParagraphStyle={styles.callout_paragraph_main}
+          overrideHeaderStyle={styles.callout_header_main}
+        />
+      );
+      break
+    default: 
+      break
+  }
+
+  return (
+    <div className={styles.large_slide_inner_container}>
+      {Callout}
+    </div>
   );
 };
 
-export default TitleBanner
+export default TitleBanner;

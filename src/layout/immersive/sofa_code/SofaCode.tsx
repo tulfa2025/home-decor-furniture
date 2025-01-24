@@ -1,0 +1,134 @@
+"use client";
+import styles from "./sofa_code.module.scss";
+import Image from "next/image";
+import { useRef, useState, useEffect, useContext } from "react";
+import { useScroll, useTransform, motion, useSpring } from "motion/react";
+/* CUSTOM CONTEXT */
+import useWindowSize from "@/hooks/use_window_size";
+import useInView from "@/hooks/use_inview";
+import SlideContext from "@/context/changeSlide";
+import calculateScrollHeight from "@/utils/calculate_scrollheight";
+
+/* CUSTOM COMPONENT */
+import CallOut from "@/components/call_out/CallOut";
+
+/*Images */
+import ipad from '../../../assets/images/immersive/Ipad 1.png'
+
+const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
+  // Get scroll height
+  const viewportSize = useWindowSize();
+
+  // Detect when the user is in viewport for triggering events
+  const inViewRef = useRef(null);
+  const isInView = useInView(inViewRef, 0.1);
+
+  const scrollTargetRef = useRef(null);
+  const { scrollY } = useScroll({
+    target: scrollTargetRef,
+  });
+
+  /* CHANGE SLIDE CONTEXT */
+  const handleChangeSlide = useContext(SlideContext);
+
+  useEffect(() => {
+    if (isInView) {
+      handleChangeSlide(layoutName);
+    }
+  }, [isInView]);
+
+  const scrollHeight = calculateScrollHeight(viewportSize.height, 1);
+
+  /* ANIMATION START AND END POSITION */
+  const [yPosition, setYPosition] = useState(0);
+
+  // Function to get the Y position of the element
+  const getElementYPosition = () => {
+    if (scrollTargetRef.current) {
+      const yPos = scrollTargetRef.current.offsetTop;
+      setYPosition(yPos); // Update state with the Y position
+    }
+  };
+
+  // Optionally, you can track the position on window resize or scroll
+  useEffect(() => {
+    // Get initial Y position when component mounts
+    getElementYPosition();
+  }, [scrollHeight]);
+
+  /* WHOLE PAGE TRANSLATOIN */
+  const transformShowcaseAnimationThree = useTransform(
+    scrollY,
+    [
+      0,
+      yPosition - viewportSize.height / 2,
+      yPosition,
+      yPosition + scrollHeight * 0.75,
+      yPosition + scrollHeight,
+    ],
+    [
+      viewportSize.height * 1.2,
+      viewportSize.height * 1.2,
+      0,
+      0,
+      -viewportSize.height * 2.4,
+    ]
+  );
+
+  const springyTransformShowcaseAnimationThree = useSpring(
+    transformShowcaseAnimationThree,
+    {
+      damping: 40,
+      stiffness: 150,
+    }
+  );
+
+  /* DETECT POPUP */
+
+  return (
+    <motion.div
+      style={{
+        height: scrollHeight,
+        position: "relative",
+        top: 0,
+        overflow: "auto",
+        zIndex: isInView ? zIndex : -1,
+      }}
+      ref={scrollTargetRef}
+    >
+      <motion.div
+        style={{
+          top: 0,
+          position: "fixed",
+          height: "100vh",
+          width: "100vw",
+          y: springyTransformShowcaseAnimationThree,
+        }}
+        ref={inViewRef}
+      >
+        {/* CONTENT AQUI */}
+        <motion.section className={styles.container}>
+          <div className={styles.left_container}>
+            <Image 
+            className={styles.immersive_image}
+              src={ipad}
+              alt=''
+              />
+
+          </div>
+          <div className={styles.right_container}>
+            <CallOut
+              heading="Immersive Experience"
+              paragraph="Scan this QR Code with your phone to view the object in your space. The experience launches directly from your browser."
+              overrideStyles={styles.callout_container_outer}
+              overrideParagraphStyle={styles.callout_paragraph}
+              calloutStyleType={1}
+            />
+          </div>
+        </motion.section>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+export default SofaCode;

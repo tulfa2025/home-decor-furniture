@@ -18,7 +18,8 @@ type SubHeaderProps = {
     | "/"
     | "/product_videos"
     | "/immersive_experience"
-    | "/happiest_costumers";
+    | "/case_studies"
+    | "/faqs";
 };
 
 export default function SubHeader({ activePage }: SubHeaderProps) {
@@ -26,7 +27,8 @@ export default function SubHeader({ activePage }: SubHeaderProps) {
     { href: "/", label: "Product Images" },
     { href: "/product_videos", label: "Product Videos" },
     { href: "/immersive_experience", label: "Immersive Experience" },
-    { href: "/happiest_costumers", label: "Happiest Costumers" },
+    { href: "/case_studies", label: "Case Studies" },
+    { href: "/faqs", label: "FAQs" },
   ];
 
   const [headerStyleType, setHeaderStyle] = useContext(SubheaderStyleContext);

@@ -208,7 +208,7 @@ const ProductVariation = ({
           <motion.section className={styles.product_container}>
             {/* CALLOUT BANNER CONTAINER */}
             <div className={styles.title_banner_container}>
-              <TitleBanner title={title} paragraph={paragraph} />
+              <TitleBanner title={title} paragraph={paragraph} bannerType='default'/>
             </div>
 
             {/* BACKGROUND IMAGE */}

@@ -10,6 +10,7 @@ import fauxTreeBlank from '../../../assets/images/dimension_images/Dimension Ima
 
 const DimensionImages: React.FC<LayoutProps> = ({
     layoutName,
+    zIndex
 }) => {
 
 
@@ -19,6 +20,7 @@ const DimensionImages: React.FC<LayoutProps> = ({
             title="Dimension Images"
             paragraph="Give your customers a clear view of how your furniture fits into their space with precise dimensions and scale indicators."
             dynamicHeader={false}
+            zIndex={zIndex}
         >
             <div
                 className={styles.flex_container}

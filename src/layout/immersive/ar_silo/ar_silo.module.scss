@@ -1,0 +1,80 @@
+@use '@/styles/shared/variables';
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    position:relative;
+    padding-left: 100px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    display: flex;
+    column-gap: 20px;
+    justify-content: center;
+    
+
+    .right_container {
+        height:100vh;
+        width: 40vw;
+        min-height: 700px;
+        overflow: hidden;
+        position: relative;
+
+
+        .immersive_image {
+            height: 100%;
+            width:100%;
+            position: relative;
+            z-index: 1000;
+            object-fit: contain;
+            scale:1.5;
+            top: 35vh;
+            right: -5vw
+        }
+    }
+
+    .left_container {
+        height:100%;
+        width: 75%;
+        background-color: transparent;
+
+        .callout_container_outer {
+            width: 100%;
+            height:  100%;
+            justify-content: center;
+            align-items: flex-start;
+            row-gap: 20px;
+            background-color: transparent;
+
+            .callout_header {
+                @include variables.setTypography(96px, normal, 600, normal);
+                text-align: left;
+                
+            }
+
+          
+        }
+        
+    }
+}
+
+.popup_button_container {
+    position: fixed;
+    
+    @include variables.xs {
+        left: calc(50vw - 150px);
+        top: 90vh;
+    }
+
+    @include variables.md {
+        left: calc(50vw - 150px);
+        top: clamp(500px, 75vh, 768px);
+    }
+
+    @include variables.lg {
+        left: calc(50vw - 175px);
+        top: 90vh;
+  
+    }
+}
+
+

@@ -1,0 +1,15 @@
+@use '@/styles/shared/variables';
+
+.int_container {
+    width: 100vw;
+    height: 100vh;
+    
+
+    .int {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        position: relative;
+        z-index: 1000;
+    }
+}

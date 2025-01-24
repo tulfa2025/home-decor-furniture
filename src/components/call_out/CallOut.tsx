@@ -62,10 +62,9 @@ export default function CallOut({
       )}
       {paragraph && (
         <p
-          className={`${styles.call_paragraph} ${
+          className={`${styles.call_paragraph} ${overrideParagraphStyle} ${
             modifier ? styles[modifier] : ""
-          }
-            ${overrideParagraphStyle}
+          } 
           `}
         >
           {paragraph}

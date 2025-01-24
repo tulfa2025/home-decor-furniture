@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Suspense, useEffect, useState } from "react";
-import getDeviceType from "@/utils/getDeviceContext";
+import { Suspense } from "react";
 
 /* CUSTOM COMPONENTS */
 import layoutCollection from "@/layout/product_videos/layout_collection_product_videos";
