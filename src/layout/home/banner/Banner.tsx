@@ -8,7 +8,6 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import VideoPlayer from "@/components/video/VideoPlayer";
-// import CtaPrimary from "@/layout/cta_primary/CtaPrimary";
 import { useRef, useEffect, useState, useContext } from "react";
 import useInView from "../../../hooks/use_inview";
 import useWindowSize from "@/hooks/use_window_size";
@@ -16,6 +15,9 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 
 import DeviceContext from "@/context/deviceContext";
+
+import useScrollTransform from "@/hooks/use_scrolltransform";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
   // Get scroll height
@@ -49,11 +51,19 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
     getElementYPosition();
   }, [scrollHeight]);
 
-  /* WHOLE PAGE TRANSLATOIN */
+  /* WHOLE PAGE TRANSLATION */
+
+  const [input, transform] = useScrollTransform(
+    scrollHeight,
+    viewportSize,
+    yPosition,
+    scrollTransformValues.banner
+  )
+
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
-    [0, scrollHeight],
-    [0, -viewportSize.height * 1.2]
+    input,
+    transform
   );
 
   const springyTransformShowcaseAnimationThree = useSpring(

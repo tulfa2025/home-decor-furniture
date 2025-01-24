@@ -14,7 +14,10 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     >
       <div className={styles.int_container}>
       <iframe 
-        src='https://xr.tulfa.com/p/7Zq7XSsg4sar6DGVoME6Tp/' 
+        src='https://app.vectary.com/p/20tEclig6faVL7mlvKkfLJ' 
+        allow="xr-spatial-tracking"
+        height='100%'
+        width='100%'
         style={{ border: 'none' }}
       />
       </div>

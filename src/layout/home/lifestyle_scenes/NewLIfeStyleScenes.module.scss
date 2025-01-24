@@ -27,12 +27,12 @@
     height: 60px;
 
     @include variables.xs {
-        bottom: 10vh;
+        top:85vh;
         left: calc(50vw - 150px);
     }
 
     @include variables.md {
-        bottom: 10vh;
+        top: 90vh;
         left: calc(50vw - 175px);
     }
 }

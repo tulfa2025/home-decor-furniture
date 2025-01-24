@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const addPopup = (videoId: number)=> {
+const addPopup = (videoId: number) => {
   // Create the overlay and popup container
   const overlay = document.createElement("div");
   overlay.style.position = "fixed";
@@ -27,7 +27,7 @@ const addPopup = (videoId: number)=> {
 
   // Create iframe for Vimeo video
   const iframe = document.createElement("iframe");
-  iframe.src = `https://player.vimeo.com/video/${videoId}`;  // Replace with your Vimeo video ID
+  iframe.src = `https://player.vimeo.com/video/${videoId}`; // Replace with your Vimeo video ID
   iframe.style.minWidth = "80vw";
   iframe.style.minHeight = "50vh";
   iframe.frameBorder = "0";
@@ -37,23 +37,41 @@ const addPopup = (videoId: number)=> {
   // Add iframe to popup
   popup.appendChild(iframe);
 
-  // Add close button
-  const closeButton = document.createElement("button");
-  closeButton.textContent = "Close";
-  closeButton.style.position = "absolute";
-  closeButton.style.top = "10px";
-  closeButton.style.right = "10px";
-  closeButton.style.padding = "5px 10px";
-  closeButton.style.backgroundColor = "#2A266A";
-  closeButton.style.color = "#fff";
-  closeButton.style.border = "none";
-  closeButton.style.borderRadius = "25px";
-  closeButton.addEventListener("click", function() {
-      document.body.removeChild(overlay);  // Remove the popup when closed
+  const closeSvg = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg"
+  );
+  closeSvg.setAttribute("width", '30px');
+  closeSvg.setAttribute("height", '30px');
+  closeSvg.setAttribute("viewBox", "0 0 37 36");
+  closeSvg.innerHTML = `
+    <g filter="url(#filter0_b_2735_6319)">
+        <rect x="0.335938" width="36" height="36" rx="18" fill="#666666" />
+        <path d="M24.3359 12L12.3359 24M12.3359 12L24.3359 24" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <defs>
+        <filter id="filter0_b_2735_6319" x="-2.33073" y="-2.66667" width="41.3333" height="41.3333" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feGaussianBlur in="BackgroundImageFix" stdDeviation="1.33333" />
+            <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_2735_6319" />
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_2735_6319" result="shape" />
+        </filter>
+    </defs>
+`;
+
+  // Style the SVG element
+  closeSvg.style.position = "absolute";
+  closeSvg.style.top = "10px";
+  closeSvg.style.right = "10px";
+  closeSvg.style.cursor = "pointer";
+
+  // Add event listener for close action
+  closeSvg.addEventListener("click", function () {
+    document.body.removeChild(overlay); // Remove the overlay when the SVG is clicked
   });
 
   // Append close button and popup to the overlay
-  popup.appendChild(closeButton);
+  popup.appendChild(closeSvg);
   overlay.appendChild(popup);
 
   // Append the overlay to the body
@@ -63,14 +81,14 @@ const addPopup = (videoId: number)=> {
 const TulfaPlayButton = ({ height, width, videoId }) => {
   return (
     <motion.button
-      onClick={()=>{
-        if(videoId)addPopup(videoId) 
+      onClick={() => {
+        if (videoId) addPopup(videoId);
       }}
       style={{
-        opacity: 0.75,
+        opacity: 1,
       }}
       whileHover={{
-        opacity: 0.99,
+        opacity: 0.75,
       }}
     >
       <svg

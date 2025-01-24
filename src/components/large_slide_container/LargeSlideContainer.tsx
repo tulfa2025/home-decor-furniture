@@ -20,6 +20,8 @@ import TitleBanner from "../title_banner/title_banner";
 
 /* CONTEXT */
 import SlideContext from "@/context/changeSlide";
+import scrollTransformValues from "@/utils/scrollTransformValues";
+import useScrollTransform from "@/hooks/use_scrolltransform";
 
 const LargeSlideContainer: React.FC<LayoutProps> = ({
   layoutName,
@@ -30,7 +32,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   dynamicHeader = false,
   bannerType = 'default'
 }) => {
-  // Subheadr scroll
+  // Subheader scroll
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
   // Get scroll height
   const viewportSize = useWindowSize();
@@ -88,36 +90,16 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   );
 
   /* WHOLE PAGE TRANSLATOIN */
+  const [input, transform] = useScrollTransform(
+    scrollHeight,
+    viewportSize,
+    yPosition,
+    scrollTransformValues.lscDefault
+  )
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
-    [
-      0,
-      viewportSize.width >= 960
-        ? yPosition - viewportSize.height / 2
-        : yPosition,
-      viewportSize.width >= 960 ? yPosition + viewportSize.height : yPosition + viewportSize.height / 2,
-      yPosition + viewportSize.height + scrollHeight * 0.1,
-      viewportSize.width >= 960
-        ? yPosition + viewportSize.height + scrollHeight * 0.55
-        : yPosition + viewportSize.height + scrollHeight * 0.25,
-      viewportSize.width >= 960
-        ? yPosition + viewportSize.height + scrollHeight * 0.90
-        : yPosition + viewportSize.height + scrollHeight * 0.55,
-      yPosition + viewportSize.height + scrollHeight,
-    ],
-    [
-      viewportSize.height * 2.4,
-      viewportSize.height * 2.4,
-      0,
-      0,
-      viewportSize.width >= 960
-        ? -viewportSize.height * 0.4 - 60
-        : -viewportSize.height * 0.2 - 60,
-      viewportSize.width >= 960
-        ? -viewportSize.height * 0.4 - 60
-        : -viewportSize.height * 0.2 - 60,
-      -viewportSize.height * 2.4,
-    ]
+    input,
+    transform
   );
 
   const springyTransformShowcaseAnimationThree = useSpring(

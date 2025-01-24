@@ -22,6 +22,8 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 
 /* CONTEXT */
 import SlideContext from "@/context/changeSlide";
+import useScrollTransform from "@/hooks/use_scrolltransform";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 
 const CtaTertiary: React.FC<LayoutProps> = ({
@@ -150,22 +152,16 @@ const CtaTertiary: React.FC<LayoutProps> = ({
   });
 
   /* PAGE TRANSFORM */
+  const [input, transform] = useScrollTransform(
+    scrollHeight,
+    viewportSize,
+    yPosition,
+    scrollTransformValues.tertiary
+  )
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
-    [
-      0,
-      yPosition - scrollHeight,
-      yPosition - scrollHeight * 0.9,
-      yPosition + viewportSize.height + scrollHeight * 0.9,
-      yPosition + viewportSize.height + scrollHeight * 1.2,
-    ],
-    [
-      viewportSize.height * 2.4,
-      viewportSize.height * 2.4,
-      0,
-      0,
-      -viewportSize.height * 2.4,
-    ]
+    input,
+    transform
   );
 
   const springyTransformShowcaseAnimationThree = useSpring(

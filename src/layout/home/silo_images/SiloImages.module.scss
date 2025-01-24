@@ -126,9 +126,9 @@
             @include variables.sm {
                 height: 100%;
                 width: 100vw;
-                max-height: 500px;
+                max-height: 600px;
                 min-height: 400px;
-                top: 15vh;
+                top: 20vh;
                 right: -1vw
                
             }
@@ -190,12 +190,12 @@
     
     @include variables.xs {
         left: calc(50vw - 150px);
-        top: 90vh;
+        top: 85vh;
     }
 
     @include variables.md {
         left: calc(50vw - 150px);
-        top: clamp(500px, 75vh, 768px);
+        top: 90vh;
     }
 
     @include variables.lg {

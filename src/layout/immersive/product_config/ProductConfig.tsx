@@ -1,9 +1,6 @@
 "use client";
 import styles from "./config.module.scss";
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
-import Image from "next/image";
-
-import fauxTreeSetting from '../../../assets/images/immersive/QR Code.png'
 
 const ProductConfig: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   return (
@@ -16,7 +13,13 @@ const ProductConfig: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       zIndex={zIndex}
     >
       <div className={styles.int_container}>
-        <Image src={fauxTreeSetting} alt="" className={styles.int} />
+      <iframe 
+        src='https://xr.tulfa.com/p/7Zq7XSsg4sar6DGVoME6Tp/' 
+        allow="xr-spatial-tracking"
+        height='100%'
+        width='100%'
+        style={{ border: 'none' }}
+      />
       </div>
     </LargeSlideContainer>
   );

@@ -11,7 +11,6 @@ import { TulfaDownArrow } from "@/assets/icons/tulfa_nav_arrows";
 import SubheaderActiveContext from "@/context/subHeader";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 
-import toggleSpinner from "@/utils/toggle_spinner";
 
 type SubHeaderProps = {
   activePage:
@@ -121,7 +120,6 @@ export default function SubHeader({ activePage }: SubHeaderProps) {
                         : headerLinkDisabled
                     }
                     tabIndex={-1}
-                    onClick={toggleSpinner}
                   >
                     {label}
                   </Link>
@@ -164,7 +162,7 @@ export default function SubHeader({ activePage }: SubHeaderProps) {
             className={`${styles.dropdown_bar} ${headerDropdownBar}`}
             animate={{
               transform: headerActivated
-                ? `translateY(${(navLinks.length - 1) * 50 - 20}px)`
+                ? `translateY(${(navLinks.length - 2) * 50}px)`
                 : `translateY(-${(navLinks.length - 1) * 50}px)`,
             }}
             transition={{
@@ -198,7 +196,7 @@ export default function SubHeader({ activePage }: SubHeaderProps) {
                         ? headerLinkActivated
                         : headerLinkDisabled
                     }`}
-                    onClick={toggleSpinner}
+
                   >
                     {label}
                   </Link>
