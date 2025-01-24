@@ -13,16 +13,19 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 /* CUSTOM COMPONENT */
 import CallOut from "@/components/call_out/CallOut";
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
-const ModalContainer = dynamic(
-  () => import("@/components/modals/ModalContainer"),
+const ARModalContainer = dynamic(
+  () => import("@/components/modals/ar/ARModalContainer"),
   {
     ssr: false,
   }
 );
 
+
 /*Images */
 import mockup from "../../../assets/images/immersive/mockup.png";
 import usePopupPosition from "@/utils/calculate_popupbutton.loc";
+import modalImageSet from "./ar_silo_images";
+
 
 const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Get scroll height
@@ -171,11 +174,11 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           )}
         </motion.div>
         {isModalOpen && (
-          <ModalContainer
+          <ARModalContainer
             ref={modalRef}
             handleModalClose={handleModalClose}
             isModalOpen={isModalOpen}
-            imageSet={{}}
+            imageSet={modalImageSet}
             selectionArray={[]}
             random={false}
             urlLink={`${window.location.protocol}//${window.location.host}${pathName}?comp=${layoutName}`}

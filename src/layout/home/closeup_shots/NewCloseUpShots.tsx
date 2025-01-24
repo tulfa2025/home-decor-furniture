@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 const ModalContainer = dynamic(
-  () => import("@/components/modals/ModalContainer"),
+  () => import("@/components/modals/standard/ModalContainer"),
   {
     ssr: false,
   }

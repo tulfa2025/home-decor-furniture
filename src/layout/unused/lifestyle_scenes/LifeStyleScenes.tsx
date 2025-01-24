@@ -27,7 +27,7 @@ import { modalSelectionArrayLifestyle } from "@/utils/constants";
 
 /* CUSTOM COMPONENTS */
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
-import ModalContainer from "@/components/modals/ModalContainer";
+import ModalContainer from "@/components/modals/standard/ModalContainer";
 import ShowCase from "@/components/showcase/ShowCase";
 
 

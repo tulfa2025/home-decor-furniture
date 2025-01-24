@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import styles from "./modal_container.module.scss";
+import styles from "../standard/modal_container.module.scss";
 
 const Toast = ({ onClose, isToastOpen }) => {
   useEffect(() => {

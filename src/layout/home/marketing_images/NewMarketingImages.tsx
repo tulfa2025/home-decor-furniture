@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 /* CUSTOM PROPS */
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
 const ModalContainer = dynamic(
-  () => import("@/components/modals/ModalContainer"),
+  () => import("@/components/modals/standard/ModalContainer"),
   {
     ssr: false,
   }

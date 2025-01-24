@@ -1,8 +1,8 @@
 "use client";
-import styles from "./modal_container.module.scss";
+import styles from "../standard/modal_container.module.scss";
 import useWindowSize from "@/hooks/use_window_size";
 import { memo, useMemo } from "react";
-import FullscreenImageContainer from "../image_container/fullscreen_image_container/FullscreenImageContainer";
+import FullscreenImageContainer from "../../image_container/fullscreen_image_container/FullscreenImageContainer";
 
 const ModalImageContainer = memo(
   ({

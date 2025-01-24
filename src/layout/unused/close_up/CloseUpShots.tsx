@@ -19,7 +19,7 @@ import {
 import ScrollContext from "@/context/scrollContext";
 
 /* CUSTOM COMPONENTS */
-import ModalContainer from "@/components/modals/ModalContainer";
+import ModalContainer from "@/components/modals/standard/ModalContainer";
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 import ShowCase from "@/components/showcase/ShowCase";
 

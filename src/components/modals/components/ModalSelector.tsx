@@ -1,4 +1,4 @@
-import styles from './modal_container.module.scss';
+import styles from '../standard/modal_container.module.scss';
 import { motion } from 'framer-motion';
 import { useMemo, useEffect, useState, useRef } from 'react';
 import useWindowSize from '@/hooks/use_window_size';

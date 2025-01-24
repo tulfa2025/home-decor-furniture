@@ -1,0 +1,10 @@
+@use '@/styles/shared/variables';
+
+.image {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    object-fit: contain;
+    bottom: 0;
+    object-position: 50% 100%;
+}

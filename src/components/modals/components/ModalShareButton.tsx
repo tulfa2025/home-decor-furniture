@@ -1,6 +1,6 @@
 "use client";
 import TulfaShareButton from "@/assets/icons/tulfa_share_icon";
-import styles from "./modal_container.module.scss";
+import styles from "../standard/modal_container.module.scss";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {

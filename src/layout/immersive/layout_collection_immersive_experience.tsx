@@ -13,6 +13,7 @@ import PhoneDemo from "./phone_1/PhoneDemo";
 import FriendsSofa from "./friends_sofa/FriendsSofa";
 import SofaCode from "./sofa_code/SofaCode";
 import ARSilo from "./ar_silo/ARSilo";
+import Workflow from "./workflow/Workflow";
 
 
 /* LAYOUT COLLECTION MUST BE IN DESIRED ORDER */
@@ -26,6 +27,7 @@ const layoutCollection: LayoutCollectionBase = [
     [PhoneDemo, ''],
     [ARSilo, 'TBA'],
     [SofaCode, 'TBA'],
+    [Workflow, 'Workflow'],
     [BookDemo, ''],
     [Blogs, '']
 

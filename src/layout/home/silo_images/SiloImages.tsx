@@ -16,7 +16,7 @@ import dynamic from "next/dynamic";
 
 /*CUSTOM COMPONENTS */
 const ModalContainer = dynamic(
-  () => import("@/components/modals/ModalContainer"),
+  () => import("@/components/modals/standard/ModalContainer"),
   {
     ssr: false,
   }

@@ -1,4 +1,4 @@
-import styles from "./modal_container.module.scss";
+import styles from "../standard/modal_container.module.scss";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useContext } from "react";
 import { TulfaDownArrow } from "@/assets/icons/tulfa_nav_arrows";

@@ -78,7 +78,8 @@ const TulfaPopupButton = ({
                      position: 'relative',
                      height: height,
                      width: width,
-                     zIndex: 20
+                     zIndex: 20,
+                     pointerEvents: 'auto'
                   }
                }
                onClick={onClick}

@@ -11,7 +11,7 @@ import LargeSlideContainer from "@/components/large_slide_container/LargeSlideCo
 import backgroundImage from "../../../assets/images/lifestyle_scenes/placeholder/image_two.png";
 import { modalSelectionArrayLifestyle } from "@/utils/constants";
 const ModalContainer = dynamic(
-  () => import("@/components/modals/ModalContainer"),
+  () => import("@/components/modals/standard/ModalContainer"),
   {
     ssr: false,
   }

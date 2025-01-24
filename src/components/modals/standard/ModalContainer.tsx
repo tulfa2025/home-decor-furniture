@@ -4,30 +4,30 @@ import styles from "./modal_container.module.scss";
 import { useState, useEffect, useContext, useCallback, useMemo } from "react";
 import dynamic from "next/dynamic";
 import SubheaderActiveContext from "@/context/subHeader";
-import Toast from "./ShareToast";
+import Toast from "../components/ShareToast";
 import useWindowSize from "@/hooks/use_window_size";
 
 /*  CUSTOM COMPONENTS */
-import BlurredBackdrop from "../backdrops/Blur";
+import BlurredBackdrop from "../../backdrops/Blur";
 import TulfaCloseButton from "@/assets/icons/tulfa_close_button";
-import ModalFilters from "./ModalSelector";
-import ModalShareButton from "./ModalShareButton";
-import ModalFiltersMobile from "./ModalFiltersMobile";
-import FullscreenImageContainer from "../image_container/fullscreen_image_container/FullscreenImageContainer";
+import ModalFilters from "../components/ModalSelector";
+import ModalShareButton from "../components/ModalShareButton";
+import ModalFiltersMobile from "../components/ModalFiltersMobile";
+import FullscreenImageContainer from "../../image_container/fullscreen_image_container/FullscreenImageContainer";
 
 /* DYNAMICALLY LOADED HEAVY COMPONENTS */
-const ModalImageContainer = dynamic(() => import("./ModalImageContainer"), {
+const ModalImageContainer = dynamic(() => import("../components/ModalImageContainer"), {
   ssr: false,
 });
 
 const ModalImageContainerMobile = dynamic(
-  () => import("./ModalImageContainerMobile"),
+  () => import("../components/ModalImageContainerMobile"),
   {
     ssr: false,
   }
 );
 
-const FullScreenCarousel = dynamic(() => import("../carousel/fullscreen_carousel/FullScreenCarousel"), {
+const FullScreenCarousel = dynamic(() => import("../../carousel/fullscreen_carousel/FullScreenCarousel"), {
   ssr: false,
 });
 
