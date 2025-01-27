@@ -58,10 +58,10 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     scrollY,
     [
       0,
-      viewportSize.width >= 768
+      viewportSize.width >= 960
         ? yPosition + scrollHeight * 0.5
         : yPosition + scrollHeight * 0.5,
-      viewportSize.width >= 768
+      viewportSize.width >= 960
         ? yPosition + scrollHeight * 1.5
         : yPosition + scrollHeight * 1.2,
     ],

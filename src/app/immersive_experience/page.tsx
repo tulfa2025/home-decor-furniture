@@ -27,7 +27,7 @@ export default function ImmersiveExperience() {
                 opacity: 0,
               }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: compName > 0 ? 2 : 0 }}
+              transition={{ duration: 1, delay: (1 + compName) * 1 }}
               style={{
                 height: "max-content",
                 minWidth: "100vw",

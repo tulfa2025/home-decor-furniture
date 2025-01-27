@@ -18,6 +18,9 @@
         @include variables.setCallOutGradient();
 
         @include variables.xs {
+            @include variables.setCallOutHeadingTypography(30px);
+        }
+        @include variables.breakpoint(325px) {
             @include variables.setCallOutHeadingTypography(36px);
         }
 

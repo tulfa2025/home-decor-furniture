@@ -161,6 +161,8 @@
                 justify-self: flex-end;
                 width: 30px;
                 height: 30px;
+                position: relative;
+                z-index: 1000;
             }
            
             .book_demo{

@@ -9,15 +9,34 @@
     padding-bottom: 100px;
     display: flex;
     column-gap: 20px;
-    justify-content: center;
+    justify-content: flex-start;
+
+    @include variables.xs {
+        padding: 100px 10px;
+    }
+    @include variables.md {
+        padding-left: 100px;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
     
 
     .right_container {
         height:100vh;
-        width: 40vw;
         min-height: 700px;
-        overflow: hidden;
-        position: relative;
+        position: absolute;
+
+        @include variables.md {
+            width: 40vw;
+                
+            @media (orientation: portrait){
+                width: 80vw;
+            }
+        }
+        @include variables.lg {
+            width: 40vw;
+           
+        }
 
 
         .immersive_image {
@@ -26,16 +45,70 @@
             position: relative;
             z-index: 20;
             object-fit: contain;
-            scale:1.5;
-            top: 35vh;
-            right: -5vw
+
+            @include variables.xs {
+                scale:1;
+                top: -20vh;
+                right: -25vw;
+            }
+
+            @include variables.breakpoint(375px) {
+                scale:1;
+                top: -10vh;
+                right: -25vw;
+            }
+            
+
+            @include variables.md {
+                scale:1.7;
+                top: 20vh;
+                right: -60vw;
+                
+                @media (orientation: portrait){
+                    scale:1;
+                    top: 0vh;
+                    right: -25vw;
+                }
+            }
+            @include variables.lg {
+                scale:1.4;
+                top: 30vh;
+                right: -60vw;
+               
+            }
+            @include variables.xl {
+                scale:1.5;
+                top: 35vh;
+                right: -55vw;
+               
+            }
         }
     }
 
     .left_container {
         height:100%;
-        width: 75%;
+        max-width: 60vw;
         background-color: transparent;
+        position: relative;
+
+        @include variables.xs {
+            
+            @media (orientation: portrait){
+                top: 20vh
+                
+            }
+        }
+
+        @include variables.md {
+            
+            @media (orientation: portrait){
+                top: 25vh
+                
+            }
+        }
+        @include variables.lg {
+            top: unset
+        }
 
         .callout_container_outer {
             width: 100%;
@@ -46,7 +119,46 @@
             background-color: transparent;
 
             .callout_header {
-                @include variables.setTypography(96px, normal, 600, normal);
+                @include variables.xs {
+                    @include variables.setTypography(30px, normal, 600, normal);
+                }
+
+                @include variables.breakpoint(375px) {
+                    @include variables.setTypography(32px, normal, 600, normal);
+                }
+                
+
+
+                @include variables.md {
+                    @include variables.setTypography(90px, normal, 600, normal);
+                    @media (orientation: portrait){
+                        @include variables.setTypography(64px, normal, 600, normal);
+                    }
+                }
+                @include variables.lg {
+                    @include variables.setTypography(96px, normal, 600, normal);
+                }
+               
+                text-align: left;
+                
+            }
+
+            .callout_paragraph {
+
+                @include variables.xs {
+                    @include variables.setTypography(14px, normal, 400, normal);
+                }
+
+                @include variables.md {
+                    @include variables.setTypography(18px, normal, 400, normal);
+                    @media (orientation: portrait){
+                        @include variables.setTypography(20px, normal, 400, normal);
+                    }
+                }
+                @include variables.lg {
+                    @include variables.setTypography(18px, normal, 400, normal);
+                }
+               
                 text-align: left;
                 
             }
@@ -62,12 +174,16 @@
     
     @include variables.xs {
         left: calc(50vw - 150px);
-        top: 90vh;
+        top: 85vh;
     }
 
     @include variables.md {
         left: calc(50vw - 150px);
-        top: clamp(500px, 75vh, 768px);
+        top: 90vh;
+
+        @media (orientation: portrait){
+            top: 90vh
+        }
     }
 
     @include variables.lg {

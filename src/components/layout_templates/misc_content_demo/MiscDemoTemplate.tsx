@@ -15,11 +15,14 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 
 import CallOut from "../../call_out/CallOut";
 import Button from "../../button/Button";
+import useScrollTransform from "@/hooks/use_scrolltransform";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 const MiscDemoTemplate = ({ 
   zIndex = 0, 
   layoutName, 
-  children
+  children,
+  scrollMap=null
 }) => {
   // Subheadr scroll
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
@@ -68,38 +71,16 @@ const MiscDemoTemplate = ({
   /* CONTENT ANIMATIONS */
 
   /* WHOLE PAGE TRANSLATOIN */
+  const [input, transform] = useScrollTransform(
+    scrollHeight,
+    viewportSize,
+    yPosition,
+    !scrollMap ? scrollTransformValues.demoTemplate : scrollMap
+  )
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
-    [
-      0,
-      viewportSize.width >= 768
-        ? yPosition - scrollHeight * 0.5
-        : yPosition - scrollHeight * 0.5,
-      viewportSize.width >= 768 ? yPosition : yPosition - scrollHeight * 0.17,
-      viewportSize.width >= 768
-        ? yPosition + scrollHeight * 0.7
-        : yPosition + scrollHeight * 0.45,
-      viewportSize.width >= 768
-        ? yPosition + scrollHeight * 0.75
-        : yPosition + scrollHeight * 0.55,
-      viewportSize.width >= 768
-        ? yPosition + scrollHeight * 0.85
-        : yPosition + scrollHeight * 0.75,
-      yPosition + scrollHeight,
-    ],
-    [
-      viewportSize.height * 2.5,
-      viewportSize.height * 2.5,
-      0,
-      0,
-      viewportSize.width >= 768
-        ? -viewportSize.height * 0.5
-        : -viewportSize.height * 0.6,
-      viewportSize.width >= 768
-        ? -viewportSize.height * 0.5
-        : -viewportSize.height * 0.6,
-      -viewportSize.height * 2.4,
-    ]
+    input,
+    transform
   );
 
   const springyTransformShowcaseAnimationThree = useSpring(

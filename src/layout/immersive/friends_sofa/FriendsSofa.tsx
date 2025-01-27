@@ -4,6 +4,7 @@ import LargeSlideContainer from "@/components/large_slide_container/LargeSlideCo
 import Image from "next/image";
 
 import fauxTreeSetting from '../../../assets/images/immersive/Main.png'
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 const FriendsSofa: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   return (
@@ -14,6 +15,7 @@ const FriendsSofa: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       dynamicHeader={false}
       bannerType="default"
       zIndex={zIndex}
+      scrollMap={scrollTransformValues.friends}
     >
       <div className={styles.int_container}>
         <Image src={fauxTreeSetting} alt="" className={styles.int} />

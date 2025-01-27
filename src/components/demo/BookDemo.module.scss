@@ -1,0 +1,133 @@
+@use '@/styles/shared/variables';
+
+.book_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, center, center);
+    height: 100vh;
+
+    @include variables.md{
+        @media(orientation: portrait){
+            justify-content: unset;
+        }
+
+    }
+
+    .book_content {
+        /* LAYOUT */
+        @include variables.setLayout(flex, center, start, 13.33px, column);
+
+
+        @include variables.md{
+            width: 80%
+
+        }
+        @include variables.xl{
+            width: 65%
+            
+        }
+        height: 65vh;
+        position: relative;
+
+
+        /* STYLE */
+        border-radius: 20px;
+
+        .book_demo_image {
+            position: absolute;
+            z-index: 0;
+            object-fit: cover;
+
+            @include variables.xs {
+                height: 100vh;
+                min-width: 100vw;
+                object-position: 55% 10%;
+                
+
+            }
+            @include variables.md{
+                width: 100%;
+                min-width: unset;
+                height: auto;
+                object-position: 50 50;
+
+                @media (orientation: portrait){
+                    height: 100vh;
+                    min-width: 100vw;
+                    object-position: 55% 10%;
+                }
+            }
+        }
+
+        .book_inner_container {
+            
+            @include variables.setLayout(flex, center, start);
+            flex-direction: column;
+            height: 100%;
+            margin-left: 3%;
+
+            @include variables.xs {
+                position: relative;
+                top: -7vh;
+            }
+            @include variables.md {
+                position: relative;
+                top: 0
+            }
+
+    
+            .book_content_heading {
+                /*  STYLE*/
+                color: variables.$light;
+    
+                /* TYPOGRAPHY */
+                @include variables.xs{
+                    @include variables.setTypography(41px, normal, 600, normal);
+                }
+                @include variables.md{
+                    @include variables.setTypography(55px, normal, 600, normal);
+                }
+                @include variables.xl{
+                    @include variables.setTypography(72px, normal, 600, normal);
+                }
+                
+    
+                /* LAYOUT */
+                position: relative;
+                margin-bottom: 5%
+                
+            }
+    
+            .book_content_paragraph {
+                /* LAYOUT */
+                width: 55%;
+
+                @include variables.md {
+                    width: 55%;
+                }
+                @include variables.xl {
+                    width: 50%;
+                }
+                
+                position: relative;
+                margin-bottom: 3%;
+    
+                /*  STYLE*/
+                color: variables.$light;
+    
+                /* TYPOGRAPHY */
+                @include variables.xs{
+                    @include variables.setTypography(16px, normal, 300, normal);
+                }
+                @include variables.md{
+                    @include variables.setTypography(16px, normal, 300, normal);
+                }
+                @include variables.xl{
+                    @include variables.setTypography(20px, normal, 300, normal);
+                }
+                
+            }
+        }
+
+       
+    }
+}

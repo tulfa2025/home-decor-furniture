@@ -29,10 +29,9 @@ const useScrollTransform = (
     useEffect(()=>{
 
         const isDesktop = viewportSize.width >= 960;
-
         
         const transformMappings: ScrollTransform = isDesktop ? transformMaps.desktop : transformMaps.mobile;
-
+        
         const inputMapNew = []
         // Generate input map
         for(const inputValues of transformMappings.input){

@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState, useEffect, useContext } from "react";
-import { useScroll, useTransform, useSpring, motion } from "motion/react";
+import { useScroll, useTransform, useSpring, motion, useMotionValueEvent } from "motion/react";
 import styles from "./ArVid.module.scss";
 /* CUSTOM COMPONENTS */
 
@@ -12,7 +12,6 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 import SlideContext from "@/context/changeSlide";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 import CallOut from "@/components/call_out/CallOut";
-import Button from "@/components/button/Button";
 
 const ARVid = ({ zIndex = 0, layoutName }) => {
   // Subheadr scroll
@@ -22,7 +21,7 @@ const ARVid = ({ zIndex = 0, layoutName }) => {
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.1);
+  const isInView = useInView(inViewRef, 0.5);
 
   /* UPDATE SLIDE POSITION AT TOP LEVEL OF PAGE */
   const handleChangeSlide = useContext(SlideContext);
@@ -66,12 +65,12 @@ const ARVid = ({ zIndex = 0, layoutName }) => {
     scrollY,
     [
       0,
-      viewportSize.width >= 768 ? yPosition - scrollHeight * 0.5 : yPosition - scrollHeight * 0.5,
-      viewportSize.width >= 768 ? yPosition + scrollHeight * 0.1 : yPosition - scrollHeight * 0.17 ,
+      viewportSize.width >= 960 ? yPosition - scrollHeight * 0.4 : yPosition - scrollHeight * 0.55,
+      viewportSize.width >= 960 ? yPosition: yPosition - scrollHeight * 0.05 ,
       yPosition + scrollHeight * 0.65,
       yPosition + scrollHeight * 0.7,
-      viewportSize.width >= 768 ?  yPosition + scrollHeight * 0.85 : yPosition + scrollHeight,
-      viewportSize.width >= 768 ? yPosition + scrollHeight : yPosition + scrollHeight * 1.2,
+      viewportSize.width >= 960 ?  yPosition + scrollHeight * 0.85 : yPosition + scrollHeight,
+      viewportSize.width >= 960 ? yPosition + scrollHeight : yPosition + scrollHeight * 1.2,
     ],
     [
       viewportSize.height * 2,
@@ -92,6 +91,15 @@ const ARVid = ({ zIndex = 0, layoutName }) => {
     }
   );
 
+    /* SET HEADER STYLE AT DIFFERNT INTERVALS */
+    useMotionValueEvent(scrollY, "change", (v) => {
+      if (isInView) {
+        if (v > yPosition) {
+          setHeaderStyle(0);
+        }
+      }
+    });
+
   return (
     <>
       <motion.div
@@ -110,7 +118,7 @@ const ARVid = ({ zIndex = 0, layoutName }) => {
             y: springyTransformShowcaseAnimationThree,
             top: 0,
             position: "fixed",
-            height: viewportSize.width >= 768 ? "100vh" : '160vh',
+            height: '100vh',
             width: "100vw",
             display: "flex",
             justifyContent: "center",

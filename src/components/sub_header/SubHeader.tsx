@@ -37,7 +37,7 @@ export default function SubHeader({ activePage }: SubHeaderProps) {
   let headerLinkActivated = "";
   let headerLinkDisabled = "";
   let TulfaIcon: JSX.Element = "";
-  let arrowFill = "#433E99";
+  let arrowFill = "";
   let headerDropdownBar = "";
   let arrowColor: "";
 

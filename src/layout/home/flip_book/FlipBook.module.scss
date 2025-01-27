@@ -3,7 +3,7 @@
 .flip_container {
     /* LAYOUT */
     @include variables.setLayout(flex, center, center);
-    height: calc(100% - 60px);
+    height: 100%;
     width: 100%;
     position: relative;
     pointer-events: none;
@@ -21,6 +21,7 @@
             transform: scale(1)
         }
         @include variables.md {
+            object-position: 50% 50%;
             transform: scale(1)
         }
         @include variables.lg {

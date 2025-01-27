@@ -2,8 +2,7 @@
 /* Memoize components */
 import { memoizeComponents } from "@/utils/memoize_components";
 import structureLayouts from "@/utils/structure_layouts";
-import Blogs from "@/layout/home/blogs/Blogs";
-import BookDemo from "@/layout/home/book_demo/BookDemo";
+import Blogs from "./blogs/Blogs";
 import Banner from "./banner/banner";
 import Devices from "./devices/devices";
 import Functionality from "./functionality/functionality";
@@ -14,6 +13,7 @@ import FriendsSofa from "./friends_sofa/FriendsSofa";
 import SofaCode from "./sofa_code/SofaCode";
 import ARSilo from "./ar_silo/ARSilo";
 import Workflow from "./workflow/Workflow";
+import BookDemo from "./book_demo/BookDemo";
 
 
 /* LAYOUT COLLECTION MUST BE IN DESIRED ORDER */

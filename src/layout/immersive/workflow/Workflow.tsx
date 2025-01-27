@@ -6,6 +6,7 @@ import Image from "next/image";
 /* CONTEXT */
 import MiscDemoTemplate from "@/components/layout_templates/misc_content_demo/MiscDemoTemplate";
 import workflow from '../../../assets/images/immersive/workflow.png'
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 const Workflow = ({
   zIndex = 0,
@@ -13,7 +14,7 @@ const Workflow = ({
 }) => {
 
   return (
-    <MiscDemoTemplate zIndex={zIndex} layoutName={layoutName}>
+    <MiscDemoTemplate zIndex={zIndex} layoutName={layoutName} scrollMap={scrollTransformValues.workflow}>
       <Image
         className={styles.image}
         src={workflow}

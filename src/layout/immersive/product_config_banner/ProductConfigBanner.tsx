@@ -2,6 +2,7 @@
 import VideoDemo from "@/components/video_demo/VIdeoDemo";
 
 import DeviceContext from "@/context/deviceContext";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 import { useContext } from "react";
 
 /* VIDEOS */
@@ -24,6 +25,7 @@ const ProductConfigBanner = ({ layoutName, zIndex }) => {
             ? "videos/immersive/product_config_compressed.mp4"
             : ""
         }
+        scrollMap={scrollTransformValues.configBanner}
       />
     </>
   );

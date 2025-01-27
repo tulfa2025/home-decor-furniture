@@ -4,30 +4,149 @@
     height: 100%;
     width: 100%;
     position:relative;
-    padding: 100px;
+    
     display: flex;
     column-gap: 20px;
+
+    @include variables.xs {
+        flex-direction: column;
+        padding: 0;
+    }
+    @include variables.md {
+        flex-direction: row;
+
+        padding: 100px;
+        @media(orientation: portrait){
+            flex-direction: column;
+            padding: 0;
+        }
+    }
+
+    @include variables.lg {
+        flex-direction: row;
+    }
+
 
     .left_container {
         height:100%;
         width: 50%;
-
+        position: relative;
         min-height: 700px;
+        display: flex;
+
+        @include variables.xs {
+            width: 100vw;
+        }
+        @include variables.md {
+            width: 50%;
+            @media(orientation: portrait){
+                width: 100vw;
+            }
+        }
+    
+        @include variables.lg {
+            width: 50%;
+        }
 
         .immersive_image {
             height: 100%;
             width:100%;
             position: relative;
             z-index: 1000;
+            
+
+            @include variables.xs {
+            }
+            @include variables.md {
+                object-fit: contain;
+                @media(orientation: portrait){
+                    object-fit: contain; 
+                }
+            }
+        
+            @include variables.lg {
+                object-fit: contain;
+            }
+    
+
+        }
+
+        .sofa {
+            
+            width:100%;
+            position: absolute;
+            z-index: 1001;
             object-fit: contain;
+            
+
+            @include variables.xs {
+            }
+            @include variables.md {
+                top: 10vh;
+                right: -1vw;
+                height: 85%;
+                @media(orientation: portrait){
+                    top: 10vh;
+                    right: -5vw;
+                    height: 90%;
+                }
+            }
+        
+            @include variables.lg {
+                top: 10vh;
+                right: -1vw;
+                height: 85%;
+            }
+        }
+
+        .qr {
+
+            @include variables.md {
+                height: clamp(60px, 100%, 90px);
+                width:clamp(60px, 100%, 90px);
+                top: 15%;
+                right: clamp(100px, 25%, 350px)
+            }
+            @include variables.lg {
+                height: clamp(60px, 100%, 90px);
+                width:clamp(60px, 100%, 90px);
+                top: 25%;
+                right: clamp(100px, 20%, 200px)
+            }
+
+            @include variables.xl {
+                height: clamp(60px, 100%, 131px);
+                width:clamp(60px, 100%, 131px);
+                top: 12%;
+                right: clamp(100px, 20%, 200px)
+            }
+            
+            position: absolute;
+            z-index: 1001;
+            object-fit: contain;
+            
 
         }
     }
 
     .right_container {
         height:100%;
-        width: 50%;
         background-color: transparent;
+
+        @include variables.xs {
+            width: 100vw;
+        }
+        @include variables.md {
+            width: 50%;
+            @media(orientation: portrait){
+                width: 100vw;
+            }
+        }
+    
+        @include variables.lg {
+            width: 50%;
+        }
+
 
         .callout_container_outer {
             width: 100%;

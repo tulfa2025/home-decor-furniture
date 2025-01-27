@@ -196,6 +196,12 @@
     @include variables.md {
         left: calc(50vw - 150px);
         top: 90vh;
+
+        @media (orientation: portrait){
+            top: 80vh
+        }
+
+
     }
 
     @include variables.lg {

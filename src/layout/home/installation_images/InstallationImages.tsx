@@ -1,6 +1,7 @@
 "use client";
 import styles from "./InstallationImages.module.scss";
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 /* INSTALLATION IMAGES */
 import imageOne from "../../../assets/images/installation_images/1.png";

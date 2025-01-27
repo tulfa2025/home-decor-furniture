@@ -3,13 +3,23 @@
 .int_container {
     width: 100vw;
     height: 100vh;
+    position: relative;
 
+    @include variables.md {
 
+        @media (orientation: portrait) {
+            width: 200vw;
+            left: -50vw;
+            top:-20vh
+            
+        }
+    }
     .int {
-        object-fit: cover;
+        object-fit: contain;
         height: 100%;
         width: 100%;
         position: relative;
 
+        
     }
 }

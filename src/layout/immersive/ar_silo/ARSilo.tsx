@@ -2,7 +2,7 @@
 import styles from "./ar_silo.module.scss";
 import Image from "next/image";
 import { useRef, useState, useEffect, useContext } from "react";
-import { useScroll, useTransform, motion, useSpring } from "motion/react";
+import { useScroll, useTransform, motion, useSpring, useMotionValueEvent } from "motion/react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 /* CUSTOM CONTEXT */
@@ -10,6 +10,7 @@ import useWindowSize from "@/hooks/use_window_size";
 import useInView from "@/hooks/use_inview";
 import SlideContext from "@/context/changeSlide";
 import calculateScrollHeight from "@/utils/calculate_scrollheight";
+import SubheaderStyleContext from "@/context/subHeaderStyle";
 /* CUSTOM COMPONENT */
 import CallOut from "@/components/call_out/CallOut";
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
@@ -25,6 +26,8 @@ const ARModalContainer = dynamic(
 import mockup from "../../../assets/images/immersive/mockup.png";
 import usePopupPosition from "@/utils/calculate_popupbutton.loc";
 import modalImageSet from "./ar_silo_images";
+import useScrollTransform from "@/hooks/use_scrolltransform";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 
 const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
@@ -84,22 +87,16 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   }, [scrollHeight]);
 
   /* WHOLE PAGE TRANSLATOIN */
+  const [input, transform] = useScrollTransform(
+    scrollHeight,
+    viewportSize,
+    yPosition,
+    scrollTransformValues.arSilo
+  )
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
-    [
-      0,
-      yPosition - viewportSize.height / 2,
-      yPosition,
-      yPosition + scrollHeight * 0.75,
-      yPosition + scrollHeight,
-    ],
-    [
-      viewportSize.height * 1.2,
-      viewportSize.height * 1.2,
-      0,
-      0,
-      -viewportSize.height * 2.4,
-    ]
+    input,
+    transform
   );
 
   const springyTransformShowcaseAnimationThree = useSpring(
@@ -123,6 +120,17 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       setIsPopupVisible(false);
     }
   }, [isInView]);
+
+    // Subheadr scroll
+    const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
+    /* SET HEADER STYLE AT DIFFERNT INTERVALS */
+    useMotionValueEvent(scrollY, "change", (v) => {
+      if (isInView) {
+        if (v > yPosition) {
+          setHeaderStyle(0)
+        }
+      }
+    });
 
   return (
     <motion.div
@@ -153,6 +161,7 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
               paragraph="Lorem ipsum dolor sit amet consectetur. Congue dui semper eu egestas posuere vehicula sodales mi."
               overrideStyles={styles.callout_container_outer}
               overrideHeaderStyle={styles.callout_header}
+              overrideParagraphStyle={styles.callout_paragraph}
               calloutStyleType={1}
             />
           </div>

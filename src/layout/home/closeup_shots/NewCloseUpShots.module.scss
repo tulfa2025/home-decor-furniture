@@ -33,5 +33,10 @@
     @include variables.md {
         top: 90vh;
         left: calc(50vw - 175px);
+
+        @media(orientation: portrait){
+            
+            top: 80vh;
+        }
     }
 }

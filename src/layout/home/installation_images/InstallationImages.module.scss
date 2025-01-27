@@ -17,7 +17,12 @@
     @include variables.md {
         grid-template-columns: repeat(3, 1fr) ;
         grid-template-rows: repeat(2, 50%);
-        top: 60px;
+
+        @media (orientation: portrait){
+            grid-template-columns: repeat(2, 50%) ;
+            grid-template-rows: repeat(3, 1fr);
+            top: 0;
+        }
     }
 
     

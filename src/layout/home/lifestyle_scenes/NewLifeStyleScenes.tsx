@@ -22,6 +22,7 @@ import useInView from "@/hooks/use_inview";
 
 /* IMAGES */
 import modalImageSet from "./lifestyle_scenes_images";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const memoizedImageSet = useMemo(()=>{
@@ -63,6 +64,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   }, [isInView]);
 
   const pathName = usePathname();
+  
 
   return (
     <>
@@ -72,6 +74,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         paragraph="Showcase your furniture in thousands of beautifully designed room setups - without moving a thing or touching a camera."
         zIndex={zIndex}
         dynamicHeader={true}
+        scrollMap={scrollTransformValues.lifestyle}
       >
         <motion.section
           className={styles.image_container}

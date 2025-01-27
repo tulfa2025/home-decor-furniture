@@ -62,6 +62,51 @@
     row-gap: 20px;
 }
 
+
+.modal_qr_container {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    
+
+    .modal_inner{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        align-self: stretch;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(67, 62, 153, 0.25) inset;
+        .modal_qr_inner_container {
+            height: 30%;
+            width: 100%;
+
+            .modal_qr_image {
+
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+
+        .modal_qr_content {
+            height: 30%;
+            width: 100%;
+
+            @include variables.setTypography(16px, normal, 400, normal);
+            text-align: center;
+            color: #2A266A
+        }
+    }
+
+   
+}
+
  
 
 .modal_indiv_image_container {
@@ -77,6 +122,8 @@
         width: 100%;
         object-fit: cover
     }
+
+   
 
     .modal_focus_overlay {
         background: rgb(255, 255, 255);
@@ -104,7 +151,7 @@
         top: unset;
         display: flex;
         justify-content: center;
-        bottom: 2vh;
+        top: 90vh;
     }
 
 

@@ -3,7 +3,8 @@ import styles from "./devices.module.scss";
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
 import Image from "next/image";
 
-import fauxTreeSetting from '../../../assets/images/dimension_images/Dimension Images 1.png'
+import fauxTreeSetting from '../../../assets/images/immersive/device_lineup.png'
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 const Devices: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   return (
@@ -14,6 +15,10 @@ const Devices: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       dynamicHeader={false}
       bannerType="main"
       zIndex={zIndex}
+      scrollMap={scrollTransformValues.devices}
+      backgroundStyles={{
+        background: 'transparent'
+      }}
     >
       <div className={styles.int_container}>
         <Image src={fauxTreeSetting} alt="" className={styles.int} />

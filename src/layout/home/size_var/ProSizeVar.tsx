@@ -26,6 +26,7 @@ const blurtwelveLightsHover = "/images/size_var/blur/12set_light_on.webp";
 
 /* BACKGROUN IMAGE */
 import backgroundImage from '../../../assets/images/size_var/Chandelier_Lifestyle_website.webp'
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 
 const ProSizeVar: React.FC<LayoutProps> = ({
@@ -59,6 +60,7 @@ const ProSizeVar: React.FC<LayoutProps> = ({
             paragraph="Lorem ipsum dolor sit amet consectetur. Arcu sollicitudin cursus et aliquet at vestibulum quis."
             zIndex={zIndex}
             dynamicHeader={true}
+            scrollMap={scrollTransformValues.sizeVar}
         />
     );
 }

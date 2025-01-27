@@ -23,6 +23,8 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 
 /* CONTEXT */
 import SlideContext from "@/context/changeSlide";
+import useScrollTransform from "@/hooks/use_scrolltransform";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 const ProductVariation = ({
   imageSet,
@@ -31,6 +33,7 @@ const ProductVariation = ({
   paragraph,
   zIndex = 0,
   dynamicHeader = false,
+  scrollMap=null
 }) => {
   // Get scroll height
   const viewportSize = useWindowSize();
@@ -109,7 +112,7 @@ const ProductVariation = ({
       viewportSize.width > 960
         ? viewportSize.height * 1.2
         : scrollHeight * 0.35,
-      viewportSize.width > 960 ? 0 : 0,
+      viewportSize.width > 960 ? -viewportSize.height * 0.1 : 0,
     ]
   );
 
@@ -125,36 +128,16 @@ const ProductVariation = ({
   );
 
   /* WHOLE PAGE TRANSLATOIN */
+  const [input, transform] = useScrollTransform(
+    scrollHeight,
+    viewportSize,
+    yPosition,
+    !scrollMap ? scrollTransformValues.varDefault : scrollMap
+  )
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
-    [
-      0,
-      yPosition,
-      viewportSize.width >= 960
-        ? yPosition + viewportSize.height
-        : yPosition + viewportSize.height/2 ,
-      yPosition + viewportSize.height + scrollHeight * 0.1,
-      yPosition + viewportSize.height + scrollHeight * 0.2,
-      viewportSize.width >= 960
-        ? yPosition + viewportSize.height + scrollHeight * 0.9
-        : yPosition + viewportSize.height + scrollHeight * 0.69,
-      yPosition + viewportSize.height + scrollHeight,
-    ],
-    [
-      viewportSize.height * 2.4,
-      viewportSize.height * 2.4,
-      viewportSize.width >= 960 ? 0 : 60,
-      viewportSize.width >= 960 ? 0 : 60,
-      viewportSize.width >= 960
-        ? -viewportSize.height * 0.4
-        : -viewportSize.height * 0.2,
-      viewportSize.width >= 960
-        ? -viewportSize.height * 0.4
-        : -viewportSize.height * 0.2,
-      viewportSize.width >= 960
-        ? -viewportSize.height * 2.4
-        : -viewportSize.height * 2,
-    ]
+    input,
+    transform
   );
 
   const springyTransformShowcaseAnimationThree = useSpring(

@@ -1,4 +1,5 @@
 "use client";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 import styles from "./banner.module.scss";
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
 
@@ -11,6 +12,7 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       dynamicHeader={false}
       bannerType="main"
       zIndex={zIndex}
+      scrollMap={scrollTransformValues.immersive}
     >
       <div className={styles.int_container}>
       <iframe 

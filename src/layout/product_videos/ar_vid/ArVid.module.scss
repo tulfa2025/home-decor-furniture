@@ -24,7 +24,8 @@
     }
     @include variables.lg {
         width: calc(100vw -  200px);
-    height: calc(100vh -  200px);
+        height: calc(100vh -  200px);
+        min-height: 450px;
         padding: 50px;
     }
 

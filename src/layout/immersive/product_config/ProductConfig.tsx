@@ -1,4 +1,5 @@
 "use client";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 import styles from "./config.module.scss";
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
 
@@ -11,6 +12,7 @@ const ProductConfig: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       dynamicHeader={false}
       bannerType="default"
       zIndex={zIndex}
+      scrollMap={scrollTransformValues.productConfig}
     >
       <div className={styles.int_container}>
       <iframe 

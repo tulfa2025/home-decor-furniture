@@ -4,6 +4,7 @@ import LargeSlideContainer from "@/components/large_slide_container/LargeSlideCo
 import Image from "next/image";
 
 import fauxTreeSetting from '../../../assets/images/size_var/10set_light_on.webp'
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   return (
@@ -14,6 +15,7 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       dynamicHeader={false}
       bannerType="default"
       zIndex={zIndex}
+      scrollMap={scrollTransformValues.functionality}
     >
       <div className={styles.int_container}>
         <Image src={fauxTreeSetting} alt="" className={styles.int} />

@@ -2,6 +2,7 @@
 import VideoDemo from "@/components/video_demo/VIdeoDemo";
 
 import DeviceContext from "@/context/deviceContext";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 import { useContext } from "react";
 
 /* VIDEOS */
@@ -25,6 +26,7 @@ const VideoEight = ({ layoutName, zIndex }) => {
             : "videos/product/Gross_compressed.mp4"
         }
         videoId={1024593444}
+        scrollMap={scrollTransformValues.gross}
       />
     </>
   );

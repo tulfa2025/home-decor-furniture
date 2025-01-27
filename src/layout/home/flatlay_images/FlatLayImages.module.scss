@@ -6,15 +6,9 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    height: 'max-content';
+    height: 100%;
     width: 100%;
     position: relative;
-    @include variables.xs {
-        top: 0;
-    }
-    @include variables.md {
-        top: 60px;
-    }
 
     .image_container {
         width: 100vw;

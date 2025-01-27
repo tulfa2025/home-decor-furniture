@@ -16,6 +16,7 @@ const VideoDemo = ({
   videoSourceRef,
   posterSrc,
   videoId = 1041177363,
+  scrollMap = null
 }) => {
   const deviceOS = useContext(DeviceContext);
 
@@ -24,7 +25,13 @@ const VideoDemo = ({
   const isInView = useInView(inViewRef, 0.75);
 
   return (
-    <DemoTemplate zIndex={zIndex} layoutName={layoutName}>
+    <DemoTemplate 
+      zIndex={zIndex} 
+      layoutName={layoutName} 
+      scrollMap={scrollMap}
+      headerStyleDefault={2}
+      dynamicHeader={false}  
+    >
       <div
       ref={inViewRef}
         style={{
@@ -51,7 +58,7 @@ const VideoDemo = ({
 
       {/* PLAY BUTTON ON MOBIL */}
       <div className={styles.play_container}>
-        {deviceOS === "Other" ? (
+        {deviceOS !== "Other" ? (
           <TulfaPlayButton height={25} width={25} videoId={videoId} />
         ) : (
           <></>

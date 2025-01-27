@@ -2,18 +2,23 @@
 import styles from "./sofa_code.module.scss";
 import Image from "next/image";
 import { useRef, useState, useEffect, useContext } from "react";
-import { useScroll, useTransform, motion, useSpring } from "motion/react";
+import { useScroll, useTransform, motion, useSpring, useMotionValueEvent } from "motion/react";
 /* CUSTOM CONTEXT */
 import useWindowSize from "@/hooks/use_window_size";
 import useInView from "@/hooks/use_inview";
 import SlideContext from "@/context/changeSlide";
 import calculateScrollHeight from "@/utils/calculate_scrollheight";
+import SubheaderStyleContext from "@/context/subHeaderStyle";
 
 /* CUSTOM COMPONENT */
 import CallOut from "@/components/call_out/CallOut";
 
 /*Images */
-import ipad from '../../../assets/images/immersive/Ipad 1.png'
+import ipad from "../../../assets/images/immersive/Ipad 1.png";
+import sofa from "../../../assets/images/immersive/dr.png";
+import qr from "../../../assets/images/immersive/image 12.png";
+import useScrollTransform from "@/hooks/use_scrolltransform";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Get scroll height
@@ -57,22 +62,16 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   }, [scrollHeight]);
 
   /* WHOLE PAGE TRANSLATOIN */
+  const [input, transform] = useScrollTransform(
+    scrollHeight,
+    viewportSize,
+    yPosition,
+    scrollTransformValues.sofaCode
+  )
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
-    [
-      0,
-      yPosition - viewportSize.height / 2,
-      yPosition,
-      yPosition + scrollHeight * 0.75,
-      yPosition + scrollHeight,
-    ],
-    [
-      viewportSize.height * 1.2,
-      viewportSize.height * 1.2,
-      0,
-      0,
-      -viewportSize.height * 2.4,
-    ]
+    input,
+    transform
   );
 
   const springyTransformShowcaseAnimationThree = useSpring(
@@ -83,7 +82,16 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     }
   );
 
-  /* DETECT POPUP */
+  // Subheadr scroll
+  const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
+  /* SET HEADER STYLE AT DIFFERNT INTERVALS */
+  useMotionValueEvent(scrollY, "change", (v) => {
+    if (isInView) {
+      if (v > yPosition) {
+        setHeaderStyle(0)
+      }
+    }
+  });
 
   return (
     <motion.div
@@ -109,12 +117,11 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         {/* CONTENT AQUI */}
         <motion.section className={styles.container}>
           <div className={styles.left_container}>
-            <Image 
-            className={styles.immersive_image}
-              src={ipad}
-              alt=''
-              />
+            <Image className={styles.immersive_image} src={ipad} alt="" />
 
+            <Image className={styles.sofa} src={sofa} alt="" />
+
+            <Image className={styles.qr} src={qr} alt="" />
           </div>
           <div className={styles.right_container}>
             <CallOut

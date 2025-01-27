@@ -30,7 +30,9 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   paragraph,
   zIndex = 0,
   dynamicHeader = false,
-  bannerType = 'default'
+  bannerType = 'default',
+  scrollMap = null,
+  backgroundStyles={}
 }) => {
   // Subheader scroll
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
@@ -94,7 +96,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     scrollHeight,
     viewportSize,
     yPosition,
-    scrollTransformValues.lscDefault
+    !scrollMap ? scrollTransformValues.lscDefault : scrollMap
   )
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
@@ -138,6 +140,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
       <motion.div
         style={{
           y: springyTransformShowcaseAnimationThree,
+          ...backgroundStyles
         }}
         className={styles.large_slide_container}
         ref={inViewRef}

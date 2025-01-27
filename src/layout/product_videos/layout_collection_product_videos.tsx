@@ -10,8 +10,8 @@ import VideoFour from "./video_4/VideoFour";
 import VideoSeven from "./video_7/VideoSeven";
 import VideoSix from "./video_6/VideoSix";
 import VideoEight from "./video_8/VideoEight";
-import Blogs from "@/layout/home/blogs/Blogs";
-import BookDemo from "@/layout/home/book_demo/BookDemo";
+import Blogs from "./blogs/Blogs";
+import BookDemo from "./book_demo/BookDemo";
 import ARVid from "./ar_vid/ARVid";
 
 /* LAYOUT COLLECTION MUST BE IN DESIRED ORDER */
