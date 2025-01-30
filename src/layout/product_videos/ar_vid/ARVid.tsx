@@ -14,6 +14,8 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 import CallOut from "@/components/call_out/CallOut";
 import VideoPlayer from "@/components/video/VideoPlayer";
 import DeviceContext from "@/context/deviceContext";
+import useScrollTransform from "@/hooks/use_scrolltransform";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 const ARVid = ({ zIndex = 0, layoutName }) => {
 
@@ -66,26 +68,16 @@ const ARVid = ({ zIndex = 0, layoutName }) => {
   /* CONTENT ANIMATIONS */
 
   /* WHOLE PAGE TRANSLATOIN */
+  const [input, transform] = useScrollTransform(
+    scrollHeight,
+    viewportSize,
+    yPosition,
+    scrollTransformValues.ARVid
+  )
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
-    [
-      0,
-      viewportSize.width >= 960 ? yPosition - scrollHeight * 0.4 : yPosition - scrollHeight * 0.55,
-      viewportSize.width >= 960 ? yPosition: yPosition - scrollHeight * 0.05 ,
-      yPosition + scrollHeight * 0.65,
-      yPosition + scrollHeight * 0.7,
-      viewportSize.width >= 960 ?  yPosition + scrollHeight * 0.85 : yPosition + scrollHeight,
-      viewportSize.width >= 960 ? yPosition + scrollHeight : yPosition + scrollHeight * 1.2,
-    ],
-    [
-      viewportSize.height * 2,
-      viewportSize.height * 2,
-      0,
-      0,
-      -viewportSize.height * 0.5,
-      -viewportSize.height * 0.5,
-      -viewportSize.height * 2.4,
-    ]
+    input,
+    transform
   );
 
   const springyTransformShowcaseAnimationThree = useSpring(

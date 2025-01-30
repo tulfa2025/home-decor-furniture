@@ -15,6 +15,8 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 
 import DeviceContext from "@/context/deviceContext";
 import { useContext } from "react";
+import useScrollTransform from "@/hooks/use_scrolltransform";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 /* VIDEOS */
 
@@ -54,18 +56,16 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   }, [scrollHeight]);
 
   /* WHOLE PAGE TRANSLATOIN */
+  const [input, transform] = useScrollTransform(
+    scrollHeight,
+    viewportSize,
+    yPosition,
+    scrollTransformValues.productBanner
+  )
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
-    [
-      0,
-      viewportSize.width >= 960
-        ? yPosition + scrollHeight * 0.5
-        : yPosition + scrollHeight * 0.5,
-      viewportSize.width >= 960
-        ? yPosition + scrollHeight * 1.5
-        : yPosition + scrollHeight * 1.2,
-    ],
-    [0, 0, -viewportSize.height * 2.4]
+    input,
+    transform
   );
 
   const springyTransformShowcaseAnimationThree = useSpring(
