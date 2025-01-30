@@ -1,10 +1,35 @@
 @use '@/styles/shared/variables';
 
 .image {
-    height: 100%;
-    width: 100%;
+    
     position: absolute;
     object-fit: contain;
-    bottom: 0;
-    object-position: 50% 100%;
+
+    @include variables.xs {
+        bottom: 0;
+        object-position: 50% 70%;
+        height: 100%;
+        width: 100%;
+    }
+   
+    @include variables.md {
+        bottom: 0;
+        object-position: 50% 70%;
+        height: 100%;
+        width: 100%;
+    }
+
+    @include variables.lg {
+        bottom: 0;
+        object-position: 50% 80%;
+        height: 100%;
+        width: 100%;
+    }
+
+    @include variables.xl {
+        bottom: 0;
+        object-position: 50% 100%;
+        height: 100%;
+        width: 100%;
+    }
 }

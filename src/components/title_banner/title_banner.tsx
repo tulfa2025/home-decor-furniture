@@ -34,6 +34,18 @@ const TitleBanner = ({ title, paragraph, bannerType }) => {
         />
       );
       break
+    case 'main-ie':
+      Callout = (
+        <CallOut
+          heading={title}
+          calloutStyleType={1}
+          paragraph={paragraph}
+          overrideStyles={styles.callout_container_main_ie}
+          overrideParagraphStyle={styles.callout_paragraph_main_ie}
+          overrideHeaderStyle={styles.callout_header_main_ie}
+        />
+      );
+      break
     default: 
       break
   }

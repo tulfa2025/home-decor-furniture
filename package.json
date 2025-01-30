@@ -10,7 +10,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "posters": "./generate_posters.sh ./assets_to_convert ./assets_to_convert",
-    "compress": "./compress_mp4.sh ./assets_to_convert"
+    "compress": "./compress_mp4.sh ./assets_to_convert",
+    "compress_mov": "./compress_mov.sh ./assets_to_convert",
+    "convert_webm": "./convert_to_webm.sh ./assets_to_convert"
   },
   "dependencies": {
     "autoprefixer": "^10.4.20",

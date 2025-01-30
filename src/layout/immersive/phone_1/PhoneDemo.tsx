@@ -13,11 +13,7 @@ const PhoneDemo = ({ layoutName, zIndex }) => {
   return (
     <>
       <VideoDemo
-        posterSrc={
-          deviceOS === "Other"
-            ? "videos/immersive/phone_demo_compressed-desktop.jpg"
-            : ""
-        }
+        posterSrc={"videos/immersive/phone_demo_compressed-desktop.jpg"}
         layoutName={layoutName}
         zIndex={zIndex}
         videoSourceRef={

@@ -13,10 +13,8 @@ const ProductConfigBanner = ({ layoutName, zIndex }) => {
   return (
     <>
       <VideoDemo
-        posterSrc={
-          deviceOS === "Other"
-            ? "videos/immersive/product_config_compressed-desktop.jpg"
-            : ""
+        posterSrc={"videos/immersive/product_config_compressed-desktop.jpg"
+
         }
         layoutName={layoutName}
         zIndex={zIndex}

@@ -13,7 +13,7 @@ const Devices: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       title="Lorem ipsum dolor sit"
       paragraph="Lorem ipsum dolor sit amet consectetur. Nibh pulvinar ut quis sollicitudin etiam cursus tortor lorem. Lorem nunc facilisis tristique amet. Elementum laoreet aenean quam phasellus imperdiet. "
       dynamicHeader={false}
-      bannerType="main"
+      bannerType="main-ie"
       zIndex={zIndex}
       scrollMap={scrollTransformValues.devices}
       backgroundStyles={{

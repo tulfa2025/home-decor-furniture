@@ -12,8 +12,13 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 import SlideContext from "@/context/changeSlide";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 import CallOut from "@/components/call_out/CallOut";
+import VideoPlayer from "@/components/video/VideoPlayer";
+import DeviceContext from "@/context/deviceContext";
 
 const ARVid = ({ zIndex = 0, layoutName }) => {
+
+  // Device context
+  const deviceContext = useContext(DeviceContext)
   // Subheadr scroll
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
   // Get scroll height
@@ -100,6 +105,19 @@ const ARVid = ({ zIndex = 0, layoutName }) => {
       }
     });
 
+    let videoPath, videoType = '';
+
+    switch(deviceContext){
+      case 'iOS':
+        videoPath = 'ipad_transparent_2.mov'
+        videoType = 'video/quicktime'
+        break
+      default:
+        videoPath = 'ipad_transparent_1.webm'
+        videoType = 'video/webm'
+        break
+    }
+
   return (
     <>
       <motion.div
@@ -146,7 +164,32 @@ const ARVid = ({ zIndex = 0, layoutName }) => {
               </div>
 
               {/* GRAPHICAL CONTENT */}
-              <div className={styles.ar_graphic_container}></div>
+              <div className={styles.ar_graphic_container}>
+
+                {/* MOV FILES ARE SUPPORTED ON APPLE BROWSERS */}
+                {/*  USE WEBM FOR OTHER DEVICE TYPES */}
+                <VideoPlayer
+                  src={`videos/product/${videoPath}`}  
+                  type={videoType}
+                  altText=''
+                  onVideoComplete={()=>{}}
+                  loop={true}
+                  autoplay={false}
+                  isInView={isInView}
+                  poster='videos/product/ipad-natural.png'
+                  styleOverride={{
+                    overflow: 'visible',
+                    height: '160%',
+                    width: '160%'
+                  }}
+                  videoStyleOverride={{
+                    objectFit: 'contain',
+                    minWidth: 500
+                  }}
+                >
+
+                </VideoPlayer>
+              </div>
             </div>
           </div>
         </motion.div>

@@ -14,7 +14,8 @@ const VideoPlayer = memo(
     styleOverride,
     autoplay,
     isInView,
-    poster
+    poster,
+    videoStyleOverride
   }) => {
     // Create a reference to the video element
     const videoRef = useRef(null);
@@ -52,6 +53,7 @@ const VideoPlayer = memo(
           poster={poster}
           loop={loop}
           className={styles.video}
+          style={videoStyleOverride}
           playsInline
         >
           <source src={src} type={type} />

@@ -110,10 +110,85 @@
 
         .ar_graphic_container {
             flex: 65%;
-            height: calc(100vh - 200px);
+            position: relative;
+            
+            
+            z-index: 300;
+
+            @include variables.xs {
+                height: 100%;
+                right: 30%;
+                
+                @media (orientation: portrait){
+                    height: 100%;
+                    right: 50%;
+                    top: -20%;
+                }
+            }
+
+            @include variables.breakpoint(375px) {
+                height: 100%;
+                right: 30%;
+                
+                @media (orientation: portrait){
+                    height: 100%;
+                    right: 35%;
+                    top: -25%;
+                }
+            }
+
+            @include variables.breakpoint(425px) {
+                height: 100%;
+                right: 30%;
+                
+                @media (orientation: portrait){
+                    height: 100%;
+                    right: 30%;
+                    top: -25%;
+                }
+            }
+
+            @include variables.md {
+                height: 100%;
+                width: 100%;
+                right: 15%;
+                top:-30%;
+
+                @media (orientation: portrait){
+                    height: 150%;
+                    right: 30%;
+                    top:-30%;
+                    
+                }
+            }
+
+            @include variables.xl {
+                height: 110%;
+                width: 110%;
+                right: 20%;
+                top: -30%
+            }
+
+            @include variables.breakpoint(1300px) {
+                height: 105%;
+                width: 105%;
+                right: 20%;
+                top: -30%
+            }
+
+            @include variables.breakpoint(1600px) {
+                height: 100%;
+                width: 100%;
+                right: 20%;
+                top: -25%
+            }
         }
 
     }
+}
+
+.video_container_style{
+    height: 9vh
 }
 
 .button_container {

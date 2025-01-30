@@ -13,6 +13,7 @@ type ScrollTransform = {
     [key: string]: {
       desktop: ScrollTransform;
       mobile: ScrollTransform;
+      smallMob: ScrollTransform
     };
   };
 
@@ -29,8 +30,17 @@ const useScrollTransform = (
     useEffect(()=>{
 
         const isDesktop = viewportSize.width >= 960;
+        const isSmallMobile = viewportSize.width <768;
         
-        const transformMappings: ScrollTransform = isDesktop ? transformMaps.desktop : transformMaps.mobile;
+        let transformMappings: ScrollTransform = transformMaps.mobile;
+
+        if(isSmallMobile && transformMaps.smallMob){
+          transformMappings = transformMaps.smallMob
+
+        } else if (isDesktop){
+
+          transformMappings = transformMaps.desktop
+        }
         
         const inputMapNew = []
         // Generate input map

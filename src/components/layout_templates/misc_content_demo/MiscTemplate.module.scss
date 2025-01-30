@@ -2,11 +2,19 @@
 
 .video_player_container {
     height: 70vh;
-    width: calc(100vw - 200px);
+    
     overflow: hidden;
     position: relative;
     margin: 0 auto;
     margin-bottom: 20px;
+
+    @include variables.md {
+        width: calc(100vw - 100px);
+    }
+
+    @include variables.lg {
+        width: calc(100vw - 200px);
+    }
     
 }
 
@@ -29,7 +37,7 @@
 
 
     @include variables.md {
-        padding: 0px 100px;
+        padding: 0px 50px;
         flex-direction: row;
         height: clamp(150px, 50vh, 350px);
         row-gap: unset;

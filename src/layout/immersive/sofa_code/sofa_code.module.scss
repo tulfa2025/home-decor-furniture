@@ -41,6 +41,7 @@
             width: 50%;
             @media(orientation: portrait){
                 width: 100vw;
+                
             }
         }
     
@@ -56,15 +57,35 @@
             
 
             @include variables.xs {
-            }
-            @include variables.md {
+                min-height: 120%;
+                min-width: 120%;
+                right: 15%;
+                top: -15%;
                 object-fit: contain;
                 @media(orientation: portrait){
                     object-fit: contain; 
+                    min-height: 120%;
+                    min-width: 120%;
+                }
+            }
+            @include variables.md {
+                min-height: 120%;
+                min-width: 120%;
+                right: 15%;
+                top: -15%;
+                object-fit: contain;
+                @media(orientation: portrait){
+                    object-fit: contain; 
+                    min-height: 120%;
+                    min-width: 120%;
                 }
             }
         
             @include variables.lg {
+                right: 0;
+                top: 0;
+                min-height: 100%;
+                min-width: 100%;
                 object-fit: contain;
             }
     
@@ -73,52 +94,95 @@
 
         .sofa {
             
-            width:100%;
+            
             position: absolute;
             z-index: 1001;
             object-fit: contain;
             
 
             @include variables.xs {
+                width:100%;
+                right: -1vw;
+                min-height: 105%;
+                min-width: 105%;
+                top: -5%;
+                @media(orientation: portrait){
+                    top: 0;
+                    right: 0;
+                    height: 100%;
+                    width:100%;
+                    min-height: 100%;
+                    min-width: 100%;
+                }
             }
             @include variables.md {
-                top: 10vh;
+                width:100%;
                 right: -1vw;
-                height: 85%;
+                min-height: 105%;
+                min-width: 105%;
+                top: -5%;
                 @media(orientation: portrait){
-                    top: 10vh;
-                    right: -5vw;
-                    height: 90%;
+                    top: 0;
+                    right: 0;
+                    height: 100%;
+                    width:100%;
+                    min-height: 100%;
+                    min-width: 100%;
                 }
             }
         
             @include variables.lg {
                 top: 10vh;
                 right: -1vw;
+                min-height: 85%;
+                min-width: 85%;
                 height: 85%;
             }
         }
 
         .qr {
+            @include variables.xs {
+                height: clamp(60px, 100%, 90px);
+                width:clamp(60px, 100%, 90px);
+                top: 22%;
+                right: clamp(10px, 10%, 250px);
+
+                @media (orientation:portrait){
+                    top:18%;
+                    right: clamp(50px, 15%, 75px);
+                }
+            }
 
             @include variables.md {
                 height: clamp(60px, 100%, 90px);
                 width:clamp(60px, 100%, 90px);
-                top: 15%;
-                right: clamp(100px, 25%, 350px)
+                top: 22%;
+                right: clamp(10px, 10%, 250px);
+
+                @media (orientation:portrait){
+                    top: 5%;
+                    right: clamp(160px, 35%, 250px);
+                }
             }
             @include variables.lg {
                 height: clamp(60px, 100%, 90px);
                 width:clamp(60px, 100%, 90px);
                 top: 25%;
-                right: clamp(100px, 20%, 200px)
+                right: clamp(120px, 17%, 150px)
             }
 
             @include variables.xl {
                 height: clamp(60px, 100%, 131px);
                 width:clamp(60px, 100%, 131px);
+                top: 15%;
+                right: clamp(100px, 17%, 150px)
+            }
+
+            @include variables.breakpoint(1500px) {
+                height: clamp(60px, 100%, 131px);
+                width:clamp(60px, 100%, 131px);
                 top: 12%;
-                right: clamp(100px, 20%, 200px)
+                right: clamp(100px, 23%, 200px)
             }
             
             position: absolute;
@@ -132,18 +196,26 @@
     .right_container {
         height:100%;
         background-color: transparent;
+        position: relative;
+        
 
         @include variables.xs {
             width: 100vw;
+            order: -1;
+            top:10vh;
         }
         @include variables.md {
+            top:0;
             width: 50%;
+            order:0;
             @media(orientation: portrait){
                 width: 100vw;
+                order: -1;
             }
         }
     
         @include variables.lg {
+            order:0;
             width: 50%;
         }
 
@@ -151,10 +223,30 @@
         .callout_container_outer {
             width: 100%;
             height:  100%;
-            justify-content: center;
-            align-items: flex-start;
             row-gap: 20px;
             background-color: transparent;
+
+            @include variables.xs {
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            @include variables.md {
+                justify-content: center;
+                align-items: flex-start;
+                text-align: unset;
+
+                @media (orientation:portrait) {
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                }
+            }
+
+            @include variables.lg {
+                text-align: unset
+            }
 
             .callout_paragraph {
                 min-width: 300px;

@@ -15,13 +15,21 @@ const ProductConfig: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       scrollMap={scrollTransformValues.productConfig}
     >
       <div className={styles.int_container}>
-      <iframe 
+      {/* <iframe 
         src='https://xr.tulfa.com/p/7Zq7XSsg4sar6DGVoME6Tp/' 
         allow="xr-spatial-tracking"
         height='100%'
         width='100%'
         style={{ border: 'none' }}
-      />
+      /> */}
+      <div
+      style={{
+        backgroundColor: 'black',
+        height: '100%',
+        width: '100%'
+      }}>
+
+      </div>
       </div>
     </LargeSlideContainer>
   );

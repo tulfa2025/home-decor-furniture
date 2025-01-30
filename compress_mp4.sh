@@ -16,7 +16,7 @@ if [ ! -d "$DIRECTORY" ]; then
 fi
 
 # Loop through all video files (mp4, mkv, avi) in the directory
-for file in "$DIRECTORY"/*.{mp4,mkv,avi}; do
+for file in "$DIRECTORY"/*.{mp4,mkv,avi,mov,webm}; do
   # Check if the file exists
   if [ -f "$file" ]; then
     # Set output filename with '_compressed' suffix

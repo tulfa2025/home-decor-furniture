@@ -5,14 +5,27 @@
     height: 100vh;
     position: relative;
 
+    @include variables.xs {
+        width: 200vw;
+        left: -50vw;
+        top:-15vh
+    }
+
     @include variables.md {
+        width: 175vw;
+        left: -37.5vw;
 
         @media (orientation: portrait) {
-            width: 200vw;
-            left: -50vw;
+            width: 175vw;
+            left: -37.5vw;
             top:-20vh
             
         }
+    }
+
+    @include variables.lg {
+        width: 100%;
+        left: 0vw;
     }
     .int {
         object-fit: contain;

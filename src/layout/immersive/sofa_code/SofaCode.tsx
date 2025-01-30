@@ -123,7 +123,7 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
             <Image className={styles.qr} src={qr} alt="" />
           </div>
-          <div className={styles.right_container}>
+          <div className={styles.right_container} >
             <CallOut
               heading="Immersive Experience"
               paragraph="Scan this QR Code with your phone to view the object in your space. The experience launches directly from your browser."
