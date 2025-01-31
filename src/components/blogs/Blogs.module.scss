@@ -3,7 +3,7 @@
 .blogs_container {
     /* LAYOUT */
     @include variables.setLayout(flex, center, center);
-    padding: 57.333px 20%;
+    padding: 57.333px 100px;
     width: 100%;
     position: relative;
     top: 60px;
@@ -39,7 +39,7 @@
             }
 
             @include variables.lg {
-                @include variables.setTypography(64px, normal, 500, normal);
+                @include variables.setTypography(32px, normal, 500, normal);
                 margin-bottom: 0px;
             }
 
@@ -57,7 +57,20 @@
             }
             @include variables.md {
                 flex-direction: row;
-                height: 75%
+                height: 75%;
+                justify-content: space-between;
+                @media (orientation: portrait){
+                    height: 50%
+                }
+            }
+            @include variables.xl {
+                flex-direction: row;
+                height: 75%;
+                justify-content: space-between;
+                @media (orientation: portrait){
+                    height: 50%
+                }
+                
             }
             
             
@@ -79,7 +92,12 @@
         }
     }
     @include variables.lg{
-        width: calc(100% / 3)
+        width: 315px;
+        height: clamp(350px, 75%, 500px);
+    }
+
+    @include variables.breakpoint(1300px){
+        width: 500px
     }
     
     

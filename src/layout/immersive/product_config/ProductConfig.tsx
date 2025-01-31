@@ -13,23 +13,16 @@ const ProductConfig: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       bannerType="default"
       zIndex={zIndex}
       scrollMap={scrollTransformValues.productConfig}
+      resize={false}
     >
       <div className={styles.int_container}>
-      <iframe 
-        src='https://xr.tulfa.com/p/7Zq7XSsg4sar6DGVoME6Tp/' 
-        allow="xr-spatial-tracking"
-        height='90%'
-        width='90%'
-        style={{ border: 'none' }}
-      />
-      {/* <div
-      style={{
-        backgroundColor: 'black',
-        height: '100%',
-        width: '100%'
-      }}>
-
-      </div> */}
+        <iframe 
+          src='https://xr.tulfa.com/p/7Zq7XSsg4sar6DGVoME6Tp/' 
+          allow="xr-spatial-tracking"
+          height='100%'
+          width='100%'
+          style={{ border: 'none' }}
+        />
       </div>
     </LargeSlideContainer>
   );

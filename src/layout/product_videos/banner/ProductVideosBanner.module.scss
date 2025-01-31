@@ -30,11 +30,12 @@
 
 
             @include variables.md {
-                bottom: 15vh;
+                bottom: 50px;
                 left: 0
             }
 
             @include variables.lg {
+                bottom:100px;
                 left: 0;
             }
 

@@ -12,7 +12,7 @@
     }
 
     @include variables.md {
-        width: 50%;
+        width: 100%;
     }
 
     .showcase_heading {
@@ -28,18 +28,24 @@
 
         /* TYPOGRAPHY */
 
-        @include variables.sm {
-            @include variables.setTypography(46px, normal, 600, normal);
+        @include variables.xs {
+            @include variables.setTypography(40px, normal, 600, normal);
+            margin-left: 7px;
+        }
+
+        @include variables.breakpoint(375px) {
+            @include variables.setTypography(48px, normal, 600, normal);
             margin-left: 7px;
         }
 
         @include variables.md {
             @include variables.setTypography(60px, normal, 600, normal);
-            margin-left: 120px;
+            margin-left: 50px;
         }
 
         @include variables.lg {
             @include variables.setTypography(64px, normal, 600, normal);
+            margin-left: 100px;
         }
        
         text-transform: capitalize;

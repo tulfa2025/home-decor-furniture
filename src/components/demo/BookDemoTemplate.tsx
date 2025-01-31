@@ -28,7 +28,7 @@ const BookDemoTemplate = ({
     // DETERMINE BACKGROUND IMAGE BASED ON VIEWPORT SIZE
     const backgroundImage = useMemo(()=>{
 
-        if(viewportSize.width > 768){
+        if(viewportSize.width >= 768){
             return bookDemoImage
         } else {
             return bookDemoImageMob
@@ -52,7 +52,7 @@ const BookDemoTemplate = ({
         }
     }, [isInView])
 
-    const scrollHeight = calculateScrollHeight(viewportSize.height,  2);
+    const scrollHeight = calculateScrollHeight(viewportSize.height,  viewportSize.width >= 960 ? 2 : 1);
 
     /* ANIMATION START AND END POSITION */
     const [yPosition, setYPosition] = useState(0);

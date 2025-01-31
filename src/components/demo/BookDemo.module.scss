@@ -60,7 +60,7 @@
 
         .book_inner_container {
             
-            @include variables.setLayout(flex, center, start);
+            display: flex;
             flex-direction: column;
             height: 100%;
             margin-left: 3%;
@@ -68,10 +68,34 @@
             @include variables.xs {
                 position: relative;
                 top: -7vh;
+                align-items: center;
+                justify-content: start;
+                
             }
             @include variables.md {
+
                 position: relative;
-                top: 0
+                top: 0;
+                align-items: start;
+                justify-content: center;
+
+                @media(orientation:portrait){
+                    position: relative;
+                    top: 0;
+                    align-items: center;
+                    justify-content: start;
+
+                }
+                
+               
+            }
+
+            @include variables.lg {
+                position: relative;
+                top: 0;
+                align-items: start;
+                justify-content: center;
+               
             }
 
     
@@ -84,45 +108,56 @@
                     @include variables.setTypography(41px, normal, 600, normal);
                 }
                 @include variables.md{
-                    @include variables.setTypography(55px, normal, 600, normal);
+                    @include variables.setTypography(55px, normal, 700, normal);
                 }
                 @include variables.xl{
-                    @include variables.setTypography(72px, normal, 600, normal);
+                    @include variables.setTypography(60px, normal, 700, normal);
                 }
                 
     
                 /* LAYOUT */
                 position: relative;
-                margin-bottom: 5%
+                margin-bottom: 13px
                 
             }
     
             .book_content_paragraph {
                 /* LAYOUT */
-                width: 55%;
+                
+
+                @include variables.xs {
+                    width: 100%;
+                    padding: 0 10px;
+                }
 
                 @include variables.md {
                     width: 55%;
+                    padding: 0 0px;
+
+                    @media (orientation:portrait){
+                        padding: 0 0px;
+                    }
                 }
                 @include variables.xl {
                     width: 50%;
+                    padding: 0 0px;
                 }
                 
                 position: relative;
-                margin-bottom: 3%;
+                margin-bottom:  13px;
     
                 /*  STYLE*/
                 color: variables.$light;
     
                 /* TYPOGRAPHY */
                 @include variables.xs{
-                    @include variables.setTypography(16px, normal, 300, normal);
+                    @include variables.setTypography(16px, normal, 400, normal);
                 }
                 @include variables.md{
-                    @include variables.setTypography(16px, normal, 300, normal);
+                    @include variables.setTypography(16px, normal, 400, normal);
                 }
                 @include variables.xl{
-                    @include variables.setTypography(20px, normal, 300, normal);
+                    @include variables.setTypography(20px, normal, 400, normal);
                 }
                 
             }

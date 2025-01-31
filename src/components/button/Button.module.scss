@@ -55,7 +55,7 @@
     }
     @include variables.lg {
         @include variables.setBorderNoColor(66.667px, 2px, solid);
-        width: 220px;
+        width: 170px;
     }
     
     transition: transform 0.2s ease;
@@ -73,7 +73,7 @@
         padding: 7px 20px;
     }
     @include variables.lg {
-        @include variables.setTypography(16px, normal, 600, normal);
+        @include variables.setTypography(12px, normal, 600, normal);
         text-align: center;
         padding: 10px 30px;
     }

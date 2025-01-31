@@ -46,7 +46,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.1);
+  const isInView = useInView(inViewRef, 0.5);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -62,10 +62,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     }
   }, [isInView]);
 
-  const scrollHeight = calculateScrollHeight(
-    viewportSize.height,
-    2
-  );
+  const scrollHeight = calculateScrollHeight(viewportSize.height, 2);
 
   /* MODAL TRIGGER */
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -107,7 +104,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     viewportSize,
     yPosition,
     scrollTransformValues.silo
-  )
+  );
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
     input,
@@ -148,85 +145,88 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   });
 
   // Memoize images
-  const memoizedImageSet = useMemo(()=>{
-    return modalImageSet
-  }, [])
+  const memoizedImageSet = useMemo(() => {
+    return modalImageSet;
+  }, []);
 
   return (
-    <motion.div
-      style={{
-        height: scrollHeight,
-        position: "relative",
-        top: 0,
-        overflow: "auto",
-        zIndex: isInView ? zIndex : -1,
-      }}
-      ref={scrollTargetRef}
-      id="silo_images"
-    >
+    <>
       <motion.div
         style={{
+          height: scrollHeight,
+          position: "relative",
           top: 0,
-          position: "fixed",
-          height: "100vh",
-          width: "100vw",
-          y: springyTransformShowcaseAnimationThree,
+          overflow: "auto",
+          zIndex: isInView ? zIndex : -1,
         }}
-        ref={inViewRef}
+        ref={scrollTargetRef}
+        id="silo_images"
       >
-        <motion.section className={styles.silo_container}>
-          <div className={styles.silo_content}>
-            <h3 className={styles.silo_content_heading}>Product Silos</h3>
-            <p className={styles.silo_content_text}>
-              Ultra-high-definition images of your furniture shot from different
-              angles.
-            </p>
-          </div>
+        <motion.div
+          style={{
+            top: 0,
+            position: "fixed",
+            height: "100vh",
+            width: "100vw",
+            y: springyTransformShowcaseAnimationThree,
+          }}
+          ref={inViewRef}
+        >
+          <motion.section className={styles.silo_container}>
+            <div className={styles.silo_content}>
+              <h3 className={styles.silo_content_heading}>Product Silos</h3>
+              <p className={styles.silo_content_text}>
+                Ultra-high-definition images of your furniture shot from
+                different angles.
+              </p>
+            </div>
 
-          <div
-            className={styles.silo_image_container}
-            style={{
-              filter: isModalOpen ? "blur(10px)" : "",
-            }}
-          >
-            <motion.div className={styles.silo_image_container_inner}>
-              <Image
-                src={backgroundImage}
-                alt=""
-                className={styles.silo_image}
-                quality={80}
-              />
-            </motion.div>
-          </div>
-        </motion.section>
-        {/* MODAL CONTAINER */}
-        {/* BUTTON TRIGGER */}
-        <motion.div className={styles.popup_button_container} s>
-          {isPopupVisible && (
-            <TulfaPopupButton
-              timer={0}
-              height={60}
-              width={300}
-              textStyle={popupPosition.textStyle}
-              text={"Take a closer look"}
-              onClick={handleModalOpen}
-            />
-          )}
+            <div
+              className={styles.silo_image_container}
+              style={{
+                filter: isModalOpen ? "blur(10px)" : "",
+              }}
+            >
+              <motion.div className={styles.silo_image_container_inner}>
+                <Image
+                  src={backgroundImage}
+                  alt=""
+                  className={styles.silo_image}
+                  quality={80}
+                />
+              </motion.div>
+            </div>
+          </motion.section>
         </motion.div>
-        {isModalOpen && (
-          <ModalContainer
-            ref={modalRef}
-            handleModalClose={handleModalClose}
-            isModalOpen={isModalOpen}
-            imageSet={memoizedImageSet}
-            selectionArray={modalSelectionArraySilo}
-            random={false}
-            filter={filter}
-            urlLink={`${window.location.protocol}//${window.location.host}${pathName}?comp=${layoutName}`}
+      </motion.div>
+
+      {/* MODAL CONTAINER */}
+      {/* BUTTON TRIGGER */}
+      <motion.div className={styles.popup_button_container} s>
+        {isPopupVisible && (
+          <TulfaPopupButton
+            timer={0}
+            height={60}
+            width={300}
+            textStyle={popupPosition.textStyle}
+            text={"Take a closer look"}
+            onClick={handleModalOpen}
           />
         )}
       </motion.div>
-    </motion.div>
+      {isModalOpen && (
+        <ModalContainer
+          ref={modalRef}
+          handleModalClose={handleModalClose}
+          isModalOpen={isModalOpen}
+          imageSet={memoizedImageSet}
+          selectionArray={modalSelectionArraySilo}
+          random={false}
+          filter={filter}
+          urlLink={`${window.location.protocol}//${window.location.host}${pathName}?comp=${layoutName}`}
+        />
+      )}
+    </>
   );
 };
 

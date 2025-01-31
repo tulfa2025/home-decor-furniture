@@ -32,7 +32,8 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   dynamicHeader = false,
   bannerType = 'default',
   scrollMap = null,
-  backgroundStyles={}
+  backgroundStyles={},
+  resize=true
 }) => {
   // Subheader scroll
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
@@ -57,7 +58,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
 
   const scrollHeight = calculateScrollHeight(
     viewportSize.height,
-    viewportSize.width > 960 ? 2 : 2
+   2
   );
 
   /* ANIMATION START AND END POSITION */
@@ -81,8 +82,16 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   /* CONTENT ANIMATIONS */
   const transformScaleAnimationOne = useTransform(
     scrollY,
-    [0, yPosition, yPosition + scrollHeight * 0.1],
-    [1.2, 1.2, 1]
+    [
+      0, 
+      yPosition, 
+      yPosition + scrollHeight * 0.1
+    ],
+    [
+      resize ? 1.2 : 1, 
+      resize ? 1.2 : 1, 
+      1
+    ]
   );
   const springyTransformScaleAnimationOne = useSpring(
     transformScaleAnimationOne,

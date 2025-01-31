@@ -5,11 +5,91 @@
     height: 100vh;
     
 
-    .int {
-        object-fit: cover;
-        
-        height: 100%;
+    .videos_container {
+        height: 70%;
         width: 100%;
+        overflow: hidden;
         position: relative;
+
+
+        .int {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+
     }
+
+
+    .video_options_container {
+        height: 25%;
+        width: 100%;
+        padding: 66px;
+        display: flex;
+        row-gap: 20px;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        .video_buttons_container {
+
+            pointer-events: auto;
+            width: clamp(500px, 75%, 700px);
+            height: 35px;
+            display: flex; 
+            justify-content: space-between;
+            align-items: start;
+            position: relative;
+
+            .button_style_default {
+                @include variables.setTypography(13px, normal, 500, normal);
+                color: variables.$primaryColor;
+                opacity: 0.8;
+                background-color: transparent;
+                
+            }
+
+            .slider_container {
+
+                position: absolute;
+                bottom: 0;
+                height: 3px;
+                background-color: rgba(230,230,230, 0.5);
+                width: 110%;
+                left: -5%;
+
+                .slider {
+                    position: absolute; 
+                    width: 20%;
+                    top: 0;
+                    background-color: rgba(150,150,150, 0.6);
+                    height:3px
+                }
+
+            }
+
+           
+
+        }
+
+        .video_description_container {
+
+            @include variables.setTypography(16px, normal, 400, normal);
+
+            color: variables.$primaryColor
+
+        }
+
+    }
+
+}
+
+.active {
+    background: linear-gradient(90deg, #433E99 0%, #EF4B32 100%);
+    font-weight: 600;
+    opacity: 1;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

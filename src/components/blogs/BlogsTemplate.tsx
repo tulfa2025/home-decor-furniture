@@ -41,7 +41,7 @@ const BlogsTemplate: React.FC<LayoutProps> = ({
         }
     }, [isInView])
 
-    const scrollHeight = calculateScrollHeight(viewportSize.height, 2);
+    const scrollHeight = calculateScrollHeight(viewportSize.height, viewportSize.width >=960 ? 2: 1);
 
     /* ANIMATION START AND END POSITION */
     const [yPosition, setYPosition] = useState(0);

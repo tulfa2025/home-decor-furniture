@@ -171,6 +171,7 @@
 
 .popup_button_container {
     position: fixed;
+    z-index: 20;
     
     @include variables.xs {
         left: calc(50vw - 150px);

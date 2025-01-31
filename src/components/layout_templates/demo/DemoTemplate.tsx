@@ -52,7 +52,7 @@ const DemoTemplate = ({
   });
 
   /* SCROLL HEIGHT OF PAGE */
-  const scrollHeight = calculateScrollHeight(viewportSize.height, 2);
+  const scrollHeight = calculateScrollHeight(viewportSize.height, viewportSize.width >=960 ? 2: 1);
 
   /* ANIMATION START POSITION */
   const [yPosition, setYPosition] = useState(0);
@@ -75,7 +75,11 @@ const DemoTemplate = ({
   /* CONTENT ANIMATIONS */
   const videoContainerScale = useTransform(
     scrollY,
-    [0, yPosition + scrollHeight * 0.5, yPosition + scrollHeight * 0.55],
+    [
+      0, 
+      viewportSize.width >= 960 ? yPosition + scrollHeight * 0.5 : yPosition + scrollHeight * 0.6, 
+      viewportSize.width >= 960 ? yPosition + scrollHeight * 0.55 : yPosition + scrollHeight * 1.1
+    ],
     [
       viewportSize.width >= 768 ? 1.05 : 1.02,
       viewportSize.width >= 768 ? 1.05 : 1.02,
@@ -85,7 +89,7 @@ const DemoTemplate = ({
 
   const springyVideoContainerScale = useSpring(videoContainerScale, {
     damping: 35,
-    stiffness: 125,
+    stiffness: 150,
   });
 
   /* WHOLE PAGE TRANSLATOIN */
@@ -105,7 +109,7 @@ const DemoTemplate = ({
     transformShowcaseAnimationThree,
     {
       damping: 35,
-      stiffness: 125,
+      stiffness: 150,
     }
   );
 

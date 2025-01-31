@@ -36,7 +36,7 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     target: scrollTargetRef,
   });
 
-  const scrollHeight = calculateScrollHeight(viewportSize.height, 1.5);
+  const scrollHeight = calculateScrollHeight(viewportSize.height, viewportSize.width >=768 ? 1.5: 1);
 
   /* ANIMATION START AND END POSITION */
   const [yPosition, setYPosition] = useState(0);

@@ -45,7 +45,7 @@ const ARVid = ({ zIndex = 0, layoutName }) => {
   });
 
   /* SCROLL HEIGHT OF PAGE */
-  const scrollHeight = calculateScrollHeight(viewportSize.height, 2);
+  const scrollHeight = calculateScrollHeight(viewportSize.height, viewportSize.width >=960 ? 2: 1);
 
   /* ANIMATION START POSITION */
   const [yPosition, setYPosition] = useState(0);
@@ -84,7 +84,7 @@ const ARVid = ({ zIndex = 0, layoutName }) => {
     transformShowcaseAnimationThree,
     {
       damping: 35,
-      stiffness: 125,
+      stiffness: 150,
     }
   );
 

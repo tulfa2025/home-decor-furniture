@@ -2,7 +2,13 @@
 import styles from "./ar_silo.module.scss";
 import Image from "next/image";
 import { useRef, useState, useEffect, useContext } from "react";
-import { useScroll, useTransform, motion, useSpring, useMotionValueEvent } from "motion/react";
+import {
+  useScroll,
+  useTransform,
+  motion,
+  useSpring,
+  useMotionValueEvent,
+} from "motion/react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 /* CUSTOM CONTEXT */
@@ -21,14 +27,12 @@ const ARModalContainer = dynamic(
   }
 );
 
-
 /*Images */
 import mockup from "../../../assets/images/immersive/mockup.png";
 import usePopupPosition from "@/utils/calculate_popupbutton.loc";
 import modalImageSet from "./ar_silo_images";
 import useScrollTransform from "@/hooks/use_scrolltransform";
 import scrollTransformValues from "@/utils/scrollTransformValues";
-
 
 const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Get scroll height
@@ -37,7 +41,7 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.1);
+  const isInView = useInView(inViewRef, 0.75);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -92,7 +96,7 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     viewportSize,
     yPosition,
     scrollTransformValues.arSilo
-  )
+  );
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
     input,
@@ -121,80 +125,83 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     }
   }, [isInView]);
 
-    // Subheadr scroll
-    const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
-    /* SET HEADER STYLE AT DIFFERNT INTERVALS */
-    useMotionValueEvent(scrollY, "change", (v) => {
-      if (isInView) {
-        if (v > yPosition) {
-          setHeaderStyle(0)
-        }
+  // Subheadr scroll
+  const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
+  /* SET HEADER STYLE AT DIFFERNT INTERVALS */
+  useMotionValueEvent(scrollY, "change", (v) => {
+    if (isInView) {
+      if (v > yPosition) {
+        setHeaderStyle(0);
       }
-    });
+    }
+  });
 
   return (
-    <motion.div
-      style={{
-        height: scrollHeight,
-        position: "relative",
-        top: 0,
-        overflow: "auto",
-        zIndex: isInView ? zIndex : -1,
-      }}
-      ref={scrollTargetRef}
-    >
+    <>
       <motion.div
         style={{
+          height: scrollHeight,
+          position: "relative",
           top: 0,
-          position: "fixed",
-          height: "100vh",
-          width: "100vw",
-          y: springyTransformShowcaseAnimationThree,
+          overflow: "auto",
+          zIndex: isInView ? zIndex : -1,
         }}
-        ref={inViewRef}
+        ref={scrollTargetRef}
       >
-        {/* CONTENT AQUI */}
-        <motion.section className={styles.container}>
-          <div className={styles.left_container}>
-            <CallOut
-              heading="Lorem ipsum dolor sit amet."
-              paragraph="Lorem ipsum dolor sit amet consectetur. Congue dui semper eu egestas posuere vehicula sodales mi."
-              overrideStyles={styles.callout_container_outer}
-              overrideHeaderStyle={styles.callout_header}
-              overrideParagraphStyle={styles.callout_paragraph}
-              calloutStyleType={1}
-            />
-          </div>
-          <div className={styles.right_container}>
-            <Image className={styles.immersive_image} src={mockup} alt="" />
-          </div>
-        </motion.section>
-        {/* BUTTON TRIGGER */}
-        <motion.div className={styles.popup_button_container} s>
-          {isPopupVisible && (
-            <TulfaPopupButton
-              timer={0}
-              height={60}
-              width={300}
-              textStyle={popupPosition.textStyle}
-              text={"Take a closer look"}
-              onClick={handleModalOpen}
-            />
-          )}
+        <motion.div
+          style={{
+            top: 0,
+            position: "fixed",
+            height: "100vh",
+            width: "100vw",
+            y: springyTransformShowcaseAnimationThree,
+          }}
+          ref={inViewRef}
+        >
+          {/* CONTENT AQUI */}
+          <motion.section className={styles.container}>
+            <div className={styles.left_container}>
+              <CallOut
+                heading="Lorem ipsum dolor sit amet."
+                paragraph="Lorem ipsum dolor sit amet consectetur. Congue dui semper eu egestas posuere vehicula sodales mi."
+                overrideStyles={styles.callout_container_outer}
+                overrideHeaderStyle={styles.callout_header}
+                overrideParagraphStyle={styles.callout_paragraph}
+                calloutStyleType={1}
+              />
+            </div>
+            <div className={styles.right_container}>
+              <Image className={styles.immersive_image} src={mockup} alt="" />
+            </div>
+          </motion.section>
         </motion.div>
-        {isModalOpen && (
-          <ARModalContainer
-            ref={modalRef}
-            handleModalClose={handleModalClose}
-            isModalOpen={isModalOpen}
-            imageSet={modalImageSet}
-            selectionArray={[]}
-            random={false}
-            urlLink={`${window.location.protocol}//${window.location.host}${pathName}?comp=${layoutName}`}
+      </motion.div>
+
+      {/* BUTTON TRIGGER */}
+      <motion.div className={styles.popup_button_container} s>
+        {isPopupVisible && (
+          <TulfaPopupButton
+            timer={0}
+            height={60}
+            width={300}
+            textStyle={popupPosition.textStyle}
+            text={"Take a closer look"}
+            onClick={handleModalOpen}
           />
         )}
       </motion.div>
-    </motion.div>
+      {isModalOpen && (
+        <ARModalContainer
+          ref={modalRef}
+          handleModalClose={handleModalClose}
+          isModalOpen={isModalOpen}
+          imageSet={modalImageSet}
+          selectionArray={[]}
+          random={false}
+          urlLink={`${window.location.protocol}//${window.location.host}${pathName}?comp=${layoutName}`}
+        />
+      )}
+    </>
   );
 };
 

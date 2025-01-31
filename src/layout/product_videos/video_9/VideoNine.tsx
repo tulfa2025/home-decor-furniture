@@ -7,28 +7,26 @@ import { useContext } from "react";
 
 /* VIDEOS */
 
-const VideoSix = ({ layoutName, zIndex }) => {
+const VideoNine = ({ layoutName, zIndex }) => {
   const deviceOS = useContext(DeviceContext);
 
   return (
     <>
       <VideoDemo
-        posterSrc={
-          deviceOS === "Other"
-            ? "videos/banner/sofa_video_compressed-desktop.jpg"
-            : "videos/product/Mobile/Sofa_veritical view_compressed-mobile.jpg"
-        }
+        posterSrc={"videos/product/BABY CRIB-natural.png"}
         layoutName={layoutName}
         zIndex={zIndex}
         videoSourceRef={
           deviceOS === "Other"
-            ? "videos/banner/sofa_video_compressed.mp4"
-            : "videos/product/Mobile/Sofa_veritical view_compressed.mp4"
+            ? "videos/product/BABY CRIB_compressed.mp4"
+            : "videos/product/Mobile/BABY_CRIB_MOBILE.mp4"
         }
-        scrollMap={scrollTransformValues.gross}
+        videoId={1024593444}
+        scrollMap={scrollTransformValues.demoTemplate
+        }
       />
     </>
   );
 };
 
-export default VideoSix;
+export default VideoNine;

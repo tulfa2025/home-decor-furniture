@@ -16,23 +16,16 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       backgroundStyle={{
         backgroundColor: 'transparent'
       }}
+      resize={false}
     >
       <div className={styles.int_container}>
       <iframe 
         src='https://app.vectary.com/p/20tEclig6faVL7mlvKkfLJ' 
         allow="xr-spatial-tracking"
-        height='90%'
-        width='90%'
+        height='100%'
+        width='100%'
         style={{ border: 'none' }}
       />
-      {/* <div
-      style={{
-        backgroundColor: 'black',
-        height: '100%',
-        width: '100%'
-      }}>
-
-      </div> */}
       </div>
     </LargeSlideContainer>
   );

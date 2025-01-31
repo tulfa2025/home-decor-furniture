@@ -35,7 +35,7 @@
     align-items: flex-start;
 
     @include variables.xs {
-        padding: 0px 20px;
+        padding: 0px 50px;
         flex-direction: column;
         height: max-content;
         row-gap: 20px;
@@ -47,10 +47,14 @@
         flex-direction: row;
         height: clamp(150px, 50vh, 350px);
         row-gap: unset;
+
+        @media(orientation: portrait){
+            padding: 0px 50px;
+        }
     }
 
     .written_content_header_container{
-        flex: 50%;
+        flex: 55%;
         display: flex;
         width: 100%;
 
