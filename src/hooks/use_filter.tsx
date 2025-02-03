@@ -19,7 +19,7 @@ const useFilter = (setIsModalOpen, layoutName) => {
             const component = searchParams.get("comp");
             const num = Number(component)
 
-            if(filter && num === layoutName){
+            if(num === layoutName){
 
                 setIsModalOpen(true);
                 filterResult.current = filter

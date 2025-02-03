@@ -41,7 +41,7 @@ const MenuPopup = ({
           scrollDistance = 0;
         } else {
           scrollDistance =
-            scrollDetails.scrollPositions[currentSlideInternal] + viewportSize.height;
+            scrollDetails.scrollPositions[currentSlideInternal] 
         }
 
         window.scrollTo({

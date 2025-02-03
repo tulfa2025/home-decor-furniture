@@ -78,19 +78,19 @@ const FlipBook = ({ layoutName, zIndex }) => {
     scrollY,
     [
       0,
-      viewportSize.width > 768
+      viewportSize.width >= 960
         ? yPosition - viewportSize.height
-        : yPosition - scrollHeight * 0.65,
-      viewportSize.width > 768 ? yPosition : yPosition - viewportSize.height,
-      yPosition + viewportSize.height + scrollHeight * 0.7,
-      yPosition + viewportSize.height + scrollHeight * 1.1,
+        : yPosition - scrollHeight * 0.6,
+      viewportSize.width >=960 ? yPosition : yPosition - scrollHeight * 0.1,
+      yPosition  + scrollHeight * 0.6,
+      yPosition  + scrollHeight * 1,
     ],
     [
-      viewportSize.height * 2,
-      viewportSize.height * 2,
+      viewportSize.height * 1.5,
+      viewportSize.height * 1.5,
       0,
       0,
-      -viewportSize.height * 2,
+      -viewportSize.height * 1.5,
     ]
   );
 

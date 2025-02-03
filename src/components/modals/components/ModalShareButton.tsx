@@ -1,6 +1,6 @@
 "use client";
 import TulfaShareButton from "@/assets/icons/tulfa_share_icon";
-import styles from "../standard/modal_container.module.scss";
+import styles from "./ModalShareButton.module.scss";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
@@ -37,7 +37,7 @@ const ModalShareButton = ({urlLink, handleIsToastOpen, appliedFilter}) => {
   };
 
   const handleOnClick = async () => {
-    if (navigator?.share && viewportSize.maxWidth < 960) {
+    if (navigator?.share && viewportSize.width < 960) {
       try {
         await navigator.share(shareData);
         /* ON SUCCESS HANDLER */
@@ -51,7 +51,7 @@ const ModalShareButton = ({urlLink, handleIsToastOpen, appliedFilter}) => {
   };
 
   const handleCopyLink = async() => {
-    if (viewportSize.maxWidth > 960) {
+    if (viewportSize.width > 960) {
       try {
         /* ON SUCCESS HANDLER */
         handleIsToastOpen(true)

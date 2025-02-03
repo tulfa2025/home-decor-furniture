@@ -56,7 +56,7 @@ const ProductVariation = ({
 
   const scrollHeight = calculateScrollHeight(
     viewportSize.height,
-    viewportSize.width > 960 ? 3 : 4
+    viewportSize.width > 960 ? 3 : 2
   );
 
   /* ANIMATION START AND END POSITION */
@@ -97,22 +97,22 @@ const ProductVariation = ({
     [
       0,
       viewportSize.width > 960
-        ? yPosition + scrollHeight * 0.8
+        ? yPosition + scrollHeight * 0.1
+        : yPosition + scrollHeight * 0.1,
+      viewportSize.width > 960
+        ? yPosition + scrollHeight * 0.15
         : yPosition + scrollHeight * 0.2,
       viewportSize.width > 960
-        ? yPosition + scrollHeight * 0.85
+        ? yPosition + scrollHeight * 0.3
         : yPosition + scrollHeight * 0.5,
-      viewportSize.width > 960
-        ? yPosition + scrollHeight * 0.85
-        : yPosition + scrollHeight * 0.9,
     ],
     [
-      viewportSize.width > 960 ? viewportSize.height * 1.2 : scrollHeight * 0.4,
-      viewportSize.width > 960 ? viewportSize.height * 1.2 : scrollHeight * 0.4,
+      viewportSize.width > 960 ? viewportSize.height * 1.2 : scrollHeight * 0.6,
+      viewportSize.width > 960 ? viewportSize.height * 1.2 : scrollHeight * 0.6,
       viewportSize.width > 960
         ? viewportSize.height * 1.2
         : scrollHeight * 0.35,
-      viewportSize.width > 960 ? -viewportSize.height * 0.1 : 0,
+      viewportSize.width > 960 ? -viewportSize.height * 0.1 : -viewportSize.height * 0.1,
     ]
   );
 

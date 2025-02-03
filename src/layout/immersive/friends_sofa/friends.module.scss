@@ -3,6 +3,14 @@
 .int_container {
     width: 100vw;
     height: 100vh;
+    
+    @include variables.xs {
+        margin-top: 80px;
+    }
+
+    @include variables.md {
+        margin-top: 0
+    }
 
     .int {
         object-fit: cover;

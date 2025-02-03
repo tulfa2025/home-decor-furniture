@@ -22,7 +22,7 @@ const VideoDemo = ({
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.75);
+  const isInView = useInView(inViewRef, 0.5);
 
   return (
     <DemoTemplate 

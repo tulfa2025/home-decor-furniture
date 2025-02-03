@@ -111,12 +111,12 @@ const CtaTertiary: React.FC<LayoutProps> = ({
   const translateAnimationOne = useTransform(
     scrollY,
     [
-      yPosition + viewportSize.height * 0.5, 
-      yPosition + scrollHeight
+      yPosition, 
+      yPosition + scrollHeight * 0.8
     ],
     [
-      viewportSize.width > 960 ? viewportSize.height * 1 : viewportSize.height * 1.5, 
-      -viewportSize.height * 2
+     viewportSize.height * 1.1, 
+      -viewportSize.height * 1.5
     ]
   );
   const springyTranslateAnimationOne = useSpring(translateAnimationOne, {
@@ -131,18 +131,18 @@ const CtaTertiary: React.FC<LayoutProps> = ({
     scrollY,
     [
       0, 
+      yPosition - scrollHeight * 0.5,
       yPosition,
-      yPosition + viewportSize.height,
-      yPosition + viewportSize.height + scrollHeight * 0.3,
-      yPosition + viewportSize.height + scrollHeight * 0.4
+      yPosition + scrollHeight * 0.5,
+      yPosition + scrollHeight * 0.6
 
     ],
     [
-      viewportSize.height / 3,
-      viewportSize.height / 3,
-      viewportSize.height / 2,
-      viewportSize.height / 2,
-      -viewportSize.height / 3,
+      viewportSize.height / 4,
+      viewportSize.height / 4,
+      viewportSize.height / 2.5,
+      viewportSize.height / 2.5,
+      0,
     ]
   );
 

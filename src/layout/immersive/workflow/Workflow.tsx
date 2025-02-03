@@ -5,7 +5,7 @@ import Image from "next/image";
 /* CUSTOM HOOKS */
 /* CONTEXT */
 import MiscDemoTemplate from "@/components/layout_templates/misc_content_demo/MiscDemoTemplate";
-import workflow from '../../../assets/images/immersive/workflow.png'
+import workflow from '../../../assets/images/immersive/tulfa-process.png'
 import scrollTransformValues from "@/utils/scrollTransformValues";
 
 const Workflow = ({

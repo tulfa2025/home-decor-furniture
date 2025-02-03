@@ -18,7 +18,7 @@ const useGoTo = (setCurrentSlide, scrollContainerRef, scrollDetails) => {
       if (component) {
         setCurrentSlide(num);
 
-        const scrollDistance = scrollDetails.scrollPositions[num] + viewportSize.height;
+        const scrollDistance = scrollDetails.scrollPositions[num];
 
         window.scrollTo({
           top: scrollDistance,

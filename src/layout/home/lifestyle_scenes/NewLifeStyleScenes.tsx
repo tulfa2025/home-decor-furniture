@@ -53,7 +53,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.5);
+  const isInView = useInView(inViewRef, 0.75);
   /*POPUPBUTTON ANIMATION */
   useEffect(() => {
     if (isInView) {

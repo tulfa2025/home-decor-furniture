@@ -20,6 +20,9 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       zIndex={zIndex}
       scrollMap={scrollTransformValues.functionality}
       resize={false}
+      backgroundStyles={{
+        backgroundColor: 'transparent'
+      }}
     >
       {/* FUNCTIONALITY CAROUSEL  */}
       <div className={styles.int_container}>
