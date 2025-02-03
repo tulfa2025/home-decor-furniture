@@ -2,8 +2,33 @@
 import scrollTransformValues from "@/utils/scrollTransformValues";
 import styles from "./config.module.scss";
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
+import useInView from "@/hooks/use_inview";
+import { useRef, useState, useEffect } from "react";
 
 const ProductConfig: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  const inViewRef = useRef(null);
+  const isInView = useInView(inViewRef, 0.75);
+
+  const timeoutRef = useRef(null)
+
+  useEffect(()=>{
+
+    if(isInView){
+
+      clearTimeout(timeoutRef.current);
+
+      timeoutRef.current = setTimeout(()=>{
+        setIsLoading(true);
+      }, 1000)
+    } else {
+      clearTimeout(timeoutRef.current);
+      
+    }
+  }, [isInView])
+
   return (
     <LargeSlideContainer
       layoutName={layoutName}
@@ -18,14 +43,15 @@ const ProductConfig: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         backgroundColor: 'transparent'
       }}
     >
-      <div className={styles.int_container}>
-        <iframe 
+      <div className={styles.int_container} ref={inViewRef}>
+        { isLoading ? <iframe 
           src='https://xr.tulfa.com/p/7Zq7XSsg4sar6DGVoME6Tp/' 
           allow="xr-spatial-tracking"
           height='100%'
           width='100%'
           style={{ border: 'none' }}
-        />
+          loading="lazy"
+        /> : ''}
       </div>
     </LargeSlideContainer>
   );

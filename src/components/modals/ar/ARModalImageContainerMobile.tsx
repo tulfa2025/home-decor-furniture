@@ -1,6 +1,6 @@
 "use client";
 import styles from "./ar_modal_container.module.scss";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import Image from "next/image";
 import Button from "@/components/button/Button";
 
@@ -9,6 +9,45 @@ const ARModalImageContainerMobile = memo(({ imageSet }) => {
   let imageArray = [];
   /* DETERMINE NUMBER OF IMAGES TO RENDER */
   let imageNo;
+
+  // IntersectionObserver callback function
+  const handleIntersection = (entries, observer) => {
+    entries.forEach((entry) => {
+      
+      if (entry.isIntersecting) {
+        const iframeWrapper = entry.target;
+
+
+          const newIframe = iframeWrapper.querySelector('iframe');
+
+        newIframe.style.display = "block";
+        observer.unobserve(iframeWrapper); // Stop observing once loaded
+      }
+    });
+  };
+
+  useEffect(() => {
+
+    let observer = null;
+    setTimeout(() => {
+      const iframes = document.querySelectorAll(".ar-wrapper"); // Get all iframe elements
+      // Create an IntersectionObserver to monitor iframe visibility
+      observer = new IntersectionObserver(handleIntersection, {
+        threshold: 0.75, // Adjust this threshold as needed (e.g., 25% visible to trigger loading)
+      });
+
+
+      iframes.forEach((iframe) => {
+        observer.observe(iframe); // Start observing each iframe
+      });
+    }, 1000);
+
+    return () => {
+      // Clean up observer when component unmounts
+      if(observer)observer.disconnect();
+      
+    };
+  }, []);
 
   if (imageSet.length > 0) {
     imageArray = [...imageSet];
@@ -38,13 +77,17 @@ const ARModalImageContainerMobile = memo(({ imageSet }) => {
           break;
         case 3:
           memoizedComponents.push(
-            <div key={i ** 2 + j} className={styles.modal_ar_container}>
+            <div
+              key={i ** 2 + j}
+              className={`${styles.modal_ar_container} ar-wrapper`}
+            >
               <iframe
                 src={imageArray[i][j]}
                 allow="xr-spatial-tracking"
                 height="100%"
                 width="100%"
-                style={{ border: "none" }}
+                style={{ border: "none", display: "none" }}
+                loading="lazy"
               />
             </div>
           );
@@ -63,7 +106,7 @@ const ARModalImageContainerMobile = memo(({ imageSet }) => {
   }
 
   return (
-    <div className={styles.modal_image_container_mobile}>
+    <div className={styles.modal_image_container_mobile} id="ar_container">
       {memoizedComponents}
     </div>
   );

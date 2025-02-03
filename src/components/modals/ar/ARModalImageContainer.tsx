@@ -74,6 +74,7 @@ const ARModalImageContainer = memo(({ imageSet }) => {
                 height="100%"
                 width="100%"
                 style={{ border: "none" }}
+                loading="lazy"
               />
             </div>
           );
