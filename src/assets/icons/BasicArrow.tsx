@@ -3,7 +3,8 @@ import React from 'react';
 
 const BasicArrow = ({
   height,
-  width
+  width,
+  arrowColor
 }) => {
 
     // const [isHovered, setIsHovered] = useState(false)
@@ -40,7 +41,7 @@ const BasicArrow = ({
             width="25"
             height="25"
             transform="rotate(-90 0 25)"
-            fill="white"
+            fill={arrowColor}
           />
         </g>
         <defs>

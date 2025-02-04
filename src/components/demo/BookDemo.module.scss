@@ -68,7 +68,7 @@
             @include variables.xs {
                 position: relative;
                 top: -7vh;
-                align-items: center;
+                align-items: start;
                 justify-content: start;
                 
             }
@@ -127,7 +127,7 @@
 
                 @include variables.xs {
                     width: 100%;
-                    padding: 0 10px;
+                    padding: 0 0px;
                 }
 
                 @include variables.md {

@@ -43,27 +43,27 @@
 .subheader_nav_activated_1 {
     /* TYPOGRAPHY */
     color: variables.$primaryColor;
-    @include variables.setTypography(12px, normal, 600, normal);
+    @include variables.setTypography(12px, normal, 500, normal);
 }
 
 .subheader_nav_disabled_1 {
     /* TYPOGRAPHY */
-    color: variables.$subHeaderTextDisabledOne;
+    color: #807DBD;
     text-align: center;
-    @include variables.setTypography(12px, normal, 400, normal);
+    @include variables.setTypography(12px, normal, 500, normal);
 }
 
 .subheader_nav_activated_2 {
     /* TYPOGRAPHY */
-    color:white;
-    @include variables.setTypography(12px, normal, 600, normal);
+    color:#FEFFFF;
+    @include variables.setTypography(12px, normal, 500, normal);
 }
 
 .subheader_nav_disabled_2 {
     /* TYPOGRAPHY */
-    color: rgba(255,255,255,0.9);
+    color: #BDBCD1;
     text-align: center;
-    @include variables.setTypography(12px, normal, 400, normal);
+    @include variables.setTypography(12px, normal, 500, normal);
 }
 
 .dropdown_bar_1{
@@ -99,11 +99,19 @@
     left: 0;
 
     @include variables.xs {
-        padding: var(--item-spacing-10, 10px) 20px;
+        padding: var(--item-spacing-10, 10px) 16px;
     }
-    @include variables.lg {
+
+    @include variables.md {
         padding: var(--item-spacing-10, 10px) 50px;
     }
+    @include variables.lg {
+        padding: var(--item-spacing-10, 10px) 100px;
+    }
+    @include variables.xl {
+        padding: var(--item-spacing-10, 10px) 120px;
+    }
+
 
     /* STYLE */
     z-index: 2000;
@@ -134,7 +142,7 @@
 
         .subheader_heading {
             /* DESKTOP - 1920 x 1080/SF Pro Display/Title 3 (semi-bolder) */
-            @include variables.setTypography(20px, normal, 400, normal);
+            @include variables.setTypography(20px, normal, 500, normal);
         }
 
         .subheader_nav {
@@ -175,10 +183,10 @@
                 background: variables.$quaternaryColor;
 
                 /* TYPOGRAPHY */
-                color: variables.$secondaryColor;
+                color: #433E99;
                 text-align: center;
                 /* DESKTOP - 1920 x 1080/SF Pro Display/Footnote */
-                @include variables.setTypography(12px, normal, 400, normal);
+                @include variables.setTypography(12px, normal, 500, normal);
             }
         }
     }
@@ -204,12 +212,14 @@
         @include variables.sm {
             min-width: 90%;
             max-width: 100%;
+            padding-left: 20px;
             
         }
 
         @include variables.md {
             min-width: 90%;
             max-width: 100%;
+            padding-left: 20px;
         }
 
         @include variables.xl {

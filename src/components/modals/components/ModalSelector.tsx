@@ -109,7 +109,7 @@ const ModalFilters = ({ selectionArray, selectedIndex, handleSelectedIndex }) =>
                     className={styles.background_highlight}
                     style={{
                    
-                        width: (containerWidth / selectionArray.length) - 10
+                        width: (containerWidth / selectionArray.length)
                     }}
 
                     animate={{

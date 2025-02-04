@@ -123,9 +123,9 @@ const BookDemoTemplate = ({ layoutName, zIndex, scrollMap = null }) => {
                 product content? Talk to us.
               </p>
               <Button
-                text="Book a Demo"
+                text="Schedule a Demo"
                 modifier="l-color"
-                buttonType={2}
+                buttonType={4}
                 externalLink="https://www.tulfa.com/contact-us"
               />
             </div>

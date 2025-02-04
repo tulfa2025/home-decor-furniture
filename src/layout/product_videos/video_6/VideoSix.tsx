@@ -25,7 +25,7 @@ const VideoSix = ({ layoutName, zIndex }) => {
             ? "videos/banner/sofa_video_compressed.mp4"
             : "videos/product/Mobile/Sofa_veritical view_compressed.mp4"
         }
-        scrollMap={scrollTransformValues.gross}
+        
       />
     </>
   );

@@ -2,6 +2,7 @@
 import VideoDemo from "@/components/video_demo/VIdeoDemo";
 
 import DeviceContext from "@/context/deviceContext";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 import { useContext } from "react";
 
 /* VIDEOS */
@@ -23,6 +24,7 @@ const VideoThree = ({ layoutName, zIndex }) => {
             ? "videos/product/gaming_chair.mp4"
             : "videos/product/Mobile/Chair_Vertical_version_compressed.mp4"
         }
+        scrollMap={scrollTransformValues.gross}
       />
     </>
   );

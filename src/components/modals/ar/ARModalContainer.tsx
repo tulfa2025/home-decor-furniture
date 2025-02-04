@@ -182,8 +182,8 @@ const ARModalContainer = ({
                   className={styles.exit_button_container}
                 >
                   <TulfaCloseButton
-                    height={40}
-                    width={40}
+                    height={42}
+                    width={42}
                     onClick={() => {
                       handleModalClose();
                       setIsActive(true);

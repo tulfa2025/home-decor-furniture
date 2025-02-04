@@ -1211,8 +1211,8 @@ const scrollTransformValues: ScrollTransformValues = {
     smallMob: {
       input: [
         [0, 0],
-        [1, -0.7],
-        [1, -0.2],
+        [1, -0.6],
+        [1, -0.1],
         [1, 0],
         [1, 1],
       ],

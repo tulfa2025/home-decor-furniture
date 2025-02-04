@@ -21,7 +21,7 @@ const ModalShareButton = ({urlLink, handleIsToastOpen, appliedFilter}) => {
   let BUTTONSIZE;
 
   if (viewportSize.width > 960) {
-    BUTTONSIZE = 40;
+    BUTTONSIZE = 42;
   } else if (viewportSize.width > 768) {
     BUTTONSIZE = 35;
   } else if (viewportSize.width > 300) {

@@ -2,7 +2,7 @@
 
 .closeup_modal {
     height: 100vh;
-    width: 100vw;
+    width: 90vw;
     position: fixed;
     z-index: 50;
     overflow-y: scroll;
@@ -13,7 +13,7 @@
     overscroll-behavior: contain;
 
     .closeup_card {
-        width: 90%;
+        width: 100%;
         box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.1);
         position: absolute;
         background-color: white;
@@ -83,8 +83,7 @@
 
 
                     .modal_button_container_inner {
-                        min-width: 80%;
-                        min-height: 40%;
+                        height: 31px;
                         flex-wrap: nowrap;
                         justify-content: center;
                         column-gap: 20px;
@@ -92,15 +91,14 @@
                         background-color: #433E99;
                         align-items: center;
                         border-radius: 30px;
-                        padding: 5px 0;
+                        padding: 7px 0;
                         overflow: hidden;
                         position: relative;
 
 
                         .background_highlight {
                             height: 80%;
-                            margin: 5px;
-
+                            margin: 0px;
                             background-color: white;
                             position: absolute;
                             left: 0;
@@ -125,15 +123,15 @@
                                 background-color: transparent;
 
                                 @include variables.sm {
-                                    font-size: 8px;
+                                    @include variables.setTypography(8px, normal, 500, normal)
                                 }
 
                                 @include variables.md {
-                                    font-size: 12px;
+                                    @include variables.setTypography(12px, normal, 500, normal)
                                 }
 
                                 @include variables.lg {
-                                    font-size: 14px;
+                                    @include variables.setTypography(14px, normal, 500, normal)
                                 }
                             }
                         }
@@ -150,18 +148,18 @@
 .modal_image_container {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    padding: 0 10px;
+    padding: 0 20px;
     row-gap: 20px;
     column-gap: 20px;
 
 }
 
 .modal_image_container_mobile {
-    margin-top: 10px;
+    margin-top: 7px;
     flex-direction: column;
     display: flex;
-    padding: 0 10px;
-    row-gap: 20px;
+    padding: 0 5px;
+    row-gap: 7px;
 }
 
  
@@ -169,7 +167,7 @@
 .modal_indiv_image_container {
     height: 100%;
     width: 100%;
-    border-radius: 25px;
+    border-radius: 8px;
     overflow: hidden;
     position: relative;
 

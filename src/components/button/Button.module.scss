@@ -1,6 +1,8 @@
 @use '@/styles/shared/variables';
 
-.button_three_container {
+
+/*BUTTON THREE STYLES*/
+.button_three_container_ver_1 {
     @include variables.setLayout(flex, space-between, center);
     position: relative;
     background-color: variables.$primaryColor;
@@ -31,11 +33,57 @@
         @include variables.setTypography(12px, normal, 500, normal);
     }
     @include variables.md {
+        @include variables.setTypography(12px, normal, 500, normal);
+    }
+
+    .pop_span {
+        color: white;
+    }
+}
+
+.button_three_container_ver_2 {
+    @include variables.setLayout(flex, space-between, center);
+    position: relative;
+    background-color: white;
+    color: #302C8C;
+    padding: 10px 20px;
+    z-index: 300;
+    pointer-events: auto;
+
+    /* STYLE */
+    @include variables.sm {
+        @include variables.setBorderNoColor(10px, 2px, solid);
+        height: 35px;
+        width: 170px;
+    }
+
+    @include variables.md {
+        @include variables.setBorderNoColor(10px, 2px, solid);
+  
+    }
+    @include variables.lg {
+        @include variables.setBorderNoColor(10px, 2px, solid);
+        
+
+    }
+
+    /* TYPOGRAPHY */
+    @include variables.sm {
+        @include variables.setTypography(12px, normal, 500, normal);
+    }
+    @include variables.md {
         @include variables.setTypography(11px, normal, 500, normal);
     }
 
+    .pop_span {
+        color: #302C8C;
+    }
 }
 
+
+
+
+/* BUTTON TWO STYLES*/
 .button_two_container {
     /* LAYOUT */
     @include variables.setLayout(flex, space-between, center);

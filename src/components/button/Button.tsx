@@ -53,6 +53,18 @@ export default function Button({
           modifier={modifier}
           onClick={onClick}
           externalLink={externalLink}
+          version={1}
+        />
+      );
+      break;
+    case 4:
+      CustomButton = (
+        <ButtonThree
+          text={text}
+          modifier={modifier}
+          onClick={onClick}
+          externalLink={externalLink}
+          version={2}
         />
       );
       break;
@@ -115,13 +127,35 @@ function ButtonTwo({ text, modifier, onClick, externalLink }: ButtonProps) {
   );
 }
 
-function ButtonThree({ text, modifier, onClick, externalLink }: ButtonProps) {
+function ButtonThree({
+  text,
+  modifier,
+  onClick,
+  externalLink,
+  version,
+}: ButtonProps) {
   // Toggle hover - prevent re renders
   const buttonRef = useRef(null);
+
+  let buttonStyle = '';
+  let arrowFill = ''
+
+  switch(version){
+    case 1:
+      buttonStyle = styles.button_three_container_ver_1;
+      arrowFill = 'white'
+      break
+    case 2:
+      buttonStyle = styles.button_three_container_ver_2;
+      arrowFill  = '#302C8C'
+      break
+    default:
+      break
+  }
   return (
     <button
       ref={buttonRef}
-      className={`${styles.button_three_container} ${styles[modifier]}`}
+      className={`${buttonStyle} ${styles[modifier]}`}
       onClick={onClick}
     >
       <span className={styles.pop_span}>
@@ -131,11 +165,7 @@ function ButtonThree({ text, modifier, onClick, externalLink }: ButtonProps) {
           text
         )}
       </span>
-      <BasicArrow 
-        height={25}
-        width={25}
-      />
-      
+      <BasicArrow height={25} width={25} arrowColor={arrowFill}/>
     </button>
   );
 }

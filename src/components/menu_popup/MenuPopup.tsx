@@ -48,7 +48,7 @@ const MenuPopup = ({
           top: scrollDistance,
           behavior: "smooth",
         });
-      }, 100);
+      }, 200);
     }
   }, [currentSlideInternal, scrollDetails]);
 
