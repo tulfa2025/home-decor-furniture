@@ -3,7 +3,8 @@ import scrollTransformValues from "@/utils/scrollTransformValues";
 import styles from "./config.module.scss";
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
 import useInView from "@/hooks/use_inview";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
+import DeviceContext from "@/context/deviceContext";
 
 const ProductConfig: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
@@ -12,7 +13,9 @@ const ProductConfig: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const inViewRef = useRef(null);
   const isInView = useInView(inViewRef, 0.5);
 
-  const timeoutRef = useRef(null)
+  const timeoutRef = useRef(null);
+
+  const deviceContext = useContext(DeviceContext)
 
   useEffect(()=>{
 
@@ -25,6 +28,10 @@ const ProductConfig: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       }, 500)
     } else {
       clearTimeout(timeoutRef.current);
+
+      if(deviceContext !== 'Other'){
+        setIsLoading(false)
+      }
       
     }
   }, [isInView])

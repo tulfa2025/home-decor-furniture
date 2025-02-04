@@ -2,8 +2,10 @@
 import scrollTransformValues from "@/utils/scrollTransformValues";
 import styles from "./banner.module.scss";
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import useInView from "@/hooks/use_inview";
+
+import DeviceContext from "@/context/deviceContext";
 
 const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
@@ -12,23 +14,25 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const inViewRef = useRef(null);
   const isInView = useInView(inViewRef, 0.25);
 
-  const timeoutRef = useRef(null)
+  const timeoutRef = useRef(null);
+
+  const deviceContext = useContext(DeviceContext)
 
   useEffect(()=>{
 
     if(isInView){
 
-     
-
       clearTimeout(timeoutRef.current);
-
-      console.log(timeoutRef)
 
       timeoutRef.current = setTimeout(()=>{
         setIsLoading(true);
-      }, 1000)
+      }, 500)
     } else {
       clearTimeout(timeoutRef.current);
+
+      if(deviceContext !== 'Other'){
+        setIsLoading(false)
+      }
       
     }
   }, [isInView])
