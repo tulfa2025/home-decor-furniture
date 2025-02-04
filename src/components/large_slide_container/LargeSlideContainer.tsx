@@ -13,6 +13,7 @@ import styles from "./LargeSlideContainer.module.scss";
 import useInView from "@/hooks/use_inview";
 import useWindowSize from "@/hooks/use_window_size";
 import calculateScrollHeight from "@/utils/calculate_scrollheight";
+import { scrollSpringProperties } from "@/utils/scrollTransformValues";
 
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 /* CUSTOM COMPONENTS */
@@ -115,10 +116,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
 
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
-    {
-      damping: 35,
-      stiffness: 150,
-    }
+    scrollSpringProperties
   );
 
   /* SET HEADER STYLE AT DIFFERNT INTERVALS */

@@ -12,6 +12,7 @@ import { motion, useSpring, useTransform, useScroll } from "framer-motion";
 
 import SlideContext from "@/context/changeSlide";
 import Image from "next/image";
+import { scrollSpringProperties } from "@/utils/scrollTransformValues";
 
 const FlipBook = ({ layoutName, zIndex }) => {
   // Get scroll height
@@ -96,10 +97,7 @@ const FlipBook = ({ layoutName, zIndex }) => {
 
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
-    {
-      damping: 40,
-      stiffness: 100,
-    }
+    scrollSpringProperties
   );
   return (
     <motion.div

@@ -18,7 +18,7 @@ import ipad from "../../../assets/images/immersive/Ipad 1.png";
 import sofa from "../../../assets/images/immersive/dr.png";
 import qr from "../../../assets/images/immersive/image 12.png";
 import useScrollTransform from "@/hooks/use_scrolltransform";
-import scrollTransformValues from "@/utils/scrollTransformValues";
+import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
 
 const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Get scroll height
@@ -76,10 +76,7 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
-    {
-      damping: 40,
-      stiffness: 150,
-    }
+    scrollSpringProperties
   );
 
   // Subheadr scroll

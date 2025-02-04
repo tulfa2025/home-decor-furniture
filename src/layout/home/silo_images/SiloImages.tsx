@@ -30,7 +30,7 @@ import useWindowSize from "@/hooks/use_window_size";
 import calculateScrollHeight from "@/utils/calculate_scrollheight";
 import usePopupPosition from "@/utils/calculate_popupbutton.loc";
 import useScrollTransform from "@/hooks/use_scrolltransform";
-import scrollTransformValues from "@/utils/scrollTransformValues";
+import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
 /* Images */
 import backgroundImage from "../../../assets/images/silo_images/np_A_cute_pink_and_blue_patterned_chair_with_wooden_le.png";
 import modalImageSet from "./image_sources_silo";
@@ -113,10 +113,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
-    {
-      damping: 40,
-      stiffness: 150,
-    }
+    scrollSpringProperties
   );
 
   /* DETECT POPUP */

@@ -10,7 +10,7 @@ const ProductConfig: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.75);
+  const isInView = useInView(inViewRef, 0.5);
 
   const timeoutRef = useRef(null)
 
@@ -22,7 +22,7 @@ const ProductConfig: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
       timeoutRef.current = setTimeout(()=>{
         setIsLoading(true);
-      }, 1000)
+      }, 500)
     } else {
       clearTimeout(timeoutRef.current);
       

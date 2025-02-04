@@ -16,6 +16,7 @@ import styles from "./ProductVariations.module.scss";
 /*CUSTOM HOOKS */
 import useInView from "@/hooks/use_inview";
 import calculateScrollHeight from "@/utils/calculate_scrollheight";
+import { scrollSpringProperties } from "@/utils/scrollTransformValues";
 
 /* CUSTOM COMPONENTS */
 import TitleBanner from "../title_banner/title_banner";
@@ -142,10 +143,7 @@ const ProductVariation = ({
 
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
-    {
-      damping: 35,
-      stiffness: 150,
-    }
+    scrollSpringProperties
   );
 
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);

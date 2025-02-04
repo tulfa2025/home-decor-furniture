@@ -16,7 +16,7 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 import CallOut from "../../call_out/CallOut";
 import Button from "../../button/Button";
 import useScrollTransform from "@/hooks/use_scrolltransform";
-import scrollTransformValues from "@/utils/scrollTransformValues";
+import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
 
 const MiscDemoTemplate = ({ 
   zIndex = 0, 
@@ -85,10 +85,7 @@ const MiscDemoTemplate = ({
 
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
-    {
-      damping: 35,
-      stiffness: 125,
-    }
+    scrollSpringProperties
   );
 
   

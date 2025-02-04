@@ -59,7 +59,7 @@ const GroupShots: React.FC<LayoutProps> = ({
 }) => {
 
     const changeTrackRef = useRef(null);
-    const isTrackInView = useInView(changeTrackRef, 0.85);
+    const isTrackInView = useInView(changeTrackRef, 0.65);
 
 
     return (

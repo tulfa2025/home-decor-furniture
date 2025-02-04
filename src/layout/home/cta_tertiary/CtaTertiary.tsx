@@ -23,7 +23,7 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 /* CONTEXT */
 import SlideContext from "@/context/changeSlide";
 import useScrollTransform from "@/hooks/use_scrolltransform";
-import scrollTransformValues from "@/utils/scrollTransformValues";
+import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
 
 
 const CtaTertiary: React.FC<LayoutProps> = ({
@@ -120,7 +120,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
     ]
   );
   const springyTranslateAnimationOne = useSpring(translateAnimationOne, {
-    damping: 35,
+    damping: 50,
     stiffness: 300
   });
 
@@ -147,8 +147,8 @@ const CtaTertiary: React.FC<LayoutProps> = ({
   );
 
   const springyTranslateAnimationTwo = useSpring(translateAnimationTwo, {
-    damping: 35,
-    stiffness: 300
+    damping: 50,
+    stiffness: 400
   });
 
   /* PAGE TRANSFORM */
@@ -166,10 +166,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
 
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
-    {
-      damping: 40,
-      stiffness: 80
-    }
+    scrollSpringProperties
   );
 
 

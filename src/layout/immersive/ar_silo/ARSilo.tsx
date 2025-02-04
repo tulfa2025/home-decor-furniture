@@ -32,7 +32,7 @@ import mockup from "../../../assets/images/immersive/mockup.png";
 import usePopupPosition from "@/utils/calculate_popupbutton.loc";
 import modalImageSet from "./ar_silo_images";
 import useScrollTransform from "@/hooks/use_scrolltransform";
-import scrollTransformValues from "@/utils/scrollTransformValues";
+import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
 import useFilter from "@/hooks/use_filter";
 
 const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
@@ -109,10 +109,7 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
-    {
-      damping: 40,
-      stiffness: 150,
-    }
+    scrollSpringProperties
   );
 
   /* DETECT POPUP */

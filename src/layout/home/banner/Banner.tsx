@@ -17,7 +17,7 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 import DeviceContext from "@/context/deviceContext";
 
 import useScrollTransform from "@/hooks/use_scrolltransform";
-import scrollTransformValues from "@/utils/scrollTransformValues";
+import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
 
 const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
   // Get scroll height
@@ -68,10 +68,7 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
 
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
-    {
-      damping: 40,
-      stiffness: 150,
-    }
+    scrollSpringProperties
   );
 
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);

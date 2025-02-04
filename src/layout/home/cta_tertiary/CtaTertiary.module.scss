@@ -71,7 +71,11 @@
             width: 175vw
         }
         @include variables.md {
-            width: 100vw
+            width: 100vw;
+
+            @media (orientation: portrait){
+                width: 175vw
+            }
         }
         .cta_image {
             /* LAYOUT */

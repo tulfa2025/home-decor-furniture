@@ -15,7 +15,7 @@ import CallOut from "@/components/call_out/CallOut";
 import VideoPlayer from "@/components/video/VideoPlayer";
 import DeviceContext from "@/context/deviceContext";
 import useScrollTransform from "@/hooks/use_scrolltransform";
-import scrollTransformValues from "@/utils/scrollTransformValues";
+import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
 
 const ARVid = ({ zIndex = 0, layoutName }) => {
 
@@ -82,10 +82,7 @@ const ARVid = ({ zIndex = 0, layoutName }) => {
 
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
-    {
-      damping: 35,
-      stiffness: 150,
-    }
+    scrollSpringProperties
   );
 
     /* SET HEADER STYLE AT DIFFERNT INTERVALS */

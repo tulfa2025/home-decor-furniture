@@ -16,7 +16,7 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 import CallOut from "../../call_out/CallOut";
 import Button from "../../button/Button";
 import useScrollTransform from "@/hooks/use_scrolltransform";
-import scrollTransformValues from "@/utils/scrollTransformValues";
+import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
 
 const DemoTemplate = ({ 
   zIndex = 0, 
@@ -107,10 +107,7 @@ const DemoTemplate = ({
 
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
-    {
-      damping: 35,
-      stiffness: 150,
-    }
+    scrollSpringProperties
   );
 
   /* SET HEADER STYLE AT DIFFERNT INTERVALS */

@@ -15,6 +15,11 @@ type ScrollTransformValues = {
   };
 };
 
+export const scrollSpringProperties = {
+  stiffness: 150,
+  damping: 45
+}
+
 const scrollTransformValues: ScrollTransformValues = {
   // Large Slide Container Template Default
   lscDefault: {
@@ -463,7 +468,8 @@ const scrollTransformValues: ScrollTransformValues = {
     mobile: {
       input: [
         [0, 0],
-        [1, -0.6],
+        [1, -0.7],
+        [1, -0.2],
         [1, 0],
         [1, 1],
       ],
@@ -471,19 +477,22 @@ const scrollTransformValues: ScrollTransformValues = {
         [1.5, 0],
         [1.5, 0],
         [0,0],
+        [0,0],
         [-1.5, 0],
       ],
     },
     smallMob: {
       input: [
         [0, 0],
-        [1, -0.5],
+        [1, -0.7],
+        [1, -0.2],
         [1, 0],
         [1, 1],
       ],
       transform: [
         [1.5, 0],
         [1.5, 0],
+        [0,0],
         [0,0],
         [-1.5, 0],
       ],
@@ -525,8 +534,8 @@ const scrollTransformValues: ScrollTransformValues = {
     smallMob: {
       input: [
         [0, 0],
-        [1, -0.9],
-        [1, -0.4],
+        [1, -1],
+        [1, -0.5],
         [1, 0],
         [1, 1],
       ],
@@ -673,7 +682,8 @@ const scrollTransformValues: ScrollTransformValues = {
     mobile: {
       input: [
         [0, 0],
-        [1, -0.6],
+        [1, -0.7],
+        [1, -0.2],
         [1, 0],
         [1, 1],
       ],
@@ -681,19 +691,23 @@ const scrollTransformValues: ScrollTransformValues = {
         [1.5, 0],
         [1.5, 0],
         [0,0],
+        [0,0],
         [-1.5, 0],
       ],
     },
     smallMob: {
       input: [
         [0, 0],
-        [1, -0.5],
+        [1, -0.7],
+        [1, -0.2],
         [1, 0],
+        
         [1, 1],
       ],
       transform: [
         [1.5, 0],
         [1.5, 0],
+        [0,0],
         [0,0],
         [-1.5, 0],
       ],
@@ -983,7 +997,7 @@ const scrollTransformValues: ScrollTransformValues = {
     mobile: {
       input: [
         [0, 0],
-        [1, -0.5],
+        [1, -0.3],
         [1, 0.5],
         [1, 1],
       ],

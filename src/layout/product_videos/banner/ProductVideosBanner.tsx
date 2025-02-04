@@ -16,7 +16,7 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 import DeviceContext from "@/context/deviceContext";
 import { useContext } from "react";
 import useScrollTransform from "@/hooks/use_scrolltransform";
-import scrollTransformValues from "@/utils/scrollTransformValues";
+import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
 
 /* VIDEOS */
 
@@ -70,10 +70,7 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const springyTransformShowcaseAnimationThree = useSpring(
     transformShowcaseAnimationThree,
-    {
-      damping: 40,
-      stiffness: 150,
-    }
+    scrollSpringProperties
   );
 
   const deviceOS = useContext(DeviceContext);
