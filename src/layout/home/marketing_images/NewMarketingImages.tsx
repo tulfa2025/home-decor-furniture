@@ -88,16 +88,19 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             alt=""
             className={styles.background_image_top}
             ref={inViewRef}
+            quality={25}
           />
           <Image
             src={backgroundImageTwo}
             alt=""
             className={styles.background_image_bottom_left}
+            quality={25}
           />
           <Image
             src={backgroundImageThree}
             alt=""
             className={styles.background_image_bottom_right}
+            quality={25}
           />
         </motion.section>
       </LargeSlideContainer>
