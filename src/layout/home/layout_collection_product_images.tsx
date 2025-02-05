@@ -24,7 +24,7 @@ import structureLayouts from "@/utils/structure_layouts";
 const layoutCollection: LayoutCollectionBase = [
     [Banner, 'Banner'],
     [SiloImages, 'Product Silos'],
-    // [CtaTertiary, ''],
+    [CtaTertiary, ''],
     [NewLifeStyleScenes, 'LifeStyle Scenes'],
     [ProSizeVar, 'Product Variations'],
     [ProColVar, 'Product Variations'],
@@ -36,8 +36,8 @@ const layoutCollection: LayoutCollectionBase = [
     // [FlipBook, ''],
     [FlatLayImages, 'Flat Lay'],
     [NewMarketingImages, 'Marketing Images'],
-    // [BookDemo, 'Book a Demo'],
-    // [Blogs, '']
+    [BookDemo, 'Book a Demo'],
+    [Blogs, '']
 ];
 
 const layoutCollectionMemoized = memoizeComponents(layoutCollection);
