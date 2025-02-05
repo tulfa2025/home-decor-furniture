@@ -8,8 +8,8 @@
     width: 100vw;
     height: 100%;
     background-color: rgba(245,245,247, 0.7);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    // -webkit-backdrop-filter: blur(10px);
+    // backdrop-filter: blur(10px);
     z-index: -1;
     
 }
@@ -77,8 +77,8 @@
     position: absolute;
     width: 100vw;
     height: 100%;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    // -webkit-backdrop-filter: blur(10px);
+    // backdrop-filter: blur(10px);
     background-color: rgba(245,245,247, 0.7);
     z-index: -1;
     

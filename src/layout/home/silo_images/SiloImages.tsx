@@ -121,13 +121,13 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   /* Calculate popup button position*/
   const popupPosition = usePopupPosition(viewportSize);
 
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  // const [isPopupVisible, setIsPopupVisible] = useState(false);
 
-  useEffect(() => {
-    if (!isInView) {
-      setIsPopupVisible(false);
-    } 
-  }, [isInView]);
+  // useEffect(() => {
+  //   if (!isInView) {
+  //     // setIsPopupVisible(false);
+  //   } 
+  // }, [isInView]);
 
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
 
@@ -136,9 +136,9 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     if (isInView) {
       if (v > yPosition) {
         setHeaderStyle(0);
-        setIsPopupVisible(true)
+        // setIsPopupVisible(true)
       } else {
-        setIsPopupVisible(false)
+        // setIsPopupVisible(false)
       }
     }
   });
@@ -203,8 +203,16 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
       {/* MODAL CONTAINER */}
       {/* BUTTON TRIGGER */}
-      <motion.div className={styles.popup_button_container} s>
-        {isPopupVisible && (
+      <motion.div className={styles.popup_button_container} 
+      
+        whileInView={{
+          display: 'block'
+        }}
+        initial={{
+          display: 'none'
+        }}
+      >
+        
           <TulfaPopupButton
             timer={0}
             height={60}
@@ -213,7 +221,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             text={"Take a closer look"}
             onClick={handleModalOpen}
           />
-        )}
+        
       </motion.div>
       {isModalOpen && (
         <ModalContainer
