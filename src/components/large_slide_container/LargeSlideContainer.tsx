@@ -23,6 +23,7 @@ import TitleBanner from "../title_banner/title_banner";
 import SlideContext from "@/context/changeSlide";
 import scrollTransformValues from "@/utils/scrollTransformValues";
 import useScrollTransform from "@/hooks/use_scrolltransform";
+import DeviceContext from "@/context/deviceContext";
 
 const LargeSlideContainer: React.FC<LayoutProps> = ({
   layoutName,
@@ -40,6 +41,8 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
   // Get scroll height
   const viewportSize = useWindowSize();
+
+  const deviceContext = useContext(DeviceContext)
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
@@ -89,8 +92,8 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
       yPosition + scrollHeight * 0.1
     ],
     [
-      resize ? 1.2 : 1, 
-      resize ? 1.2 : 1, 
+      resize && deviceContext === 'Other' ? 1.2 : 1, 
+      resize && deviceContext === 'Other' ? 1.2 : 1, 
       1
     ]
   );
