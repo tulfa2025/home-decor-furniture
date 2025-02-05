@@ -37,32 +37,19 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const modalRef = useRef(null);
   const handleModalOpen = () => {
-    setIsPopupVisible(false);
     setIsModalOpen(true);
   };
 
   const handleModalClose = () => {
-    setIsPopupVisible(true);
     setIsModalOpen(false);
   };
 
   // Ensure the ref is available before applying useScroll
   const scrollTargetRef = useRef(null);
 
-  /* DETECT POPUP */
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
-
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
   const isInView = useInView(inViewRef, 0.75);
-  /*POPUPBUTTON ANIMATION */
-  useEffect(() => {
-    if (isInView) {
-      setIsPopupVisible(true);
-    } else {
-      setIsPopupVisible(false);
-    }
-  }, [isInView]);
 
   const pathName = usePathname();
 
@@ -83,7 +70,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           className={styles.image_container}
           ref={inViewRef}
           style={{
-            filter: isModalOpen ? "blur(10px)" : "",
+            filter: isModalOpen && deviceContext === 'Other' ? "blur(10px)" : "",
           }}
         >
           <Image
@@ -100,25 +87,8 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       {/* BUTTON TRIGGER */}
       <motion.div
         className={styles.closeup_button_container}
-        initial={{
-          opacity: 0,
-
-        }}
-        style={{
-          display: isPopupVisible ? 'block' : 'none',
-        }}
-        whileInView={{
-          opacity: isPopupVisible ? 1 : 0,
-          transition: {
-            delay: 0.5,
-            duration: 0.1,
-          },
-        }}
-        viewport={{
-          amount: 0.5,
-        }}
       >
-        {isPopupVisible && (
+        {isInView && (
           <TulfaPopupButton
             timer={0}
             height={60}
