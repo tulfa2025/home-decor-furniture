@@ -290,14 +290,14 @@ const scrollTransformValues: ScrollTransformValues = {
         [1, -0.6],
         [1, -0.1],
         [1, 0.1],
-        [1, 1.1],
+        [1, 0.9],
       ],
       transform: [
         [1.5, 0],
         [1.5, 0],
         [0, 0],
         [0, 0],
-        [-1.5, 0],
+        [-1.7, 0],
       ],
     },
   },
@@ -997,13 +997,13 @@ const scrollTransformValues: ScrollTransformValues = {
     mobile: {
       input: [
         [0, 0],
-        [1, -0.3],
+        [1, -0.4],
         [1, 0.5],
         [1, 1],
       ],
       transform: [
-        [1.5, 0],
-        [1.5, 0],
+        [0, 0],
+        [0, 0],
         [0, 0],
         [-1.5, 0],
       ],
