@@ -121,7 +121,7 @@
         .silo_image_container_inner {
             /* LAYOUT */
             position: relative;
-            background-color: transparent;
+            background-color: white;
     
             @include variables.sm {
                 height: 100%;
@@ -168,7 +168,7 @@
             .silo_image {
                
                 object-fit: cover;
-                background-color: transparent;
+                background-color: white;
 
                 @include variables.sm {
                     object-position:50% 50%;

@@ -227,7 +227,6 @@ const CtaTertiary: React.FC<LayoutProps> = ({
             style={{
               position: "absolute",
               y: springyTranslateAnimationTwo,
-              backgroundColor: "transparent",
             }}
             className={styles.cta_image_container}
           >

@@ -1,16 +1,5 @@
 @use '@/styles/shared/variables';
 
-@mixin mask($scale, $translateY, $translateX){
-    width: 100%;
-    height: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: scale($scale) translateY($translateY) translateX($translateX);
-    outline: none;
-    box-shadow: none;
-
-}
 
 .video_container {
     /* LAYOUT */

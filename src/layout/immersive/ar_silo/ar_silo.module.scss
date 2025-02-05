@@ -25,6 +25,7 @@
         height:100vh;
         min-height: 700px;
         position: absolute;
+        z-index: 20;
 
         @include variables.md {
             width: 40vw;
@@ -88,8 +89,9 @@
     .left_container {
         height:100%;
         max-width: 60vw;
-        background-color: transparent;
+        background-color: white;
         position: relative;
+        z-index: 10;
 
         @include variables.xs {
             
@@ -116,7 +118,7 @@
             justify-content: center;
             align-items: flex-start;
             row-gap: 20px;
-            background-color: transparent;
+            background-color: white;
 
             .callout_header {
                 @include variables.xs {

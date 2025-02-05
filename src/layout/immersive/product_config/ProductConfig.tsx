@@ -46,9 +46,6 @@ const ProductConfig: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       zIndex={zIndex}
       scrollMap={scrollTransformValues.productConfig}
       resize={false}
-      backgroundStyles={{
-        backgroundColor: 'transparent'
-      }}
     >
       <div className={styles.int_container} ref={inViewRef}>
         { isLoading ? <iframe 

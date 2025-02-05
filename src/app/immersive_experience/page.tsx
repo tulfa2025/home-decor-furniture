@@ -14,6 +14,31 @@ export default function ImmersiveExperience() {
         activePagePath="/immersive_experience"
       >
         {/* ALL PAGES */}
+        <motion.div
+          style={{
+            zIndex: 9999,
+            position: 'fixed',
+            height:'100vh',
+            width: '100vw',
+            top: 0,
+            left: 0,
+            backgroundColor: 'white'
+            
+          }}
+          initial={{
+            opacity: 1
+          }}
+          animate={{
+            opacity: 0,
+            zIndex: -1
+          }}
+          transition={{
+            delay: 2,
+            transition: 0.5
+          }}
+        >
+
+        </motion.div>
         {layoutCollection.order.map((compName) => {
           const NextComp = layoutCollection[compName].component;
 
@@ -23,15 +48,9 @@ export default function ImmersiveExperience() {
             <motion.div
               key={compName}
               id={compName}
-              initial={{
-                opacity: 0,
-              }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: (1 + compName) * 0.5 }}
               style={{
                 height: "max-content",
                 minWidth: "100vw",
-                backgroundColor: "transparent",
                 pointerEvents: "none",
               }}
             >

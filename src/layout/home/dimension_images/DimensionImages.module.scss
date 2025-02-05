@@ -61,14 +61,12 @@
             @include variables.xs{
                 width: 80%;
                 object-position: 20% 80%;
-                transform: scale(1);
                 object-fit: cover;
 
             }
             @include variables.md{
                 width: 100%;
                 object-position: 50% 78%;
-                transform: scale(1);
                 object-fit: cover;
 
                 @media(orientation: portrait){
@@ -78,7 +76,6 @@
             }
             @include variables.lg{
                 object-position: 50% 70%;
-                transform: scale(1);
                 object-fit: cover;
                 
             }

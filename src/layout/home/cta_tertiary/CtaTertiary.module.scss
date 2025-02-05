@@ -4,7 +4,7 @@
     /* LAYOUT */
     @include variables.setLayout(flex, center, center, 0, column);
     height: 100%;
-    background-color: transparent;
+    background-color: white;
     position: relative;
     
     .cta_content {

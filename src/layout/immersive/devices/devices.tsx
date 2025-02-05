@@ -16,9 +16,6 @@ const Devices: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       bannerType="main-ie"
       zIndex={zIndex}
       scrollMap={scrollTransformValues.devices}
-      backgroundStyles={{
-        background: 'transparent'
-      }}
     >
       <div className={styles.int_container}>
         <Image src={fauxTreeSetting} alt="" className={styles.int} />

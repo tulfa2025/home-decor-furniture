@@ -45,9 +45,6 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       bannerType="main-ie"
       zIndex={zIndex}
       scrollMap={scrollTransformValues.immersive}
-      backgroundStyles={{
-        backgroundColor: 'transparent'
-      }}
       resize={false}
     >
       <div className={styles.int_container}  ref={inViewRef}>
