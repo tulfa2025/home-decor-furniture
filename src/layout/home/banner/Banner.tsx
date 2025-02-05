@@ -138,7 +138,7 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
               }
               type="video/mp4"
               altText=""
-              loop={true}
+              loop={deviceOS === "Other" ? true : false}
               autoplay={true}
               isInView={isInView}
               onVideoComplete={() => {}}

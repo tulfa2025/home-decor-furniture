@@ -22,9 +22,9 @@ import structureLayouts from "@/utils/structure_layouts";
 
 /* LAYOUT COLLECTION MUST BE IN DESIRED ORDER */
 const layoutCollection: LayoutCollectionBase = [
-    // [Banner, 'Banner'],
+    [Banner, 'Banner'],
     [SiloImages, 'Product Silos'],
-    [CtaTertiary, ''],
+    // [CtaTertiary, ''],
     [NewLifeStyleScenes, 'LifeStyle Scenes'],
     [ProSizeVar, 'Product Variations'],
     [ProColVar, 'Product Variations'],
@@ -33,7 +33,7 @@ const layoutCollection: LayoutCollectionBase = [
     [GroupShots, 'Group Shots'],
     [DimensionImages, 'Dimension Images'],
     [InstallationImages, 'Installation Images'],
-    [FlipBook, ''],
+    // [FlipBook, ''],
     [FlatLayImages, 'Flat Lay'],
     [NewMarketingImages, 'Marketing Images'],
     // [BookDemo, 'Book a Demo'],
