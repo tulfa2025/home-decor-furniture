@@ -189,7 +189,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                   src={backgroundImage}
                   alt=""
                   className={styles.silo_image}
-                  quality={80}
+                  quality={50}
                 />
               </motion.div>
             </div>

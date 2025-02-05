@@ -89,6 +89,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             priority
             className={styles.background_image}
             ref={scrollTargetRef}
+            quality={65}
           />
         </motion.section>
       </LargeSlideContainer>

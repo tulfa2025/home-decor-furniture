@@ -42,6 +42,7 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             style={{
               ...image_container_style,
             }}
+            quality={50}
           />
           <Image
             alt=""
@@ -49,6 +50,7 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             style={{
               ...image_container_style,
             }}
+            quality={50}
           />
           <Image
             alt=""
@@ -56,6 +58,7 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             style={{
               ...image_container_style,
             }}
+            quality={50}
           />
           <Image
             alt=""
@@ -63,6 +66,7 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             style={{
               ...image_container_style,
             }}
+            quality={50}
           />
 
           {viewportSize.width > 768 ? (
@@ -73,6 +77,7 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                 style={{
                   ...image_container_style,
                 }}
+                quality={50}
               />
               <Image
                 alt=""
@@ -80,6 +85,7 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                 style={{
                   ...image_container_style,
                 }}
+                quality={50}
               />
             </>
           ) : null}

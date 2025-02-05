@@ -201,7 +201,7 @@ const ProductVariation = ({
                 alt=""
                 priority
                 className={imageSet.backgroundStyling}
-                quality={80}
+                quality={70}
               />
             </motion.div>
 

@@ -130,7 +130,7 @@ const ModalImageContainer = memo(
             fullscreenToggle={true}
             isFocusOverlay={true}
             blur={true}
-            quality={70}
+            quality={60}
             handleFullscreenToggle={handleFullscreenToggle}
             imageIndex={imageIndex}
           />

@@ -82,6 +82,7 @@ const AutomaticCarousel: React.FC<AutomaticCarouaProps> = memo(
                   width: "100%",
                   objectFit: "cover",
                 }}
+                quality={50}
               />
             </motion.div>
           );
