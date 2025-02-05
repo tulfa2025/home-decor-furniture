@@ -15,6 +15,7 @@ import SlideContext from "@/context/changeSlide";
 import useScrollTransform from "@/hooks/use_scrolltransform";
 import scrollTransformValues from "@/utils/scrollTransformValues";
 import { scrollSpringProperties } from "@/utils/scrollTransformValues";
+import DeviceContext from "@/context/deviceContext";
 
 const BlogsTemplate: React.FC<LayoutProps> = ({
   layoutName,
@@ -81,6 +82,8 @@ const BlogsTemplate: React.FC<LayoutProps> = ({
     scrollSpringProperties
   );
 
+  const deviceContext = useContext(DeviceContext)
+
   return (
     <motion.div
       style={{
@@ -98,7 +101,7 @@ const BlogsTemplate: React.FC<LayoutProps> = ({
           position: "fixed",
           height: "100vh",
           width: "100vw",
-          y: springyTransformShowcaseAnimationThree,
+          y: deviceContext === 'Other' ? springyTransformShowcaseAnimationThree : transformShowcaseAnimationThree,
         }}
         ref={inViewRef}
       >

@@ -14,7 +14,7 @@ import SiloImages from "@/layout/home/silo_images/SiloImages";
 import ProSizeVar from "./size_var/ProSizeVar";
 import ProColVar from "./color_var/ProColVar";
 import ProTextVar from "./text_var/ProTextVar";
-import FlipBook from "./flip_book/FlipBook";
+// import FlipBook from "./flip_book/FlipBook";
 
 /* Memoize components */
 import { memoizeComponents } from "@/utils/memoize_components";

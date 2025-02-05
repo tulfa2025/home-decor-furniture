@@ -193,7 +193,7 @@ const ProductVariation = ({
             position: "fixed",
             height: viewportSize.width > 768 ? "140vh" : "130vh",
             width: "100vw",
-            y: springyTransformShowcaseAnimationThree,
+            y: deviceContext === 'Other' ? springyTransformShowcaseAnimationThree : transformShowcaseAnimationThree,
           }}
           ref={inViewRef}
         >
@@ -211,7 +211,7 @@ const ProductVariation = ({
               {/* BACKGROUND IMAGE */}
               <motion.div
                 style={{
-                  scale: springyTransformScaleAnimationOne,
+                  scale: deviceContext === 'Other' ? springyTransformScaleAnimationOne : 1,
                 }}
                 className={styles.background_image_container}
               >

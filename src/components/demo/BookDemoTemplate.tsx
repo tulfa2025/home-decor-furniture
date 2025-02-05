@@ -15,6 +15,7 @@ import bookDemoImageMob from "../../assets/images/book_demo/book_mobile.webp";
 import useScrollTransform from "@/hooks/use_scrolltransform";
 import scrollTransformValues from "@/utils/scrollTransformValues";
 import { scrollSpringProperties } from "@/utils/scrollTransformValues";
+import DeviceContext from "@/context/deviceContext";
 
 const BookDemoTemplate = ({ layoutName, zIndex, scrollMap = null }) => {
   // Get scroll height
@@ -86,6 +87,8 @@ const BookDemoTemplate = ({ layoutName, zIndex, scrollMap = null }) => {
     transformShowcaseAnimationThree,
     scrollSpringProperties
   );
+
+  const deviceContext = useContext(DeviceContext)
   return (
     <motion.div
       style={{
@@ -103,7 +106,7 @@ const BookDemoTemplate = ({ layoutName, zIndex, scrollMap = null }) => {
           position: "fixed",
           height: "100vh",
           width: "100vw",
-          y: springyTransformShowcaseAnimationThree,
+          y: deviceContext === 'Other' ? springyTransformShowcaseAnimationThree : transformShowcaseAnimationThree,
         }}
         ref={inViewRef}
       >

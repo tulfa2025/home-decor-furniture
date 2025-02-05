@@ -141,7 +141,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     >
       <motion.div
         style={{
-          y: springyTransformShowcaseAnimationThree,
+          y: deviceContext === 'Other' ? springyTransformShowcaseAnimationThree :  transformShowcaseAnimationThree,
           ...backgroundStyles,
         }}
         className={styles.large_slide_container}
@@ -157,7 +157,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
         <motion.section
           className={styles.large_slide_content_container}
           style={{
-            scale: springyTransformScaleAnimationOne,
+            scale: deviceContext === 'Other' ? springyTransformScaleAnimationOne : 1,
           }}
         >
           <motion.div

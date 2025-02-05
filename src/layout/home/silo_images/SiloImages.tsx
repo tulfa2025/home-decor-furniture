@@ -157,7 +157,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             position: "fixed",
             height: "100vh",
             width: "100vw",
-            y: springyTransformShowcaseAnimationThree,
+            y: deviceContext === 'Other' ? springyTransformShowcaseAnimationThree : transformShowcaseAnimationThree,
           }}
           ref={inViewRef}
         >

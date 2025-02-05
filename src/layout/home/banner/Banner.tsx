@@ -119,7 +119,7 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
           position: "fixed",
           height: "100vh",
           width: "100vw",
-          y: springyTransformShowcaseAnimationThree,
+          y: deviceOS === 'Other' ? springyTransformShowcaseAnimationThree : transformShowcaseAnimationThree,
         }}
         ref={inViewRef}
       >
