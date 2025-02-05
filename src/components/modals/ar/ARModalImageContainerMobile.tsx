@@ -1,6 +1,6 @@
 "use client";
 import styles from "./ar_modal_container.module.scss";
-import { memo, useEffect } from "react";
+import { memo, useEffect, useRef } from "react";
 import Image from "next/image";
 import Button from "@/components/button/Button";
 
@@ -10,24 +10,29 @@ const ARModalImageContainerMobile = memo(({ imageSet }) => {
   /* DETERMINE NUMBER OF IMAGES TO RENDER */
   let imageNo;
 
+  // Log timeouts  for each element
+  const timeoutRefs = useRef({});
   // IntersectionObserver callback function
   const handleIntersection = (entries, observer) => {
     entries.forEach((entry) => {
-      
       if (entry.isIntersecting) {
-        const iframeWrapper = entry.target;
+        const iframeWrapper: Element = entry.target;
 
+        // Clear timeout
+        clearTimeout(timeoutRefs[iframeWrapper.id]);
 
-          const newIframe = iframeWrapper.querySelector('iframe');
+        // Set new timeout
+        timeoutRefs[iframeWrapper.id] = setTimeout(() => {
+          const newIframe = iframeWrapper.querySelector("iframe");
 
-        newIframe.style.display = "block";
-        observer.unobserve(iframeWrapper); // Stop observing once loaded
+          newIframe.style.display = "block";
+          observer.unobserve(iframeWrapper); // Stop observing once loaded
+        }, 700);
       }
     });
   };
 
   useEffect(() => {
-
     let observer = null;
     setTimeout(() => {
       const iframes = document.querySelectorAll(".ar-wrapper"); // Get all iframe elements
@@ -35,17 +40,14 @@ const ARModalImageContainerMobile = memo(({ imageSet }) => {
       observer = new IntersectionObserver(handleIntersection, {
         threshold: 0.75, // Adjust this threshold as needed (e.g., 25% visible to trigger loading)
       });
-
-
       iframes.forEach((iframe) => {
         observer.observe(iframe); // Start observing each iframe
       });
-    }, 1000);
+    }, 500);
 
     return () => {
       // Clean up observer when component unmounts
-      if(observer)observer.disconnect();
-      
+      if (observer) observer.disconnect();
     };
   }, []);
 

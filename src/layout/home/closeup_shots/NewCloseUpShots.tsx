@@ -18,7 +18,7 @@ const ModalContainer = dynamic(
 import useInView from "@/hooks/use_inview";
 
 /* IMAGES */
-import backgroundImage from "../../../assets/images/closeup_shots/rug_one.png";
+import backgroundImage from "../../../assets/images/closeup_shots/rug_one.webp";
 import modalImageSet from "./closeup_shots_images";
 
 const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {

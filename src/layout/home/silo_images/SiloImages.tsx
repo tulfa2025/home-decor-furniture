@@ -32,7 +32,7 @@ import usePopupPosition from "@/utils/calculate_popupbutton.loc";
 import useScrollTransform from "@/hooks/use_scrolltransform";
 import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
 /* Images */
-import backgroundImage from "../../../assets/images/silo_images/np_A_cute_pink_and_blue_patterned_chair_with_wooden_le.png";
+import backgroundImage from "../../../assets/images/silo_images/np_A_cute_pink_and_blue_patterned_chair_with_wooden_le.webp";
 import modalImageSet from "./image_sources_silo";
 
 /* CONTEXT */

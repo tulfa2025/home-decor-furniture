@@ -2,7 +2,7 @@
 
 .closeup_modal {
     height: 100vh;
-    width: 100vw;
+    width: 90vw;
     position: fixed;
     z-index: 50;
     overflow-y: scroll;
@@ -13,7 +13,7 @@
     overscroll-behavior: contain;
 
     .closeup_card {
-        width: 90%;
+        width: 100%;
         box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.1);
         position: absolute;
         background-color: white;

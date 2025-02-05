@@ -13,15 +13,13 @@ const ProductConfigBanner = ({ layoutName, zIndex }) => {
   return (
     <>
       <VideoDemo
-        posterSrc={"videos/immersive/product_config_compressed-desktop.jpg"
-
-        }
+        posterSrc={"videos/immersive/product_config_compressed-desktop.jpg"}
         layoutName={layoutName}
         zIndex={zIndex}
         videoSourceRef={
           deviceOS === "Other"
             ? "videos/immersive/product_config_compressed.mp4"
-            : ""
+            : "videos/immersive/output_product_config_compressed.mp4"
         }
         scrollMap={scrollTransformValues.configBanner}
       />

@@ -4,12 +4,12 @@ import LargeSlideContainer from "@/components/large_slide_container/LargeSlideCo
 import scrollTransformValues from "@/utils/scrollTransformValues";
 
 /* INSTALLATION IMAGES */
-import imageOne from "../../../assets/images/installation_images/1.png";
-import imageTwo from "../../../assets/images/installation_images/2.png";
-import imageThree from "../../../assets/images/installation_images/3.png";
-import imageFour from "../../../assets/images/installation_images/4.png";
-import imageFive from "../../../assets/images/installation_images/5.png";
-import imageSix from "../../../assets/images/installation_images/6.png";
+import imageOne from "../../../assets/images/installation_images/1.webp";
+import imageTwo from "../../../assets/images/installation_images/2.webp";
+import imageThree from "../../../assets/images/installation_images/3.webp";
+import imageFour from "../../../assets/images/installation_images/4.webp";
+import imageFive from "../../../assets/images/installation_images/5.webp";
+import imageSix from "../../../assets/images/installation_images/6.webp";
 
 import Image from "next/image";
 

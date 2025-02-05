@@ -219,8 +219,8 @@ const scrollTransformValues: ScrollTransformValues = {
     mobile: {
       input: [
         [0, 0],
-        [1, -0.75],
-        [1, -0.25],
+        [1, -0.9],
+        [1, -0.4],
         [1, 0],
         [1, 1],
       ],
@@ -235,8 +235,8 @@ const scrollTransformValues: ScrollTransformValues = {
     smallMob: {
       input: [
         [0, 0],
-        [1, -0.75],
-        [1, -0.25],
+        [1, -0.9],
+        [1, -0.4],
         [1, 0],
         [1, 1],
       ],
@@ -502,8 +502,8 @@ const scrollTransformValues: ScrollTransformValues = {
     desktop: {
       input: [
         [0, 0],
-        [1, -0.5],
-        [1, 0],
+        [1, -0.4],
+        [1, 0.1],
         [1, 0.6],
         [1, 1],
       ],
@@ -534,8 +534,8 @@ const scrollTransformValues: ScrollTransformValues = {
     smallMob: {
       input: [
         [0, 0],
-        [1, -1],
-        [1, -0.5],
+        [1, -0.9],
+        [1, -0.4],
         [1, 0],
         [1, 1],
       ],
@@ -1195,8 +1195,8 @@ const scrollTransformValues: ScrollTransformValues = {
     mobile: {
       input: [
         [0, 0],
-        [1, -0.85],
-        [1, -0.35],
+        [1, -0.75],
+        [1, -0.25],
         [1, 0],
         [1, 1],
       ],
@@ -1211,8 +1211,8 @@ const scrollTransformValues: ScrollTransformValues = {
     smallMob: {
       input: [
         [0, 0],
-        [1, -0.6],
-        [1, -0.1],
+        [1, -0.5],
+        [1, 0],
         [1, 0],
         [1, 1],
       ],

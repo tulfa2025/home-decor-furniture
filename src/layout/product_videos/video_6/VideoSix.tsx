@@ -23,7 +23,7 @@ const VideoSix = ({ layoutName, zIndex }) => {
         videoSourceRef={
           deviceOS === "Other"
             ? "videos/banner/sofa_video_compressed.mp4"
-            : "videos/product/Mobile/Sofa_veritical view_compressed.mp4"
+            : "videos/product/Mobile/Sofa-banner-teaser_compressed.mp4"
         }
         
       />

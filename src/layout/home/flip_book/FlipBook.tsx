@@ -1,6 +1,6 @@
 "use client";
 /* IMAGES */
-import imageSeven from "../../../assets/images/installation_images/7.png";
+import imageSeven from "../../../assets/images/installation_images/7.webp";
 import styles from "./FlipBook.module.scss";
 
 import useWindowSize from "@/hooks/use_window_size";

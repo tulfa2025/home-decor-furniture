@@ -19,7 +19,7 @@ const PhoneDemo = ({ layoutName, zIndex }) => {
         videoSourceRef={
           deviceOS === "Other"
             ? "videos/immersive/phone_demo_compressed.mp4"
-            : ""
+            : "videos/immersive/output_phone_demo_compressed.mp4"
         }
         scrollMap={scrollTransformValues.phoneDemo}
       />

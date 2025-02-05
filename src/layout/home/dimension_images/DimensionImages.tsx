@@ -5,8 +5,8 @@ import Image from 'next/image'
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
 
 /* DIMENSION IMAGES */
-import fauxTreeSetting from '../../../assets/images/dimension_images/armchair_setting.png'
-import fauxTreeBlank from '../../../assets/images/dimension_images/Dimension Images 1.png'
+import fauxTreeSetting from '../../../assets/images/dimension_images/armchair_setting.webp'
+import fauxTreeBlank from '../../../assets/images/dimension_images/Dimension Images 1.webp'
 
 const DimensionImages: React.FC<LayoutProps> = ({
     layoutName,

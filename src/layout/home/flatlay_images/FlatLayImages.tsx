@@ -5,10 +5,12 @@ import styles from "./FlatLayImages.module.scss";
 import Image from "next/image";
 /* FLATLAY IMAGES */
 import flatlayOneImage from "../../../assets/images/flatlay_images/FlatLay1.jpg";
+import flatlayOneMobImage from "../../../assets/images/flatlay_images/FlatLay-mobile-2.webp";
 import flatlayTwoImage from "../../../assets/images/flatlay_images/scene1.png";
 import { useState, useRef, useEffect } from "react";
 
 import useInView from "@/hooks/use_inview";
+import useWindowSize from "@/hooks/use_window_size";
 
 const FlatLayImages: React.FC<LayoutProps> = ({
   layoutName,
@@ -22,6 +24,8 @@ const FlatLayImages: React.FC<LayoutProps> = ({
 
   const changeTrackRef = useRef(null);
   const isTrackInView = useInView(inViewRef, 0.85);
+
+  const viewportSize = useWindowSize()
 
   useEffect(()=>{
     if(isTrackInView){
@@ -53,7 +57,7 @@ const FlatLayImages: React.FC<LayoutProps> = ({
           ref={inViewRef}
         >
           <Image
-            src={flatlayOneImage}
+            src={viewportSize.height > viewportSize.width ? flatlayOneMobImage : flatlayOneImage }
             alt=""
             className={styles.first_image}
           />

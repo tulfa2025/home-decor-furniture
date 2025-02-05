@@ -1,7 +1,7 @@
 "use client";
 import styles from "./CtaTertiary.module.scss";
 import Image from "next/image";
-import sofaImage from "../../../assets/images/cta_tertiary/Green_sofa.png";
+import sofaImage from "../../../assets/images/cta_tertiary/Green_sofa.webp";
 
 import {
   motion,

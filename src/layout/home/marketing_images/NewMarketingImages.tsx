@@ -20,9 +20,9 @@ import useInView from "@/hooks/use_inview";
 
 /* IMAGES */
 import modalImageSet from "./marketing_images";
-import backgroundImageOne from "../../../assets/images/marketing_images/kv2.jpg";
-import backgroundImageTwo from "../../../assets/images/marketing_images/mockup revista 2.jpg";
-import backgroundImageThree from "../../../assets/images/marketing_images/mockup laptop.jpg";
+import backgroundImageOne from "../../../assets/images/marketing_images/kv2.webp";
+import backgroundImageTwo from "../../../assets/images/marketing_images/mockup revista 2.webp";
+import backgroundImageThree from "../../../assets/images/marketing_images/mockup laptop.webp";
 
 const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 

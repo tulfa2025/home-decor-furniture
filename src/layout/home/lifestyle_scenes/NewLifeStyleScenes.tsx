@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 
 /* CUSTOM PROPS */
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
-import backgroundImage from "../../../assets/images/lifestyle_scenes/placeholder/image_two.png";
+import backgroundImage from "../../../assets/images/lifestyle_scenes/placeholder/image_two.webp";
 import { modalSelectionArrayLifestyle } from "@/utils/constants";
 const ModalContainer = dynamic(
   () => import("@/components/modals/standard/ModalContainer"),
