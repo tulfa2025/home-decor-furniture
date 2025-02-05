@@ -70,12 +70,10 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const modalRef = useRef(null);
   const handleModalOpen = () => {
-    setIsPopupVisible(false);
     setIsModalOpen(true);
   };
 
   const handleModalClose = () => {
-    setIsPopupVisible(true);
     setIsModalOpen(false);
   };
 
@@ -193,19 +191,19 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
       {/* MODAL CONTAINER */}
       {/* BUTTON TRIGGER */}
-      <motion.div className={styles.popup_button_container} 
+      {isInView && !isModalOpen ?<motion.div className={styles.popup_button_container} 
       >
         
-          {isInView ? <TulfaPopupButton
+           <TulfaPopupButton
             timer={0}
             height={60}
             width={300}
             textStyle={popupPosition.textStyle}
             text={"Take a closer look"}
             onClick={handleModalOpen}
-          /> : <></>}
+          /> 
         
-      </motion.div>
+      </motion.div>: <></>}
       {isModalOpen && (
         <ModalContainer
           ref={modalRef}

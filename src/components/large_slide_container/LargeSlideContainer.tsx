@@ -32,17 +32,17 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   paragraph,
   zIndex = 0,
   dynamicHeader = false,
-  bannerType = 'default',
+  bannerType = "default",
   scrollMap = null,
-  backgroundStyles={},
-  resize=true
+  backgroundStyles = {},
+  resize = true,
 }) => {
   // Subheader scroll
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
   // Get scroll height
   const viewportSize = useWindowSize();
 
-  const deviceContext = useContext(DeviceContext)
+  const deviceContext = useContext(DeviceContext);
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
@@ -60,10 +60,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     }
   }, [isInView]);
 
-  const scrollHeight = calculateScrollHeight(
-    viewportSize.height,
-   2
-  );
+  const scrollHeight = calculateScrollHeight(viewportSize.height, 2);
 
   /* ANIMATION START AND END POSITION */
   const [yPosition, setYPosition] = useState(0);
@@ -86,15 +83,11 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   /* CONTENT ANIMATIONS */
   const transformScaleAnimationOne = useTransform(
     scrollY,
+    [0, yPosition, yPosition + scrollHeight * 0.1],
     [
-      0, 
-      yPosition, 
-      yPosition + scrollHeight * 0.1
-    ],
-    [
-      resize && deviceContext === 'Other' ? 1.2 : 1, 
-      resize && deviceContext === 'Other' ? 1.2 : 1, 
-      1
+      resize && deviceContext === "Other" ? 1.2 : 1,
+      resize && deviceContext === "Other" ? 1.2 : 1,
+      1,
     ]
   );
   const springyTransformScaleAnimationOne = useSpring(
@@ -110,7 +103,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     viewportSize,
     yPosition,
     !scrollMap ? scrollTransformValues.lscDefault : scrollMap
-  )
+  );
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
     input,
@@ -135,15 +128,6 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     }
   });
 
-
-  const [isRendered, setIsRendered] = useState(false);
-
-  useEffect(()=>{
-    setTimeout(()=>{
-      setIsRendered(true)
-    }, 2000)
-  }, [])
-
   return (
     <motion.div
       style={{
@@ -158,18 +142,15 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
       <motion.div
         style={{
           y: springyTransformShowcaseAnimationThree,
-          ...backgroundStyles
+          ...backgroundStyles,
         }}
         className={styles.large_slide_container}
         ref={inViewRef}
       >
-        {isRendered ? (
-          <>
-        
         <motion.div className={styles.large_slide_callout_container}>
-          <TitleBanner 
-            title={title} 
-            paragraph={paragraph} 
+          <TitleBanner
+            title={title}
+            paragraph={paragraph}
             bannerType={bannerType}
           />
         </motion.div>
@@ -189,11 +170,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
             {children}
           </motion.div>
         </motion.section>
-      </>
-    
-    ) : <></>}
-        
-    </motion.div>
+      </motion.div>
     </motion.div>
   );
 };

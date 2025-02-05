@@ -33,19 +33,34 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const modalRef = useRef(null);
   const handleModalOpen = () => {
+    setIsPopupVisible(false);
     setIsModalOpen(true);
   };
 
   const handleModalClose = () => {
+    setIsPopupVisible(true);
     setIsModalOpen(false);
   };
 
   // Ensure the ref is available before applying useScroll
   const scrollTargetRef = useRef(null);
 
+  /* DETECT POPUP */
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.5);
+  const isInView = useInView(inViewRef, 0.3);
+  /*POPUPBUTTON ANIMATION */
+  useEffect(() => {
+
+    if(isInView){
+      setIsPopupVisible(true);
+    } else {
+      setIsPopupVisible(false)
+    }
+    
+  }, [isInView]);
 
   const deviceContext = useContext(DeviceContext)
 
@@ -78,8 +93,23 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       {/* BUTTON TRIGGER */}
       <motion.div
         className={styles.closeup_button_container}
+        initial={{
+          opacity: 0,
+        }}
+        style={{
+          display: isPopupVisible ? 'block' : 'none',
+        }}
+        whileInView={{
+          opacity: isPopupVisible ? 1 : 0,
+          transition: {
+            duration: 0.5,
+          },
+        }}
+        viewport={{
+          amount: 0.5,
+        }}
       >
-        {isInView&& (
+        {isPopupVisible && (
           <TulfaPopupButton
             timer={0}
             height={60}
