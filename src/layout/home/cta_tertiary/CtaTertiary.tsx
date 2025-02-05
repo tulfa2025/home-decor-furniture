@@ -226,7 +226,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
           <motion.div
             style={{
               position: "absolute",
-              y: deviceContext === 'Other' ? springyTranslateAnimationTwo : '35vh',
+              y: deviceContext === 'Other' ? springyTranslateAnimationTwo : '40vh',
             
             }}
             className={styles.cta_image_container}

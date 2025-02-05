@@ -124,11 +124,9 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   useEffect(() => {
-    if (isInView) {
-      setIsPopupVisible(true);
-    } else {
+    if (!isInView) {
       setIsPopupVisible(false);
-    }
+    } 
   }, [isInView]);
 
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
@@ -138,6 +136,9 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     if (isInView) {
       if (v > yPosition) {
         setHeaderStyle(0);
+        setIsPopupVisible(true)
+      } else {
+        setIsPopupVisible(false)
       }
     }
   });
