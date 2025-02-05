@@ -35,7 +35,7 @@ const ProductVariation = ({
   paragraph,
   zIndex = 0,
   dynamicHeader = false,
-  scrollMap=null
+  scrollMap = null,
 }) => {
   // Get scroll height
   const viewportSize = useWindowSize();
@@ -114,7 +114,9 @@ const ProductVariation = ({
       viewportSize.width > 960
         ? viewportSize.height * 1.2
         : scrollHeight * 0.35,
-      viewportSize.width > 960 ? -viewportSize.height * 0.1 : -viewportSize.height * 0.1,
+      viewportSize.width > 960
+        ? -viewportSize.height * 0.1
+        : -viewportSize.height * 0.1,
     ]
   );
 
@@ -135,7 +137,7 @@ const ProductVariation = ({
     viewportSize,
     yPosition,
     !scrollMap ? scrollTransformValues.varDefault : scrollMap
-  )
+  );
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
     input,
@@ -162,8 +164,16 @@ const ProductVariation = ({
     }
   });
 
+  const deviceContext = useContext(DeviceContext);
 
-  const deviceContext = useContext(DeviceContext)
+  const [isRendered, setIsRendered] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log('Triggered render')
+      setIsRendered(true);
+    }, 3000);
+  }, []);
 
   return (
     <>
@@ -187,70 +197,78 @@ const ProductVariation = ({
           }}
           ref={inViewRef}
         >
-          <motion.section className={styles.product_container}>
-            {/* CALLOUT BANNER CONTAINER */}
-            <div className={styles.title_banner_container}>
-              <TitleBanner title={title} paragraph={paragraph} bannerType='default'/>
-            </div>
-
-            {/* BACKGROUND IMAGE */}
-            <motion.div
-              style={{
-                scale: springyTransformScaleAnimationOne,
-              }}
-              className={styles.background_image_container}
-            >
-              <Image
-                src={imageSet.background}
-                alt=""
-                priority
-                className={imageSet.backgroundStyling}
-                quality={deviceContext === 'Other' ? 50 : 1}
-              />
-            </motion.div>
-
-            {/* VARIATION CONTAINER */}
-            <motion.div
-              className={styles.product_variation_content_container}
-              style={{
-                y: springyTransformPopupAnimationOne,
-              }}
-            >
-              {/* IMAGE CONTAINER */}
-              <div className={styles.images_container}>
-                {imageSet["top"].map((imageSource, index) => {
-                  return (
-                    <motion.div
-                      key={index}
-                      className={styles.indiv_image_container}
-                      style={{
-                        opacity: viewportSize.height > 768 ? 0 : 1,
-                        y: viewportSize.height > 768 ? 100 : 0,
-                      }}
-                      whileInView={{
-                        opacity: 1,
-                        y: 0,
-                      }}
-                      transition={{
-                        delay: (index + 1) * 0.2,
-                        duration: 0.5,
-                      }}
-                    >
-                      <VariationImageContainer
-                        imageSrc={imageSource}
-                        imageStyles={imageSet.imageStyles}
-                        imageClassName={styles.indiv_image_var}
-                        blur={true}
-                        quality={1}
-                      />
-
-                      <p className={styles.image_text}>{imageSource[2]}</p>
-                    </motion.div>
-                  );
-                })}
+          {isRendered ? (
+            <motion.section className={styles.product_container}>
+              {/* CALLOUT BANNER CONTAINER */}
+              <div className={styles.title_banner_container}>
+                <TitleBanner
+                  title={title}
+                  paragraph={paragraph}
+                  bannerType="default"
+                />
               </div>
-            </motion.div>
-          </motion.section>
+
+              {/* BACKGROUND IMAGE */}
+              <motion.div
+                style={{
+                  scale: springyTransformScaleAnimationOne,
+                }}
+                className={styles.background_image_container}
+              >
+                <Image
+                  src={imageSet.background}
+                  alt=""
+                  priority
+                  className={imageSet.backgroundStyling}
+                  quality={deviceContext === "Other" ? 50 : 1}
+                />
+              </motion.div>
+
+              {/* VARIATION CONTAINER */}
+              <motion.div
+                className={styles.product_variation_content_container}
+                style={{
+                  y: springyTransformPopupAnimationOne,
+                }}
+              >
+                {/* IMAGE CONTAINER */}
+                <div className={styles.images_container}>
+                  {imageSet["top"].map((imageSource, index) => {
+                    return (
+                      <motion.div
+                        key={index}
+                        className={styles.indiv_image_container}
+                        style={{
+                          opacity: viewportSize.height > 768 ? 0 : 1,
+                          y: viewportSize.height > 768 ? 100 : 0,
+                        }}
+                        whileInView={{
+                          opacity: 1,
+                          y: 0,
+                        }}
+                        transition={{
+                          delay: (index + 1) * 0.2,
+                          duration: 0.5,
+                        }}
+                      >
+                        <VariationImageContainer
+                          imageSrc={imageSource}
+                          imageStyles={imageSet.imageStyles}
+                          imageClassName={styles.indiv_image_var}
+                          blur={true}
+                          quality={1}
+                        />
+
+                        <p className={styles.image_text}>{imageSource[2]}</p>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            </motion.section>
+          ) : (
+            <></>
+          )}
         </motion.div>
       </motion.div>
     </>

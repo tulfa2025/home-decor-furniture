@@ -135,6 +135,15 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     }
   });
 
+
+  const [isRendered, setIsRendered] = useState(false);
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setIsRendered(true)
+    }, 2000)
+  }, [])
+
   return (
     <motion.div
       style={{
@@ -154,6 +163,9 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
         className={styles.large_slide_container}
         ref={inViewRef}
       >
+        {isRendered ? (
+          <>
+        
         <motion.div className={styles.large_slide_callout_container}>
           <TitleBanner 
             title={title} 
@@ -177,7 +189,11 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
             {children}
           </motion.div>
         </motion.section>
-      </motion.div>
+      </>
+    
+    ) : <></>}
+        
+    </motion.div>
     </motion.div>
   );
 };
