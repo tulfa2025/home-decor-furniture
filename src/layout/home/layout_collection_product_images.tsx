@@ -22,7 +22,7 @@ import structureLayouts from "@/utils/structure_layouts";
 
 /* LAYOUT COLLECTION MUST BE IN DESIRED ORDER */
 const layoutCollection: LayoutCollectionBase = [
-    [Banner, 'Banner'],
+    // [Banner, 'Banner'],
     [SiloImages, 'Product Silos'],
     [CtaTertiary, ''],
     [NewLifeStyleScenes, 'LifeStyle Scenes'],
@@ -36,8 +36,8 @@ const layoutCollection: LayoutCollectionBase = [
     [FlipBook, ''],
     [FlatLayImages, 'Flat Lay'],
     [NewMarketingImages, 'Marketing Images'],
-    [BookDemo, 'Book a Demo'],
-    [Blogs, '']
+    // [BookDemo, 'Book a Demo'],
+    // [Blogs, '']
 ];
 
 const layoutCollectionMemoized = memoizeComponents(layoutCollection);
