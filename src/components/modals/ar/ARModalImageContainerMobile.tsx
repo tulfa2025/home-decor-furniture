@@ -69,7 +69,7 @@ const ARModalImageContainerMobile = memo(({ imageSet }) => {
               key={i ** 2 + j}
               className={styles.modal_indiv_image_container}
             >
-              <Image src={imageArray[i][j]} alt="" quality={50}/>
+              <Image src={imageArray[i][j]} alt="" quality={1}/>
             </div>
           );
           break;

@@ -38,6 +38,7 @@ import modalImageSet from "./image_sources_silo";
 /* CONTEXT */
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 import SlideContext from "@/context/changeSlide";
+import DeviceContext from "@/context/deviceContext";
 
 const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Get scroll height
@@ -146,6 +147,8 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     return modalImageSet;
   }, []);
 
+  const deviceContext = useContext(DeviceContext)
+
   return (
     <>
       <motion.div
@@ -189,7 +192,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                   src={backgroundImage}
                   alt=""
                   className={styles.silo_image}
-                  quality={50}
+                  quality={deviceContext === 'Other' ? 50 : 1}
                 />
               </motion.div>
             </div>

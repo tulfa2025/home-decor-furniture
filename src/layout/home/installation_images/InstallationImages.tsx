@@ -14,6 +14,8 @@ import imageSix from "../../../assets/images/installation_images/6.webp";
 import Image from "next/image";
 
 import useWindowSize from "@/hooks/use_window_size";
+import { useContext } from "react";
+import DeviceContext from "@/context/deviceContext";
 
 const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const image_container_style = {
@@ -26,6 +28,8 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   };
 
   const viewportSize = useWindowSize();
+
+  const deviceContext = useContext(DeviceContext)
 
   return (
     <>
@@ -42,7 +46,7 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             style={{
               ...image_container_style,
             }}
-            quality={50}
+            quality={deviceContext === 'Other' ? 50 : 1}
           />
           <Image
             alt=""
@@ -50,7 +54,7 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             style={{
               ...image_container_style,
             }}
-            quality={50}
+            quality={deviceContext === 'Other' ? 50 : 1}
           />
           <Image
             alt=""
@@ -58,7 +62,7 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             style={{
               ...image_container_style,
             }}
-            quality={50}
+            quality={deviceContext === 'Other' ? 50 : 1}
           />
           <Image
             alt=""
@@ -66,7 +70,7 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             style={{
               ...image_container_style,
             }}
-            quality={50}
+            quality={deviceContext === 'Other' ? 50 : 1}
           />
 
           {viewportSize.width > 768 ? (
@@ -77,7 +81,7 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                 style={{
                   ...image_container_style,
                 }}
-                quality={50}
+                quality={deviceContext === 'Other' ? 50 : 1}
               />
               <Image
                 alt=""
@@ -85,7 +89,7 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                 style={{
                   ...image_container_style,
                 }}
-                quality={50}
+                quality={deviceContext === 'Other' ? 50 : 1}
               />
             </>
           ) : null}

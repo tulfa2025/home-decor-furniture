@@ -2,7 +2,7 @@
 import styles from "./NewLIfeStyleScenes.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useMemo, useRef, useState, useEffect, useContext } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 
@@ -23,6 +23,7 @@ import useInView from "@/hooks/use_inview";
 /* IMAGES */
 import modalImageSet from "./lifestyle_scenes_images";
 import scrollTransformValues from "@/utils/scrollTransformValues";
+import DeviceContext from "@/context/deviceContext";
 
 const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const memoizedImageSet = useMemo(()=>{
@@ -64,6 +65,8 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   }, [isInView]);
 
   const pathName = usePathname();
+
+  const deviceContext = useContext(DeviceContext)
   
 
   return (
@@ -89,7 +92,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             priority
             className={styles.background_image}
             ref={scrollTargetRef}
-            quality={65}
+            quality={deviceContext === 'Other' ? 50 : 1}
           />
         </motion.section>
       </LargeSlideContainer>

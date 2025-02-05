@@ -2,7 +2,7 @@
 import styles from "./NewMarketingImages.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState, useEffect, useMemo } from "react";
+import { useRef, useState, useEffect, useMemo, useContext } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 
@@ -23,6 +23,7 @@ import modalImageSet from "./marketing_images";
 import backgroundImageOne from "../../../assets/images/marketing_images/kv2.webp";
 import backgroundImageTwo from "../../../assets/images/marketing_images/mockup revista 2.webp";
 import backgroundImageThree from "../../../assets/images/marketing_images/mockup laptop.webp";
+import DeviceContext from "@/context/deviceContext";
 
 const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
@@ -68,6 +69,8 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const pathName = usePathname();
 
+  const deviceContext = useContext(DeviceContext)
+
   return (
     <>
       <LargeSlideContainer
@@ -88,19 +91,19 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             alt=""
             className={styles.background_image_top}
             ref={inViewRef}
-            quality={25}
+            quality={deviceContext === 'Other' ? 50 : 1}
           />
           <Image
             src={backgroundImageTwo}
             alt=""
             className={styles.background_image_bottom_left}
-            quality={25}
+            quality={deviceContext === 'Other' ? 50 : 1}
           />
           <Image
             src={backgroundImageThree}
             alt=""
             className={styles.background_image_bottom_right}
-            quality={25}
+            quality={deviceContext === 'Other' ? 50 : 1}
           />
         </motion.section>
       </LargeSlideContainer>

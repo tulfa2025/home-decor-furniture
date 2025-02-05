@@ -7,11 +7,15 @@ import LargeSlideContainer from "@/components/large_slide_container/LargeSlideCo
 /* DIMENSION IMAGES */
 import fauxTreeSetting from '../../../assets/images/dimension_images/armchair_setting.webp'
 import fauxTreeBlank from '../../../assets/images/dimension_images/Dimension Images 1.webp'
+import { useContext } from 'react';
+import DeviceContext from '@/context/deviceContext';
 
 const DimensionImages: React.FC<LayoutProps> = ({
     layoutName,
     zIndex
 }) => {
+
+    const deviceContext = useContext(DeviceContext)
 
 
     return (
@@ -33,6 +37,7 @@ const DimensionImages: React.FC<LayoutProps> = ({
                         src={fauxTreeBlank}
                         alt=""
                         className={styles.measurement}
+                        quality={deviceContext === 'Other' ? 50 : 1}
                     />
                 </div>
                 <div
@@ -42,6 +47,7 @@ const DimensionImages: React.FC<LayoutProps> = ({
                         src={fauxTreeSetting}
                         alt=""
                         className={styles.setting}
+                        quality={deviceContext === 'Other' ? 50 : 1}
                     />
                 </div>
 

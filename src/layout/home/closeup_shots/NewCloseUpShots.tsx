@@ -2,7 +2,7 @@
 import styles from "./NewCloseUpShots.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState, useEffect, useMemo } from "react";
+import { useRef, useState, useEffect, useMemo, useContext } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 
@@ -20,6 +20,7 @@ import useInView from "@/hooks/use_inview";
 /* IMAGES */
 import backgroundImage from "../../../assets/images/closeup_shots/rug_one.webp";
 import modalImageSet from "./closeup_shots_images";
+import DeviceContext from "@/context/deviceContext";
 
 const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const memoizedImageSet = useMemo(()=>{
@@ -61,6 +62,8 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     
   }, [isInView]);
 
+  const deviceContext = useContext(DeviceContext)
+
   return (
     <>
       <LargeSlideContainer
@@ -82,7 +85,7 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             priority
             className={styles.background_image}
             ref={scrollTargetRef}
-            quality={50}
+            quality={deviceContext === 'Other' ? 50 : 1}
           />
         </motion.section>
       </LargeSlideContainer>

@@ -26,6 +26,7 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 import SlideContext from "@/context/changeSlide";
 import useScrollTransform from "@/hooks/use_scrolltransform";
 import scrollTransformValues from "@/utils/scrollTransformValues";
+import DeviceContext from "@/context/deviceContext";
 
 const ProductVariation = ({
   imageSet,
@@ -161,6 +162,9 @@ const ProductVariation = ({
     }
   });
 
+
+  const deviceContext = useContext(DeviceContext)
+
   return (
     <>
       <motion.div
@@ -201,7 +205,7 @@ const ProductVariation = ({
                 alt=""
                 priority
                 className={imageSet.backgroundStyling}
-                quality={60}
+                quality={deviceContext === 'Other' ? 50 : 1}
               />
             </motion.div>
 

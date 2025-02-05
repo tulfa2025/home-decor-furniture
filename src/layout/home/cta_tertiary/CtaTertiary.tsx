@@ -24,6 +24,7 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 import SlideContext from "@/context/changeSlide";
 import useScrollTransform from "@/hooks/use_scrolltransform";
 import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
+import DeviceContext from "@/context/deviceContext";
 
 
 const CtaTertiary: React.FC<LayoutProps> = ({
@@ -170,7 +171,10 @@ const CtaTertiary: React.FC<LayoutProps> = ({
   );
 
 
-  const setHeaderStyle = useContext(SubheaderStyleContext)
+  const setHeaderStyle = useContext(SubheaderStyleContext);
+
+
+  const deviceContext = useContext(DeviceContext)
 
   /* SET HEADER STYLE AT DIFFERNT INTERVALS */
   useMotionValueEvent(scrollY, 'change', (v)=>{
@@ -227,7 +231,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
             }}
             className={styles.cta_image_container}
           >
-            <Image src={sofaImage} alt="" className={styles.cta_image} />
+            <Image src={sofaImage} alt="" className={styles.cta_image} quality={deviceContext === 'Other' ? 50 : 1}/>
           </motion.div>
         </motion.section>
       </motion.div>
