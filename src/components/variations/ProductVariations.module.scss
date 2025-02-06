@@ -11,6 +11,7 @@
 
     /*OPTIMISATION*/
     content-visibility: auto;
+    will-change: contents;
 
     .title_banner_container {
         @include variables.xs {
@@ -58,7 +59,6 @@
     will-change: transform;
     bottom: 0;
     pointer-events: auto;
-    z-index: 100;
 }
 
 
