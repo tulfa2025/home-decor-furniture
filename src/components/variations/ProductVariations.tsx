@@ -170,7 +170,6 @@ const ProductVariation = ({
 
   useEffect(() => {
     setTimeout(() => {
-      console.log('Triggered render')
       setIsRendered(true);
     }, 3000);
   }, []);
@@ -239,8 +238,8 @@ const ProductVariation = ({
                         key={index}
                         className={styles.indiv_image_container}
                         style={{
-                          opacity: viewportSize.height > 768 ? 0 : 1,
-                          y: viewportSize.height > 768 ? 100 : 0,
+                          opacity: deviceContext === 'Other' ? 0 : 1,
+                          y: deviceContext === 'Other' ? 100 : 0,
                         }}
                         whileInView={{
                           opacity: 1,
@@ -255,7 +254,7 @@ const ProductVariation = ({
                           imageSrc={imageSource}
                           imageStyles={imageSet.imageStyles}
                           imageClassName={styles.indiv_image_var}
-                          blur={true}
+                          blur={false}
                           quality={1}
                         />
 

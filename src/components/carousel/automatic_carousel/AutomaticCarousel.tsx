@@ -96,6 +96,8 @@ const AutomaticCarousel: React.FC<AutomaticCarouaProps> = memo(
   }
 );
 
+
+
 AutomaticCarousel.displayName = "AutomaticCaroua";
 
 export default AutomaticCarousel;

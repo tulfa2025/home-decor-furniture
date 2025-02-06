@@ -25,7 +25,7 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.9);
+  const isInView = useInView(inViewRef, 0.75);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
