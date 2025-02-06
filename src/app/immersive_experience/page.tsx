@@ -1,12 +1,16 @@
 "use client";
 import { motion } from "framer-motion";
-import { Suspense } from "react";
+import { Suspense, useContext } from "react";
 
 /* CUSTOM COMPONENTS */
 import layoutCollection from "@/layout/immersive/layout_collection_immersive_experience";
 import PageTemplate from "@/components/page_template/PageTemplate";
+import getDeviceType from "@/utils/getDeviceContext";
 
 export default function ImmersiveExperience() {
+
+  const deviceContext = getDeviceType()
+
   return (
     <Suspense>
       <PageTemplate

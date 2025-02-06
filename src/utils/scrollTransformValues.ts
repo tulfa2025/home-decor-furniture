@@ -1155,7 +1155,7 @@ const scrollTransformValues: ScrollTransformValues = {
         [1.5, 0],
         [0, 0],
         [0, 0],
-        [-1.5, 0],
+        [-1.9, 0],
       ],
     },
     smallMob: {

@@ -70,9 +70,9 @@ class ThreeDBasic {
     this._controls = new OrbitControls(this._camera, this._threejs.domElement);
     this._controls.enableDamping = true; // Smooth damping
     this._controls.dampingFactor = 0.25; // Damping factor (slows down the camera movement)
-    this._controls.enableZoom = true; // Allow zooming
+    this._controls.enableZoom = false; // Allow zooming
 
-    this._camera.position.set(0, 1, 4); // Position the camera
+    this._camera.position.set(0, 1, 3.2); // Position the camera
     this._controls.update();
 
     this.target = new THREE.Object3D();
@@ -106,7 +106,7 @@ class ThreeDBasic {
     // Ensure renderer and camera are updated on window resize
     const rect = this._domObj.getBoundingClientRect();
     this._threejs.setSize(rect.width, rect.height);
-    this._camera.aspect = 1920 / 1080; // Update aspect ratio
+    this._camera.aspect = rect.width / rect.height; // Update aspect ratio
     this._camera.updateProjectionMatrix(); // Apply the new aspect ratio
   }
 
@@ -114,7 +114,7 @@ class ThreeDBasic {
     const loader = new GLTFLoader();
     loader.load(this._glbRef, (gltf) => {
       this._model = gltf.scene;
-      this._model.position.set(0, -1, 0); // Set the model's position to (0, 0, 0)
+      this._model.position.set(0, -0.3, 0); // Set the model's position to (0, 0, 0)
       this._model.traverse((c) => {
         c.castShadow = true;
       });

@@ -2,7 +2,13 @@
 import styles from "./sofa_code.module.scss";
 import Image from "next/image";
 import { useRef, useState, useEffect, useContext } from "react";
-import { useScroll, useTransform, motion, useSpring, useMotionValueEvent } from "motion/react";
+import {
+  useScroll,
+  useTransform,
+  motion,
+  useSpring,
+  useMotionValueEvent,
+} from "motion/react";
 /* CUSTOM CONTEXT */
 import useWindowSize from "@/hooks/use_window_size";
 import useInView from "@/hooks/use_inview";
@@ -18,7 +24,11 @@ import ipad from "../../../assets/images/immersive/Ipad 1.png";
 import sofa from "../../../assets/images/immersive/dr.png";
 import qr from "../../../assets/images/immersive/image 12.png";
 import useScrollTransform from "@/hooks/use_scrolltransform";
-import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
+import scrollTransformValues, {
+  scrollSpringProperties,
+} from "@/utils/scrollTransformValues";
+import DeviceContext from "@/context/deviceContext";
+import ThreeDSofa from "../3d_sofa/ThreeDSofa";
 
 const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Get scroll height
@@ -67,7 +77,7 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     viewportSize,
     yPosition,
     scrollTransformValues.sofaCode
-  )
+  );
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
     input,
@@ -85,10 +95,12 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   useMotionValueEvent(scrollY, "change", (v) => {
     if (isInView) {
       if (v > yPosition) {
-        setHeaderStyle(0)
+        setHeaderStyle(0);
       }
     }
   });
+
+  const deviceContext = useContext(DeviceContext)
 
   return (
     <motion.div
@@ -114,13 +126,20 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         {/* CONTENT AQUI */}
         <motion.section className={styles.container}>
           <div className={styles.left_container}>
-            <Image className={styles.immersive_image} src={ipad} alt="" />
+            {/* MOBILE DEVICE */}
+            {deviceContext !== "Other" ? (
+              <>
+                <Image className={styles.immersive_image} src={ipad} alt="" />
 
-            <Image className={styles.sofa} src={sofa} alt="" />
+                <Image className={styles.sofa} src={sofa} alt="" />
 
-            <Image className={styles.qr} src={qr} alt="" />
+                <Image className={styles.qr} src={qr} alt="" />
+              </>
+            ) : (
+              <ThreeDSofa/>
+            )}
           </div>
-          <div className={styles.right_container} >
+          <div className={styles.right_container}>
             <CallOut
               heading="Immersive Experience"
               paragraph="Scan this QR Code with your phone to view the object in your space. The experience launches directly from your browser."

@@ -11,7 +11,7 @@ const ThreeDScene = ({
 
   useEffect(() => {
     // SET UP
-    if(canvasRef.current){
+    if(canvasRef.current && !threedScene.current){
         threedScene.current   = new ThreeDBasic(
             canvasRef.current,
             glbRef

@@ -98,7 +98,7 @@ const MiscDemoTemplate = ({
           position: "relative",
           top: 0,
           overflow: "auto",
-          backgroundColor: "transparent",
+          backgroundColor: "white",
           zIndex: isInView ? zIndex : -1,
         }}
         ref={scrollTargetRef}

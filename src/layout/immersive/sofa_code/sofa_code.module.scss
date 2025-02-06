@@ -13,9 +13,9 @@
         padding: 0;
     }
     @include variables.md {
-        flex-direction: row;
+        flex-direction: column;
 
-        padding: 100px;
+        padding: 50px;
         @media(orientation: portrait){
             flex-direction: column;
             padding: 0;
@@ -24,12 +24,12 @@
 
     @include variables.lg {
         flex-direction: row;
+        padding: 0
     }
 
 
     .left_container {
         height:100%;
-        width: 50%;
         position: relative;
         min-height: 700px;
         display: flex;
@@ -38,7 +38,7 @@
             width: 100vw;
         }
         @include variables.md {
-            width: 50%;
+            width: 100%;
             @media(orientation: portrait){
                 width: 100vw;
                 
@@ -46,7 +46,7 @@
         }
     
         @include variables.lg {
-            width: 50%;
+            width: 100%;
         }
 
         .immersive_image {
@@ -195,7 +195,7 @@
 
     .right_container {
         height:100%;
-        background-color: transparent;
+        background-color: white;
         position: relative;
         
 
@@ -206,8 +206,7 @@
         }
         @include variables.md {
             top:0;
-            width: 50%;
-            order:0;
+            order:-1;
             @media(orientation: portrait){
                 width: 100vw;
                 order: -1;
@@ -233,9 +232,7 @@
             }
 
             @include variables.md {
-                justify-content: center;
-                align-items: flex-start;
-                text-align: unset;
+              
 
                 @media (orientation:portrait) {
                     justify-content: center;
@@ -245,7 +242,8 @@
             }
 
             @include variables.lg {
-                text-align: unset
+                text-align: unset;
+                align-items: start;
             }
 
             .callout_paragraph {

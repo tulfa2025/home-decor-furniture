@@ -14,8 +14,6 @@ import SofaCode from "./sofa_code/SofaCode";
 import ARSilo from "./ar_silo/ARSilo";
 import Workflow from "./workflow/Workflow";
 import BookDemo from "./book_demo/BookDemo";
-import ThreeDSofa from "./3d_sofa/ThreeDSofa";
-
 
 /* LAYOUT COLLECTION MUST BE IN DESIRED ORDER */
 const layoutCollection: LayoutCollectionBase = [
@@ -28,7 +26,6 @@ const layoutCollection: LayoutCollectionBase = [
     [ARSilo, 'Augmented Reality'],
     [FriendsSofa, 'See It In Your Space'],
     [SofaCode, 'Friends'],
-    [ThreeDSofa, 'Three D'],
     [Workflow, 'Workflow'],
     [BookDemo, ''],
     [Blogs, '']

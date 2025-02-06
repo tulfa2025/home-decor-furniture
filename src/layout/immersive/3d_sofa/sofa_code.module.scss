@@ -1,31 +1,5 @@
 @use '@/styles/shared/variables';
 
-.container {
-    height: 100%;
-    width: 100%;
-    position:relative;
-    
-    display: flex;
-    column-gap: 20px;
-
-    @include variables.xs {
-        flex-direction: column;
-        padding: 0;
-    }
-    @include variables.md {
-        flex-direction: row;
-
-        padding: 100px;
-        @media(orientation: portrait){
-            flex-direction: column;
-            padding: 0;
-        }
-    }
-
-    @include variables.lg {
-        flex-direction: row;
-    }
-
     .canvasContainer {
         pointer-events: auto;
         height: 100%;
@@ -33,4 +7,3 @@
         margin: 0 auto;
     }
     
-}
