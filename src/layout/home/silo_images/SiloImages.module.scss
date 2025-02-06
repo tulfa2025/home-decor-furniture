@@ -172,6 +172,11 @@
 
                 @include variables.sm {
                     object-position:50% 50%;
+                    height: 75%;
+                    width: 100%;
+                }
+                @include variables.md {
+                    object-position:50% 50%;
                     height: 100%;
                     width: 100%;
                 }

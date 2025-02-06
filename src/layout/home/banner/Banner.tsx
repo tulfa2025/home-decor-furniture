@@ -25,7 +25,7 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.1);
+  const isInView = useInView(inViewRef, 0.9);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -139,7 +139,7 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
               type="video/mp4"
               altText=""
               loop={deviceOS === "Other" ? true : false}
-              autoplay={true}
+              autoplay={isInView}
               isInView={isInView}
               onVideoComplete={() => {}}
             />

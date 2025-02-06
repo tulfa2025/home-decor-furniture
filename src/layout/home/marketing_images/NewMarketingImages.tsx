@@ -91,19 +91,19 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             alt=""
             className={styles.background_image_top}
             ref={inViewRef}
-            quality={deviceContext === 'Other' ? 50 : 20}
+            quality={deviceContext === 'Other' ? 50 : 10}
           />
           <Image
             src={backgroundImageTwo}
             alt=""
             className={styles.background_image_bottom_left}
-            quality={deviceContext === 'Other' ? 50 : 20}
+            quality={deviceContext === 'Other' ? 50 : 10}
           />
           <Image
             src={backgroundImageThree}
             alt=""
             className={styles.background_image_bottom_right}
-            quality={deviceContext === 'Other' ? 50 : 20}
+            quality={deviceContext === 'Other' ? 50 : 10}
           />
         </motion.section>
       </LargeSlideContainer>

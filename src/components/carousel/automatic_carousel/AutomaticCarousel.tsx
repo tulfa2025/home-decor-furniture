@@ -2,7 +2,8 @@
 import Image from "next/image";
 import { StaticImageData } from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState, memo, useRef } from "react";
+import { useEffect, useState, memo, useRef, useContext } from "react";
+import DeviceContext from "@/context/deviceContext";
 
 type ImageSet = {
   [key: string]: {
@@ -41,6 +42,9 @@ const AutomaticCarousel: React.FC<AutomaticCarouaProps> = memo(
         });
       }, changeDelay);
     }, [currentIndex, paused]);
+
+
+    const deviceContext = useContext(DeviceContext)
 
     return (
       <AnimatePresence initial={true}>
@@ -82,7 +86,7 @@ const AutomaticCarousel: React.FC<AutomaticCarouaProps> = memo(
                   width: "100%",
                   objectFit: "cover",
                 }}
-                quality={50}
+                quality={deviceContext === 'Other' ? 50 : 10}
               />
             </motion.div>
           );

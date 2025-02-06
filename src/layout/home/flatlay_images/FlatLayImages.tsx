@@ -7,10 +7,11 @@ import Image from "next/image";
 import flatlayOneImage from "../../../assets/images/flatlay_images/FlatLay1.jpg";
 import flatlayOneMobImage from "../../../assets/images/flatlay_images/FlatLay-mobile-2.webp";
 import flatlayTwoImage from "../../../assets/images/flatlay_images/scene1.png";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 
 import useInView from "@/hooks/use_inview";
 import useWindowSize from "@/hooks/use_window_size";
+import DeviceContext from "@/context/deviceContext";
 
 const FlatLayImages: React.FC<LayoutProps> = ({
   layoutName,
@@ -33,8 +34,9 @@ const FlatLayImages: React.FC<LayoutProps> = ({
     } else {
       setDirection(0)
     }
-    
-  }, [isTrackInView])
+    }, [isTrackInView])
+  
+  const deviceContext = useContext(DeviceContext)
 
 
   return (
@@ -60,6 +62,7 @@ const FlatLayImages: React.FC<LayoutProps> = ({
             src={viewportSize.height > viewportSize.width ? flatlayOneMobImage : flatlayOneImage }
             alt=""
             className={styles.first_image}
+            quality={deviceContext === 'Other' ? 50 : 10}
           />
         </motion.div>
         <motion.div
@@ -77,6 +80,7 @@ const FlatLayImages: React.FC<LayoutProps> = ({
             src={flatlayTwoImage}
             alt=""
             className={styles.second_image}
+            quality={deviceContext === 'Other' ? 50 : 10}
           />
         </motion.div>
       </div>

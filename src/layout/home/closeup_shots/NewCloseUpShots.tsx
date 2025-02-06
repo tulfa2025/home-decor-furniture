@@ -85,7 +85,7 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             priority
             className={styles.background_image}
             ref={scrollTargetRef}
-            quality={deviceContext === 'Other' ? 50 : 20}
+            quality={deviceContext === 'Other' ? 50 : 10}
           />
         </motion.section>
       </LargeSlideContainer>

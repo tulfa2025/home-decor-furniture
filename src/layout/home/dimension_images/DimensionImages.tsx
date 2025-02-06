@@ -37,7 +37,7 @@ const DimensionImages: React.FC<LayoutProps> = ({
                         src={fauxTreeBlank}
                         alt=""
                         className={styles.measurement}
-                        quality={deviceContext === 'Other' ? 50 : 20}
+                        quality={deviceContext === 'Other' ? 50 : 10}
                     />
                 </div>
                 <div
@@ -47,7 +47,7 @@ const DimensionImages: React.FC<LayoutProps> = ({
                         src={fauxTreeSetting}
                         alt=""
                         className={styles.setting}
-                        quality={deviceContext === 'Other' ? 50 : 20}
+                        quality={deviceContext === 'Other' ? 50 : 10}
                     />
                 </div>
 
