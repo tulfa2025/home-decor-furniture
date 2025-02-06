@@ -1,8 +1,9 @@
 "use client";
 import Image from "next/image";
-import { memo, useRef, useState } from "react";
+import { memo, useContext, useRef, useState } from "react";
 import styles from "./variation_image_container.module.scss";
 import { motion } from "framer-motion";
+import DeviceContext from "@/context/deviceContext";
 
 const VariationImageContainer = memo(
   ({
@@ -14,6 +15,8 @@ const VariationImageContainer = memo(
   }) => {
     const elementRef = useRef<HTMLDivElement | null>(null);
     const [isHovered, setIsHovered] = useState(false);
+
+    const deviceContext = useContext(DeviceContext)
 
 
     return (
@@ -28,10 +31,12 @@ const VariationImageContainer = memo(
           className={`${imageClassName} ${styles.indiv_image}`}
           onMouseEnter={() => {
             if (!imageSrc[3]) return;
+            if(deviceContext !== 'Other') return
             setIsHovered(true);
           }}
           onMouseLeave={() => {
             if (!imageSrc[3]) return;
+            if(deviceContext !== 'Other') return
             setIsHovered(false);
           }}
         >
@@ -52,7 +57,7 @@ const VariationImageContainer = memo(
         </motion.div>
 
         {/* If alternative image */}
-        {imageSrc[3] ? (
+        {imageSrc[3] && deviceContext === 'Other' ? (
           <Image
             src={imageSrc[3]}
             alt=""
