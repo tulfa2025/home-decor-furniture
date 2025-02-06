@@ -59,7 +59,7 @@ const VideoDemo = ({
       {/* PLAY BUTTON ON MOBIL */}
       <div className={styles.play_container}>
         {deviceOS !== "Other" ? (
-          <TulfaPlayButton height={25} width={25} videoId={videoId} />
+          <TulfaPlayButton height={35} width={35} videoId={videoId} />
         ) : (
           <></>
         )}

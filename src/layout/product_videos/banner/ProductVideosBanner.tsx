@@ -16,7 +16,10 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 import DeviceContext from "@/context/deviceContext";
 import { useContext } from "react";
 import useScrollTransform from "@/hooks/use_scrolltransform";
-import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
+import scrollTransformValues, {
+  scrollSpringProperties,
+} from "@/utils/scrollTransformValues";
+import TulfaPlayButton from "@/assets/icons/tulfa_play_button";
 
 /* VIDEOS */
 
@@ -36,7 +39,10 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     target: scrollTargetRef,
   });
 
-  const scrollHeight = calculateScrollHeight(viewportSize.height, viewportSize.width >=768 ? 1.5: 1);
+  const scrollHeight = calculateScrollHeight(
+    viewportSize.height,
+    viewportSize.width >= 768 ? 1.5 : 1
+  );
 
   /* ANIMATION START AND END POSITION */
   const [yPosition, setYPosition] = useState(0);
@@ -61,7 +67,7 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     viewportSize,
     yPosition,
     scrollTransformValues.productBanner
-  )
+  );
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
     input,
@@ -75,17 +81,16 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const deviceOS = useContext(DeviceContext);
 
-  useEffect(()=>{
+  useEffect(() => {
+    if (isInView) {
+      const menu = document.getElementById("menu");
 
-    if(isInView){
-      const menu  = document.getElementById('menu')
-
-      menu.style.visibility = 'hidden'
+      menu.style.visibility = "hidden";
     } else {
-      const menu  = document.getElementById('menu');
-      menu.style.visibility = 'unset'
+      const menu = document.getElementById("menu");
+      menu.style.visibility = "unset";
     }
-  }, [isInView])
+  }, [isInView]);
 
   return (
     <motion.div
@@ -155,6 +160,15 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             />
           </div>
         </motion.section>
+
+        {/* PLAY BUTTON ON MOBIL */}
+        <div className={styles.play_container}>
+          {deviceOS !== "Other" ? (
+            <TulfaPlayButton height={35} width={35} videoId={""} />
+          ) : (
+            <></>
+          )}
+        </div>
       </motion.div>
     </motion.div>
   );

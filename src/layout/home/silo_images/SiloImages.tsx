@@ -157,7 +157,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             position: "fixed",
             height: "100vh",
             width: "100vw",
-            y: deviceContext === 'Other' ? springyTransformShowcaseAnimationThree : transformShowcaseAnimationThree,
+            y:springyTransformShowcaseAnimationThree,
           }}
           ref={inViewRef}
         >
@@ -191,7 +191,10 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
       {/* MODAL CONTAINER */}
       {/* BUTTON TRIGGER */}
-      {isInView && !isModalOpen ?<motion.div className={styles.popup_button_container} 
+      {isInView 
+      && 
+      !isModalOpen ?
+      <motion.div className={styles.popup_button_container} 
       >
         
            <TulfaPopupButton

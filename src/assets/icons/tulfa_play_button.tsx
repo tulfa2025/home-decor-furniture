@@ -41,8 +41,8 @@ const addPopup = (videoId: number) => {
     "http://www.w3.org/2000/svg",
     "svg"
   );
-  closeSvg.setAttribute("width", '30px');
-  closeSvg.setAttribute("height", '30px');
+  closeSvg.setAttribute("width", "30px");
+  closeSvg.setAttribute("height", "30px");
   closeSvg.setAttribute("viewBox", "0 0 37 36");
   closeSvg.innerHTML = `
     <g filter="url(#filter0_b_2735_6319)">
@@ -94,26 +94,21 @@ const TulfaPlayButton = ({ height, width, videoId }) => {
       <svg
         width={width}
         height={height}
-        viewBox="0 0 25 25"
+        viewBox="0 0 35 35"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <rect
-          x="0.694444"
-          y="0.694444"
-          width="23.6111"
-          height="23.6111"
-          rx="11.8056"
-          stroke="white"
-          stroke-width="1.38889"
-        />
-        <path
-          d="M9.72217 6.94434V17.361L18.0555 12.1527L9.72217 6.94434Z"
-          stroke="white"
-          stroke-width="1.38889"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
+        <g clip-path="url(#clip0_7282_2315)">
+          <path
+            d="M17.4998 2.91699C9.44984 2.91699 2.9165 9.45033 2.9165 17.5003C2.9165 25.5503 9.44984 32.0837 17.4998 32.0837C25.5498 32.0837 32.0832 25.5503 32.0832 17.5003C32.0832 9.45033 25.5498 2.91699 17.4998 2.91699ZM14.5832 24.0628V10.9378L23.3332 17.5003L14.5832 24.0628Z"
+            fill="white"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_7282_2315">
+            <rect width="35" height="35" fill="white" />
+          </clipPath>
+        </defs>
       </svg>
     </motion.button>
   );

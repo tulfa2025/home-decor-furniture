@@ -203,7 +203,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
           height: "100vh",
           width: "100%",
           top: 0,
-          y: deviceContext === 'Other' ? springyTransformShowcaseAnimationThree : transformShowcaseAnimationThree,
+          y: springyTransformShowcaseAnimationThree,
         }}
       >
         <motion.section className={styles.cta_container}>

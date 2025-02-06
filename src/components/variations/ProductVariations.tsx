@@ -193,7 +193,7 @@ const ProductVariation = ({
             position: "fixed",
             height: viewportSize.width > 768 ? "140vh" : "130vh",
             width: "100vw",
-            y: deviceContext === 'Other' ? springyTransformShowcaseAnimationThree : transformShowcaseAnimationThree,
+            y: springyTransformShowcaseAnimationThree,
           }}
           ref={inViewRef}
         >
