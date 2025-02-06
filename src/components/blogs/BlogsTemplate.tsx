@@ -101,7 +101,7 @@ const BlogsTemplate: React.FC<LayoutProps> = ({
           position: "fixed",
           height: "100vh",
           width: "100vw",
-          y: deviceContext === 'Other' ? springyTransformShowcaseAnimationThree : transformShowcaseAnimationThree,
+          y: springyTransformShowcaseAnimationThree,
         }}
         ref={inViewRef}
       >

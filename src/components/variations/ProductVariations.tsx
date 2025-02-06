@@ -80,19 +80,6 @@ const ProductVariation = ({
 
   /* ANIMATIONS */
 
-  /* BACKGROUND ANIMATIONS */
-  const transformScaleAnimationOne = useTransform(
-    scrollY,
-    [0, yPosition, yPosition + scrollHeight * 0.3],
-    [1, 1, 1]
-  );
-  const springyTransformScaleAnimationOne = useSpring(
-    transformScaleAnimationOne,
-    {
-      damping: 40,
-    }
-  );
-
   /* POPP ANIMATION */
   const transformPopupAnimationOne = useTransform(
     scrollY,
@@ -125,9 +112,6 @@ const ProductVariation = ({
     {
       damping: 40,
       stiffness: viewportSize.width > 960 ? 150 : 400,
-      mass: 0.2, // Lighter = quicker stop
-      velocity: 0, // No initial speed
-      restDelta: 0.01, // Stops when close to the target
     }
   );
 
@@ -209,9 +193,6 @@ const ProductVariation = ({
 
               {/* BACKGROUND IMAGE */}
               <motion.div
-                style={{
-                  scale: deviceContext === 'Other' ? springyTransformScaleAnimationOne : 1,
-                }}
                 className={styles.background_image_container}
               >
                 <Image

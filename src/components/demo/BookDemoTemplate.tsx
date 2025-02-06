@@ -106,7 +106,7 @@ const BookDemoTemplate = ({ layoutName, zIndex, scrollMap = null }) => {
           position: "fixed",
           height: "100vh",
           width: "100vw",
-          y: deviceContext === 'Other' ? springyTransformShowcaseAnimationThree : transformShowcaseAnimationThree,
+          y: springyTransformShowcaseAnimationThree,
         }}
         ref={inViewRef}
       >

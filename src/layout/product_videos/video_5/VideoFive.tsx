@@ -18,15 +18,15 @@ const VideoFive = ({
     return(<><VideoDemo   
       posterSrc={
         deviceOS === "Other"
-          ? "videos/product/Tulfa - 3D Modeling _ CGI Walkthrough_compressed.jpg"
-          : ''
+          ? "videos/product/output_Solar shingle video_compressed-desktop.jpg"
+          : "videos/product/output_Solar shingle video_compressed-natural.jpg"
       }
       layoutName={layoutName}
       zIndex={zIndex}
       videoSourceRef={
         deviceOS === "Other"
-          ? "videos/product/Tulfa - 3D Modeling _ CGI Walkthrough_compressed.mp4"
-          : ""
+          ? "videos/product/Solar shingle video_compressed.mp4"
+          : "videos/product/output_Solar shingle video_compressed.mp4"
       }/></>)
 }
 

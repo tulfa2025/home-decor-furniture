@@ -6,6 +6,7 @@ import ProductVideosBanner from "./banner/ProductVideosBanner";
 import VideoOne from "./video_1/VideoOne";
 import VideoTwo from "./video_2/VideoTwo";
 import VideoThree from "./video_3/VideoThree";
+import VideoFive from "./video_5/VideoFive";
 import VideoFour from "./video_4/VideoFour";
 import VideoSix from "./video_6/VideoSix";
 import VideoNine from "./video_9/VideoNine";
@@ -17,6 +18,7 @@ import BookDemo from "./book_demo/BookDemo";
 const layoutCollection: LayoutCollectionBase = [
     [ProductVideosBanner, 'Banner'],
     [VideoThree, 'Chair'],
+    [VideoFive, 'Solar Shingles'],
     [VideoSix, 'Sofa'],
     [VideoTwo, 'Exploded View'],
     [VideoNine, 'Baby Crib'],
