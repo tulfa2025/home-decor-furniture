@@ -136,7 +136,28 @@ class ThreeDBasic {
       );
     };
 
-    if (this._followMouse) window.addEventListener("mousemove", onMouseMove);
+    const onTouchMove = (e) => {
+      const touch = e.touches[0]
+      this.pointer.x = (touch.clientX / window.innerWidth) * 2 - 1;
+      this.pointer.y = (touch.clientY / window.innerHeight) * 2 - 1;
+      this.planeNormal.copy(this._camera.position).normalize();
+      this.plane.setFromNormalAndCoplanarPoint(
+        this.planeNormal,
+        this._scene.position
+      );
+      this.raycaster.setFromCamera(this.pointer, this._camera);
+      this.raycaster.ray.intersectPlane(this.plane, this.intersectionPoint);
+      this.target.position.set(
+        this.intersectionPoint.x,
+        -this.intersectionPoint.y,
+        2
+      );
+    };
+
+    if (this._followMouse){
+      window.addEventListener("mousemove", onMouseMove)
+      window.addEventListener("touchmove", onTouchMove)
+    };
 
     // Set up any model loading if needed (you can call this._LoadModel() if it's needed)
 

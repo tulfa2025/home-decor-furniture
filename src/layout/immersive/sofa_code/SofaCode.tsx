@@ -103,7 +103,7 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const deviceContext = useContext(DeviceContext);
 
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <motion.div
@@ -129,7 +129,7 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         {/* CONTENT AQUI */}
         <motion.section className={styles.container}>
           {/* MOBILE DEVICE */}
-          {deviceContext !== "Other" ? (
+          {/* {deviceContext !== "Other" ? (
             <>
               <div className={styles.left_container}>
                 <Image className={styles.immersive_image} src={ipad} alt="" />
@@ -194,7 +194,39 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                 
                }
             </>
-          )}
+          )} */}
+          <>
+            <ThreeDSofa />
+            <div className={styles.arButton}>
+              <ARIcon
+                onClick={() => {
+                  setIsModalOpen(true);
+                }}
+              />
+            </div>
+            {isModalOpen && (
+              <div className={styles.modalPopUp}>
+                <h3 className={styles.headerContainer}>Augmented Reality</h3>
+                <Image
+                  src="/glb/qr/recliner.png"
+                  alt=""
+                  width={200}
+                  height={200}
+                />
+                <span className={styles.text}>
+                  Point your camera at the QR code. Tap the banner that appears
+                  on your screen.
+                </span>
+                <button
+                  onClick={() => {
+                    setIsModalOpen(false);
+                  }}
+                >
+                  Close
+                </button>
+              </div>
+            )}
+          </>
         </motion.section>
       </motion.div>
     </motion.div>

@@ -79,9 +79,9 @@ const ARModalImageContainer = memo(({ imageSet }) => {
               /> */}
               <ThreeDScene 
               glbRef={imageArray[imageIndex][4]}
-              followMouse={true}
+              followMouse={false}
               cameraPosition={
-                [0,1,2]
+                [0,3,5]
               }
               modelRotation={[
                 0,
