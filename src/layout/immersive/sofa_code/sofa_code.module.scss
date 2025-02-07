@@ -1,4 +1,10 @@
 @use '@/styles/shared/variables';
+.arButton {
+    position: absolute;
+    top: 8vh;
+    right: 5vw;
+    pointer-events: auto;
+}
 .modalPopUp {
     height: max-content;
     display: flex;
@@ -7,8 +13,23 @@
     background-color: white;
     position: absolute;
     top: 25vh;
-    width: calc((100vw - 300px) / 2);
+    right: calc((100vw - 300px) / 2);
     border-radius: 7px;
+    pointer-events: auto;
+
+    row-gap: 20px;
+    align-items: center;
+    padding: 5px 10px;
+
+    .headerContainer {
+        @include variables.setTypography(24px, normal, 600, normal);
+        color: variables.$primaryColor
+    }
+    .text {
+        @include variables.setTypography(16px, normal, 400, normal );
+        color: variables.$primaryColor;
+        text-align: center;
+    }
 }
 
 .container {

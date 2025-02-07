@@ -151,17 +151,20 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           ) : (
             <>
               <ThreeDSofa />
-              <div>
+              <div
+                className={styles.arButton}
+              >
                 <ARIcon
                   onClick={()=>{
-                    setIsModalOpen(!isModalOpen)
+                    
+                    setIsModalOpen(true)
                   }}
                 />
               </div>
               {
-                isModalOpen && (
+                isModalOpen && 
                   <div
-                    className={styles.modalPopup}
+                    className={styles.modalPopUp}
                   >
                     <h3
                       className={styles.headerContainer}  
@@ -169,10 +172,14 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                       Augmented Reality
                     </h3>
                     <Image
-                      src=''
+                      src='/glb/qr/recliner.png'
                       alt=''
+                      width={200}
+                      height={200}
                     />
-                    <span>
+                    <span
+                      className={styles.text}
+                    >
                       Point your camera at the QR code. Tap the banner that appears on your screen.
 
                     </span>
@@ -184,7 +191,7 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                       Close
                     </button>
                   </div>
-                )
+                
                }
             </>
           )}

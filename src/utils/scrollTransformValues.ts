@@ -1180,8 +1180,8 @@ const scrollTransformValues: ScrollTransformValues = {
     desktop: {
       input: [
         [0, 0],
-        [1, -0.8],
-        [1, -0.3],
+        [1, -0.65],
+        [1, -0.2],
         [1, 0.5],
         [1, 1],
       ],
