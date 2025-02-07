@@ -15,18 +15,18 @@ import qrSiloSixImage from "../../../assets/images/immersive/silo/6/tulfa-beach-
 
 /* Images under different categories */
 type ARModalImageSet = {
-  [key: string]: Array<[StaticImageData, StaticImageData,  StaticImageData, string]>; // Normal image / blurred version
+  [key: string]: Array<[StaticImageData, StaticImageData,  StaticImageData, string, string]>; // Normal image / blurred version / vectary link /glb file path
 };
 
 const modalImageSet = {
   background: '',
   top: [
-    [siloOneImage, '', qrSiloOneImage, 'https://xr.tulfa.com/p/3UR3hA2ckbxFOetynJ3gSq/'],
-    [siloTwoImage, '', qrSiloTwoImage, 'https://xr.tulfa.com/p/5AUBwtEKmUn8BkK7mFi52h/'],
-    [siloThreeImage, '', qrSiloThreeImage, 'https://xr.tulfa.com/p/07FpvlfdavtSDCxBdDxqrU'],
-    [siloFourImage, '', qrSiloFourImage, 'https://xr.tulfa.com/p/5cgUtEEDBCMdX37JmjGCaP'],
-    [siloFiveImage, '', qrSiloFiveImage, 'https://xr.tulfa.com/p/6FZRFe2SRPGsTi4UMXL1o8'],
-    [siloSixImage, '', qrSiloSixImage, 'https://xr.tulfa.com/p/1BMMG5u0IaNxvNbZucCtGu'],
+    [siloOneImage, '', qrSiloOneImage, 'https://xr.tulfa.com/p/3UR3hA2ckbxFOetynJ3gSq/', 'glb/Table.glb'],
+    [siloTwoImage, '', qrSiloTwoImage, 'https://xr.tulfa.com/p/5AUBwtEKmUn8BkK7mFi52h/', 'glb/Table.glb'],
+    [siloThreeImage, '', qrSiloThreeImage, 'https://xr.tulfa.com/p/07FpvlfdavtSDCxBdDxqrU', 'glb/Table.glb'],
+    [siloFourImage, '', qrSiloFourImage, 'https://xr.tulfa.com/p/5cgUtEEDBCMdX37JmjGCaP', 'glb/Table.glb'],
+    [siloFiveImage, '', qrSiloFiveImage, 'https://xr.tulfa.com/p/6FZRFe2SRPGsTi4UMXL1o8', 'glb/Table.glb'],
+    [siloSixImage, '', qrSiloSixImage, 'https://xr.tulfa.com/p/1BMMG5u0IaNxvNbZucCtGu', 'glb/Table.glb'],
     
   ],
 };

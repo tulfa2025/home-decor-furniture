@@ -3,6 +3,7 @@ import styles from "./ar_modal_container.module.scss";
 import useWindowSize from "@/hooks/use_window_size";
 import { memo, useMemo } from "react";
 import Image from "next/image";
+import ThreeDScene from "@/components/3dscene/three_d_scene";
 
 const ARModalImageContainer = memo(({ imageSet }) => {
   /* ARRAY OF IMAGES TO RENDER */
@@ -67,15 +68,33 @@ const ARModalImageContainer = memo(({ imageSet }) => {
               }}
               className={styles.modal_indiv_image_container}
             >
-              {/* IFRAME GOES HERE */}
-              <iframe
+              {/* THREE JS MODEL GOES HERE */}
+              {/* <iframe
                 src={imageArray[imageIndex][3]}
                 allow="xr-spatial-tracking"
                 height="100%"
                 width="100%"
                 style={{ border: "none" }}
                 loading="lazy"
-              />
+              /> */}
+              <ThreeDScene 
+              glbRef={imageArray[imageIndex][4]}
+              followMouse={true}
+              cameraPosition={
+                [0,1,2]
+              }
+              modelRotation={[
+                0,
+                Math.PI,
+                0
+              ]}
+
+              initialPosition={[
+                0,0,-2
+              ]}
+              enableRotateMouse={true}
+              enableZoom={true}
+            />
             </div>
           );
           break;

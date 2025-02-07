@@ -3,9 +3,37 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 class ThreeDBasic {
-  constructor(canvasRef, glbRef) {
+  constructor(
+    canvasRef,
+    glbRef,
+    followMouse,
+    cameraPosition = [0, 1, 3.2],
+    modelPosition = [0, 0, 0],
+    modelRotation = [0, 0, 0], // Note potential for gimbal locks if not careful
+    initialPosition = [0, 0, 0],
+    playAnimation,
+    animationNames,
+    defaultAnimationName,
+    dragRotateEnabled = false,
+    enableZoom = false
+  ) {
     this._glbRef = glbRef;
     this._domObj = canvasRef;
+
+    // INteractive controls
+    this._followMouse = followMouse;
+    this._dragRotateEnabled = dragRotateEnabled;
+    this._enableZoom = enableZoom
+
+    this._cameraPosition = cameraPosition; // PLacement of camera in world space
+    this._initialPosition = initialPosition; // Position of mouse in world space
+    this._modelPosition = modelPosition; // Position oft model in world space
+    this._modelRotation = modelRotation; // initial Rotation of model
+
+    // Animations
+    this._animationNames = animationNames;
+    this._playAnimation = playAnimation;
+    this._defaultAnimationName = defaultAnimationName;
     this._initialize();
   }
 
@@ -66,20 +94,28 @@ class ThreeDBasic {
     this._scene.add(ambientLight);
 
     // Orbit controls
-    // Set up OrbitControls (interactive camera control)
+    // // Set up OrbitControls (interactive camera control)
     this._controls = new OrbitControls(this._camera, this._threejs.domElement);
     this._controls.enableDamping = true; // Smooth damping
     this._controls.dampingFactor = 0.25; // Damping factor (slows down the camera movement)
-    this._controls.enableZoom = false; // Allow zooming
+    this._controls.enableZoom = this._enableZoom; // Allow zooming
+    this._controls.enableRotate = this._dragRotateEnabled
 
-    this._camera.position.set(0, 1, 3.2); // Position the camera
+    this._camera.position.set(...this._cameraPosition); // Position the camera
     this._controls.update();
 
+
+      
+    
+
     this.target = new THREE.Object3D();
-    this.intersectionPoint = new THREE.Vector3()
-    this.planeNormal = new THREE.Vector3()
-    this.plane = new THREE.Plane()
-    this.raycaster = new THREE.Raycaster()
+    this.target.position.x = this._initialPosition[0];
+    this.target.position.y = this._initialPosition[1];
+    this.target.position.z = this._initialPosition[2];
+    this.intersectionPoint = new THREE.Vector3();
+    this.planeNormal = new THREE.Vector3();
+    this.plane = new THREE.Plane();
+    this.raycaster = new THREE.Raycaster();
     // Set up raycasting for mouse tracking
     this.pointer = new THREE.Vector2();
 
@@ -87,13 +123,20 @@ class ThreeDBasic {
       this.pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
       this.pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
       this.planeNormal.copy(this._camera.position).normalize();
-      this.plane.setFromNormalAndCoplanarPoint(this.planeNormal, this._scene.position)
+      this.plane.setFromNormalAndCoplanarPoint(
+        this.planeNormal,
+        this._scene.position
+      );
       this.raycaster.setFromCamera(this.pointer, this._camera);
       this.raycaster.ray.intersectPlane(this.plane, this.intersectionPoint);
-      this.target.position.set(this.intersectionPoint.x, -this.intersectionPoint.y, 2)
+      this.target.position.set(
+        this.intersectionPoint.x,
+        -this.intersectionPoint.y,
+        2
+      );
     };
 
-    window.addEventListener("mousemove", onMouseMove);
+    if (this._followMouse) window.addEventListener("mousemove", onMouseMove);
 
     // Set up any model loading if needed (you can call this._LoadModel() if it's needed)
 
@@ -114,35 +157,105 @@ class ThreeDBasic {
     const loader = new GLTFLoader();
     loader.load(this._glbRef, (gltf) => {
       this._model = gltf.scene;
-      this._model.position.set(0, -0.3, 0); // Set the model's position to (0, 0, 0)
+      this._model.position.set(...this._modelPosition); // Set the model's position to (0, 0, 0)
+      this._model.rotation.set(...this._modelRotation);
+
       this._model.traverse((c) => {
         c.castShadow = true;
       });
 
       this._scene.add(this._model);
+
+      // IF no animations then return
+      if (!this._animationNames.length) return;
+
+      this.animations = gltf.animations;
+
+      const defaultAnimation = this.animations.find((animation) => {
+        if (animation.name === this._defaultAnimationName) return animation;
+      });
+
+      this.mixer = new THREE.AnimationMixer(this._model);
+
+      let action = this.mixer.clipAction(defaultAnimation, this._model);
+      action.play();
     });
   }
 
   _rotateModelToFacePoint() {
+    // Get the direction vector from the model to the mouse
+    const direction = new THREE.Vector3()
+      .subVectors(this.target.position, this._model.position)
+      .normalize();
 
-    this._model.lookAt(this.target.position);
+    // Calculate the angle the model needs to rotate to face the mouse
+    const angle = Math.atan2(direction.x, direction.z);
+    this._model.rotation.y = Math.max(
+      Math.min(angle, Math.PI / 12),
+      -Math.PI / 12
+    ) + this._modelRotation[1];
+
+    const angleX = Math.atan2(
+      direction.y,
+      Math.sqrt(direction.x * direction.x + direction.z * direction.z)
+    );
+    this._model.rotation.x = Math.max(
+      Math.min(-angleX, Math.PI / 16),
+      -Math.PI / 24
+    );
+  }
+
+  playAnimation(playAnimation: boolean) {
+    if (!this.animations) return;
+
+    const oldAnimation = this.animations.find((animation) => {
+      if (animation.name === this._defaultAnimationName) return animation;
+    });
+
+    let oldAction = this.mixer.clipAction(oldAnimation, this._model);
+
+    if (playAnimation) {
+      oldAction.play();
+    } else {
+      oldAction.stop();
+      oldAction.reset();
+    }
+  }
+
+  changeAnimation(animationName: string) {
+    if (!this.animations) return;
+
+    const oldAnimation = this.animations.find((animation) => {
+      if (animation.name === this._defaultAnimationName) return animation;
+    });
+
+    let oldAction = this.mixer.clipAction(oldAnimation, this._model);
+    oldAction.stop();
+    oldAction.reset();
+
+    const newAnimation = this.animations.find((animation) => {
+      if (animation.name === animationName) return animation;
+    });
+    this._defaultAnimationName = animationName;
+
+    let action = this.mixer.clipAction(newAnimation, this._model);
+    action.play();
   }
 
   _RAF() {
     requestAnimationFrame(() => {
-
       // Rotate the model to face the mouse position
-      if (this._model) {
+      if (this._model && this._followMouse) {
         this._rotateModelToFacePoint();
+      }
+      if (this.mixer) {
+        this.mixer.update(1 / 60); // Adjust time increment as needed
       }
       this._controls.update();
       this._threejs.render(this._scene, this._camera);
       this._RAF();
     });
   }
-
-  /* Rotate camera depening of position of mouse on the screen */
-  followMouse(e) {}
 }
 
 export default ThreeDBasic;

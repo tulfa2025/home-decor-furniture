@@ -9,7 +9,7 @@ const ThreeDSofa: React.FC = () => {
       {/* CONTENT AQUI */}
      
         <div className={styles.canvasContainer}>
-          <ThreeDScene glbRef="glb/Sofa.glb" />
+          <ThreeDScene glbRef="glb/Sofa.glb" followMouse={true}/>
         </div>
       
     </>

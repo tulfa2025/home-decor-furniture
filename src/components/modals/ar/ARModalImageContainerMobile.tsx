@@ -83,21 +83,24 @@ const ARModalImageContainerMobile = memo(({ imageSet }) => {
               key={i ** 2 + j}
               className={`${styles.modal_ar_container} ar-wrapper`}
             >
-              <iframe
+              {/* PLACEHOLDER IMAGE */}
+              {/* <iframe
                 src={imageArray[i][j]}
                 allow="xr-spatial-tracking"
                 height="100%"
                 width="100%"
                 style={{ border: "none", display: "none" }}
                 loading="lazy"
-              />
+              /> */}
             </div>
           );
           break;
         case 4:
           memoizedComponents.push(
             <div className={styles.modal_ar_button_container}>
-              <Button text="See In Your Device" buttonType={3} />
+              <Button text="See In Your Device" buttonType={3} onClick={()=>{
+                window.location.href = imageArray[i][j]
+              }} />
             </div>
           );
           break;

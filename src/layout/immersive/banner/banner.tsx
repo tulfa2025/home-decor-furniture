@@ -6,6 +6,7 @@ import { useEffect, useRef, useState, useContext } from "react";
 import useInView from "@/hooks/use_inview";
 
 import DeviceContext from "@/context/deviceContext";
+import ThreeDScene from "@/components/3dscene/three_d_scene";
 
 const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
@@ -48,14 +49,30 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       resize={false}
     >
       <div className={styles.int_container}  ref={inViewRef}>
-      {isLoading ? <iframe 
+      {/* {isLoading ? <iframe 
         src='https://app.vectary.com/p/20tEclig6faVL7mlvKkfLJ' 
         allow="xr-spatial-tracking"
         height='100%'
         width='100%'
         style={{ border: 'none' }}
         loading="lazy"
-      /> : ''}
+      /> : ''} */}
+        <ThreeDScene 
+              glbRef="glb/Immersive_AR.glb" 
+              followMouse={true}
+              cameraPosition={
+                [0,0,4]
+              }
+              modelRotation={[
+               0,
+                -Math.PI / 2,
+                0
+              ]}
+              initialPosition={[
+                0,0,2
+              ]}
+            />
+          
       </div>
     </LargeSlideContainer>
   );

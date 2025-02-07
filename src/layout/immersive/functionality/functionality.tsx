@@ -1,14 +1,32 @@
 "use client";
+import DeviceContext from "@/context/deviceContext";
 import styles from "./functionality.module.scss";
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
 import scrollTransformValues from "@/utils/scrollTransformValues";
 
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useMemo, useState } from "react";
+import { useEffect, useRef, useMemo, useState, useContext } from "react";
+import ThreeDScene from "@/components/3dscene/three_d_scene";
+import useInView from "@/hooks/use_inview";
 
 const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const [buttonSelection, setButtonSelection] = useState(1);
+
+  const animationList = useMemo(()=>{
+    return [
+      'Outer Body',
+      'Side Drawer',
+      'Inside Drawer',
+      'Lamp',
+      'Lamp'
+    ]
+  }, [])
+
+  const deviceContext = useContext(DeviceContext);
+
+  const inViewRef = useRef(null)
+  const isInView  = useInView(inViewRef, 0.2)
 
   return (
     <LargeSlideContainer
@@ -21,54 +39,76 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       scrollMap={scrollTransformValues.functionality}
       resize={false}
     >
-      {/* FUNCTIONALITY CAROUSEL  */}
-      <div className={styles.int_container}>
+      <div className={styles.int_container} ref={inViewRef}>
+        {/* FUNCTIONALITY CAROUSEL - MObile */}
+
         <div className={styles.videos_container}>
-          <FunctionalityVideoContainer
-            src="Animation_1_compressed.mp4"
-            isPlaying={buttonSelection === 1}
-          />
-          <FunctionalityVideoContainer
-            src="Animation_2_compressed.mp4"
-            isPlaying={buttonSelection === 2}
-          />
-          <FunctionalityVideoContainer
-            src="Animation_3_compressed.mp4"
-            isPlaying={buttonSelection === 3}
-          />
-          <FunctionalityVideoContainer
-            src="Animation_4_compressed.mp4"
-            isPlaying={buttonSelection === 4}
-          />
-          <FunctionalityVideoContainer
-            src="Animation_5_compressed.mp4"
-            isPlaying={buttonSelection === 5}
-          />
+          {deviceContext !== "Other" && (
+            <>
+              <FunctionalityVideoContainer
+                src="Animation_1_compressed.mp4"
+                isPlaying={buttonSelection === 1}
+              />
+              <FunctionalityVideoContainer
+                src="Animation_2_compressed.mp4"
+                isPlaying={buttonSelection === 2}
+              />
+              <FunctionalityVideoContainer
+                src="Animation_3_compressed.mp4"
+                isPlaying={buttonSelection === 3}
+              />
+              <FunctionalityVideoContainer
+                src="Animation_4_compressed.mp4"
+                isPlaying={buttonSelection === 4}
+              />
+              <FunctionalityVideoContainer
+                src="Animation_5_compressed.mp4"
+                isPlaying={buttonSelection === 5}
+              />
+            </>
+          )}
+          {deviceContext === "Other" && (
+            <ThreeDScene 
+              glbRef="glb/Table.glb" 
+              followMouse={false}
+              cameraPosition={
+                [0,1,2.5]
+              }
+              modelRotation={[
+                0,
+                Math.PI,
+                0
+              ]}
+
+              initialPosition={[
+                0,0,-2
+              ]}
+              animationNames={animationList}
+              playAnimation={isInView}
+              defaultAnimationName={animationList[buttonSelection - 1]}
+              enableRotateMouse={true}
+            />
+          )}
         </div>
 
         <div className={styles.video_options_container}>
           <div className={styles.video_buttons_container}>
             {/* SLIDER */}
-            <div
-              className={styles.slider_container}
-            >
+            <div className={styles.slider_container}>
               <motion.div
                 className={styles.slider}
                 initial={{
-                  left:0
+                  left: 0,
                 }}
                 animate={{
-                  left: `${20 * (buttonSelection-1)}%`
+                  left: `${20 * (buttonSelection - 1)}%`,
                 }}
                 transition={{
-                  type: 'spring',
+                  type: "spring",
                   damping: 20,
-                  stiffness: 150
+                  stiffness: 150,
                 }}
-              >
-
-              </motion.div>
-
+              ></motion.div>
             </div>
 
             {/* BUTTONS */}
@@ -84,7 +124,7 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             </motion.button>
             <motion.button
               className={`${styles.button_style_default} ${
-                buttonSelection === 2 ?  styles.active : ""
+                buttonSelection === 2 ? styles.active : ""
               }`}
               onClick={() => {
                 setButtonSelection(2);
@@ -94,7 +134,7 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             </motion.button>
             <motion.button
               className={`${styles.button_style_default} ${
-                buttonSelection === 3 ?  styles.active : ""
+                buttonSelection === 3 ? styles.active : ""
               }`}
               onClick={() => {
                 setButtonSelection(3);
@@ -104,7 +144,7 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             </motion.button>
             <motion.button
               className={`${styles.button_style_default} ${
-                buttonSelection === 4 ?  styles.active : ""
+                buttonSelection === 4 ? styles.active : ""
               }`}
               onClick={() => {
                 setButtonSelection(4);
@@ -114,7 +154,7 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             </motion.button>
             <motion.button
               className={`${styles.button_style_default} ${
-                buttonSelection === 5 ?  styles.active : ""
+                buttonSelection === 5 ? styles.active : ""
               }`}
               onClick={() => {
                 setButtonSelection(5);
