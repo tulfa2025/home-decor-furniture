@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import ThreeDBasic from "./ThreeObject";
+import useInView from "@/hooks/use_inview";
 
 const ThreeDScene = ({
   glbRef,
@@ -12,90 +13,65 @@ const ThreeDScene = ({
   playAnimation,
   defaultAnimationName,
   enableRotateMouse,
-  enableZoom
+  enableZoom,
 }) => {
   const canvasRef = useRef(null);
 
   const threedScene = useRef(null);
 
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
-  const timeoutRef = useRef(null)
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // `entry` is the intersection observer entry
-        clearTimeout(timeoutRef.current)
-        timeoutRef.current = setTimeout(()=>{
-          setIsVisible(entry.isIntersecting); // true if the element is in view
-        observer.unobserve(canvasRef.current)
-        }, 1250)
-      },
-      {
-        root: null, // null means the viewport
-        rootMargin: '0px', // margin around the root
-        threshold: 0.5, // percentage of the element that should be in view
-      }
-    );
+  const isInView = useInView(canvasRef, 0.2);
 
-    if (canvasRef.current) {
-      observer.observe(canvasRef.current);
-    }
-
-    // Clean up the observer when the component unmounts
-    return () => {
-      if (canvasRef.current) {
-        observer.unobserve(canvasRef.current);
-      }
-    };
-  }, []);
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
     // SET UP
-    if (canvasRef.current && !threedScene.current && isVisible) {
-      threedScene.current = new ThreeDBasic(
-        canvasRef.current,
-        glbRef,
-        followMouse,
-        cameraPosition,
-        modelPosition,
-        modelRotation,
-        initialPosition,
-        playAnimation,
-        animationNames,
-        defaultAnimationName,
-        enableRotateMouse,
-        enableZoom
-      );
-    }
-  }, [isVisible]);
+    clearTimeout(timeoutRef.current);
+    if (canvasRef.current && !threedScene.current && isInView) {
+      
 
+      timeoutRef.current = setTimeout(() => {
+        threedScene.current = new ThreeDBasic(
+          canvasRef.current,
+          glbRef,
+          followMouse,
+          cameraPosition,
+          modelPosition,
+          modelRotation,
+          initialPosition,
+          playAnimation,
+          animationNames,
+          defaultAnimationName,
+          enableRotateMouse,
+          enableZoom
+        );
+      }, 1250);
+    }
+  }, [isInView]);
 
   // Change Animation
-  useEffect(()=>{
-
-    if(threedScene.current){
-      threedScene.current.changeAnimation(defaultAnimationName)
+  useEffect(() => {
+    if (threedScene.current) {
+      threedScene.current.changeAnimation(defaultAnimationName);
     }
-  }, [defaultAnimationName])
+  }, [defaultAnimationName]);
 
   // Pause and play
-  useEffect(()=>{
-
-    if(threedScene.current){
-      threedScene.current.playAnimation(playAnimation)
+  useEffect(() => {
+    if (threedScene.current) {
+      threedScene.current.playAnimation(playAnimation);
     }
-
-  }, [playAnimation])
+  }, [playAnimation]);
 
   return (
     <div
       style={{
         height: "110%",
         width: "110%",
-        display: 'flex',
-        alignItems: 'center',
-        pointerEvents: 'auto'
+        display: "flex",
+        alignItems: "center",
+        pointerEvents: "auto",
       }}
       ref={canvasRef}
     />
