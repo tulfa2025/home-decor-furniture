@@ -16,6 +16,7 @@ const ThreeDSofa: React.FC = () => {
           glbRef="glb/Sofa.glb"
           followMouse={true}
           cameraPosition={deviceContext !== "Other" ? [0, 2, 6] : [0, 2, 3]}
+          // modelPosition={[0, -1, 0]}
         />
       </div>
     </>
