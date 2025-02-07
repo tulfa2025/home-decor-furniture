@@ -1,4 +1,15 @@
 @use '@/styles/shared/variables';
+.modalPopUp {
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    background-color: white;
+    position: absolute;
+    top: 25vh;
+    width: calc((100vw - 300px) / 2);
+    border-radius: 7px;
+}
 
 .container {
     height: 100%;

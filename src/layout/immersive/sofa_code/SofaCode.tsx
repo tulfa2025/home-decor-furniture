@@ -29,6 +29,7 @@ import scrollTransformValues, {
 } from "@/utils/scrollTransformValues";
 import DeviceContext from "@/context/deviceContext";
 import ThreeDSofa from "../3d_sofa/ThreeDSofa";
+import ARIcon from "@/assets/icons/arIcon";
 
 const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Get scroll height
@@ -100,7 +101,9 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     }
   });
 
-  const deviceContext = useContext(DeviceContext)
+  const deviceContext = useContext(DeviceContext);
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
     <motion.div
@@ -125,29 +128,66 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       >
         {/* CONTENT AQUI */}
         <motion.section className={styles.container}>
-          <div className={styles.left_container}>
-            {/* MOBILE DEVICE */}
-            {deviceContext !== "Other" ? (
-              <>
+          {/* MOBILE DEVICE */}
+          {deviceContext !== "Other" ? (
+            <>
+              <div className={styles.left_container}>
                 <Image className={styles.immersive_image} src={ipad} alt="" />
 
                 <Image className={styles.sofa} src={sofa} alt="" />
 
                 <Image className={styles.qr} src={qr} alt="" />
-              </>
-            ) : (
-              <ThreeDSofa/>
-            )}
-          </div>
-          <div className={styles.right_container}>
-            <CallOut
-              heading="Immersive Experience"
-              paragraph="Scan this QR Code with your phone to view the object in your space. The experience launches directly from your browser."
-              overrideStyles={styles.callout_container_outer}
-              overrideParagraphStyle={styles.callout_paragraph}
-              calloutStyleType={1}
-            />
-          </div>
+              </div>
+              <div className={styles.right_container}>
+                <CallOut
+                  heading="Immersive Experience"
+                  paragraph="Scan this QR Code with your phone to view the object in your space. The experience launches directly from your browser."
+                  overrideStyles={styles.callout_container_outer}
+                  overrideParagraphStyle={styles.callout_paragraph}
+                  calloutStyleType={1}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <ThreeDSofa />
+              <div>
+                <ARIcon
+                  onClick={()=>{
+                    setIsModalOpen(!isModalOpen)
+                  }}
+                />
+              </div>
+              {
+                isModalOpen && (
+                  <div
+                    className={styles.modalPopup}
+                  >
+                    <h3
+                      className={styles.headerContainer}  
+                    >
+                      Augmented Reality
+                    </h3>
+                    <Image
+                      src=''
+                      alt=''
+                    />
+                    <span>
+                      Point your camera at the QR code. Tap the banner that appears on your screen.
+
+                    </span>
+                    <button
+                      onClick={()=>{
+                        setIsModalOpen(false)
+                      }}
+                    >
+                      Close
+                    </button>
+                  </div>
+                )
+               }
+            </>
+          )}
         </motion.section>
       </motion.div>
     </motion.div>

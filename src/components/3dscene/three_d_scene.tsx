@@ -18,10 +18,41 @@ const ThreeDScene = ({
 
   const threedScene = useRef(null);
 
+  const [isVisible, setIsVisible] = useState(false)
+
+  const timeoutRef = useRef(null)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // `entry` is the intersection observer entry
+        clearTimeout(timeoutRef.current)
+        timeoutRef.current = setTimeout(()=>{
+          setIsVisible(entry.isIntersecting); // true if the element is in view
+        observer.unobserve(canvasRef.current)
+        }, 1250)
+      },
+      {
+        root: null, // null means the viewport
+        rootMargin: '0px', // margin around the root
+        threshold: 0.5, // percentage of the element that should be in view
+      }
+    );
+
+    if (canvasRef.current) {
+      observer.observe(canvasRef.current);
+    }
+
+    // Clean up the observer when the component unmounts
+    return () => {
+      if (canvasRef.current) {
+        observer.unobserve(canvasRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     // SET UP
-    if (canvasRef.current && !threedScene.current) {
+    if (canvasRef.current && !threedScene.current && isVisible) {
       threedScene.current = new ThreeDBasic(
         canvasRef.current,
         glbRef,
@@ -37,7 +68,7 @@ const ThreeDScene = ({
         enableZoom
       );
     }
-  }, []);
+  }, [isVisible]);
 
 
   // Change Animation
