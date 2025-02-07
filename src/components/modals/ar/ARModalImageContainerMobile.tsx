@@ -99,7 +99,7 @@ const ARModalImageContainerMobile = memo(({ imageSet }) => {
           memoizedComponents.push(
             <div className={styles.modal_ar_button_container}>
               <Button text="See In Your Device" buttonType={3} onClick={()=>{
-                window.location.href = imageArray[i][j]
+                window.location.href = imageArray[i][j - 1]
               }} />
             </div>
           );
