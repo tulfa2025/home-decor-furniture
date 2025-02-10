@@ -41,6 +41,7 @@ const ThreeDSofa: React.FC = () => {
           followMouse={true}
           cameraPosition={cameraPosition}
           modelPosition={modelPosition}
+          blurSrc='/glb/blur/Sofa_blur.png'
         />
       </div>
     </>

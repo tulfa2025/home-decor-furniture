@@ -1,0 +1,59 @@
+@use '@/styles/shared/variables';
+
+.loading_placeholder {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    row-gap: 20px;
+
+    .image_container {
+        position: absolute;
+        z-index: -1;
+    }
+
+    .notification {
+        @include variables.setTypography(24px, normal, 500, normal);
+        color: white;
+        text-shadow: 1px 1px 1px variables.$primaryColor;
+
+    }
+
+    .loading_bar {
+        height: 2px;
+        width:25%;
+        background-color: white;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+
+        &::after {
+            content: '';
+            left: -100%;
+            width: 25%;
+            height: 3px;
+            background-color: variables.$primaryColor;
+            z-index: -1;
+            position: absolute;
+            transition: left 0.5s ease;
+            animation: move 2s infinite;
+        }
+
+        @keyframes move {
+            0% {
+                left: -25%
+            }
+            50% {
+                left: 100%
+            }
+            100% {
+                left: -25%
+            }
+
+        }
+    }
+  
+}

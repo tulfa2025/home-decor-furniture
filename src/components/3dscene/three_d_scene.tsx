@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ThreeDBasic from "./ThreeObject";
 import useInView from "@/hooks/use_inview";
+import Image from "next/image";
+import styles from './three_d_scene.module.scss'
 
 const ThreeDScene = ({
   glbRef,
@@ -14,24 +16,35 @@ const ThreeDScene = ({
   defaultAnimationName,
   enableRotateMouse,
   enableZoom,
-  pathToBackground
+  pathToBackground,
+  blurSrc=''
 }) => {
   const canvasRef = useRef(null);
+  const inViewRef = useRef(null)
 
   const threedScene = useRef(null);
 
-  const [isVisible, setIsVisible] = useState(false);
-
-  const isInView = useInView(canvasRef, 0.2);
+  const isInView = useInView(inViewRef, 0.2);
 
   const timeoutRef = useRef(null);
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const onLoad = useCallback(()=>{
+
+    setIsLoaded(true);
+
+    threedScene.current.removeEventListener('modelloaded', onLoad)
+
+
+  }, [blurSrc])
+
+  // SETUP SCENE AND LOAD MODEL
   useEffect(() => {
     // SET UP
+    
     clearTimeout(timeoutRef.current);
     if (canvasRef.current && !threedScene.current && isInView) {
-      
-
       timeoutRef.current = setTimeout(() => {
         threedScene.current = new ThreeDBasic(
           canvasRef.current,
@@ -48,6 +61,7 @@ const ThreeDScene = ({
           enableZoom,
           pathToBackground
         );
+        threedScene.current.addEventListener('modelloaded', onLoad)
       }, 1250);
     }
   }, [isInView]);
@@ -66,32 +80,60 @@ const ThreeDScene = ({
     }
   }, [playAnimation]);
 
-  const timeoutRefPos = useRef(null)
+  const timeoutRefPos = useRef(null);
   // Update model and camera position on change
-  useEffect(()=>{
+  useEffect(() => {
+    clearTimeout(timeoutRefPos.current);
 
-    clearTimeout(timeoutRefPos.current)
-
-    setTimeout(()=>{
+    setTimeout(() => {
       if (threedScene.current) {
         threedScene.current.updateModelPosition(modelPosition);
         threedScene.current.updateCameraPosition(cameraPosition);
       }
-    }, 1000)
-    
-  }, [cameraPosition, modelPosition])
+    }, 1000);
+  }, [cameraPosition, modelPosition]);
 
   return (
-    <div
-      style={{
-        height: "100%",
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        pointerEvents: "auto",
-      }}
-      ref={canvasRef}
-    />
+    <>
+      {/* LOADING PLACEHOLDER HERE */}
+      {!isLoaded && <div
+        className={styles.loading_placeholder}
+        ref={inViewRef}
+      >
+        <Image 
+          src={blurSrc}
+          alt=''
+          height={700}
+          width={700}
+          priority
+          className={styles.image_container}
+        />
+        <h4
+          className={styles.notification}
+        >
+          Loading 3D Model
+        </h4>
+
+        <div
+          className={styles.loading_bar}
+        >
+
+        </div>
+      </div>
+      }
+
+      {/** */}
+      <div
+        style={{
+          height: "100%",
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          pointerEvents: "auto",
+        }}
+        ref={canvasRef}
+      ></div>
+    </>
   );
 };
 

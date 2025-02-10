@@ -8,7 +8,7 @@ OUTPUT_DIR="${2:-$INPUT_DIR/blur}"
 mkdir -p "$OUTPUT_DIR"
 
 # Image size for blur (10px)
-BLUR_SIZE="10x10"
+BLUR_SIZE="100x100"
 
 # Supported image formats
 IMAGE_EXTENSIONS=("jpg" "jpeg" "png" "webp")

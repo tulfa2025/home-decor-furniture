@@ -65,6 +65,7 @@
 
         @include variables.md {
             flex-direction: row;
+            justify-content: center;
             align-items: unset
         }
 

@@ -101,7 +101,8 @@ const ARModalImageContainerMobile = memo(({ imageSet }) => {
                 initialPosition={[0, 0, -2]}
                 enableRotateMouse={true}
                 enableZoom={true}
-                pathToBackground='/images/immersive/bg-3d-model.webp'
+                pathToBackground='/glb/immersive/bg-3d-model.webp'
+                blurSrc={imageArray[i][1]}
               />
             </div>
           );

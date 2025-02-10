@@ -87,6 +87,7 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
               playAnimation={isInView}
               defaultAnimationName={animationList[buttonSelection - 1]}
               enableRotateMouse={true}
+              blurSrc="/glb/blur/functionality_blur.png"
             />
           )}
         </div>

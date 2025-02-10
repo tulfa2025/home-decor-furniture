@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-class ThreeDBasic {
+class ThreeDBasic extends EventTarget {
   constructor(
     canvasRef,
     glbRef,
@@ -18,6 +18,8 @@ class ThreeDBasic {
     enableZoom = false,
     pathToBackground = ""
   ) {
+    super();
+
     this._glbRef = glbRef;
     this._domObj = canvasRef;
 
@@ -100,7 +102,7 @@ class ThreeDBasic {
 
         this._plane = plane;
 
-        this._plane.rotation.y = Math.PI / 2
+        this._plane.rotation.y = Math.PI / 2;
         this._scene.add(this._plane);
       });
     }
@@ -189,8 +191,6 @@ class ThreeDBasic {
       window.addEventListener("touchmove", onTouchMove);
     }
 
-    // Set up any model loading if needed (you can call this._LoadModel() if it's needed)
-
     this._LoadModel();
     // Call the animation loop
     this._RAF();
@@ -204,55 +204,63 @@ class ThreeDBasic {
     this._camera.updateProjectionMatrix(); // Apply the new aspect ratio
   }
 
-  updateModelPosition (modelPosition){
-
+  updateModelPosition(modelPosition) {
     this._model.position.set(...modelPosition);
-
   }
 
-  updateCameraPosition (cameraPosition){
-
+  updateCameraPosition(cameraPosition) {
     this._camera.position.set(...cameraPosition);
   }
 
   _LoadModel() {
     const loader = new GLTFLoader();
-    loader.load(this._glbRef, (gltf) => {
-      this._model = gltf.scene;
-      this._model.position.set(...this._modelPosition); // Set the model's position to (0, 0, 0)
-      this._model.rotation.set(...this._modelRotation);
+    loader.load(
+      this._glbRef,
+      (gltf) => {
+        this._model = gltf.scene;
+        this._model.position.set(...this._modelPosition); // Set the model's position to (0, 0, 0)
+        this._model.rotation.set(...this._modelRotation);
 
-      this._model.traverse((c) => {
-        if (c.isMesh) {
-          c.geometry.computeVertexNormals();
-        }
-      });
+        this._model.traverse((c) => {
+          if (c.isMesh) {
+            c.geometry.computeVertexNormals();
+          }
+        });
 
-      this._scene.add(this._model);
+        this._scene.add(this._model);
 
-      // IF no animations then return
-      if (!this._animationNames.length) return;
+        // DISPATCH LOADED EVENT
+        this.dispatchEvent(new CustomEvent("modelloaded"));
+        
+        // IF no animations then return
+        if (!this._animationNames.length) return;
 
-      this.animations = gltf.animations;
+        this.animations = gltf.animations;
 
-      const defaultAnimation = this.animations.find((animation) => {
-        if (animation.name === this._defaultAnimationName) return animation;
-      });
+        const defaultAnimation = this.animations.find((animation) => {
+          if (animation.name === this._defaultAnimationName) return animation;
+        });
 
-      this.mixer = new THREE.AnimationMixer(this._model);
+        this.mixer = new THREE.AnimationMixer(this._model);
 
-      let action = this.mixer.clipAction(defaultAnimation, this._model);
+        let action = this.mixer.clipAction(defaultAnimation, this._model);
 
-      const animationDuration = defaultAnimation.duration;
-      action.loop = THREE.LoopOnce;
+        const animationDuration = defaultAnimation.duration;
+        action.loop = THREE.LoopOnce;
 
-      action.play();
+        action.play();
 
-      setTimeout(() => {
-        action.time = animationDuration / 2; // Set the animation to the halfway point
-        action.paused = true;
-      }, (animationDuration / 2) * 1000);
-    });
+        setTimeout(() => {
+          action.time = animationDuration / 2; // Set the animation to the halfway point
+          action.paused = true;
+        }, (animationDuration / 2) * 1000);
+      },
+      () => {},
+      () => {
+        // On Error
+        this.dispatchEvent(new CustomEvent("modelerror"));
+      }
+    );
   }
 
   _rotateModelToFacePoint() {
@@ -308,10 +316,10 @@ class ThreeDBasic {
     });
 
     let oldAction = this.mixer.clipAction(oldAnimation, this._model);
-    
+
     oldAction.stop();
     oldAction.reset();
-    oldAction.paused = false
+    oldAction.paused = false;
 
     const newAnimation = this.animations.find((animation) => {
       if (animation.name === animationName) return animation;
@@ -343,14 +351,13 @@ class ThreeDBasic {
       this._controls.update();
 
       if (this._plane) {
-        
         this._plane.position.set(
           this._camera.position.x * -1,
           -this._camera.position.y,
           this._camera.position.z * -1
-        ) 
+        );
 
-        this._plane.lookAt(this._camera.position)
+        this._plane.lookAt(this._camera.position);
         // this._plane.rotateY(Math.PI/2)
       }
 

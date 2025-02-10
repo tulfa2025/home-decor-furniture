@@ -74,6 +74,7 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
               modelPosition={[
                 0,-0.5,0
               ]}
+              blurSrc="/glb/blur/Immersive_blur.png"
             />
           
       </div>
