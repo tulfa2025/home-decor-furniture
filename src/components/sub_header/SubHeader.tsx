@@ -162,8 +162,8 @@ export default function SubHeader({ activePage }: SubHeaderProps) {
             className={`${styles.dropdown_bar} ${headerDropdownBar}`}
             animate={{
               transform: headerActivated
-                ? `translateY(${(navLinks.length - 2) * 50}px)`
-                : `translateY(-${(navLinks.length - 1) * 50}px)`,
+                ? `translateY(${(navLinks.length - 1) * 50}px)`
+                : `translateY(-${(navLinks.length) * 50}px)`,
             }}
             transition={{
               type: "spring",
