@@ -96,14 +96,10 @@ const ProductVariation = ({
         : yPosition + scrollHeight * 0.5,
     ],
     [
-      viewportSize.width > 960 ? viewportSize.height * 1.2 : scrollHeight * 0.6,
-      viewportSize.width > 960 ? viewportSize.height * 1.2 : scrollHeight * 0.6,
-      viewportSize.width > 960
-        ? viewportSize.height * 1.2
-        : scrollHeight * 0.35,
-      viewportSize.width > 960
-        ? -viewportSize.height * 0.1
-        : -viewportSize.height * 0.1,
+      viewportSize.width > 960 ? viewportSize.height * 1.15 : scrollHeight * 0.6,
+      viewportSize.width > 960 ? viewportSize.height * 1.15 : scrollHeight * 0.6,
+      viewportSize.width > 960 ? viewportSize.height * 1.15 : scrollHeight * 0.35,
+      viewportSize.width > 960 ? -viewportSize.height * 0.075 : -viewportSize.height * 0.1,
     ]
   );
 

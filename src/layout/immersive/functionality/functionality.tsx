@@ -72,7 +72,7 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
               glbRef="glb/Table.glb" 
               followMouse={false}
               cameraPosition={
-                [0,1,2.5]
+                [0,1,2.2]
               }
               modelRotation={[
                 0,

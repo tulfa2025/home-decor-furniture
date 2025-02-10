@@ -2,11 +2,35 @@
 import styles from "./sofa_code.module.scss";
 import { motion } from "framer-motion";
 import ThreeDScene from "@/components/3dscene/three_d_scene";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import DeviceContext from "@/context/deviceContext";
+import useWindowSize from "@/hooks/use_window_size";
+
 
 const ThreeDSofa: React.FC = () => {
-  const deviceContext = useContext(DeviceContext);
+
+  const viewportSize = useWindowSize()
+
+  const cameraPosition = useMemo(()=>{
+    if(viewportSize.width >= 960){
+      return [0, 0.5, 2.5]
+    } else if (viewportSize.width >= 768){
+      return [0, 0.5, 3.5]
+    } else {
+      return [0, 0.5, 6]
+    }
+  }, [viewportSize])
+
+  const modelPosition = useMemo(()=>{
+    if(viewportSize.width >= 960){
+      return [0, -0.5, 0]
+    } else if (viewportSize.width >= 768){
+      return [0, -0.5, 0]
+    } else {
+      return [0, -0.5, 0]
+    }
+  }, [viewportSize])
+
   return (
     <>
       {/* CONTENT AQUI */}
@@ -15,8 +39,8 @@ const ThreeDSofa: React.FC = () => {
         <ThreeDScene
           glbRef="glb/Sofa.glb"
           followMouse={true}
-          cameraPosition={deviceContext !== "Other" ? [0, 2, 6] : [0, 2, 3]}
-          // modelPosition={[0, -1, 0]}
+          cameraPosition={cameraPosition}
+          modelPosition={modelPosition}
         />
       </div>
     </>

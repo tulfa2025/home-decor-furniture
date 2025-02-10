@@ -28,7 +28,7 @@ const ARModalContainer = dynamic(
 );
 
 /*Images */
-import mockup from "../../../assets/images/immersive/mockup.png";
+import mockup from "../../../assets/images/immersive/Augmented-reality-phone.webp";
 import usePopupPosition from "@/utils/calculate_popupbutton.loc";
 import modalImageSet from "./ar_silo_images";
 import useScrollTransform from "@/hooks/use_scrolltransform";

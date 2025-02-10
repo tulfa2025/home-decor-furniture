@@ -74,21 +74,23 @@ const TulfaRightArrow = ({
     height,
     width,
     className,
-    onClick
+    onClick,
+    arrowColor,
+    arrowFill
 }) => {
     return (
         <button
             className={className}
             onClick={onClick}
         >
-            <svg width={width} height={height} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="40" y="40" width="40" height="40" rx="20" transform="rotate(-180 40 40)" fill="#F5F5F7" />
+            <svg width={width} height={height} viewBox="0 0 40 40" fill='none' xmlns="http://www.w3.org/2000/svg">
+                <rect x="40" y="40" width="40" height="40" rx="20" transform="rotate(-180 40 40)" fill={arrowFill} />
                 <g clip-path="url(#clip0_17_643)">
-                    <path d="M17.25 12.5L24.75 20L17.25 27.5" stroke="#433E99" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M17.25 12.5L24.75 20L17.25 27.5" stroke={arrowColor} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 </g>
                 <defs>
                     <clipPath id="clip0_17_643">
-                        <rect width="18" height="12" fill="white" transform="matrix(0 -1 1 0 14 29)" />
+                        <rect width="18" height="12" fill={arrowColor} transform="matrix(0 -1 1 0 14 29)" />
                     </clipPath>
                 </defs>
             </svg>

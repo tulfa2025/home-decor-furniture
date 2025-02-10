@@ -94,6 +94,7 @@ const ARModalImageContainer = memo(({ imageSet }) => {
               ]}
               enableRotateMouse={true}
               enableZoom={true}
+              pathToBackground='/images/immersive/bg-3d-model.webp'
             />
             </div>
           );

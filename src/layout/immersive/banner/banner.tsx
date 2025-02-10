@@ -61,7 +61,7 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
               glbRef="glb/Immersive_AR.glb" 
               followMouse={true}
               cameraPosition={
-                [0,0,4]
+                [0,0,2.5]
               }
               modelRotation={[
                0,
@@ -70,6 +70,9 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
               ]}
               initialPosition={[
                 0,0,2
+              ]}
+              modelPosition={[
+                0,-0.5,0
               ]}
             />
           

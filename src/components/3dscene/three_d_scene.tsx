@@ -14,6 +14,7 @@ const ThreeDScene = ({
   defaultAnimationName,
   enableRotateMouse,
   enableZoom,
+  pathToBackground
 }) => {
   const canvasRef = useRef(null);
 
@@ -44,7 +45,8 @@ const ThreeDScene = ({
           animationNames,
           defaultAnimationName,
           enableRotateMouse,
-          enableZoom
+          enableZoom,
+          pathToBackground
         );
       }, 1250);
     }
@@ -64,11 +66,26 @@ const ThreeDScene = ({
     }
   }, [playAnimation]);
 
+  const timeoutRefPos = useRef(null)
+  // Update model and camera position on change
+  useEffect(()=>{
+
+    clearTimeout(timeoutRefPos.current)
+
+    setTimeout(()=>{
+      if (threedScene.current) {
+        threedScene.current.updateModelPosition(modelPosition);
+        threedScene.current.updateCameraPosition(cameraPosition);
+      }
+    }, 1000)
+    
+  }, [cameraPosition, modelPosition])
+
   return (
     <div
       style={{
-        height: "110%",
-        width: "110%",
+        height: "100%",
+        width: "100%",
         display: "flex",
         alignItems: "center",
         pointerEvents: "auto",

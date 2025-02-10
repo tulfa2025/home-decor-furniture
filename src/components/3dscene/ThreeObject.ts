@@ -15,15 +15,18 @@ class ThreeDBasic {
     animationNames,
     defaultAnimationName,
     dragRotateEnabled = false,
-    enableZoom = false
+    enableZoom = false,
+    pathToBackground = ""
   ) {
     this._glbRef = glbRef;
     this._domObj = canvasRef;
 
+    this._pathToBackground = pathToBackground;
+
     // INteractive controls
     this._followMouse = followMouse;
     this._dragRotateEnabled = dragRotateEnabled;
-    this._enableZoom = enableZoom
+    this._enableZoom = enableZoom;
 
     this._cameraPosition = cameraPosition; // PLacement of camera in world space
     this._initialPosition = initialPosition; // Position of mouse in world space
@@ -42,7 +45,7 @@ class ThreeDBasic {
     const rect = this._domObj.getBoundingClientRect();
 
     // Initialize WebGLRenderer
-    this._threejs = new THREE.WebGLRenderer();
+    this._threejs = new THREE.WebGLRenderer({ antialias: true });
     this._threejs.shadowMap.enabled = true;
     this._threejs.shadowMap.type = THREE.PCFSoftShadowMap;
     this._threejs.setPixelRatio(window.devicePixelRatio); // High DPI support
@@ -70,6 +73,37 @@ class ThreeDBasic {
 
     // Create the scene
     this._scene = new THREE.Scene();
+
+    // Backgrond
+    if (this._pathToBackground) {
+      // Load an image and resize it
+      const loader = new THREE.TextureLoader();
+      loader.load(this._pathToBackground, (texture) => {
+        // Resize the texture if it's not square
+        // const size = Math.min(rect.width, rect.height); // Get the smaller dimension for equal width/height
+
+        // Resize the texture (example for a plane geometry)
+        texture.image.width = 15;
+        texture.image.height = 15;
+
+        texture.generateMipmaps = false; // Disable mipmap generation
+        texture.minFilter = THREE.LinearFilter; // Use linear filtering for better performance
+        texture.magFilter = THREE.LinearFilter; // Use linear filtering for better performance
+
+        // Update the texture
+        texture.needsUpdate = true;
+
+        // Create a plane with the resized texture
+        const geometry = new THREE.PlaneGeometry(15, 15);
+        const material = new THREE.MeshBasicMaterial({ map: texture });
+        const plane = new THREE.Mesh(geometry, material);
+
+        this._plane = plane;
+
+        this._plane.rotation.y = Math.PI / 2
+        this._scene.add(this._plane);
+      });
+    }
 
     // // Add a Directional Light
     // Add directional light (shines in one direction)
@@ -99,14 +133,10 @@ class ThreeDBasic {
     this._controls.enableDamping = true; // Smooth damping
     this._controls.dampingFactor = 0.25; // Damping factor (slows down the camera movement)
     this._controls.enableZoom = this._enableZoom; // Allow zooming
-    this._controls.enableRotate = this._dragRotateEnabled
+    this._controls.enableRotate = this._dragRotateEnabled;
 
     this._camera.position.set(...this._cameraPosition); // Position the camera
     this._controls.update();
-
-
-      
-    
 
     this.target = new THREE.Object3D();
     this.target.position.x = this._initialPosition[0];
@@ -137,7 +167,7 @@ class ThreeDBasic {
     };
 
     const onTouchMove = (e) => {
-      const touch = e.touches[0]
+      const touch = e.touches[0];
       this.pointer.x = (touch.clientX / window.innerWidth) * 2 - 1;
       this.pointer.y = (touch.clientY / window.innerHeight) * 2 - 1;
       this.planeNormal.copy(this._camera.position).normalize();
@@ -154,10 +184,10 @@ class ThreeDBasic {
       );
     };
 
-    if (this._followMouse){
-      window.addEventListener("mousemove", onMouseMove)
-      window.addEventListener("touchmove", onTouchMove)
-    };
+    if (this._followMouse) {
+      window.addEventListener("mousemove", onMouseMove);
+      window.addEventListener("touchmove", onTouchMove);
+    }
 
     // Set up any model loading if needed (you can call this._LoadModel() if it's needed)
 
@@ -174,6 +204,17 @@ class ThreeDBasic {
     this._camera.updateProjectionMatrix(); // Apply the new aspect ratio
   }
 
+  updateModelPosition (modelPosition){
+
+    this._model.position.set(...modelPosition);
+
+  }
+
+  updateCameraPosition (cameraPosition){
+
+    this._camera.position.set(...cameraPosition);
+  }
+
   _LoadModel() {
     const loader = new GLTFLoader();
     loader.load(this._glbRef, (gltf) => {
@@ -182,7 +223,9 @@ class ThreeDBasic {
       this._model.rotation.set(...this._modelRotation);
 
       this._model.traverse((c) => {
-        c.castShadow = true;
+        if (c.isMesh) {
+          c.geometry.computeVertexNormals();
+        }
       });
 
       this._scene.add(this._model);
@@ -199,7 +242,16 @@ class ThreeDBasic {
       this.mixer = new THREE.AnimationMixer(this._model);
 
       let action = this.mixer.clipAction(defaultAnimation, this._model);
+
+      const animationDuration = defaultAnimation.duration;
+      action.loop = THREE.LoopOnce;
+
       action.play();
+
+      setTimeout(() => {
+        action.time = animationDuration / 2; // Set the animation to the halfway point
+        action.paused = true;
+      }, (animationDuration / 2) * 1000);
     });
   }
 
@@ -211,10 +263,9 @@ class ThreeDBasic {
 
     // Calculate the angle the model needs to rotate to face the mouse
     const angle = Math.atan2(direction.x, direction.z);
-    this._model.rotation.y = Math.max(
-      Math.min(angle, Math.PI / 12),
-      -Math.PI / 12
-    ) + this._modelRotation[1];
+    this._model.rotation.y =
+      Math.max(Math.min(angle, Math.PI / 12), -Math.PI / 12) +
+      this._modelRotation[1];
 
     const angleX = Math.atan2(
       direction.y,
@@ -235,8 +286,14 @@ class ThreeDBasic {
 
     let oldAction = this.mixer.clipAction(oldAnimation, this._model);
 
+    oldAction.loop = THREE.LoopOnce;
+    const animationDuration = oldAnimation.duration;
+
     if (playAnimation) {
-      oldAction.play();
+      setTimeout(() => {
+        oldAction.time = animationDuration / 2; // Set the animation to the halfway point
+        oldAction.paused = true;
+      }, (animationDuration / 2) * 1000);
     } else {
       oldAction.stop();
       oldAction.reset();
@@ -251,8 +308,10 @@ class ThreeDBasic {
     });
 
     let oldAction = this.mixer.clipAction(oldAnimation, this._model);
+    
     oldAction.stop();
     oldAction.reset();
+    oldAction.paused = false
 
     const newAnimation = this.animations.find((animation) => {
       if (animation.name === animationName) return animation;
@@ -260,7 +319,15 @@ class ThreeDBasic {
     this._defaultAnimationName = animationName;
 
     let action = this.mixer.clipAction(newAnimation, this._model);
+
+    action.clampWhenFinished = true;
+    const animationDuration = newAnimation.duration;
     action.play();
+
+    setTimeout(() => {
+      action.time = animationDuration / 1.5; // Set the animation to the halfway point
+      action.paused = true;
+    }, (animationDuration / 1.5) * 1000);
   }
 
   _RAF() {
@@ -272,7 +339,21 @@ class ThreeDBasic {
       if (this.mixer) {
         this.mixer.update(1 / 60); // Adjust time increment as needed
       }
+
       this._controls.update();
+
+      if (this._plane) {
+        
+        this._plane.position.set(
+          this._camera.position.x * -1,
+          -this._camera.position.y,
+          this._camera.position.z * -1
+        ) 
+
+        this._plane.lookAt(this._camera.position)
+        // this._plane.rotateY(Math.PI/2)
+      }
+
       this._threejs.render(this._scene, this._camera);
       this._RAF();
     });

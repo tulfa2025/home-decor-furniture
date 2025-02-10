@@ -2,6 +2,7 @@ import { FaPlus } from "react-icons/fa";
 import { LuExpand } from "react-icons/lu";
 import { ReactElement, useRef } from "react";
 import BasicArrow from "@/assets/icons/BasicArrow";
+import { TulfaRightArrow } from "@/assets/icons/tulfa_nav_arrows";
 
 import styles from "./Button.module.scss";
 
@@ -65,6 +66,18 @@ export default function Button({
           onClick={onClick}
           externalLink={externalLink}
           version={2}
+        />
+      );
+      break;
+    case 5:
+      CustomButton = (
+        <ButtonThree
+          text={text}
+          modifier={modifier}
+          onClick={onClick}
+          externalLink={externalLink}
+          version={1}
+          arrow={false}
         />
       );
       break;
@@ -133,24 +146,29 @@ function ButtonThree({
   onClick,
   externalLink,
   version,
+  arrow=true
 }: ButtonProps) {
   // Toggle hover - prevent re renders
   const buttonRef = useRef(null);
 
-  let buttonStyle = '';
-  let arrowFill = ''
+  let buttonStyle = "";
+  let arrowFill = "";
+  let arrowColor = "";
 
-  switch(version){
+  switch (version) {
     case 1:
       buttonStyle = styles.button_three_container_ver_1;
-      arrowFill = 'white'
-      break
+      arrowFill = "none";
+
+      arrowColor = "white";
+      break;
     case 2:
       buttonStyle = styles.button_three_container_ver_2;
-      arrowFill  = '#302C8C'
-      break
+      arrowFill = "none";
+      arrowColor = "white";
+      break;
     default:
-      break
+      break;
   }
   return (
     <button
@@ -165,7 +183,12 @@ function ButtonThree({
           text
         )}
       </span>
-      <BasicArrow height={25} width={25} arrowColor={arrowFill}/>
+      {arrow &&<TulfaRightArrow
+        height={32}
+        width={32}
+        arrowFill={arrowFill}
+        arrowColor={arrowColor}
+      />}
     </button>
   );
 }

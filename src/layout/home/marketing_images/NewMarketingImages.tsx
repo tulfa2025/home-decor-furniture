@@ -24,6 +24,7 @@ import backgroundImageOne from "../../../assets/images/marketing_images/kv2.webp
 import backgroundImageTwo from "../../../assets/images/marketing_images/mockup revista 2.webp";
 import backgroundImageThree from "../../../assets/images/marketing_images/mockup laptop.webp";
 import DeviceContext from "@/context/deviceContext";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
@@ -78,6 +79,7 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         title="Marketing Images"
         paragraph="Lorem ipsum dolor sit amet sonsectetur. Id lacus enim amet aliquet phasellus porta notaque."
         zIndex={zIndex}
+        scrollMap={scrollTransformValues.marketingImgs}
       >
         <motion.section
           className={styles.image_container}

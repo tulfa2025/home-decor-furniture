@@ -33,7 +33,7 @@ const blurmarketingThirteenImage =
   "images/marketing_images/workspace-mock-up-desktop-computer-on-table-copy-2024-05-02-15-35-45-utc.jpg";
 
 const modalImageSet = {
-  background: marketingTenImage,
+  background: marketingTwelveImage,
   top: [
     [marketingOneImage, blurmarketingOneImage],
     [marketingTwoImage, blurmarketingTwoImage],
@@ -44,7 +44,7 @@ const modalImageSet = {
     [marketingEightImage, blurmarketingEightImage],
     [marketingNineImage, blurmarketingNineImage],
     [marketingElevenImage, blurmarketingElevenImage],
-    [marketingTwelveImage, blurmarketingTwelveImage],
+    [marketingTenImage, blurmarketingTenImage],
     [marketingThirteenImage, blurmarketingThirteenImage],
   ],
 };

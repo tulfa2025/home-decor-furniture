@@ -1,5 +1,45 @@
 @use '@/styles/shared/variables';
 
+.image_container {
+
+    position:relative;
+    margin: 0 auto;
+    height: 100%;
+    
+
+    @include variables.xs {
+        width: 100%;
+       
+    }
+   
+    @include variables.md {
+        
+        padding: 0 0px;
+
+        @media (orientation:portrait){
+            width: calc(100vw - 15vw);
+
+        }
+    }
+
+    @include variables.lg {
+        
+        width: calc(100vw - 15vw);
+
+        @media (orientation:portrait){
+            width: calc(100vw - 15vw);
+
+            padding: 0 0px;
+        }
+    }
+
+    @include variables.xl {
+        width: calc(100vw - 35vw);
+
+        padding: 0 0px;
+    }
+
+}
 .image {
     
     position: absolute;

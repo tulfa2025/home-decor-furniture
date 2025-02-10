@@ -1,7 +1,7 @@
 "use client";
 import styles from "./sofa_code.module.scss";
 import Image from "next/image";
-import { useRef, useState, useEffect, useContext } from "react";
+import { useRef, useState, useEffect, useContext, useMemo } from "react";
 import {
   useScroll,
   useTransform,
@@ -17,12 +17,12 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 
 /* CUSTOM COMPONENT */
-import CallOut from "@/components/call_out/CallOut";
+// import CallOut from "@/components/call_out/CallOut";
 
-/*Images */
-import ipad from "../../../assets/images/immersive/Ipad 1.png";
-import sofa from "../../../assets/images/immersive/dr.png";
-import qr from "../../../assets/images/immersive/image 12.png";
+// /*Images */
+// import ipad from "../../../assets/images/immersive/Ipad 1.png";
+// import sofa from "../../../assets/images/immersive/dr.png";
+// import qr from "../../../assets/images/immersive/image 12.png";
 import useScrollTransform from "@/hooks/use_scrolltransform";
 import scrollTransformValues, {
   scrollSpringProperties,
@@ -30,6 +30,8 @@ import scrollTransformValues, {
 import DeviceContext from "@/context/deviceContext";
 import ThreeDSofa from "../3d_sofa/ThreeDSofa";
 import ARIcon from "@/assets/icons/arIcon";
+import TulfaCloseButton from "@/assets/icons/tulfa_close_button";
+import Button from "@/components/button/Button";
 
 const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Get scroll height
@@ -104,6 +106,8 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const deviceContext = useContext(DeviceContext);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  
 
   return (
     <motion.div
@@ -210,20 +214,21 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                 <Image
                   src="/glb/qr/recliner.png"
                   alt=""
-                  width={200}
-                  height={200}
+                  width={173}
+                  height={173}
                 />
                 <span className={styles.text}>
-                  Point your camera at the QR code. Tap the banner that appears
-                  on your screen.
+                  Point your camera at the QR code.
                 </span>
-                <button
+                <Button buttonType={5} text='See in your computer'/>
+                <TulfaCloseButton
                   onClick={() => {
                     setIsModalOpen(false);
                   }}
-                >
-                  Close
-                </button>
+                  height={42}
+                  width={42}
+                  fill="rgba(102, 102, 102, 0.60)"
+                />
               </div>
             )}
           </>
