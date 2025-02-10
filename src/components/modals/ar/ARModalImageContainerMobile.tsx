@@ -3,6 +3,7 @@ import styles from "./ar_modal_container.module.scss";
 import { memo, useEffect, useRef } from "react";
 import Image from "next/image";
 import Button from "@/components/button/Button";
+import ThreeDScene from "@/components/3dscene/three_d_scene";
 
 const ARModalImageContainerMobile = memo(({ imageSet }) => {
   /* ARRAY OF IMAGES TO RENDER */
@@ -69,7 +70,7 @@ const ARModalImageContainerMobile = memo(({ imageSet }) => {
               key={i ** 2 + j}
               className={styles.modal_indiv_image_container}
             >
-              <Image src={imageArray[i][j]} alt="" quality={1}/>
+              <Image src={imageArray[i][j]} alt="" quality={1} />
             </div>
           );
           break;
@@ -92,15 +93,28 @@ const ARModalImageContainerMobile = memo(({ imageSet }) => {
                 style={{ border: "none", display: "none" }}
                 loading="lazy"
               /> */}
+              <ThreeDScene
+                glbRef={imageArray[i][4]}
+                followMouse={false}
+                cameraPosition={[0, 3, 5]}
+                modelRotation={[0, Math.PI, 0]}
+                initialPosition={[0, 0, -2]}
+                enableRotateMouse={true}
+                enableZoom={true}
+              />
             </div>
           );
           break;
         case 4:
           memoizedComponents.push(
             <div className={styles.modal_ar_button_container}>
-              <Button text="See In Your Device" buttonType={3} onClick={()=>{
-                window.location.href = imageArray[i][j - 1]
-              }} />
+              <Button
+                text="See In Your Device"
+                buttonType={3}
+                onClick={() => {
+                  window.location.href = imageArray[i][j - 1];
+                }}
+              />
             </div>
           );
           break;

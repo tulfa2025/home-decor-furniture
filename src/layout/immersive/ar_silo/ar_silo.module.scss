@@ -50,13 +50,13 @@
             @include variables.xs {
                 scale:1;
                 top: -20vh;
-                right: -25vw;
+                right: -30vw;
             }
 
             @include variables.breakpoint(375px) {
                 scale:1;
                 top: -10vh;
-                right: -25vw;
+                right: -32vw;
             }
             
 
