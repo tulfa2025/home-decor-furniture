@@ -23,7 +23,7 @@ const modalImageSet = {
     [siloTwoImage, '', qrSiloTwoImage, 'https://xr.tulfa.com/p/5AUBwtEKmUn8BkK7mFi52h/', 'glb/popup/garden.glb'],
     [siloThreeImage, '', qrSiloThreeImage, 'https://xr.tulfa.com/p/07FpvlfdavtSDCxBdDxqrU', 'glb/popup/xmas.glb'],
     [siloFourImage, '', qrSiloFourImage, 'https://xr.tulfa.com/p/5cgUtEEDBCMdX37JmjGCaP', 'glb/popup/gaming_chair.glb'],
-    [siloFiveImage, '', qrSiloFiveImage, 'https://xr.tulfa.com/p/6FZRFe2SRPGsTi4UMXL1o8', 'glb/popup/drawers;glb'],
+    [siloFiveImage, '', qrSiloFiveImage, 'https://xr.tulfa.com/p/6FZRFe2SRPGsTi4UMXL1o8', 'glb/popup/drawers.glb'],
     [siloSixImage, '', qrSiloSixImage, 'https://xr.tulfa.com/p/1BMMG5u0IaNxvNbZucCtGu', 'glb/popup/lounger.glb'],
     
   ],
