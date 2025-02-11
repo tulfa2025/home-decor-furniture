@@ -3,6 +3,7 @@ import ThreeDBasic from "./ThreeObject";
 import useInView from "@/hooks/use_inview";
 import Image from "next/image";
 import styles from "./three_d_scene.module.scss";
+import { usePathname } from "next/navigation";
 
 const ThreeDScene = ({
   glbRef,
@@ -32,7 +33,6 @@ const ThreeDScene = ({
 
   const onLoad = useCallback(() => {
     setIsLoaded(true);
-    
   }, [blurSrc]);
 
   // SETUP SCENE AND LOAD MODEL
@@ -65,16 +65,15 @@ const ThreeDScene = ({
   const removeModelRef = useRef(null);
   useEffect(() => {
     clearTimeout(removeModelRef.current);
-    if(!threedScene.current) {
-
+    if (!threedScene.current) {
     } else if (!isInView && threedScene.current.isLoaded) {
       removeModelRef.current = setTimeout(() => {
         setIsLoaded(false);
         threedScene.current.removeEventListener("modelloaded", onLoad);
         threedScene.current = null;
-        canvasRef.current.innerHTML = ''
+        canvasRef.current.innerHTML = "";
       }, 2000);
-    } 
+    }
   }, [isInView]);
 
   // Change Animation
@@ -104,18 +103,23 @@ const ThreeDScene = ({
     }, 1000);
   }, [cameraPosition, modelPosition]);
 
+  // Remove when navigated away
+  const pathname = usePathname()
+  useEffect(() => {
+    return () => {
+      if (canvasRef.current) {
+        canvasRef.current.remove();
+      }
+    };
+  }, [pathname]);
+
   return (
     <>
       {/* in view container */}
-      <div
-        className={styles.in_view_container}
-        ref={inViewRef}
-      >
-
-      </div>
+      <div className={styles.in_view_container} ref={inViewRef}></div>
       {/* LOADING PLACEHOLDER HERE */}
       {!isLoaded && (
-        <div className={styles.loading_placeholder} >
+        <div className={styles.loading_placeholder}>
           <Image
             src={blurSrc}
             alt=""
