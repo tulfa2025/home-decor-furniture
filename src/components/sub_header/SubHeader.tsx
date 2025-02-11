@@ -4,7 +4,7 @@ import styles from "./SubHeader.module.scss";
 import TulfaSubheaderStyleOne from "@/assets/icons/tulfa_icon_1";
 import TulfaSubheaderStyleTwo from "@/assets/icons/tulfa_icon_2";
 import { AnimatePresence, motion } from "framer-motion";
-import { useRef, useState, useContext } from "react";
+import { useRef, useState, useContext, useEffect } from "react";
 import useWindowSize from "@/hooks/use_window_size";
 import { TulfaDownArrow } from "@/assets/icons/tulfa_nav_arrows";
 
@@ -26,8 +26,6 @@ export default function SubHeader({ activePage }: SubHeaderProps) {
     { href: "/", label: "Product Images" },
     { href: "/product_videos", label: "Product Videos" },
     { href: "/immersive_experience", label: "Immersive Experience" },
-    // { href: "/case_studies", label: "Case Studies" },
-    // { href: "/faqs", label: "FAQs" },
   ];
 
   const [headerStyleType, setHeaderStyle] = useContext(SubheaderStyleContext);
@@ -84,6 +82,12 @@ export default function SubHeader({ activePage }: SubHeaderProps) {
 
   /* Is header visible */
   const [isActive, setIsActive] = useContext(SubheaderActiveContext);
+
+  useEffect(()=>{
+    return(()=>{
+      headerRef.current = null;
+    })
+  },[])
 
   return (
     <>

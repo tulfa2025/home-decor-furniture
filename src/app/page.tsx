@@ -9,7 +9,10 @@ import { Suspense } from "react";
 export default function Home() {
   return (
     <Suspense>
-      <PageTemplate layoutCollection={layoutCollection} activePagePath="/">
+      <PageTemplate 
+        layoutCollection={layoutCollection} 
+        activePagePath="/"
+      >
         {/* ALL PAGES */}
         <motion.div
           style={{

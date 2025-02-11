@@ -2,67 +2,81 @@
 import styles from "./NewCloseUpShots.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState, useEffect, useMemo, useContext } from "react";
+import { useRef, useState, useEffect, useMemo, useContext, useCallback } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 
 /* CUSTOM COMPONENTS */
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
-const ModalContainer = dynamic(
-  () => import("@/components/modals/standard/ModalContainer"),
-  {
-    ssr: false,
-  }
-);
+import ModalContainer from"@/components/modals/standard/ModalContainer"
 import useInView from "@/hooks/use_inview";
 
 /* IMAGES */
 import backgroundImage from "../../../assets/images/closeup_shots/rug_one.webp";
 import modalImageSet from "./closeup_shots_images";
 import DeviceContext from "@/context/deviceContext";
+import useWindowSize from "@/hooks/use_window_size";
 
 const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
-  const memoizedImageSet = useMemo(()=>{
-    return modalImageSet
-  }, [])
+  const memoizedImageSet = useMemo(() => {
+    return modalImageSet;
+  }, []);
   const pathName = usePathname();
+
+  const viewportSize = useWindowSize()
   /*  MODAL RELATED LOGIC */
   //Scroll Block context
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const modalRef = useRef(null);
-  const handleModalOpen = () => {
-    setIsPopupVisible(false);
-    setIsModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setIsPopupVisible(true);
-    setIsModalOpen(false);
-  };
-
-  // Ensure the ref is available before applying useScroll
-  const scrollTargetRef = useRef(null);
 
   /* DETECT POPUP */
   const [isPopupVisible, setIsPopupVisible] = useState(false);
+  // Modal open and close handlers using useCallback to prevent unnecessary re-creations
+  const handleModalOpen = useCallback(() => {
+    setIsPopupVisible(false);
+    setIsModalOpen(true);
+  }, []);
+
+  const handleModalClose = useCallback(() => {
+    setIsPopupVisible(true);
+    setIsModalOpen(false);
+  }, []);
+
+  // Ensure the ref is available before applying useScroll
+  const scrollTargetRef = useRef(null);
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
   const isInView = useInView(inViewRef, 0.3);
   /*POPUPBUTTON ANIMATION */
   useEffect(() => {
-
-    if(isInView){
+    if (isInView) {
       setIsPopupVisible(true);
     } else {
-      setIsPopupVisible(false)
+      setIsPopupVisible(false);
     }
-    
   }, [isInView]);
 
-  const deviceContext = useContext(DeviceContext)
+  const deviceContext = useContext(DeviceContext);
+
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      if (modalRef.current) {
+        modalRef.current = null;
+      }
+
+      if (scrollTargetRef.current) {
+        scrollTargetRef.current = null;
+      }
+
+      if (inViewRef.current) {
+        inViewRef.current = null;
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -76,7 +90,8 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           className={styles.image_container}
           ref={inViewRef}
           style={{
-            filter: isModalOpen && deviceContext === 'Other' ? "blur(10px)" : "",
+            filter:
+              isModalOpen && deviceContext === "Other" ? "blur(10px)" : "",
           }}
         >
           <Image
@@ -85,7 +100,7 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             priority
             className={styles.background_image}
             ref={scrollTargetRef}
-            quality={deviceContext === 'Other' ? 50 : 10}
+            quality={deviceContext === "Other" ? 50 : 10}
           />
         </motion.section>
       </LargeSlideContainer>
@@ -97,7 +112,7 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           opacity: 0,
         }}
         style={{
-          display: isPopupVisible ? 'block' : 'none',
+          display: isPopupVisible ? "block" : "none",
         }}
         whileInView={{
           opacity: isPopupVisible ? 1 : 0,
@@ -131,6 +146,7 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           urlLink={`${window.location.protocol}//${
             window.location.host
           }${pathName}?comp=${layoutName + 1}`}
+          viewportSize={viewportSize}
         />
       )}
     </>

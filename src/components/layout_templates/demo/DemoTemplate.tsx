@@ -117,6 +117,22 @@ const DemoTemplate = ({
       }
     }
   });
+  
+  // Cleanup
+  useEffect(()=>{
+    return(()=>{
+
+      if(scrollTargetRef.current){
+
+        scrollTargetRef.current = null
+      }
+
+      if(inViewRef.current){
+
+        inViewRef.current = null
+      }
+    })
+  }, [])
 
   return (
     <>

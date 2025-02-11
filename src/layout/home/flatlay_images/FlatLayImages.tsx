@@ -1,5 +1,5 @@
 "use client";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { inView, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
 import styles from "./FlatLayImages.module.scss";
 import Image from "next/image";
@@ -37,6 +37,16 @@ const FlatLayImages: React.FC<LayoutProps> = ({
     }, [isTrackInView])
   
   const deviceContext = useContext(DeviceContext)
+
+  useEffect(()=>{
+    return(()=>{
+
+      changeTrackRef.current = null;
+      inViewRef.current = null;
+      containerRef.current = null
+
+    })
+  }, [])
 
 
   return (

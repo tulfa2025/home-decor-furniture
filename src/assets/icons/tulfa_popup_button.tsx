@@ -58,6 +58,12 @@ const TulfaPopupButton = ({
 
    }, [isInView])
 
+   useEffect(()=>{
+      return(()=>{
+         elementRef.current = null
+      })
+   },[])
+
 
    const style = {
       height,

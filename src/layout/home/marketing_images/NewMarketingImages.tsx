@@ -8,12 +8,7 @@ import { usePathname } from "next/navigation";
 
 /* CUSTOM PROPS */
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
-const ModalContainer = dynamic(
-  () => import("@/components/modals/standard/ModalContainer"),
-  {
-    ssr: false,
-  }
-);
+import ModalContainer from "@/components/modals/standard/ModalContainer"
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 import useFilter from "@/hooks/use_filter";
 import useInView from "@/hooks/use_inview";
@@ -25,13 +20,15 @@ import backgroundImageTwo from "../../../assets/images/marketing_images/mockup r
 import backgroundImageThree from "../../../assets/images/marketing_images/mockup laptop.webp";
 import DeviceContext from "@/context/deviceContext";
 import scrollTransformValues from "@/utils/scrollTransformValues";
+import useWindowSize from "@/hooks/use_window_size";
 
 const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
-
-  const memoizedImageSet = useMemo(()=>{
-    return modalImageSet
-  }, [])
+  const memoizedImageSet = useMemo(() => {
+    return modalImageSet;
+  }, []);
   /*  MODAL RELATED LOGIC */
+
+  const viewportSize = useWindowSize()
   //Scroll Block context
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -44,7 +41,7 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   };
 
   const handleModalClose = () => {
-     setIsPopupVisible(true);
+    setIsPopupVisible(true);
     setIsModalOpen(false);
   };
 
@@ -59,18 +56,33 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const isInView = useInView(inViewRef, 0.1);
   /*POPUPBUTTON ANIMATION */
   useEffect(() => {
-
-    if(isInView){
+    if (isInView) {
       setIsPopupVisible(true);
     } else {
-      setIsPopupVisible(false)
+      setIsPopupVisible(false);
     }
-    
   }, [isInView]);
 
   const pathName = usePathname();
 
-  const deviceContext = useContext(DeviceContext)
+  const deviceContext = useContext(DeviceContext);
+
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      if (modalRef.current) {
+        modalRef.current = null;
+      }
+
+      if (scrollTargetRef.current) {
+        scrollTargetRef.current = null;
+      }
+
+      if (inViewRef.current) {
+        inViewRef.current = null;
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -93,19 +105,19 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             alt=""
             className={styles.background_image_top}
             ref={inViewRef}
-            quality={deviceContext === 'Other' ? 50 : 10}
+            quality={deviceContext === "Other" ? 50 : 10}
           />
           <Image
             src={backgroundImageTwo}
             alt=""
             className={styles.background_image_bottom_left}
-            quality={deviceContext === 'Other' ? 50 : 10}
+            quality={deviceContext === "Other" ? 50 : 10}
           />
           <Image
             src={backgroundImageThree}
             alt=""
             className={styles.background_image_bottom_right}
-            quality={deviceContext === 'Other' ? 50 : 10}
+            quality={deviceContext === "Other" ? 50 : 10}
           />
         </motion.section>
       </LargeSlideContainer>
@@ -117,7 +129,7 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           opacity: 0,
         }}
         style={{
-          display: isPopupVisible ? 'block' : 'none',
+          display: isPopupVisible ? "block" : "none",
         }}
         whileInView={{
           opacity: isPopupVisible ? 1 : 0,
@@ -151,6 +163,7 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           random={false}
           filter={filter}
           urlLink={`${window.location.protocol}//${window.location.host}${pathName}?comp=${layoutName}`}
+          viewportSize={viewportSize}
         />
       )}
     </>

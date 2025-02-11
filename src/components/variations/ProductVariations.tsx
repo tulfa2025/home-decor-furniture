@@ -96,10 +96,18 @@ const ProductVariation = ({
         : yPosition + scrollHeight * 0.5,
     ],
     [
-      viewportSize.width > 960 ? viewportSize.height * 1.15 : scrollHeight * 0.6,
-      viewportSize.width > 960 ? viewportSize.height * 1.15 : scrollHeight * 0.6,
-      viewportSize.width > 960 ? viewportSize.height * 1.15 : scrollHeight * 0.35,
-      viewportSize.width > 960 ? -viewportSize.height * 0.075 : -viewportSize.height * 0.1,
+      viewportSize.width > 960
+        ? viewportSize.height * 1.15
+        : scrollHeight * 0.6,
+      viewportSize.width > 960
+        ? viewportSize.height * 1.15
+        : scrollHeight * 0.6,
+      viewportSize.width > 960
+        ? viewportSize.height * 1.15
+        : scrollHeight * 0.35,
+      viewportSize.width > 960
+        ? -viewportSize.height * 0.075
+        : -viewportSize.height * 0.1,
     ]
   );
 
@@ -148,10 +156,30 @@ const ProductVariation = ({
 
   const [isRendered, setIsRendered] = useState(false);
 
+  const renderedRef = useRef(null)
   useEffect(() => {
-    setTimeout(() => {
+
+    clearTimeout(renderedRef.current)
+    renderedRef.current = setTimeout(() => {
       setIsRendered(true);
     }, 3000);
+
+    return(()=>{
+      clearTimeout(renderedRef.current)
+    })
+  }, []);
+
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      if (scrollTargetRef.current) {
+        scrollTargetRef.current = null;
+      }
+
+      if (inViewRef.current) {
+        inViewRef.current = null;
+      }
+    };
   }, []);
 
   return (
@@ -188,9 +216,7 @@ const ProductVariation = ({
               </div>
 
               {/* BACKGROUND IMAGE */}
-              <motion.div
-                className={styles.background_image_container}
-              >
+              <motion.div className={styles.background_image_container}>
                 <Image
                   src={imageSet.background}
                   alt=""
@@ -215,8 +241,8 @@ const ProductVariation = ({
                         key={index}
                         className={styles.indiv_image_container}
                         style={{
-                          opacity: deviceContext === 'Other' ? 0 : 1,
-                          y: deviceContext === 'Other' ? 100 : 0,
+                          opacity: deviceContext === "Other" ? 0 : 1,
+                          y: deviceContext === "Other" ? 100 : 0,
                         }}
                         whileInView={{
                           opacity: 1,

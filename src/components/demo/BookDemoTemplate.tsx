@@ -88,7 +88,18 @@ const BookDemoTemplate = ({ layoutName, zIndex, scrollMap = null }) => {
     scrollSpringProperties
   );
 
-  const deviceContext = useContext(DeviceContext)
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      if (scrollTargetRef.current) {
+        scrollTargetRef.current = null;
+      }
+
+      if (inViewRef.current) {
+        inViewRef.current = null;
+      }
+    };
+  }, []);
   return (
     <motion.div
       style={{

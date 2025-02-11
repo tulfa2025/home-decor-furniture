@@ -8,8 +8,8 @@ const memoizeComponents = (components: Array<[React.FC, string]>): Array<[React.
     const memoizedComponents: Array<[React.ExoticComponent, string]>= [];
     components.forEach((comp: [React.FC, string]) => {
         
-        const memoizedComponent = memo(comp[0])
-        memoizedComponents.push([memoizedComponent, comp[1]]);
+        // const memoizedComponent = memo(comp[0])
+        memoizedComponents.push([comp[0], comp[1]]);
     });
 
     return memoizedComponents;

@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
-import { memo, useContext, useRef, useState } from "react";
+import { memo, useContext, useEffect, useRef, useState } from "react";
 import styles from "./variation_image_container.module.scss";
 import { motion } from "framer-motion";
 import DeviceContext from "@/context/deviceContext";
 
 const VariationImageContainer = memo(
   ({
-    imageSrc,  // MainIMage, blurred, des, hover, hover blurred
+    imageSrc, // MainIMage, blurred, des, hover, hover blurred
     imageStyles,
     imageClassName,
     blur = false,
@@ -16,8 +16,16 @@ const VariationImageContainer = memo(
     const elementRef = useRef<HTMLDivElement | null>(null);
     const [isHovered, setIsHovered] = useState(false);
 
-    const deviceContext = useContext(DeviceContext)
+    const deviceContext = useContext(DeviceContext);
 
+    // Cleanup
+    useEffect(() => {
+      return () => {
+        if (elementRef.current) {
+          elementRef.current = null;
+        }
+      };
+    }, []);
 
     return (
       <>
@@ -31,19 +39,19 @@ const VariationImageContainer = memo(
           className={`${imageClassName} ${styles.indiv_image}`}
           onMouseEnter={() => {
             if (!imageSrc[3]) return;
-            if(deviceContext !== 'Other') return
+            if (deviceContext !== "Other") return;
             setIsHovered(true);
           }}
           onMouseLeave={() => {
             if (!imageSrc[3]) return;
-            if(deviceContext !== 'Other') return
+            if (deviceContext !== "Other") return;
             setIsHovered(false);
           }}
         >
           <Image
-          style={{
-            ...imageStyles
-          }}
+            style={{
+              ...imageStyles,
+            }}
             src={imageSrc[0]}
             alt=""
             className={`
@@ -57,7 +65,7 @@ const VariationImageContainer = memo(
         </motion.div>
 
         {/* If alternative image */}
-        {imageSrc[3] && deviceContext === 'Other' ? (
+        {imageSrc[3] && deviceContext === "Other" ? (
           <Image
             src={imageSrc[3]}
             alt=""

@@ -1,7 +1,7 @@
 "use client";
 import styles from "./ar_silo.module.scss";
 import Image from "next/image";
-import { useRef, useState, useEffect, useContext } from "react";
+import { useRef, useState, useEffect, useContext, useCallback } from "react";
 import {
   useScroll,
   useTransform,
@@ -20,19 +20,16 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 /* CUSTOM COMPONENT */
 import CallOut from "@/components/call_out/CallOut";
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
-const ARModalContainer = dynamic(
-  () => import("@/components/modals/ar/ARModalContainer"),
-  {
-    ssr: false,
-  }
-);
+import ARModalContainer from "@/components/modals/ar/ARModalContainer";
 
 /*Images */
 import mockup from "../../../assets/images/immersive/Augmented-reality-phone.webp";
 import usePopupPosition from "@/utils/calculate_popupbutton.loc";
 import modalImageSet from "./ar_silo_images";
 import useScrollTransform from "@/hooks/use_scrolltransform";
-import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
+import scrollTransformValues, {
+  scrollSpringProperties,
+} from "@/utils/scrollTransformValues";
 import useFilter from "@/hooks/use_filter";
 
 const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
@@ -63,16 +60,15 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   /* MODAL TRIGGER */
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const modalRef = useRef(null);
-  const handleModalOpen = () => {
+  const handleModalOpen = useCallback(() => {
     setIsPopupVisible(false);
     setIsModalOpen(true);
-  };
+  }, []);
 
-  const handleModalClose = () => {
+  const handleModalClose = useCallback(() => {
     setIsPopupVisible(true);
     setIsModalOpen(false);
-  };
+  }, []);
 
   /* IF modal filter in path name then set open */
   useFilter(setIsModalOpen, layoutName);
@@ -121,27 +117,22 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   useEffect(() => {
     if (isInView) {
       setIsPopupVisible(true);
-
-      
     } else {
       setIsPopupVisible(false);
     }
   }, [isInView]);
 
-  const timeoutRef= useRef(null)
+  const timeoutRef = useRef(null);
 
-  useEffect(()=>{
-    if(!hasAnimatedRef.current && isInView){
-
-    
-      timeoutRef.current =setTimeout(()=>{
-        hasAnimatedRef.current = true
-      }, 2000)
+  useEffect(() => {
+    if (!hasAnimatedRef.current && isInView) {
+      timeoutRef.current = setTimeout(() => {
+        hasAnimatedRef.current = true;
+      }, 2000);
     } else {
-      clearTimeout(timeoutRef.current)
-
+      clearTimeout(timeoutRef.current);
     }
-  },[isInView])
+  }, [isInView]);
 
   // Subheadr scroll
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
@@ -154,7 +145,11 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     }
   });
 
-  const hasAnimatedRef = useRef(false)
+  const hasAnimatedRef = useRef(false);
+
+  useEffect(() => {
+    return () => {};
+  }, []);
 
   return (
     <>
@@ -180,20 +175,18 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         >
           {/* CONTENT AQUI */}
           <motion.section className={styles.container}>
-            <motion.div 
+            <motion.div
               className={styles.left_container}
               initial={{
-                opacity: hasAnimatedRef.current  ? 1 : 0
+                opacity: hasAnimatedRef.current ? 1 : 0,
               }}
               animate={{
                 opacity: isInView ? 1 : 0,
-                transition:{
-                  delay: 1
-                }
+                transition: {
+                  delay: 1,
+                },
               }}
-              >
-
-
+            >
               <CallOut
                 heading="Lorem ipsum dolor sit amet."
                 paragraph="Lorem ipsum dolor sit amet consectetur. Congue dui semper eu egestas posuere vehicula sodales mi."
@@ -203,23 +196,26 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                 calloutStyleType={1}
               />
             </motion.div>
-            <motion.div 
+            <motion.div
               className={styles.right_container}
               initial={{
-                transform: !hasAnimatedRef.current ? 'translateX(-50vw)' : 'translateX(0)'
+                transform: !hasAnimatedRef.current
+                  ? "translateX(-50vw)"
+                  : "translateX(0)",
               }}
               animate={{
-                transform: 
-                isInView 
-                && !hasAnimatedRef.current
-                ? 'translateX(0)' :  (hasAnimatedRef.current ? 'translateX(0)' : 'translateX(-50vw)')
+                transform:
+                  isInView && !hasAnimatedRef.current
+                    ? "translateX(0)"
+                    : hasAnimatedRef.current
+                    ? "translateX(0)"
+                    : "translateX(-50vw)",
               }}
               transition={{
                 delay: 0.8,
                 duration: 0.45,
-                ease: "easeIn"
+                ease: "easeIn",
               }}
-
             >
               <Image className={styles.immersive_image} src={mockup} alt="" />
             </motion.div>
@@ -242,13 +238,13 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       </motion.div>
       {isModalOpen && (
         <ARModalContainer
-          ref={modalRef}
           handleModalClose={handleModalClose}
           isModalOpen={isModalOpen}
           imageSet={modalImageSet}
           selectionArray={[]}
           random={false}
           urlLink={`${window.location.protocol}//${window.location.host}${pathName}?comp=${layoutName}`}
+          viewportSize={viewportSize}
         />
       )}
     </>

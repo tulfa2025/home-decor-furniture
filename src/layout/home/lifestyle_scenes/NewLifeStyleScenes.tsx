@@ -3,19 +3,15 @@ import styles from "./NewLIfeStyleScenes.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useMemo, useRef, useState, useEffect, useContext } from "react";
-import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 
 /* CUSTOM PROPS */
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
 import backgroundImage from "../../../assets/images/lifestyle_scenes/placeholder/image_two.webp";
 import { modalSelectionArrayLifestyle } from "@/utils/constants";
-const ModalContainer = dynamic(
-  () => import("@/components/modals/standard/ModalContainer"),
-  {
-    ssr: false,
-  }
-);
+import ModalContainer from "@/components/modals/standard/ModalContainer"
+
+
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 import useFilter from "@/hooks/use_filter";
 import useInView from "@/hooks/use_inview";
@@ -24,11 +20,12 @@ import useInView from "@/hooks/use_inview";
 import modalImageSet from "./lifestyle_scenes_images";
 import scrollTransformValues from "@/utils/scrollTransformValues";
 import DeviceContext from "@/context/deviceContext";
+import useWindowSize from "@/hooks/use_window_size";
 
 const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
-  const memoizedImageSet = useMemo(()=>{
-    return modalImageSet
-  }, [])
+  const memoizedImageSet = useMemo(() => {
+    return modalImageSet;
+  }, []);
   /*  MODAL RELATED LOGIC */
   //Scroll Block context
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -66,9 +63,26 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const pathName = usePathname();
 
-  const deviceContext = useContext(DeviceContext)
-  
+  const deviceContext = useContext(DeviceContext);
 
+
+  const viewportSize = useWindowSize()
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      if (modalRef.current) {
+        modalRef.current = null;
+      }
+
+      if (scrollTargetRef.current) {
+        scrollTargetRef.current = null;
+      }
+
+      if (inViewRef.current) {
+        inViewRef.current = null;
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -93,7 +107,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             priority
             className={styles.background_image}
             ref={scrollTargetRef}
-            quality={deviceContext === 'Other' ? 50 : 10}
+            quality={deviceContext === "Other" ? 50 : 10}
           />
         </motion.section>
       </LargeSlideContainer>
@@ -103,10 +117,9 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         className={styles.closeup_button_container}
         initial={{
           opacity: 0,
-
         }}
         style={{
-          display: isPopupVisible ? 'block' : 'none',
+          display: isPopupVisible ? "block" : "none",
         }}
         whileInView={{
           opacity: isPopupVisible ? 1 : 0,
@@ -140,6 +153,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           random={false}
           filter={filter}
           urlLink={`${window.location.protocol}//${window.location.host}${pathName}?comp=${layoutName}`}
+          viewportSize={viewportSize}
         />
       )}
     </>

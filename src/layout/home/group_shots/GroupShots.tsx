@@ -1,95 +1,85 @@
-'use client'
-import styles from './GroupShots.module.scss'
-import { motion } from 'framer-motion'
-import { useRef } from 'react';
-import useInView from '@/hooks/use_inview';
+"use client";
+import styles from "./GroupShots.module.scss";
+import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import useInView from "@/hooks/use_inview";
 /* CUSTOM PROPS */
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
 
 /* IMAGES */
-import AutomaticCarousel from '@/components/carousel/automatic_carousel/AutomaticCarousel';
-import groupShoteOne from '../../../assets/images/group_shots/Group-shot_Plates_scene_1.webp'
-import groupShoteTwo from '../../../assets/images/group_shots/Group-shot_Plates_scene_2.webp'
-import groupShoteThree from '../../../assets/images/group_shots/Group-shot_Plates_scene_3.webp'
-import groupShoteFour from '../../../assets/images/group_shots/Group-shot_Plates_scene_4.webp'
+import AutomaticCarousel from "@/components/carousel/automatic_carousel/AutomaticCarousel";
+import groupShoteOne from "../../../assets/images/group_shots/Group-shot_Plates_scene_1.webp";
+import groupShoteTwo from "../../../assets/images/group_shots/Group-shot_Plates_scene_2.webp";
+import groupShoteThree from "../../../assets/images/group_shots/Group-shot_Plates_scene_3.webp";
+import groupShoteFour from "../../../assets/images/group_shots/Group-shot_Plates_scene_4.webp";
 
 type ImageSet = {
-    order: string[];
-    [key: string]: {
-        imageData: StaticImageData,
-        imageName: string,
-        buttonColor?: "dark" | "light",
-        overrideStyle: {}
-    };
-}
+  order: string[];
+  [key: string]: {
+    imageData: StaticImageData;
+    imageName: string;
+    buttonColor?: "dark" | "light";
+    overrideStyle: {};
+  };
+};
 
 const imageSet: ImageSet = {
-    order: [
-        "groupOne",
-        "groupTwo",
-        "groupThree",
-        "groupFour",
-    ],
-    groupOne: {
-        imageName: "groupOne",
-        imageData: groupShoteOne,
-        overrideStyle: {}
-    },
-    groupTwo: {
-        imageName: "groupTwo",
-        imageData: groupShoteTwo,
-        overrideStyle: {}
-    },
-    groupThree: {
-        imageName: "groupThree",
-        imageData: groupShoteThree,
-        overrideStyle: {}
-    },
-    groupFour: {
-        imageName: "groupFour",
-        imageData: groupShoteFour,
-        overrideStyle: {}
-    }
-}
+  order: ["groupOne", "groupTwo", "groupThree", "groupFour"],
+  groupOne: {
+    imageName: "groupOne",
+    imageData: groupShoteOne,
+    overrideStyle: {},
+  },
+  groupTwo: {
+    imageName: "groupTwo",
+    imageData: groupShoteTwo,
+    overrideStyle: {},
+  },
+  groupThree: {
+    imageName: "groupThree",
+    imageData: groupShoteThree,
+    overrideStyle: {},
+  },
+  groupFour: {
+    imageName: "groupFour",
+    imageData: groupShoteFour,
+    overrideStyle: {},
+  },
+};
 
+const GroupShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
+  const changeTrackRef = useRef(null);
+  const isTrackInView = useInView(changeTrackRef, 0.65);
 
-const GroupShots: React.FC<LayoutProps> = ({
-    layoutName,
-    zIndex
-}) => {
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      if (changeTrackRef.current) {
+        changeTrackRef.current = null;
+      }
+    };
+  }, []);
 
-    const changeTrackRef = useRef(null);
-    const isTrackInView = useInView(changeTrackRef, 0.65);
-
-
-    return (
-        <LargeSlideContainer
-            layoutName={layoutName}
-            title="Group Shots"
-            paragraph="Present your furniture items grouped together to show their compatibility and create a coherent look."
-            zIndex={zIndex}
-            dynamicHeader={true}
-        >
-            <motion.section
-                className={styles.video_container}
-                ref={changeTrackRef}
-
-            >
-                <AutomaticCarousel
-                    imageSet={imageSet}
-                    changeDelay={1000}
-                    transition={{
-                        duration: 0.5
-                    }}
-                    paused={
-                        isTrackInView ? false : true
-                    }
-                />
-
-            </motion.section>
-        </LargeSlideContainer>
-
-    );
-}
+  return (
+    <LargeSlideContainer
+      layoutName={layoutName}
+      title="Group Shots"
+      paragraph="Present your furniture items grouped together to show their compatibility and create a coherent look."
+      zIndex={zIndex}
+      dynamicHeader={true}
+    >
+      <motion.section className={styles.video_container} ref={changeTrackRef}>
+        <AutomaticCarousel
+          imageSet={imageSet}
+          changeDelay={1000}
+          transition={{
+            duration: 0.5,
+          }}
+          paused={isTrackInView ? false : true}
+        />
+      </motion.section>
+    </LargeSlideContainer>
+  );
+};
 
 export default GroupShots;

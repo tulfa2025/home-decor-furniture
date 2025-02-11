@@ -7,7 +7,7 @@ import TulfaPlayButton from "@/assets/icons/tulfa_play_button";
 /* CONTEXT */
 import DemoTemplate from "../layout_templates/demo/DemoTemplate";
 import DeviceContext from "@/context/deviceContext";
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import useInView from "@/hooks/use_inview";
 
 const VideoDemo = ({
@@ -23,6 +23,12 @@ const VideoDemo = ({
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
   const isInView = useInView(inViewRef, 0.5);
+
+  useEffect(()=>{
+    return(()=>{
+      inViewRef.current = null
+    })
+  },[])
 
   return (
     <DemoTemplate 

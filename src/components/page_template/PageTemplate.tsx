@@ -1,7 +1,7 @@
 "use client";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-import { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 
 /* CUSTOM HOOKS */
@@ -14,7 +14,6 @@ import MenuPopup from "@/components/menu_popup/MenuPopup";
 import SubHeader from "../sub_header/SubHeader";
 
 /* CONTEXT */
-import ScrollContext from "@/context/scrollContext";
 import SubheaderActiveContext from "@/context/subHeader";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 import SlideContext from "@/context/changeSlide";
@@ -25,17 +24,8 @@ const PageTemplate = ({ children, layoutCollection, activePagePath }) => {
   /* HEADER STYLE */
   const [headerStyle, setHeaderStyle] = useState(2);
 
-  const headerStyleMemo = useMemo(()=>{
-    return [headerStyle, setHeaderStyle]
-  }, [])
-
-
-
   /* SCROLL BLOCKING CONTROLS */
   const scrollingContainersRef = useRef([]);
-  const handleIsScrollBlocked = useCallback((flag = false, elementRef = null) => {
-    // Your logic
-  }, []);
 
   /* CURRENT SLIDE CONTROLS */
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -52,9 +42,6 @@ const PageTemplate = ({ children, layoutCollection, activePagePath }) => {
   };
 
   const handleSubheaderActive = useState(true);
-  const handleSubheaderActiveMemo = useMemo(()=>{
-    return handleSubheaderActive
-  }, [])
   const scrollContainerRef = useRef(null);
 
   /* GET WINDOW SIZE */
@@ -83,9 +70,12 @@ const PageTemplate = ({ children, layoutCollection, activePagePath }) => {
 
   /* DEVICE CONTEXT */
   const [deviceType, setDeviceType] = useState("");
-  const deviceTypeMemo = useMemo(()=>{
-    return getDeviceType()
-  }, [])
+
+  useEffect(() => {
+    if (window) {
+      setDeviceType(getDeviceType());
+    }
+  }, []);
 
   // Set any loading  spinner to norma
   useEffect(() => {
@@ -95,47 +85,45 @@ const PageTemplate = ({ children, layoutCollection, activePagePath }) => {
   }, []);
 
   // Unmount scrollcontainer
-  const pathName = usePathname()
+  const pathName = usePathname();
   useEffect(() => {
-    return () => {      
+    return () => {
       if (scrollContainerRef.current) {
         scrollContainerRef.current.innerHTML = "";
         scrollContainerRef.current = null;
-        scrollingContainersRef.current = null 
+        scrollingContainersRef.current = null;
       }
     };
-  }, []);
-
+  }, [pathName]);
   return (
-    <DeviceContext.Provider value={deviceTypeMemo}>
-      <SubheaderStyleContext.Provider value={headerStyleMemo}>
-        <SubheaderActiveContext.Provider value={handleSubheaderActiveMemo}>
-          <ScrollContext.Provider value={handleIsScrollBlocked}>
-            <SubHeader activePage={activePagePath} />
+    <DeviceContext.Provider value={deviceType}>
+      <SubheaderStyleContext.Provider value={[headerStyle, setHeaderStyle]}>
+        <SubheaderActiveContext.Provider value={handleSubheaderActive}>
+          <SubHeader activePage={activePagePath} />
 
-            <div
-              style={{
-                position: "relative",
-                top: 0,
-                left: 0,
-                width: "100%",
-                overflowX: "hidden",
-                zIndex: 20,
-              }}
-              ref={scrollContainerRef}
-            >
-              <SlideContext.Provider value={handleChangeSlide}>
-                {/* LAYOUT COLLECTION COMPONENTS GO HERE */}
-                {children}
-              </SlideContext.Provider>
-              <MenuPopup
-                layoutCollection={layoutCollection}
-                scrollDetails={scrollDetails}
-                scrollingContainersRef={scrollingContainersRef}
-                currentSlide={currentSlide}
-              />
-            </div>
-          </ScrollContext.Provider>
+          <div
+            style={{
+              position: "relative",
+              top: 0,
+              left: 0,
+              width: "100%",
+              overflowX: "hidden",
+              zIndex: 20,
+            }}
+            ref={scrollContainerRef}
+            key={pathName}
+          >
+            <SlideContext.Provider value={handleChangeSlide}>
+              {/* LAYOUT COLLECTION COMPONENTS GO HERE */}
+              {children}
+            </SlideContext.Provider>
+            <MenuPopup
+              layoutCollection={layoutCollection}
+              scrollDetails={scrollDetails}
+              scrollingContainersRef={scrollingContainersRef}
+              currentSlide={currentSlide}
+            />
+          </div>
         </SubheaderActiveContext.Provider>
       </SubheaderStyleContext.Provider>
     </DeviceContext.Provider>

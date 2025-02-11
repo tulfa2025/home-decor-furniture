@@ -5,7 +5,7 @@ import Image from "next/image";
 import Button from "@/components/button/Button";
 import ThreeDScene from "@/components/3dscene/three_d_scene";
 
-const ARModalImageContainerMobile = memo(({ imageSet }) => {
+const ARModalImageContainerMobile = ({ imageSet }) => {
   /* ARRAY OF IMAGES TO RENDER */
   let imageArray = [];
   /* DETERMINE NUMBER OF IMAGES TO RENDER */
@@ -147,8 +147,5 @@ const ARModalImageContainerMobile = memo(({ imageSet }) => {
       {memoizedComponents}
     </div>
   );
-});
-
-ARModalImageContainerMobile.displayName = "ARModalImageContainerMobile";
-
+}
 export default ARModalImageContainerMobile;

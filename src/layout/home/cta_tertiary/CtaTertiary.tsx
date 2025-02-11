@@ -10,7 +10,7 @@ import {
   useSpring,
   useMotionValueEvent,
 } from "framer-motion";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import useWindowSize from "@/hooks/use_window_size";
 
 /* CUSTOM HOOKS */
@@ -23,19 +23,17 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 /* CONTEXT */
 import SlideContext from "@/context/changeSlide";
 import useScrollTransform from "@/hooks/use_scrolltransform";
-import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
+import scrollTransformValues, {
+  scrollSpringProperties,
+} from "@/utils/scrollTransformValues";
 import DeviceContext from "@/context/deviceContext";
 
-
-const CtaTertiary: React.FC<LayoutProps> = ({
-  layoutName,
-  zIndex
-}) => {
+const CtaTertiary: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
   const isInView = useInView(inViewRef, 0.1);
 
-  const handleChangeSlide = useContext(SlideContext)
+  const handleChangeSlide = useContext(SlideContext);
   useEffect(() => {
     if (isInView) {
       handleChangeSlide(layoutName);
@@ -44,7 +42,10 @@ const CtaTertiary: React.FC<LayoutProps> = ({
 
   // Get scroll height
   const viewportSize = useWindowSize();
-  const scrollHeight = calculateScrollHeight(viewportSize.height, viewportSize.width > 960 ? 3 : 2)
+  const scrollHeight = calculateScrollHeight(
+    viewportSize.height,
+    viewportSize.width > 960 ? 3 : 2
+  );
 
   /* ANIMATION START AND END POSITION */
   const [yPosition, setYPosition] = useState(0);
@@ -52,7 +53,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
   // Function to get the Y position of the element
   const getElementYPosition = () => {
     if (scrollTargetRef.current) {
-      const yPos = scrollTargetRef.current.offsetTop ;
+      const yPos = scrollTargetRef.current.offsetTop;
       setYPosition(yPos); // Update state with the Y position
     }
   };
@@ -73,70 +74,57 @@ const CtaTertiary: React.FC<LayoutProps> = ({
   /**
    * For each SPAN element, check whether its in the viewport
    */
+  // Intersection Observer to highlight text on scroll
+  const observerCallback = useCallback(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(styles.cta_content_paragraph_activated);
+        } else {
+          entry.target.classList.remove(styles.cta_content_paragraph_activated);
+        }
+      });
+    },
+    []
+  );
+
   useEffect(() => {
-    // Select all the text groups
     const textGroups = document.querySelectorAll(".text-group");
+    const observer = new IntersectionObserver(observerCallback, {
+      threshold: 1,
+    });
 
-    // Create an intersection observer
-    const observer = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          // When a text group enters the viewport, add 'highlight' class
-          if (entry.isIntersecting) {
-            entry.target.classList.add(
-              `${styles.cta_content_paragraph_activated}`
-            );
-          } else {
-            entry.target.classList.remove(
-              `${styles.cta_content_paragraph_activated}`
-            );
-          }
-        });
-      },
-      {
-        threshold: 1,
-      }
-    );
-
-    // Observe each text group
     textGroups.forEach((group) => {
       observer.observe(group);
     });
 
-    return;
-  });
+    return () => {
+      observer.disconnect(); // Cleanup on component unmount
+    };
+  }, [observerCallback]);
 
   /* SCROLLBASED ANIMATIONS */
 
   //CTA CONTENT
   const translateAnimationOne = useTransform(
     scrollY,
-    [
-      yPosition, 
-      yPosition + scrollHeight * 0.8
-    ],
-    [
-     viewportSize.height * 1.1, 
-      -viewportSize.height * 1.5
-    ]
+    [yPosition, yPosition + scrollHeight * 0.8],
+    [viewportSize.height * 1.1, -viewportSize.height * 1.5]
   );
   const springyTranslateAnimationOne = useSpring(translateAnimationOne, {
     damping: 50,
-    stiffness: 300
+    stiffness: 300,
   });
-
-
 
   // CHAIR
   const translateAnimationTwo = useTransform(
     scrollY,
     [
-      0, 
+      0,
       yPosition - scrollHeight * 0.5,
       yPosition,
       yPosition + scrollHeight * 0.5,
-      yPosition + scrollHeight * 0.6
-
+      yPosition + scrollHeight * 0.6,
     ],
     [
       viewportSize.height / 4,
@@ -149,7 +137,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
 
   const springyTranslateAnimationTwo = useSpring(translateAnimationTwo, {
     damping: 50,
-    stiffness: 400
+    stiffness: 400,
   });
 
   /* PAGE TRANSFORM */
@@ -158,7 +146,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
     viewportSize,
     yPosition,
     scrollTransformValues.tertiary
-  )
+  );
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
     input,
@@ -170,20 +158,31 @@ const CtaTertiary: React.FC<LayoutProps> = ({
     scrollSpringProperties
   );
 
-
   const setHeaderStyle = useContext(SubheaderStyleContext);
 
-
-  const deviceContext = useContext(DeviceContext)
+  const deviceContext = useContext(DeviceContext);
 
   /* SET HEADER STYLE AT DIFFERNT INTERVALS */
-  useMotionValueEvent(scrollY, 'change', (v)=>{
-    if(isInView){
-      if(v > yPosition - scrollHeight * 0.1){
-        setHeaderStyle(0)
+  useMotionValueEvent(scrollY, "change", (v) => {
+    if (isInView) {
+      if (v > yPosition - scrollHeight * 0.1) {
+        setHeaderStyle(0);
       }
     }
-  })
+  });
+
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      if (scrollTargetRef.current) {
+        scrollTargetRef.current = null;
+      }
+
+      if (inViewRef.current) {
+        inViewRef.current = null;
+      }
+    };
+  }, []);
   return (
     <motion.div
       animate={{
@@ -193,7 +192,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
       style={{
         height: scrollHeight,
         position: "relative",
-        zIndex: isInView ? zIndex : -1
+        zIndex: isInView ? zIndex : -1,
       }}
       ref={scrollTargetRef}
     >
@@ -214,7 +213,9 @@ const CtaTertiary: React.FC<LayoutProps> = ({
             }}
           >
             <p className={styles.cta_content_paragraph}>
-              <span className={`${styles.text_group} text-group`}>Lorem ipsum dolor sit amet. </span>
+              <span className={`${styles.text_group} text-group`}>
+                Lorem ipsum dolor sit amet.{" "}
+              </span>
               <span className={`${styles.text_group} text-group`}>
                 Quo odit atque ut architecto obcaecati rem{" "}
               </span>
@@ -226,12 +227,19 @@ const CtaTertiary: React.FC<LayoutProps> = ({
           <motion.div
             style={{
               position: "absolute",
-              y: deviceContext === 'Other' ? springyTranslateAnimationTwo : '40vh',
-            
+              y:
+                deviceContext === "Other"
+                  ? springyTranslateAnimationTwo
+                  : "40vh",
             }}
             className={styles.cta_image_container}
           >
-            <Image src={sofaImage} alt="" className={styles.cta_image} quality={deviceContext === 'Other' ? 50 : 1}/>
+            <Image
+              src={sofaImage}
+              alt=""
+              className={styles.cta_image}
+              quality={deviceContext === "Other" ? 50 : 1}
+            />
           </motion.div>
         </motion.section>
       </motion.div>

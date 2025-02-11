@@ -42,7 +42,7 @@ export default function ProductVideos() {
           const compLength = layoutCollection.order.length;
 
           return (
-            <motion.div
+            <div
               key={compName}
               id={compName}
               style={{
@@ -52,7 +52,7 @@ export default function ProductVideos() {
               }}
             >
               <NextComp layoutName={compName} zIndex={compLength - compName} />
-            </motion.div>
+            </div>
           );
         })}
       </PageTemplate>

@@ -8,7 +8,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import VideoPlayer from "@/components/video/VideoPlayer";
-import { useRef, useEffect, useState, useContext } from "react";
+import { useRef, useEffect, useState, useContext, useMemo } from "react";
 import useInView from "../../../hooks/use_inview";
 import useWindowSize from "@/hooks/use_window_size";
 import calculateScrollHeight from "@/utils/calculate_scrollheight";
@@ -22,6 +22,7 @@ import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTra
 const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
   // Get scroll height
   const viewportSize = useWindowSize();
+  const scrollHeight = useMemo(() => calculateScrollHeight(viewportSize.height, 1), [viewportSize.height]);
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
@@ -32,7 +33,7 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
     target: scrollTargetRef,
   });
 
-  const scrollHeight = calculateScrollHeight(viewportSize.height, 1);
+  
 
   /* ANIMATION START AND END POSITION */
   const [yPosition, setYPosition] = useState(0);
@@ -89,17 +90,38 @@ const Banner: React.FC<LayoutProps> = ({ zIndex }) => {
 
 
   /* HIDE MENU BUTTON */
+  const menuRef = useRef(null)
   useEffect(()=>{
 
-    if(isInView){
-      const menu  = document.getElementById('menu')
+    if(!menuRef.current)  menuRef.current  = document.getElementById('menu')
 
-      menu.style.visibility = 'hidden'
+    if(isInView){
+    
+      menuRef.current.style.visibility = 'hidden'
     } else {
-      const menu  = document.getElementById('menu');
-      menu.style.visibility = 'unset'
+      menuRef.current.style.visibility = 'unset'
     }
   }, [isInView])
+
+  // Cleanup
+  useEffect(()=>{
+    return(()=>{
+      if(menuRef.current){
+
+        menuRef.current = null;
+      }
+
+      if(scrollTargetRef.current){
+
+        scrollTargetRef.current = null
+      }
+
+      if(inViewRef.current){
+
+        inViewRef.current = null
+      }
+    })
+  }, [])
 
   // Trigger move to next slide programmatically??
   return (

@@ -335,20 +335,17 @@ class ThreeDBasic extends EventTarget {
   // Cleanup assets
   remove() {
     if (this._scene) {
-      this._scene.traverse((object) => {
-        if (object instanceof THREE.Mesh) {
-          object.geometry.dispose();
-          if (object.material.isMaterial) {
-            object.material.dispose();
-          } else {
-            object.material.forEach((mat) => mat.dispose());
-          }
-        }
-      });
-
+      
+      this._scene = null
       // Dispose of dom element
-      this._domObj.parentNode.removeChild(this._threejs.domElement)
-
+      try{
+        this._domObj.removeChild(this._domObj.children[0])
+        this._threejs.domElement.innerHTML = ''
+        this._threejs.domElement = null  
+      }catch(e){
+        console.log(e)
+      }
+      
       // Dispose of textures, lights, etc.
       if (this._threejs) {
         this._threejs.dispose();

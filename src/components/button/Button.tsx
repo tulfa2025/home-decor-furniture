@@ -188,6 +188,7 @@ function ButtonThree({
         width={32}
         arrowFill={arrowFill}
         arrowColor={arrowColor}
+        button={false}
       />}
     </button>
   );

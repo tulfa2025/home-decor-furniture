@@ -5,7 +5,7 @@ import { memo, useMemo } from "react";
 import Image from "next/image";
 import ThreeDScene from "@/components/3dscene/three_d_scene";
 
-const ARModalImageContainer = memo(({ imageSet }) => {
+const ARModalImageContainer =({ imageSet }) => {
   /* ARRAY OF IMAGES TO RENDER */
   let imageArray = [];
   /* DETERMINE NUMBER OF IMAGES TO RENDER */
@@ -48,6 +48,7 @@ const ARModalImageContainer = memo(({ imageSet }) => {
                 gridArea: `${rowNumber} / ${columnNumber} / span 1 / span ${columnSpan}`,
               }}
               className={styles.modal_indiv_image_container}
+              key={i ** 2 + j + 100}
             >
               <Image
                 src={imageArray[imageIndex][0]}
@@ -63,6 +64,7 @@ const ARModalImageContainer = memo(({ imageSet }) => {
           columnSpan = 9;
           memoizedComponents.push(
             <div
+            key={i ** 2 + j + 4}
               style={{
                 gridArea: `${rowNumber} / ${columnNumber} / span 1 / span ${columnSpan}`,
               }}
@@ -105,6 +107,7 @@ const ARModalImageContainer = memo(({ imageSet }) => {
           columnSpan = 3;
           memoizedComponents.push(
             <div
+              key={i ** 2 + j + 50}
               style={{
                 gridArea: `${rowNumber} / ${columnNumber} / span 1 / span ${columnSpan}`,
               }}
@@ -151,8 +154,6 @@ const ARModalImageContainer = memo(({ imageSet }) => {
       {memoizedComponents}
     </div>
   );
-});
-
-ARModalImageContainer.displayName = "ARModalImageContainer";
+}
 
 export default ARModalImageContainer;

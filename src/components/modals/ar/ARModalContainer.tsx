@@ -28,14 +28,12 @@ const ARModalImageContainerMobile = dynamic(
   }
 );
 const ARModalContainer = ({
-  ref,
   handleModalClose,
   isModalOpen,
   imageSet,
   urlLink = "",
+  viewportSize
 }) => {
-  const viewportSize = useWindowSize();
-
 
   const [isActive, setIsActive] = useContext(SubheaderActiveContext);
 
@@ -57,7 +55,6 @@ const ARModalContainer = ({
 
   return (
     <>
-      <AnimatePresence initial={true}>
         <div
           style={{
             borderTopLeftRadius: 25,
@@ -69,7 +66,6 @@ const ARModalContainer = ({
             left: 0,
             pointerEvents: "auto",
           }}
-          className="modal_container"
         >
           <motion.div
             initial={{
@@ -95,9 +91,7 @@ const ARModalContainer = ({
           </motion.div>
 
           <motion.div
-            className={`${styles.closeup_modal} ${
-              isModalOpen ? "disable_global_scroll" : ""
-            }`}
+            className={styles.closeup_modal}
             initial={{
               opacity: 0,
               y: "100vh",
@@ -113,9 +107,8 @@ const ARModalContainer = ({
               opacity: 0,
               y: "100vh",
             }}
-            ref={ref}
           >
-            <div className={`${styles.closeup_card}  scroll_container`}>
+            <div className={styles.closeup_card}>
               {/* CONTENT CONTAINER */}
               <div className={styles.closeup_modal_content}>
                 {/* HEADER CONTAINER */}
@@ -212,7 +205,7 @@ const ARModalContainer = ({
             </div>
           </motion.div>
         </div>
-      </AnimatePresence>
+
     </>
   );
 };
