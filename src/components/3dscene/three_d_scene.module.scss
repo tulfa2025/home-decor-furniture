@@ -1,5 +1,14 @@
 @use '@/styles/shared/variables';
 
+.in_view_container {
+    position: absolute;
+    z-index: 10; 
+    pointer-events: none;
+    height: 100%;
+    width: 1px;
+    right: 0
+}
+
 .loading_placeholder {
     height: 100%;
     width: 100%;

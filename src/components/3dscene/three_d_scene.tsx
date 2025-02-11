@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ThreeDBasic from "./ThreeObject";
 import useInView from "@/hooks/use_inview";
 import Image from "next/image";
-import styles from './three_d_scene.module.scss'
+import styles from "./three_d_scene.module.scss";
 
 const ThreeDScene = ({
   glbRef,
@@ -17,32 +17,27 @@ const ThreeDScene = ({
   enableRotateMouse,
   enableZoom,
   pathToBackground,
-  blurSrc=''
+  blurSrc = "",
 }) => {
   const canvasRef = useRef(null);
-  const inViewRef = useRef(null)
+  const inViewRef = useRef(null);
 
   const threedScene = useRef(null);
 
-  const isInView = useInView(inViewRef, 0.2);
+  const isInView = useInView(inViewRef, 0.05);
 
   const timeoutRef = useRef(null);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const onLoad = useCallback(()=>{
-
+  const onLoad = useCallback(() => {
     setIsLoaded(true);
-
-    threedScene.current.removeEventListener('modelloaded', onLoad)
-
-
-  }, [blurSrc])
+    
+  }, [blurSrc]);
 
   // SETUP SCENE AND LOAD MODEL
   useEffect(() => {
     // SET UP
-    
     clearTimeout(timeoutRef.current);
     if (canvasRef.current && !threedScene.current && isInView) {
       timeoutRef.current = setTimeout(() => {
@@ -61,9 +56,25 @@ const ThreeDScene = ({
           enableZoom,
           pathToBackground
         );
-        threedScene.current.addEventListener('modelloaded', onLoad)
+        threedScene.current.addEventListener("modelloaded", onLoad);
       }, 1250);
     }
+  }, [isInView]);
+
+  // remove model from view whe leaves scene
+  const removeModelRef = useRef(null);
+  useEffect(() => {
+    clearTimeout(removeModelRef.current);
+    if(!threedScene.current) {
+
+    } else if (!isInView && threedScene.current.isLoaded) {
+      removeModelRef.current = setTimeout(() => {
+        setIsLoaded(false);
+        threedScene.current.removeEventListener("modelloaded", onLoad);
+        threedScene.current = null;
+        canvasRef.current.innerHTML = ''
+      }, 2000);
+    } 
   }, [isInView]);
 
   // Change Animation
@@ -95,32 +106,29 @@ const ThreeDScene = ({
 
   return (
     <>
-      {/* LOADING PLACEHOLDER HERE */}
-      {!isLoaded && <div
-        className={styles.loading_placeholder}
+      {/* in view container */}
+      <div
+        className={styles.in_view_container}
         ref={inViewRef}
       >
-        <Image 
-          src={blurSrc}
-          alt=''
-          height={700}
-          width={700}
-          priority
-          className={styles.image_container}
-        />
-        <h4
-          className={styles.notification}
-        >
-          Loading 3D Model
-        </h4>
 
-        <div
-          className={styles.loading_bar}
-        >
-
-        </div>
       </div>
-      }
+      {/* LOADING PLACEHOLDER HERE */}
+      {!isLoaded && (
+        <div className={styles.loading_placeholder} >
+          <Image
+            src={blurSrc}
+            alt=""
+            height={700}
+            width={700}
+            priority
+            className={styles.image_container}
+          />
+          <h4 className={styles.notification}>Loading 3D Model</h4>
+
+          <div className={styles.loading_bar}></div>
+        </div>
+      )}
 
       {/** */}
       <div

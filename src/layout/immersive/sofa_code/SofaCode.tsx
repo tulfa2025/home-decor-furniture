@@ -103,11 +103,27 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     }
   });
 
-  const deviceContext = useContext(DeviceContext);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  
+
+
+  const timeoutRef = useRef(null); 
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    if (isInView) {
+      clearTimeout(timeoutRef.current);
+    } else {
+      clearTimeout(timeoutRef.current);
+
+      // Clear 3d model when 3d model out of scene for performance
+      if (isActive) {
+        timeoutRef.current = setTimeout(()=>{
+          setIsActive(false);
+        }, 1250)
+      }
+    }
+  }, [isInView]);
 
   return (
     <motion.div

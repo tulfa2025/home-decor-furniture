@@ -19,16 +19,32 @@ const ARModalImageContainerMobile = memo(({ imageSet }) => {
       if (entry.isIntersecting) {
         const iframeWrapper: Element = entry.target;
 
-        // Clear timeout
-        clearTimeout(timeoutRefs[iframeWrapper.id]);
+        // Clear timeouts
+        clearTimeout(timeoutRefs[iframeWrapper.id].inView);
+        clearTimeout(timeoutRefs[iframeWrapper.id].remove);
 
         // Set new timeout
-        timeoutRefs[iframeWrapper.id] = setTimeout(() => {
+        timeoutRefs[iframeWrapper.id].inView = setTimeout(() => {
           const newIframe = iframeWrapper.querySelector("iframe");
 
           newIframe.style.display = "block";
-          observer.unobserve(iframeWrapper); // Stop observing once loaded
         }, 700);
+      }else if(!entry.isIntersecting){
+
+        const iframeWrapper: Element = entry.target;
+
+        // Clear timeouts
+        clearTimeout(timeoutRefs[iframeWrapper.id].inView);
+        clearTimeout(timeoutRefs[iframeWrapper.id].remove);
+
+        // Set new timeout
+        timeoutRefs[iframeWrapper.id].remove = setTimeout(() => {
+          const newIframe = iframeWrapper.querySelector("iframe");
+
+          if(newIframe.style.display !== 'none') newIframe.style.display = "none";
+          
+        }, 700);
+
       }
     });
   };

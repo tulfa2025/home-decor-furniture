@@ -29,9 +29,8 @@ const ProductConfig: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     } else {
       clearTimeout(timeoutRef.current);
 
-      if(deviceContext !== 'Other'){
-        setIsLoading(false)
-      }
+      
+        setIsLoading(false)   
       
     }
   }, [isInView])

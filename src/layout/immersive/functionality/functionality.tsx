@@ -13,20 +13,15 @@ import useInView from "@/hooks/use_inview";
 const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const [buttonSelection, setButtonSelection] = useState(1);
 
-  const animationList = useMemo(()=>{
-    return [
-      'Outer Body',
-      'Side Drawer',
-      'Inside Drawer',
-      'Lamp',
-      'Lamp'
-    ]
-  }, [])
+  const animationList = useMemo(() => {
+    return ["Outer Body", "Side Drawer", "Inside Drawer", "Lamp", "Lamp"];
+  }, []);
 
   const deviceContext = useContext(DeviceContext);
 
-  const inViewRef = useRef(null)
-  const isInView  = useInView(inViewRef, 0.2)
+  const inViewRef = useRef(null);
+  const isInView = useInView(inViewRef, 0.2);
+ 
 
   return (
     <LargeSlideContainer
@@ -68,21 +63,12 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             </>
           )}
           {deviceContext === "Other" && (
-            <ThreeDScene 
-              glbRef="glb/Table.glb" 
+            <ThreeDScene
+              glbRef="glb/Table.glb"
               followMouse={false}
-              cameraPosition={
-                [0,1,2.2]
-              }
-              modelRotation={[
-                0,
-                Math.PI,
-                0
-              ]}
-
-              initialPosition={[
-                0,0,-2
-              ]}
+              cameraPosition={[0, 1, 2.2]}
+              modelRotation={[0, Math.PI, 0]}
+              initialPosition={[0, 0, -2]}
               animationNames={animationList}
               playAnimation={isInView}
               defaultAnimationName={animationList[buttonSelection - 1]}

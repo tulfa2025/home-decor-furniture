@@ -22,6 +22,7 @@ class ThreeDBasic extends EventTarget {
 
     this._glbRef = glbRef;
     this._domObj = canvasRef;
+    this.isLoaded = false
 
     this._pathToBackground = pathToBackground;
 
@@ -231,6 +232,8 @@ class ThreeDBasic extends EventTarget {
 
         // DISPATCH LOADED EVENT
         this.dispatchEvent(new CustomEvent("modelloaded"));
+
+        this.isLoaded = true
         
         // IF no animations then return
         if (!this._animationNames.length) return;
