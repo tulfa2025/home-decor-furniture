@@ -58,14 +58,7 @@ class ThreeDBasic extends EventTarget {
     // Inside the ThreeDBasic class, in the _initialize() method
     this._threejs.setClearColor(0xffffff, 1); // White background
 
-    // Resize event listener
-    window.addEventListener(
-      "resize",
-      () => {
-        this._OnWindowResize();
-      },
-      false
-    );
+    
 
     // Set up the camera
     const fov = 40;

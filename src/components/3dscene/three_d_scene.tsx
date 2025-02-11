@@ -113,6 +113,19 @@ const ThreeDScene = ({
     };
   }, [pathname]);
 
+
+  useEffect(() => {
+    const handleResize = () => {
+      threedScene.current._OnWindowResize();
+    };
+  
+    window.addEventListener('resize', handleResize);
+  
+    return () => {
+      window.removeEventListener('resize', handleResize); // Clean up the event listener
+    };
+  }, []);
+
   return (
     <>
       {/* in view container */}
