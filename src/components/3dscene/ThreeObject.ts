@@ -22,7 +22,7 @@ class ThreeDBasic extends EventTarget {
 
     this._glbRef = glbRef;
     this._domObj = canvasRef;
-    this.isLoaded = false
+    this.isLoaded = false;
 
     this._pathToBackground = pathToBackground;
 
@@ -57,8 +57,6 @@ class ThreeDBasic extends EventTarget {
 
     // Inside the ThreeDBasic class, in the _initialize() method
     this._threejs.setClearColor(0xffffff, 1); // White background
-
-    
 
     // Set up the camera
     const fov = 40;
@@ -226,8 +224,8 @@ class ThreeDBasic extends EventTarget {
         // DISPATCH LOADED EVENT
         this.dispatchEvent(new CustomEvent("modelloaded"));
 
-        this.isLoaded = true
-        
+        this.isLoaded = true;
+
         // IF no animations then return
         if (!this._animationNames.length) return;
 
@@ -332,6 +330,31 @@ class ThreeDBasic extends EventTarget {
       action.time = animationDuration / 1.5; // Set the animation to the halfway point
       action.paused = true;
     }, (animationDuration / 1.5) * 1000);
+  }
+
+  // Cleanup assets
+  remove() {
+    if (this._scene) {
+      this._scene.traverse((object) => {
+        if (object instanceof THREE.Mesh) {
+          object.geometry.dispose();
+          if (object.material.isMaterial) {
+            object.material.dispose();
+          } else {
+            object.material.forEach((mat) => mat.dispose());
+          }
+        }
+      });
+
+      // Dispose of dom element
+      this._domObj.parentNode.removeChild(this._threejs.domElement)
+
+      // Dispose of textures, lights, etc.
+      if (this._threejs) {
+        this._threejs.dispose();
+        
+      }
+    }
   }
 
   _RAF() {

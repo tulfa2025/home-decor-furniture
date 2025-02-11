@@ -61,7 +61,7 @@ const ThreeDScene = ({
     }
   }, [isInView]);
 
-  // remove model from view whe leaves scene
+  // remove model from view whe leaves scene + clean up
   const removeModelRef = useRef(null);
   useEffect(() => {
     clearTimeout(removeModelRef.current);
@@ -70,6 +70,7 @@ const ThreeDScene = ({
       removeModelRef.current = setTimeout(() => {
         setIsLoaded(false);
         threedScene.current.removeEventListener("modelloaded", onLoad);
+        threedScene.current.remove();
         threedScene.current = null;
         canvasRef.current.innerHTML = "";
       }, 2000);
@@ -104,7 +105,7 @@ const ThreeDScene = ({
   }, [cameraPosition, modelPosition]);
 
   // Remove when navigated away
-  const pathname = usePathname()
+  const pathname = usePathname();
   useEffect(() => {
     return () => {
       if (canvasRef.current) {
@@ -113,19 +114,31 @@ const ThreeDScene = ({
     };
   }, [pathname]);
 
-
+  // Handling resize events listeners
   useEffect(() => {
     const handleResize = () => {
       threedScene.current._OnWindowResize();
     };
-  
-    window.addEventListener('resize', handleResize);
-  
+
+    window.addEventListener("resize", handleResize);
+
     return () => {
-      window.removeEventListener('resize', handleResize); // Clean up the event listener
+      window.removeEventListener("resize", handleResize); // Clean up the event listener
     };
   }, []);
 
+  // Handling assets
+  useEffect(() => {
+    return () => {
+      if (threedScene.current) {
+        threedScene.current.removeEventListener("modelloaded", onLoad);
+        threedScene.current.remove();
+        threedScene.current = null;
+      }
+    };
+  }, []);
+
+  
   return (
     <>
       {/* in view container */}

@@ -69,6 +69,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const deviceContext = useContext(DeviceContext)
   
 
+
   return (
     <>
       <LargeSlideContainer

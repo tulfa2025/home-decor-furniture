@@ -31,6 +31,10 @@ function useWindowSize() {
     // Add fullscreen change event listener
     document.addEventListener('fullscreenchange', checkFullscreen);
 
+    return(()=>{
+      document.removeEventListener('fullscreenchange', checkFullscreen);
+    })
+
   }, []); // Empty array ensures that effect is only run on mount
 
   useEffect(() => {

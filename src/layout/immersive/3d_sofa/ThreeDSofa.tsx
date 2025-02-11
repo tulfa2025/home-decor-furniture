@@ -2,8 +2,7 @@
 import styles from "./sofa_code.module.scss";
 import { motion } from "framer-motion";
 import ThreeDScene from "@/components/3dscene/three_d_scene";
-import { useContext, useMemo } from "react";
-import DeviceContext from "@/context/deviceContext";
+import { useMemo } from "react";
 import useWindowSize from "@/hooks/use_window_size";
 
 

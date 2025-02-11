@@ -1,12 +1,10 @@
 "use client";
-import { Suspense } from "react";
 import { motion } from "framer-motion";
 
 /* CUSTOM COMPONENTS */
 import layoutCollection from "@/layout/home/layout_collection_product_images";
 import PageTemplate from "@/components/page_template/PageTemplate";
-
-import DeviceContext from "@/context/deviceContext";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -42,7 +40,7 @@ export default function Home() {
           const compLength = layoutCollection.order.length;
 
           return (
-            <motion.div
+            <div
               key={compName}
               id={compName}
               style={{
@@ -51,7 +49,7 @@ export default function Home() {
               }}
             >
               <NextComp layoutName={compName} zIndex={compLength - compName} />
-            </motion.div>
+            </div>
           );
         })}
       </PageTemplate>

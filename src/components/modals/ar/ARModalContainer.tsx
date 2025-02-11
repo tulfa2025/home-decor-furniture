@@ -53,6 +53,8 @@ const ARModalContainer = ({
     setIsToastOpen(state);
   };
 
+  
+
   return (
     <>
       <AnimatePresence initial={true}>
