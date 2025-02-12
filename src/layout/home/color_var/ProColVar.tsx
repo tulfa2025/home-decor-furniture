@@ -14,9 +14,6 @@ const ProColVar: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         ['/images/color_var/Light Grey.webp',  "Greek Isles",'/images/color_var/Light Grey_B.webp'],
       ],
     };
-
-   
-
   return (
     <ProductVariation
       layoutName={layoutName}

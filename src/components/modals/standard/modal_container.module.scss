@@ -190,7 +190,7 @@
     z-index: 1000;
     width: 100%;
     position: fixed;
-    pointer-events: auto;
+    pointer-events: none;
 
     @include variables.xs {
         top: 7vh;

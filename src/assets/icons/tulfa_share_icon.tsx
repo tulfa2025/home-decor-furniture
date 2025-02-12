@@ -16,7 +16,8 @@ const TulfaShareButton = ({
             style={{
                 backgroundColor:"#666666",
                 borderRadius: height/2,
-                opacity: 0.5
+                opacity: 0.5,
+                pointerEvents: 'auto'
             }}
             whileHover={{
                 opacity: 0.8

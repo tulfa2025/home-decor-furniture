@@ -2,7 +2,7 @@
 import TulfaShareButton from "@/assets/icons/tulfa_share_icon";
 import styles from "./ModalShareButton.module.scss";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   FBButton,
   IGButton,
@@ -13,6 +13,7 @@ import {
   LinkButton,
 } from "@/assets/icons/social/SocialMedia";
 import useWindowSize from "@/hooks/use_window_size";
+import DeviceContext from "@/context/deviceContext";
 
 
 const ModalShareButton = ({urlLink, handleIsToastOpen, appliedFilter}) => {
@@ -36,8 +37,10 @@ const ModalShareButton = ({urlLink, handleIsToastOpen, appliedFilter}) => {
     url: urlLink,
   };
 
+  const deviceContext = useContext(DeviceContext)
+
   const handleOnClick = async () => {
-    if (navigator?.share && viewportSize.width < 960) {
+    if (navigator?.share && deviceContext !== 'Other') {
       try {
         await navigator.share(shareData);
         /* ON SUCCESS HANDLER */
@@ -51,7 +54,9 @@ const ModalShareButton = ({urlLink, handleIsToastOpen, appliedFilter}) => {
   };
 
   const handleCopyLink = async() => {
-    if (viewportSize.width > 960) {
+
+
+    if (deviceContext === 'Other') {
       try {
         /* ON SUCCESS HANDLER */
         handleIsToastOpen(true)
@@ -63,6 +68,10 @@ const ModalShareButton = ({urlLink, handleIsToastOpen, appliedFilter}) => {
       }
     }
   };
+
+  const style = {
+    pointerEvents: 'auto'
+  }
 
   return (
     <div className={styles.share_container}>
@@ -78,18 +87,19 @@ const ModalShareButton = ({urlLink, handleIsToastOpen, appliedFilter}) => {
           className={styles.media_icon_container_inner}
           animate={{
             display: isOptionsActive  ? 'flex' : 'none',
-            pointerEvents: 'auto'
           }}
         >
           <LinkButton
             width={BUTTONSIZE}
             height={BUTTONSIZE}
             onClick={handleCopyLink}
+            style={style}
           />
           <FBButton
             width={BUTTONSIZE}
             height={BUTTONSIZE}
             onClick={handleCopyLink}
+            style={style}
           />
           {/* <MessengerButton
                         width={BUTTONSIZE}
@@ -99,16 +109,19 @@ const ModalShareButton = ({urlLink, handleIsToastOpen, appliedFilter}) => {
             width={BUTTONSIZE}
             height={BUTTONSIZE}
             onClick={handleCopyLink}
+            style={style}
           />
           <LinkedButton
             width={BUTTONSIZE}
             height={BUTTONSIZE}
             onClick={handleCopyLink}
+            style={style}
           />
           <XButton
             width={BUTTONSIZE}
             height={BUTTONSIZE}
             onClick={handleCopyLink}
+            style={style}
           />
         </motion.div>
       </motion.div>
