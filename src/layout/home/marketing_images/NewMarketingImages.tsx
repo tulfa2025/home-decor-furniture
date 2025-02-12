@@ -3,21 +3,17 @@ import styles from "./NewMarketingImages.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRef, useState, useEffect, useMemo, useContext } from "react";
-import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 
 /* CUSTOM PROPS */
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
-import ModalContainer from "@/components/modals/standard/ModalContainer"
+import ModalContainer from "@/components/modals/standard/ModalContainer";
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 import useFilter from "@/hooks/use_filter";
 import useInView from "@/hooks/use_inview";
 
 /* IMAGES */
 import modalImageSet from "./marketing_images";
-import backgroundImageOne from "../../../assets/images/marketing_images/kv2.webp";
-import backgroundImageTwo from "../../../assets/images/marketing_images/mockup revista 2.webp";
-import backgroundImageThree from "../../../assets/images/marketing_images/mockup laptop.webp";
 import DeviceContext from "@/context/deviceContext";
 import scrollTransformValues from "@/utils/scrollTransformValues";
 import useWindowSize from "@/hooks/use_window_size";
@@ -28,7 +24,7 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   }, []);
   /*  MODAL RELATED LOGIC */
 
-  const viewportSize = useWindowSize()
+  const viewportSize = useWindowSize();
   //Scroll Block context
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -93,33 +89,50 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         zIndex={zIndex}
         scrollMap={scrollTransformValues.marketingImgs}
       >
-        <motion.section
-          className={styles.image_container}
-          ref={scrollTargetRef}
-          style={{
-            filter: isModalOpen ? "blur(10px)" : "",
-          }}
-        >
-          <Image
-            src={backgroundImageOne}
-            alt=""
-            className={styles.background_image_top}
-            ref={inViewRef}
-            quality={deviceContext === "Other" ? 50 : 10}
-          />
-          <Image
-            src={backgroundImageTwo}
-            alt=""
-            className={styles.background_image_bottom_left}
-            quality={deviceContext === "Other" ? 50 : 10}
-          />
-          <Image
-            src={backgroundImageThree}
-            alt=""
-            className={styles.background_image_bottom_right}
-            quality={deviceContext === "Other" ? 50 : 10}
-          />
-        </motion.section>
+        <div ref={inViewRef} className={styles.inview_trigger}></div>
+        {isInView && (
+          <motion.section
+            className={styles.image_container}
+            ref={scrollTargetRef}
+            style={{
+              filter: isModalOpen ? "blur(10px)" : "",
+            }}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            transition={{
+              delay: 0.5
+            }}
+          >
+            <Image
+              src="/images/marketing_images/kv2.webp"
+              alt=""
+              className={styles.background_image_top}
+              quality={deviceContext === "Other" ? 50 : 10}
+              width={3000}
+              height={2400}
+            />
+            <Image
+              src="/images/marketing_images/mockup revista 2.webp"
+              alt=""
+              className={styles.background_image_bottom_left}
+              quality={deviceContext === "Other" ? 50 : 10}
+              width={3000}
+              height={2400}
+            />
+            <Image
+              src="/images/marketing_images/mockup laptop.webp"
+              alt=""
+              className={styles.background_image_bottom_right}
+              quality={deviceContext === "Other" ? 50 : 10}
+              width={3000}
+              height={2400}
+            />
+          </motion.section>
+        )}
       </LargeSlideContainer>
       {/* Marketing IMages SCENES Modal */}
       {/* BUTTON TRIGGER */}

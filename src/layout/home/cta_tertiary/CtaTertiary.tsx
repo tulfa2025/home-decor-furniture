@@ -1,7 +1,6 @@
 "use client";
 import styles from "./CtaTertiary.module.scss";
 import Image from "next/image";
-import sofaImage from "../../../assets/images/cta_tertiary/Green_sofa.webp";
 
 import {
   motion,
@@ -166,7 +165,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   useMotionValueEvent(scrollY, "change", (v) => {
     if (isInView) {
       if (v > yPosition - scrollHeight * 0.1) {
-        setHeaderStyle(0);
+        // setHeaderStyle(0);
       }
     }
   });
@@ -204,6 +203,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           top: 0,
           y: springyTransformShowcaseAnimationThree,
         }}
+        ref={inViewRef}
       >
         <motion.section className={styles.cta_container}>
           <motion.div
@@ -234,12 +234,15 @@ const CtaTertiary: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             }}
             className={styles.cta_image_container}
           >
-            <Image
-              src={sofaImage}
+            {isInView &&<Image
+              src='/images/cta_tertiary/Green_sofa.webp'
               alt=""
               className={styles.cta_image}
               quality={deviceContext === "Other" ? 50 : 1}
-            />
+              width={2000}
+              height={2000}
+            
+            />}
           </motion.div>
         </motion.section>
       </motion.div>

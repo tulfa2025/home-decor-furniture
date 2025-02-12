@@ -3,10 +3,13 @@ import styles from "./friends.module.scss";
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
 import Image from "next/image";
 
-import fauxTreeSetting from '../../../assets/images/immersive/Main.png'
+import fauxTreeSetting from "../../../assets/images/immersive/Main.png";
 import scrollTransformValues from "@/utils/scrollTransformValues";
+import DeviceContext from "@/context/deviceContext";
+import { useContext } from "react";
 
 const FriendsSofa: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
+  const deviceContext = useContext(DeviceContext)
   return (
     <LargeSlideContainer
       layoutName={layoutName}
@@ -18,7 +21,12 @@ const FriendsSofa: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       scrollMap={scrollTransformValues.friends}
     >
       <div className={styles.int_container}>
-        <Image src={fauxTreeSetting} alt="" className={styles.int} />
+        <Image
+          src={fauxTreeSetting}
+          alt=""
+          className={styles.int}
+          quality={deviceContext === "Other" ? 50 : 10}
+        />
       </div>
     </LargeSlideContainer>
   );

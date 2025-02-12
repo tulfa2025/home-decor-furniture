@@ -7,10 +7,8 @@ import { usePathname } from "next/navigation";
 
 /* CUSTOM PROPS */
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
-import backgroundImage from "../../../assets/images/lifestyle_scenes/placeholder/image_two.webp";
 import { modalSelectionArrayLifestyle } from "@/utils/constants";
-import ModalContainer from "@/components/modals/standard/ModalContainer"
-
+import ModalContainer from "@/components/modals/standard/ModalContainer";
 
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 import useFilter from "@/hooks/use_filter";
@@ -51,7 +49,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.2);
+  const isInView = useInView(inViewRef, 0.05);
   /*POPUPBUTTON ANIMATION */
   useEffect(() => {
     if (isInView) {
@@ -65,8 +63,7 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const deviceContext = useContext(DeviceContext);
 
-
-  const viewportSize = useWindowSize()
+  const viewportSize = useWindowSize();
   // Cleanup
   useEffect(() => {
     return () => {
@@ -94,22 +91,32 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         dynamicHeader={true}
         scrollMap={scrollTransformValues.lifestyle}
       >
-        <motion.section
-          className={styles.image_container}
-          ref={inViewRef}
-          style={{
-            filter: isModalOpen ? "blur(10px)" : "",
-          }}
-        >
-          <Image
-            src={backgroundImage}
-            alt=""
-            priority
-            className={styles.background_image}
-            ref={scrollTargetRef}
-            quality={deviceContext === "Other" ? 50 : 10}
-          />
-        </motion.section>
+        <div ref={inViewRef} className={styles.inview_trigger}></div>
+        {isInView && (
+          <motion.section
+            className={styles.image_container}
+            ref={inViewRef}
+            style={{
+              filter: isModalOpen ? "blur(10px)" : "",
+            }}
+            initial={{
+              opacity:0
+            }}
+            animate={{
+              opacity: 1
+            }}
+          >
+            <Image
+              src="/images/lifestyle_scenes/image_two.webp"
+              alt=""
+              width={2912}
+              height={1632}
+              className={styles.background_image}
+              ref={scrollTargetRef}
+              quality={deviceContext === "Other" ? 50 : 10}
+            />
+          </motion.section>
+        )}
       </LargeSlideContainer>
       {/* LIFESTYLE SCENES Modal */}
       {/* BUTTON TRIGGER */}
@@ -144,7 +151,6 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       </motion.div>
       {isModalOpen && (
         <ModalContainer
-          ref={modalRef}
           handleModalClose={handleModalClose}
           isModalOpen={isModalOpen}
           imageSet={memoizedImageSet}

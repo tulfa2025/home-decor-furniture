@@ -69,13 +69,14 @@ const PageTemplate = ({ children, layoutCollection, activePagePath }) => {
   useGoTo(setCurrentSlide, scrollDetails);
 
   /* DEVICE CONTEXT */
-  const [deviceType, setDeviceType] = useState("");
+  const [deviceType, setDeviceType] = useState(getDeviceType());
 
-  useEffect(() => {
-    if (window) {
-      setDeviceType(getDeviceType());
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (window) {
+  //     console.log('Setting device type')
+  //     setDeviceType();
+  //   }
+  // }, []);
 
   // Set any loading  spinner to norma
   useEffect(() => {

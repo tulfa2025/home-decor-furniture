@@ -14,7 +14,6 @@ import SiloImages from "@/layout/home/silo_images/SiloImages";
 import ProSizeVar from "./size_var/ProSizeVar";
 import ProColVar from "./color_var/ProColVar";
 import ProTextVar from "./text_var/ProTextVar";
-// import FlipBook from "./flip_book/FlipBook";
 
 /* Memoize components */
 import { memoizeComponents } from "@/utils/memoize_components";
@@ -33,7 +32,6 @@ const layoutCollection: LayoutCollectionBase = [
     [GroupShots, 'Group Shots'],
     [DimensionImages, 'Dimension Images'],
     [InstallationImages, 'Installation Images'],
-    // [FlipBook, ''],
     [FlatLayImages, 'Flat Lay'],
     [NewMarketingImages, 'Marketing Images'],
     [BookDemo, 'Book a Demo'],

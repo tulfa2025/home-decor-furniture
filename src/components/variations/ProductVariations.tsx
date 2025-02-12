@@ -42,7 +42,7 @@ const ProductVariation = ({
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.1);
+  const isInView = useInView(inViewRef, 0.05);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -156,17 +156,16 @@ const ProductVariation = ({
 
   const [isRendered, setIsRendered] = useState(false);
 
-  const renderedRef = useRef(null)
+  const renderedRef = useRef(null);
   useEffect(() => {
-
-    clearTimeout(renderedRef.current)
+    clearTimeout(renderedRef.current);
     renderedRef.current = setTimeout(() => {
       setIsRendered(true);
     }, 3000);
 
-    return(()=>{
-      clearTimeout(renderedRef.current)
-    })
+    return () => {
+      clearTimeout(renderedRef.current);
+    };
   }, []);
 
   // Cleanup
@@ -216,22 +215,37 @@ const ProductVariation = ({
               </div>
 
               {/* BACKGROUND IMAGE */}
-              <motion.div className={styles.background_image_container}>
-                <Image
-                  src={imageSet.background}
-                  alt=""
-                  priority
-                  className={imageSet.backgroundStyling}
-                  quality={deviceContext === "Other" ? 50 : 1}
-                />
-              </motion.div>
+              {isInView && (
+                <motion.div 
+                  className={styles.background_image_container}
+                  initial={{
+                    opacity: 0
+                  }}
+                  animate={{
+                    opacity: 1
+                  }}
+                  transition={{
+                    delay: 0.5
+                  }}
+                  >
+                  <Image
+                    src={imageSet.background}
+                    alt=""
+                    height={2400}
+                    width={3000}
+                    className={imageSet.backgroundStyling}
+                    quality={deviceContext === "Other" ? 50 : 1}
+                  />
+                </motion.div>
+              )}
 
               {/* VARIATION CONTAINER */}
-              <motion.div
+              {isInView && <motion.div
                 className={styles.product_variation_content_container}
                 style={{
                   y: springyTransformPopupAnimationOne,
                 }}
+                
               >
                 {/* IMAGE CONTAINER */}
                 <div className={styles.images_container}>
@@ -257,16 +271,15 @@ const ProductVariation = ({
                           imageSrc={imageSource}
                           imageStyles={imageSet.imageStyles}
                           imageClassName={styles.indiv_image_var}
-                          blur={false}
                           quality={1}
                         />
 
-                        <p className={styles.image_text}>{imageSource[2]}</p>
+                        <p className={styles.image_text}>{imageSource[1]}</p>
                       </motion.div>
                     );
                   })}
                 </div>
-              </motion.div>
+              </motion.div>}
             </motion.section>
           ) : (
             <></>

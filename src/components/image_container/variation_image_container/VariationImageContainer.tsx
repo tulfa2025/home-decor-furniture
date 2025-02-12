@@ -5,12 +5,11 @@ import styles from "./variation_image_container.module.scss";
 import { motion } from "framer-motion";
 import DeviceContext from "@/context/deviceContext";
 
-const VariationImageContainer = memo(
+const VariationImageContainer = 
   ({
     imageSrc, // MainIMage, blurred, des, hover, hover blurred
     imageStyles,
     imageClassName,
-    blur = false,
     quality = 75,
   }) => {
     const elementRef = useRef<HTMLDivElement | null>(null);
@@ -33,17 +32,17 @@ const VariationImageContainer = memo(
           ref={elementRef}
           style={{
             ...imageStyles,
-            opacity: isHovered && imageSrc[3] ? 0 : 1,
+            opacity: isHovered && imageSrc[2] ? 0 : 1,
             transition: "opacity 0.2s ease-in",
           }}
           className={`${imageClassName} ${styles.indiv_image}`}
           onMouseEnter={() => {
-            if (!imageSrc[3]) return;
+            if (!imageSrc[2]) return;
             if (deviceContext !== "Other") return;
             setIsHovered(true);
           }}
           onMouseLeave={() => {
-            if (!imageSrc[3]) return;
+            if (!imageSrc[2]) return;
             if (deviceContext !== "Other") return;
             setIsHovered(false);
           }}
@@ -58,16 +57,17 @@ const VariationImageContainer = memo(
               ${styles.indiv_image} 
               ${imageClassName}
             `}
-            placeholder={blur ? "blur" : undefined}
             quality={quality}
-            blurDataURL={imageSrc[1]}
+            width={2000}
+            height={2000}
+
           />
         </motion.div>
 
         {/* If alternative image */}
-        {imageSrc[3] && deviceContext === "Other" ? (
+        {imageSrc[2] && deviceContext === "Other" ? (
           <Image
-            src={imageSrc[3]}
+            src={imageSrc[2]}
             alt=""
             style={{
               ...imageStyles,
@@ -75,16 +75,14 @@ const VariationImageContainer = memo(
               transition: "opacity 0.2s ease-out",
             }}
             className={`${imageClassName} ${styles.indiv_image_hover}`}
-            placeholder={blur ? "blur" : undefined}
             quality={quality}
-            blurDataURL={imageSrc[4]}
+            width={2000}
+            height={2000}
           />
         ) : null}
       </>
     );
   }
-);
 
-VariationImageContainer.displayName = "variation image container";
 
 export default VariationImageContainer;

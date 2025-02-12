@@ -7,14 +7,22 @@ import {
   useTransform,
   useMotionValueEvent,
 } from "framer-motion";
-import { useRef, useState, useEffect, useContext, useMemo, useCallback } from "react";
+import {
+  useRef,
+  useState,
+  useEffect,
+  useContext,
+  useMemo,
+  useCallback,
+  Suspense,
+} from "react";
 import styles from "./SiloImages.module.scss";
 import { modalSelectionArraySilo } from "@/utils/constants";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 /*CUSTOM COMPONENTS */
-import ModalContainer from "@/components/modals/standard/ModalContainer"
+import ModalContainer from "@/components/modals/standard/ModalContainer";
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 
 /* CUSTOM HOOKS */
@@ -28,7 +36,7 @@ import scrollTransformValues, {
   scrollSpringProperties,
 } from "@/utils/scrollTransformValues";
 /* Images */
-import backgroundImage from "../../../assets/images/silo_images/np_A_cute_pink_and_blue_patterned_chair_with_wooden_le.webp";
+// import backgroundImage from "../../../assets/images/silo_images/np_A_cute_pink_and_blue_patterned_chair_with_wooden_le.webp";
 import modalImageSet from "./image_sources_silo";
 
 /* CONTEXT */
@@ -43,7 +51,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.5);
+  const isInView = useInView(inViewRef, 0.1);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -137,7 +145,6 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       if (inViewRef.current) {
         inViewRef.current = null;
       }
-
     };
   }, []);
 
@@ -180,14 +187,31 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                   isModalOpen && deviceContext === "Other" ? "blur(10px)" : "",
               }}
             >
-              <div className={styles.silo_image_container_inner}>
-                <Image
-                  src={backgroundImage}
-                  alt=""
-                  className={styles.silo_image}
-                  quality={deviceContext === "Other" ? 50 : 1}
-                />
-              </div>
+              {isInView && (
+                <motion.div className={styles.silo_image_container_inner}
+                  initial={{
+                    opacity:0
+                  }}
+                  animate={{
+                    opacity: 1
+                  }}
+                  transition={{
+                    delay: 1,
+                    duration: 1
+                  }}
+                >
+                  
+                  <Image
+                    src="/images/silo_images/np_A_cute_pink_and_blue_patterned_chair_with_wooden_le.webp"
+                    alt=""
+                    width={2000}
+                    height={2000}
+                    className={styles.silo_image}
+                    quality={deviceContext === "Other" ? 50 : 1}
+                  />
+                  
+                </motion.div>
+              )}
             </div>
           </section>
         </motion.div>

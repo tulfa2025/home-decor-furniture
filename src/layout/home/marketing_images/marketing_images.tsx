@@ -44,7 +44,7 @@ const modalImageSet = {
     [marketingEightImage, blurmarketingEightImage],
     [marketingNineImage, blurmarketingNineImage],
     [marketingElevenImage, blurmarketingElevenImage],
-    [marketingTenImage, blurmarketingTenImage],
+    [marketingTwelveImage, blurmarketingTwelveImage],
     [marketingThirteenImage, blurmarketingThirteenImage],
   ],
 };

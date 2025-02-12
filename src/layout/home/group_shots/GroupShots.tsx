@@ -8,10 +8,6 @@ import LargeSlideContainer from "@/components/large_slide_container/LargeSlideCo
 
 /* IMAGES */
 import AutomaticCarousel from "@/components/carousel/automatic_carousel/AutomaticCarousel";
-import groupShoteOne from "../../../assets/images/group_shots/Group-shot_Plates_scene_1.webp";
-import groupShoteTwo from "../../../assets/images/group_shots/Group-shot_Plates_scene_2.webp";
-import groupShoteThree from "../../../assets/images/group_shots/Group-shot_Plates_scene_3.webp";
-import groupShoteFour from "../../../assets/images/group_shots/Group-shot_Plates_scene_4.webp";
 
 type ImageSet = {
   order: string[];
@@ -27,29 +23,29 @@ const imageSet: ImageSet = {
   order: ["groupOne", "groupTwo", "groupThree", "groupFour"],
   groupOne: {
     imageName: "groupOne",
-    imageData: groupShoteOne,
+    imageData: "/images/group_shots/Group-shot_Plates_scene_1.webp",
     overrideStyle: {},
   },
   groupTwo: {
     imageName: "groupTwo",
-    imageData: groupShoteTwo,
+    imageData: "/images/group_shots/Group-shot_Plates_scene_2.webp",
     overrideStyle: {},
   },
   groupThree: {
     imageName: "groupThree",
-    imageData: groupShoteThree,
+    imageData: "/images/group_shots/Group-shot_Plates_scene_3.webp",
     overrideStyle: {},
   },
   groupFour: {
     imageName: "groupFour",
-    imageData: groupShoteFour,
+    imageData: "/images/group_shots/Group-shot_Plates_scene_4.webp",
     overrideStyle: {},
   },
 };
 
 const GroupShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const changeTrackRef = useRef(null);
-  const isTrackInView = useInView(changeTrackRef, 0.65);
+  const isTrackInView = useInView(changeTrackRef, 0.05);
 
   // Cleanup
   useEffect(() => {
@@ -68,16 +64,31 @@ const GroupShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       zIndex={zIndex}
       dynamicHeader={true}
     >
-      <motion.section className={styles.video_container} ref={changeTrackRef}>
-        <AutomaticCarousel
-          imageSet={imageSet}
-          changeDelay={1000}
-          transition={{
-            duration: 0.5,
+      <div ref={changeTrackRef} className={styles.inview_trigger}></div>
+      {isTrackInView && (
+        <motion.section
+          className={styles.video_container}
+          
+          initial={{
+            opacity: 0,
           }}
-          paused={isTrackInView ? false : true}
-        />
-      </motion.section>
+          animate={{
+            opacity: 1,
+          }}
+          transition={{
+            delay: 0.5
+          }}
+        >
+          <AutomaticCarousel
+            imageSet={imageSet}
+            changeDelay={1000}
+            transition={{
+              duration: 0.5,
+            }}
+            paused={isTrackInView ? false : true}
+          />
+        </motion.section>
+      )}
     </LargeSlideContainer>
   );
 };

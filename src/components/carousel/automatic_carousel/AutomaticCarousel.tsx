@@ -81,6 +81,8 @@ const AutomaticCarousel: React.FC<AutomaticCarouaProps> = memo(
                 src={imageSet[imageName].imageData}
                 alt=""
                 objectPosition="0 0"
+                width={3000}
+                height={2400}
                 style={{
                   height: "100%",
                   width: "100%",

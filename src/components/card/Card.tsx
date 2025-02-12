@@ -17,6 +17,7 @@ export default function Card({ heading, date, paragraph, imageData }: CardProps)
                 src={imageData}
                 alt={heading}
                 className={styles.card_image}
+                quality={35}
             />
             <div className={styles.card_header}>
                 <h5 className={styles.card_header_heading}>

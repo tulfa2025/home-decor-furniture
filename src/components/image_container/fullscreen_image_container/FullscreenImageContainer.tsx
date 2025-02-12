@@ -124,6 +124,7 @@ const FullscreenImageContainer = ({
             objectFit: isFullscreen ? "contain" : "cover",
           }}
           blurDataURL={imageSrc[1]}
+          
 
           ref={imageRef}
         />

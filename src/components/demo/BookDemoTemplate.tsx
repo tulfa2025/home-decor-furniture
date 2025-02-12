@@ -10,8 +10,6 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 import SlideContext from "@/context/changeSlide";
 import styles from "./BookDemo.module.scss";
 
-import bookDemoImage from "../../assets/images/book_demo/book.webp";
-import bookDemoImageMob from "../../assets/images/book_demo/book_mobile.webp";
 import useScrollTransform from "@/hooks/use_scrolltransform";
 import scrollTransformValues from "@/utils/scrollTransformValues";
 import { scrollSpringProperties } from "@/utils/scrollTransformValues";
@@ -24,9 +22,9 @@ const BookDemoTemplate = ({ layoutName, zIndex, scrollMap = null }) => {
   // DETERMINE BACKGROUND IMAGE BASED ON VIEWPORT SIZE
   const backgroundImage = useMemo(() => {
     if (viewportSize.width >= 768) {
-      return bookDemoImage;
+      return "/images/book_demo/book.webp";
     } else {
-      return bookDemoImageMob;
+      return "/images/book_demo/book_mobile.webp";
     }
   }, [viewportSize]);
 
@@ -100,6 +98,8 @@ const BookDemoTemplate = ({ layoutName, zIndex, scrollMap = null }) => {
       }
     };
   }, []);
+
+  const deviceContext = useContext(DeviceContext);
   return (
     <motion.div
       style={{
@@ -121,30 +121,45 @@ const BookDemoTemplate = ({ layoutName, zIndex, scrollMap = null }) => {
         }}
         ref={inViewRef}
       >
-        <motion.section className={styles.book_container}>
-          <div className={styles.book_content}>
-            <Image
-              alt=""
-              src={backgroundImage}
-              priority
-              className={styles.book_demo_image}
-            />
-            <div className={styles.book_inner_container}>
-              <h4 className={styles.book_content_heading}>Book a Demo</h4>
-              <p className={styles.book_content_paragraph}>
-                We have produced product visuals and immersive experiences for
-                fortune 500 companies. Are you spending more than $50k on your
-                product content? Talk to us.
-              </p>
-              <Button
-                text="Schedule a Demo"
-                modifier="l-color"
-                buttonType={4}
-                externalLink="https://www.tulfa.com/contact-us"
+        {isInView && (
+          <motion.section
+            className={styles.book_container}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            transition={{
+              delay: 0.5,
+            }}
+          >
+            <div className={styles.book_content}>
+              <Image
+                alt=""
+                src={backgroundImage}
+                className={styles.book_demo_image}
+                quality={deviceContext === "Other" ? 50 : 10}
+                height={2400}
+                width={3000}
               />
+              <div className={styles.book_inner_container}>
+                <h4 className={styles.book_content_heading}>Book a Demo</h4>
+                <p className={styles.book_content_paragraph}>
+                  We have produced product visuals and immersive experiences for
+                  fortune 500 companies. Are you spending more than $50k on your
+                  product content? Talk to us.
+                </p>
+                <Button
+                  text="Schedule a Demo"
+                  modifier="l-color"
+                  buttonType={4}
+                  externalLink="https://www.tulfa.com/contact-us"
+                />
+              </div>
             </div>
-          </div>
-        </motion.section>
+          </motion.section>
+        )}
       </motion.div>
     </motion.div>
   );

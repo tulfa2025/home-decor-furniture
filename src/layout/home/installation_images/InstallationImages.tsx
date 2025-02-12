@@ -1,21 +1,13 @@
 "use client";
 import styles from "./InstallationImages.module.scss";
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
-import scrollTransformValues from "@/utils/scrollTransformValues";
-
-/* INSTALLATION IMAGES */
-import imageOne from "../../../assets/images/installation_images/1.webp";
-import imageTwo from "../../../assets/images/installation_images/2.webp";
-import imageThree from "../../../assets/images/installation_images/3.webp";
-import imageFour from "../../../assets/images/installation_images/4.webp";
-import imageFive from "../../../assets/images/installation_images/5.webp";
-import imageSix from "../../../assets/images/installation_images/6.webp";
-
+import {motion} from 'framer-motion'
 import Image from "next/image";
 
 import useWindowSize from "@/hooks/use_window_size";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import DeviceContext from "@/context/deviceContext";
+import useInView from "@/hooks/use_inview";
 
 const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const image_container_style = {
@@ -29,7 +21,10 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const viewportSize = useWindowSize();
 
-  const deviceContext = useContext(DeviceContext)
+  const deviceContext = useContext(DeviceContext);
+
+  const inViewRef = useRef(null);
+  const isInView = useInView(inViewRef, 0.2);
 
   return (
     <>
@@ -39,61 +34,85 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         paragraph="Guide your customers with clear, step-by-step images for assembling and setting up the furniture."
         zIndex={zIndex}
       >
-        <div className={styles.image_container}>
-          <Image
-            alt=""
-            src={imageSix}
-            style={{
-              ...image_container_style,
-            }}
-            quality={deviceContext === 'Other' ? 50 : 1}
-          />
-          <Image
-            alt=""
-            src={imageFive}
-            style={{
-              ...image_container_style,
-            }}
-            quality={deviceContext === 'Other' ? 50 : 1}
-          />
-          <Image
-            alt=""
-            src={imageTwo}
-            style={{
-              ...image_container_style,
-            }}
-            quality={deviceContext === 'Other' ? 50 : 1}
-          />
-          <Image
-            alt=""
-            src={imageThree}
-            style={{
-              ...image_container_style,
-            }}
-            quality={deviceContext === 'Other' ? 50 : 1}
-          />
+        <div ref={inViewRef} className={styles.inview_trigger}></div>
+        {isInView && (
+          <motion.div className={styles.image_container}initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          transition={{
+            delay: 0.5
+          }}
+          >
+            <Image
+              alt=""
+              src="/images/installation_images/6.webp"
+              style={{
+                ...image_container_style,
+              }}
+              quality={deviceContext === "Other" ? 50 : 1}
+              width={3840}
+              height={2560}
+            />
+            <Image
+              alt=""
+              src="/images/installation_images/5.webp"
+              style={{
+                ...image_container_style,
+              }}
+              quality={deviceContext === "Other" ? 50 : 1}
+              width={3840}
+              height={2560}
+            />
+            <Image
+              alt=""
+              src="/images/installation_images/2.webp"
+              style={{
+                ...image_container_style,
+              }}
+              quality={deviceContext === "Other" ? 50 : 1}
+              width={3840}
+              height={2560}
+            />
+            <Image
+              alt=""
+              src="/images/installation_images/3.webp"
+              style={{
+                ...image_container_style,
+              }}
+              quality={deviceContext === "Other" ? 50 : 1}
+              width={3840}
+              height={2560}
+            />
 
-          {viewportSize.width > 768 ? (
-            <>
-              <Image
-                alt=""
-                src={imageFour}
-                style={{
-                  ...image_container_style,
-                }}
-                quality={deviceContext === 'Other' ? 50 : 1}
-              />
-              <Image
-                alt=""
-                src={imageOne}
-                style={{
-                  ...image_container_style,
-                }}
-                quality={deviceContext === 'Other' ? 50 : 1}
-              />
-            </>
-          ) : null}
-        </div>
+            {viewportSize.width > 768 ? (
+              <>
+                <Image
+                  alt=""
+                  src="/images/installation_images/4.webp"
+                  style={{
+                    ...image_container_style,
+                  }}
+                  quality={deviceContext === "Other" ? 50 : 1}
+                  width={3840}
+                  height={2560}
+                />
+                <Image
+                  alt=""
+                  src="/images/installation_images/1.webp"
+                  style={{
+                    ...image_container_style,
+                  }}
+                  quality={deviceContext === "Other" ? 50 : 1}
+                  width={3840}
+                  height={2560}
+                />
+              </>
+            ) : null}
+          </motion.div>
+        )}
       </LargeSlideContainer>
     </>
   );

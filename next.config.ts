@@ -37,8 +37,20 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ["image/webp"],
-  }
-
+  },
+  async headers() {
+    return [
+      {
+        source: "/:path*", // Apply this to all paths
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, no-cache, must-revalidate, proxy-revalidate", // Add no-cache header
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

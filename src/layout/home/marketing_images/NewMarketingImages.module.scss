@@ -1,5 +1,13 @@
 @use '@/styles/shared/variables';
-
+.inview_trigger {
+    height: 100%;
+    width: 10px;
+    position: absolute;
+    top: 0;
+    right: 10vw;
+    z-index: 100;
+    // background-color: black;
+}
 .image_container {
     /* LAYOUT */
     

@@ -31,6 +31,7 @@ import scrollTransformValues, {
   scrollSpringProperties,
 } from "@/utils/scrollTransformValues";
 import useFilter from "@/hooks/use_filter";
+import DeviceContext from "@/context/deviceContext";
 
 const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Get scroll height
@@ -151,6 +152,8 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     return () => {};
   }, []);
 
+  const deviceContext = useContext(DeviceContext)
+
   return (
     <>
       <motion.div
@@ -217,7 +220,12 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                 ease: "easeIn",
               }}
             >
-              <Image className={styles.immersive_image} src={mockup} alt="" />
+              <Image 
+                className={styles.immersive_image} 
+                src={mockup} 
+                alt="" 
+                quality={deviceContext === "Other" ? 50 : 10}
+              />
             </motion.div>
           </motion.section>
         </motion.div>
