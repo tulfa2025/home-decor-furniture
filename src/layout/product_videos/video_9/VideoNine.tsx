@@ -21,7 +21,7 @@ const VideoNine = ({ layoutName, zIndex }) => {
             ? "videos/product/BABY CRIB_compressed.mp4"
             : "videos/product/Mobile/BABY_CRIB_MOBILE.mp4"
         }
-        videoId={1024593444}
+        videoId={1056102792}
         scrollMap={scrollTransformValues.demoTemplate
         }
       />

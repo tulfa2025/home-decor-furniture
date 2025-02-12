@@ -30,34 +30,23 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const filter = useFilter(setIsModalOpen, layoutName);
 
-  const modalRef = useRef(null);
   const handleModalOpen = () => {
-    setIsPopupVisible(false);
     setIsModalOpen(true);
   };
 
   const handleModalClose = () => {
-    setIsPopupVisible(true);
+
     setIsModalOpen(false);
   };
 
   // Ensure the ref is available before applying useScroll
   const scrollTargetRef = useRef(null);
 
-  /* DETECT POPUP */
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
   const isInView = useInView(inViewRef, 0.1);
-  /*POPUPBUTTON ANIMATION */
-  useEffect(() => {
-    if (isInView) {
-      setIsPopupVisible(true);
-    } else {
-      setIsPopupVisible(false);
-    }
-  }, [isInView]);
+  const isPopupVisible = useInView(inViewRef, 0.75);
 
   const pathName = usePathname();
 
@@ -66,10 +55,6 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Cleanup
   useEffect(() => {
     return () => {
-      if (modalRef.current) {
-        modalRef.current = null;
-      }
-
       if (scrollTargetRef.current) {
         scrollTargetRef.current = null;
       }
@@ -167,7 +152,6 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       </motion.div>
       {isModalOpen && (
         <ModalContainer
-          ref={modalRef}
           handleModalClose={handleModalClose}
           isModalOpen={isModalOpen}
           imageSet={memoizedImageSet}

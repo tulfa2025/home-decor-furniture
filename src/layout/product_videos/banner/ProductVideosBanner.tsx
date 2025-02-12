@@ -143,6 +143,7 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                       ? "videos/product/Kitchen-3D-Rendering_compressed.jpg"
                       : "videos/product/Mobile/Kitchin_scene_vertical_view_compressed-mobile.jpg"
                   }
+                
                 ></VideoPlayer>
               ) : (
                 <></>
@@ -164,7 +165,7 @@ const ProductVideosBanner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         {/* PLAY BUTTON ON MOBIL */}
         <div className={styles.play_container}>
           {deviceOS !== "Other" ? (
-            <TulfaPlayButton height={35} width={35} videoId={""} />
+            <TulfaPlayButton height={35} width={35} videoId={1056105868} />
           ) : (
             <></>
           )}

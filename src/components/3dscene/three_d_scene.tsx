@@ -19,6 +19,8 @@ const ThreeDScene = ({
   enableZoom,
   pathToBackground,
   blurSrc = "",
+  lightingArray = [],
+  modelShadow = false
 }) => {
   const canvasRef = useRef(null);
   const inViewRef = useRef(null);
@@ -54,7 +56,9 @@ const ThreeDScene = ({
           defaultAnimationName,
           enableRotateMouse,
           enableZoom,
-          pathToBackground
+          pathToBackground,
+          lightingArray,
+          modelShadow
         );
         threedScene.current.addEventListener("modelloaded", onLoad);
       }, 1250);
@@ -149,8 +153,8 @@ const ThreeDScene = ({
           <Image
             src={blurSrc}
             alt=""
-            height={700}
-            width={700}
+            height={2000}
+            width={2000}
             priority
             className={styles.image_container}
           />

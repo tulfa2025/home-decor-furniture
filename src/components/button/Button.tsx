@@ -184,11 +184,12 @@ function ButtonThree({
         )}
       </span>
       {arrow &&<TulfaRightArrow
-        height={32}
-        width={32}
+        height={16}
+        width={16}
         arrowFill={arrowFill}
         arrowColor={arrowColor}
         button={false}
+        thickness={3.5}
       />}
     </button>
   );

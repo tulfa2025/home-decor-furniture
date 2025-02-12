@@ -22,6 +22,7 @@ const VideoFour = ({
           : 'videos/product/Mobile/Dinning Tabel_Vertical version_compressed-mobile.jpg'
       }
       layoutName={layoutName}
+      videoId={1056103371}
       zIndex={zIndex}
       videoSourceRef={
         deviceOS === "Other"

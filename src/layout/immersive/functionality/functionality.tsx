@@ -10,6 +10,8 @@ import { useEffect, useRef, useMemo, useState, useContext } from "react";
 import ThreeDScene from "@/components/3dscene/three_d_scene";
 import useInView from "@/hooks/use_inview";
 
+import lightingArray from "./functionalityLIghting";
+
 const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const [buttonSelection, setButtonSelection] = useState(1);
 
@@ -73,7 +75,9 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
               playAnimation={isInView}
               defaultAnimationName={animationList[buttonSelection - 1]}
               enableRotateMouse={true}
-              blurSrc="/glb/blur/functionality_blur.png"
+              blurSrc="/glb/blur/blur-image-table.webp"
+              lightingArray={lightingArray}
+              modelShadow={true}
             />
           )}
         </div>

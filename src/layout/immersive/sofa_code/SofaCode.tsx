@@ -16,22 +16,16 @@ import SlideContext from "@/context/changeSlide";
 import calculateScrollHeight from "@/utils/calculate_scrollheight";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 
-/* CUSTOM COMPONENT */
-// import CallOut from "@/components/call_out/CallOut";
-
-// /*Images */
-// import ipad from "../../../assets/images/immersive/Ipad 1.png";
-// import sofa from "../../../assets/images/immersive/dr.png";
-// import qr from "../../../assets/images/immersive/image 12.png";
 import useScrollTransform from "@/hooks/use_scrolltransform";
 import scrollTransformValues, {
   scrollSpringProperties,
 } from "@/utils/scrollTransformValues";
-import DeviceContext from "@/context/deviceContext";
+
 import ThreeDSofa from "../3d_sofa/ThreeDSofa";
 import ARIcon from "@/assets/icons/arIcon";
 import TulfaCloseButton from "@/assets/icons/tulfa_close_button";
 import Button from "@/components/button/Button";
+
 
 const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Get scroll height
@@ -105,9 +99,7 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-
-  const timeoutRef = useRef(null); 
+  const timeoutRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
@@ -118,9 +110,9 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
       // Clear 3d model when 3d model out of scene for performance
       if (isActive) {
-        timeoutRef.current = setTimeout(()=>{
+        timeoutRef.current = setTimeout(() => {
           setIsActive(false);
-        }, 1250)
+        }, 1250);
       }
     }
   }, [isInView]);
@@ -148,73 +140,6 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       >
         {/* CONTENT AQUI */}
         <motion.section className={styles.container}>
-          {/* MOBILE DEVICE */}
-          {/* {deviceContext !== "Other" ? (
-            <>
-              <div className={styles.left_container}>
-                <Image className={styles.immersive_image} src={ipad} alt="" />
-
-                <Image className={styles.sofa} src={sofa} alt="" />
-
-                <Image className={styles.qr} src={qr} alt="" />
-              </div>
-              <div className={styles.right_container}>
-                <CallOut
-                  heading="Immersive Experience"
-                  paragraph="Scan this QR Code with your phone to view the object in your space. The experience launches directly from your browser."
-                  overrideStyles={styles.callout_container_outer}
-                  overrideParagraphStyle={styles.callout_paragraph}
-                  calloutStyleType={1}
-                />
-              </div>
-            </>
-          ) : (
-            <>
-              <ThreeDSofa />
-              <div
-                className={styles.arButton}
-              >
-                <ARIcon
-                  onClick={()=>{
-                    
-                    setIsModalOpen(true)
-                  }}
-                />
-              </div>
-              {
-                isModalOpen && 
-                  <div
-                    className={styles.modalPopUp}
-                  >
-                    <h3
-                      className={styles.headerContainer}  
-                    >
-                      Augmented Reality
-                    </h3>
-                    <Image
-                      src='/glb/qr/recliner.png'
-                      alt=''
-                      width={200}
-                      height={200}
-                    />
-                    <span
-                      className={styles.text}
-                    >
-                      Point your camera at the QR code. Tap the banner that appears on your screen.
-
-                    </span>
-                    <button
-                      onClick={()=>{
-                        setIsModalOpen(false)
-                      }}
-                    >
-                      Close
-                    </button>
-                  </div>
-                
-               }
-            </>
-          )} */}
           <>
             <ThreeDSofa />
             <div className={styles.arButton}>
@@ -236,7 +161,7 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                 <span className={styles.text}>
                   Point your camera at the QR code.
                 </span>
-                <Button buttonType={5} text='See in your computer'/>
+                <Button buttonType={5} text="See in your computer" />
                 <TulfaCloseButton
                   onClick={() => {
                     setIsModalOpen(false);

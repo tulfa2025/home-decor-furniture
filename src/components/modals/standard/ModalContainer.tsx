@@ -15,7 +15,6 @@ import FullscreenImageContainer from "../../image_container/fullscreen_image_con
 
 /* DYNAMICALLY LOADED HEAVY COMPONENTS */
 import ModalImageContainer from "../components/ModalImageContainer";
-
 import ModalImageContainerMobile from "../components/ModalImageContainerMobile";
 
 import FullScreenCarousel from "../../carousel/fullscreen_carousel/FullScreenCarousel";

@@ -16,13 +16,18 @@ class ThreeDBasic extends EventTarget {
     defaultAnimationName,
     dragRotateEnabled = false,
     enableZoom = false,
-    pathToBackground = ""
+    pathToBackground = "",
+    lightingArray,
+    modelShadow = false
   ) {
     super();
 
+    this._modelShadow = modelShadow
     this._glbRef = glbRef;
     this._domObj = canvasRef;
     this.isLoaded = false;
+
+    this._lightingArray = lightingArray;
 
     this._pathToBackground = pathToBackground;
 
@@ -99,27 +104,18 @@ class ThreeDBasic extends EventTarget {
       });
     }
 
+
+
     // // Add a Directional Light
-    // Add directional light (shines in one direction)
-    const light = new THREE.DirectionalLight(0xfeffff, 1);
-    light.position.set(20, 2, 10);
-    light.target.position.set(0, 0, 0);
-    light.castShadow = true;
-    light.shadow.bias = 0.01;
-    light.shadow.mapSize.width = 2048;
-    light.shadow.mapSize.height = 2048;
-    light.shadow.camera.near = 1.0;
-    light.shadow.camera.far = 1000;
-    light.shadow.left = 10;
-    light.shadow.right = -10;
-    light.shadow.top = 10;
-    light.shadow.bottom = -10;
+    // Add directional light (shines in one direction);
 
-    this._scene.add(light);
+    if(this._lightingArray.length > 0){
+      for(let light of this._lightingArray){
+        this._scene.add(light)
+      }
+    }
 
-    // Add Ambient Light
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1); // Soft ambient light
-    this._scene.add(ambientLight);
+    
 
     // Orbit controls
     // // Set up OrbitControls (interactive camera control)
@@ -216,6 +212,8 @@ class ThreeDBasic extends EventTarget {
         this._model.traverse((c) => {
           if (c.isMesh) {
             c.geometry.computeVertexNormals();
+            c.castShadow = true; // Mesh casts shadows
+            c.receiveShadow = this._modelShadow; // Mesh can receive shadows
           }
         });
 
@@ -335,21 +333,19 @@ class ThreeDBasic extends EventTarget {
   // Cleanup assets
   remove() {
     if (this._scene) {
-      
-      this._scene = null
+      this._scene = null;
       // Dispose of dom element
-      try{
-        this._domObj.removeChild(this._domObj.children[0])
-        this._threejs.domElement.innerHTML = ''
-        this._threejs.domElement = null  
-      }catch(e){
-        console.log(e)
+      try {
+        this._domObj.removeChild(this._domObj.children[0]);
+        this._threejs.domElement.innerHTML = "";
+        this._threejs.domElement = null;
+      } catch (e) {
+        console.log(e);
       }
-      
+
       // Dispose of textures, lights, etc.
       if (this._threejs) {
         this._threejs.dispose();
-        
       }
     }
   }

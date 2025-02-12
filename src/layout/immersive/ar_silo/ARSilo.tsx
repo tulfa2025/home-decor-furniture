@@ -23,7 +23,6 @@ import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 import ARModalContainer from "@/components/modals/ar/ARModalContainer";
 
 /*Images */
-import mockup from "../../../assets/images/immersive/Augmented-reality-phone.webp";
 import usePopupPosition from "@/utils/calculate_popupbutton.loc";
 import modalImageSet from "./ar_silo_images";
 import useScrollTransform from "@/hooks/use_scrolltransform";
@@ -41,6 +40,8 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
   const isInView = useInView(inViewRef, 0.2);
+  const isPopupVisible= useInView(inViewRef, 0.75);
+
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -62,12 +63,10 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalOpen = useCallback(() => {
-    setIsPopupVisible(false);
     setIsModalOpen(true);
   }, []);
 
   const handleModalClose = useCallback(() => {
-    setIsPopupVisible(true);
     setIsModalOpen(false);
   }, []);
 
@@ -113,16 +112,6 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   /* Calculate popup button position*/
   const popupPosition = usePopupPosition(viewportSize);
 
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
-
-  useEffect(() => {
-    if (isInView) {
-      setIsPopupVisible(true);
-    } else {
-      setIsPopupVisible(false);
-    }
-  }, [isInView]);
-
   const timeoutRef = useRef(null);
 
   useEffect(() => {
@@ -152,7 +141,7 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     return () => {};
   }, []);
 
-  const deviceContext = useContext(DeviceContext)
+  const deviceContext = useContext(DeviceContext);
 
   return (
     <>
@@ -220,12 +209,16 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                 ease: "easeIn",
               }}
             >
-              <Image 
-                className={styles.immersive_image} 
-                src={mockup} 
-                alt="" 
-                quality={deviceContext === "Other" ? 50 : 10}
-              />
+              {isInView && (
+                <Image
+                  className={styles.immersive_image}
+                  src="/images/immersive/Augmented-reality-phone.webp"
+                  alt=""
+                  quality={deviceContext === "Other" ? 50 : 10}
+                  height={2400}
+                  width={3000}
+                />
+              )}
             </motion.div>
           </motion.section>
         </motion.div>

@@ -21,7 +21,7 @@ find "$ROOT_DIRECTORY" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*
   output="${file%.*}.webp"
   
   # Convert image to WebP using cwebp
-  cwebp -q 75 "$file" -o "$output"
+  cwebp -q 10 "$file" -o "$output"
   
   echo "Converted $file to $output"
 done

@@ -24,6 +24,7 @@ const VideoTwo = ({ layoutName, zIndex }) => {
             ? "videos/product/Sofa exploded with lifestyle_compressed.mp4"
             : "videos/product/Mobile/2nd_Sofa_veritical view_compressed.mp4"
         }
+        videoId={1056106199}
       />
     </>
   );

@@ -30,7 +30,7 @@ const BookDemoTemplate = ({ layoutName, zIndex, scrollMap = null }) => {
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.1);
+  const isInView = useInView(inViewRef, 0.01);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -131,7 +131,7 @@ const BookDemoTemplate = ({ layoutName, zIndex, scrollMap = null }) => {
               opacity: 1,
             }}
             transition={{
-              delay: 0.5,
+              delay: 0.25,
             }}
           >
             <div className={styles.book_content}>

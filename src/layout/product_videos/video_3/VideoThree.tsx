@@ -25,6 +25,7 @@ const VideoThree = ({ layoutName, zIndex }) => {
             : "videos/product/Mobile/Chair_Vertical_version_compressed.mp4"
         }
         scrollMap={scrollTransformValues.gross}
+        videoId={1056106630}
       />
     </>
   );

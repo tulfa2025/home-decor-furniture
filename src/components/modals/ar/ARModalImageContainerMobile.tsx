@@ -1,9 +1,10 @@
 "use client";
 import styles from "./ar_modal_container.module.scss";
-import { memo, useEffect, useRef } from "react";
+import {useEffect, useRef } from "react";
 import Image from "next/image";
 import Button from "@/components/button/Button";
 import ThreeDScene from "@/components/3dscene/three_d_scene";
+import lightingArray from "./standardLighting";
 
 const ARModalImageContainerMobile = ({ imageSet }) => {
   /* ARRAY OF IMAGES TO RENDER */
@@ -29,8 +30,7 @@ const ARModalImageContainerMobile = ({ imageSet }) => {
 
           newIframe.style.display = "block";
         }, 700);
-      }else if(!entry.isIntersecting){
-
+      } else if (!entry.isIntersecting) {
         const iframeWrapper: Element = entry.target;
 
         // Clear timeouts
@@ -41,10 +41,9 @@ const ARModalImageContainerMobile = ({ imageSet }) => {
         timeoutRefs[iframeWrapper.id].remove = setTimeout(() => {
           const newIframe = iframeWrapper.querySelector("iframe");
 
-          if(newIframe.style.display !== 'none') newIframe.style.display = "none";
-          
+          if (newIframe.style.display !== "none")
+            newIframe.style.display = "none";
         }, 700);
-
       }
     });
   };
@@ -86,7 +85,13 @@ const ARModalImageContainerMobile = ({ imageSet }) => {
               key={i ** 2 + j}
               className={styles.modal_indiv_image_container}
             >
-              <Image src={imageArray[i][j]} alt="" quality={1} />
+              <Image
+                src={imageArray[i][j]}
+                alt=""
+                quality={1}
+                width={2000}
+                height={2000}
+              />
             </div>
           );
           break;
@@ -100,15 +105,6 @@ const ARModalImageContainerMobile = ({ imageSet }) => {
               key={i ** 2 + j}
               className={`${styles.modal_ar_container} ar-wrapper`}
             >
-              {/* PLACEHOLDER IMAGE */}
-              {/* <iframe
-                src={imageArray[i][j]}
-                allow="xr-spatial-tracking"
-                height="100%"
-                width="100%"
-                style={{ border: "none", display: "none" }}
-                loading="lazy"
-              /> */}
               <ThreeDScene
                 glbRef={imageArray[i][4]}
                 followMouse={false}
@@ -117,8 +113,10 @@ const ARModalImageContainerMobile = ({ imageSet }) => {
                 initialPosition={[0, 0, -2]}
                 enableRotateMouse={true}
                 enableZoom={true}
-                pathToBackground='/glb/immersive/bg-3d-model.webp'
+                pathToBackground="/glb/immersive/bg-3d-model.webp"
                 blurSrc={imageArray[i][1]}
+                lightingArray={lightingArray}
+                modelShadow={true}
               />
             </div>
           );
@@ -147,5 +145,5 @@ const ARModalImageContainerMobile = ({ imageSet }) => {
       {memoizedComponents}
     </div>
   );
-}
+};
 export default ARModalImageContainerMobile;

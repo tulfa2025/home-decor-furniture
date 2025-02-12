@@ -1,11 +1,9 @@
 "use client";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import styles from "./ar_modal_container.module.scss";
-import { useState, useEffect, useContext, useCallback } from "react";
-import dynamic from "next/dynamic";
+import { useState, useEffect, useContext } from "react";
 import SubheaderActiveContext from "@/context/subHeader";
 import Toast from "../components/ShareToast";
-import useWindowSize from "@/hooks/use_window_size";
 
 /*  CUSTOM COMPONENTS */
 import BlurredBackdrop from "../../backdrops/Blur";
@@ -14,19 +12,9 @@ import ModalShareButton from "../components/ModalShareButton";
 import TitleBanner from "@/components/title_banner/title_banner";
 
 /* DYNAMICALLY LOADED HEAVY COMPONENTS */
-const ARModalImageContainer = dynamic(
-  () => import("./ARModalImageContainer"),
-  {
-    ssr: false,
-  }
-);
+import ARModalImageContainer from"./ARModalImageContainer"
+import ARModalImageContainerMobile from"./ARModalImageContainerMobile"
 
-const ARModalImageContainerMobile = dynamic(
-  () => import("./ARModalImageContainerMobile"),
-  {
-    ssr: false,
-  }
-);
 const ARModalContainer = ({
   handleModalClose,
   isModalOpen,

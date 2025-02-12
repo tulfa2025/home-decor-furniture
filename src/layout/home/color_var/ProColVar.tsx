@@ -1,7 +1,6 @@
 "use client";
 import styles from "./ProColVar.module.scss";
 import ProductVariation from "@/components/variations/ProductVariations";
-import { useMemo } from "react";
 
 const ProColVar: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
@@ -11,8 +10,8 @@ const ProColVar: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       top: [
         ['/images/color_var/Red Organic.webp',  "Italiano Rose", '/images/color_var/Red Organic_B.webp'],
         ['/images/color_var/Brown.webp',  "Sugar Coated Almond", '/images/color_var/Brown_B.webp'],
-        ['/images/color_var/Organic.webp',  "Park Avenue", '/images/color_var/Light Grey_B.webp'],
-        ['/images/color_var/Light Grey.webp',  "Greek Isles", '/images/color_var/Organic_B.webp'],
+        ['/images/color_var/Organic.webp',  "Park Avenue",  '/images/color_var/Organic_B.webp'],
+        ['/images/color_var/Light Grey.webp',  "Greek Isles",'/images/color_var/Light Grey_B.webp'],
       ],
     };
 

@@ -23,6 +23,7 @@ const VideoFive = ({
       }
       layoutName={layoutName}
       zIndex={zIndex}
+      videoId={1056106444}
       videoSourceRef={
         deviceOS === "Other"
           ? "videos/product/Solar shingle video_compressed.mp4"

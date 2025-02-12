@@ -52,6 +52,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
   const isInView = useInView(inViewRef, 0.1);
+  const isPopupInView = useInView(inViewRef, 0.5);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -219,7 +220,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
       {/* MODAL CONTAINER */}
       {/* BUTTON TRIGGER */}
-      {isInView && !isModalOpen ? (
+      {isPopupInView && !isModalOpen ? (
         <div className={styles.popup_button_container}>
           <TulfaPopupButton
             timer={0}

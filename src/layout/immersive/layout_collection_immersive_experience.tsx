@@ -17,18 +17,18 @@ import BookDemo from "./book_demo/BookDemo";
 
 /* LAYOUT COLLECTION MUST BE IN DESIRED ORDER */
 const layoutCollection: LayoutCollectionBase = [
-    [Banner, 'Immersive Experience'],
-    [Devices, 'Cross-devices'],
-    [Functionality, 'Functionality Images'],
-    [ProductConfigBanner, ''],
-    [ProductConfig, 'Product Configurator'],
-    [PhoneDemo, ''],
+    // [Banner, 'Immersive Experience'],
+    // [Devices, 'Cross-devices'],
+    // [Functionality, 'Functionality Images'],
+    // [ProductConfigBanner, ''],
+    // [ProductConfig, 'Product Configurator'],
+    // [PhoneDemo, ''],
     [ARSilo, 'Augmented Reality'],
-    [FriendsSofa, 'See It In Your Space'],
-    [SofaCode, 'Friends'],
-    [Workflow, 'Workflow'],
-    [BookDemo, ''],
-    [Blogs, '']
+    // [FriendsSofa, 'See It In Your Space'],
+    // [SofaCode, 'Friends'],
+    // [Workflow, 'Workflow'],
+    // [BookDemo, ''],
+    // [Blogs, '']
 
 ];
 

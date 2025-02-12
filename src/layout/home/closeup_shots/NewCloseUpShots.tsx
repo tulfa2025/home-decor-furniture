@@ -35,16 +35,12 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   //Scroll Block context
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  /* DETECT POPUP */
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
   // Modal open and close handlers using useCallback to prevent unnecessary re-creations
   const handleModalOpen = useCallback(() => {
-    setIsPopupVisible(false);
     setIsModalOpen(true);
   }, []);
 
   const handleModalClose = useCallback(() => {
-    setIsPopupVisible(true);
     setIsModalOpen(false);
   }, []);
 
@@ -54,14 +50,8 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
   const isInView = useInView(inViewRef, 0.05);
-  /*POPUPBUTTON ANIMATION */
-  useEffect(() => {
-    if (isInView) {
-      setIsPopupVisible(true);
-    } else {
-      setIsPopupVisible(false);
-    }
-  }, [isInView]);
+  const isPopupVisible = useInView(inViewRef, 0.75);
+
 
   const deviceContext = useContext(DeviceContext);
 

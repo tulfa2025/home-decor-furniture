@@ -12,18 +12,17 @@ import VideoSix from "./video_6/VideoSix";
 import VideoNine from "./video_9/VideoNine";
 import Blogs from "./blogs/Blogs";
 import BookDemo from "./book_demo/BookDemo";
-// import ARVid from "./ar_vid/ARVid";
 
 /* LAYOUT COLLECTION MUST BE IN DESIRED ORDER */
 const layoutCollection: LayoutCollectionBase = [
     [ProductVideosBanner, 'Banner'],
-    [VideoThree, 'Chair'],
+    [VideoThree, 'Ergonomic Chair'],
     [VideoFive, 'Solar Shingles'],
     [VideoSix, 'Sofa'],
-    [VideoTwo, 'Exploded View'],
+    [VideoTwo, 'Sofa Exploded View'],
     [VideoNine, 'Baby Crib'],
-    [VideoOne, 'Build'],
-    [VideoFour, 'Dining'],
+    [VideoOne, 'Dresser'],
+    [VideoFour, 'Chandelier'],
     [BookDemo, ''],
     [Blogs, '']
 

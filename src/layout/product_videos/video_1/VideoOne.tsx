@@ -36,6 +36,7 @@ const VideoOne = ({ layoutName, zIndex }) => {
           ? "videos/product/Dresser.mp4"
           :  "videos/product/Mobile/Dresser_installaton_vertical view_compressed.mp4"
       }
+      videoId={1056104610}
       />
     </>
   );

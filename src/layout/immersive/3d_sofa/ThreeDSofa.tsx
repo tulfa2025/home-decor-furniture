@@ -1,9 +1,9 @@
 "use client";
 import styles from "./sofa_code.module.scss";
-import { motion } from "framer-motion";
 import ThreeDScene from "@/components/3dscene/three_d_scene";
 import { useMemo } from "react";
 import useWindowSize from "@/hooks/use_window_size";
+import lightingArray from "./sofaLighting";
 
 
 const ThreeDSofa: React.FC = () => {
@@ -40,7 +40,9 @@ const ThreeDSofa: React.FC = () => {
           followMouse={true}
           cameraPosition={cameraPosition}
           modelPosition={modelPosition}
-          blurSrc='/glb/blur/Sofa_blur.png'
+          blurSrc='/glb/blur/blur-image-friends.webp'
+          lightingArray={lightingArray}
+          modelShadow={true}
         />
       </div>
     </>

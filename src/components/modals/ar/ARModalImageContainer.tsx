@@ -4,6 +4,7 @@ import useWindowSize from "@/hooks/use_window_size";
 import { memo, useMemo } from "react";
 import Image from "next/image";
 import ThreeDScene from "@/components/3dscene/three_d_scene";
+import lightingArray from "./standardLighting";
 
 const ARModalImageContainer =({ imageSet }) => {
   /* ARRAY OF IMAGES TO RENDER */
@@ -54,6 +55,8 @@ const ARModalImageContainer =({ imageSet }) => {
                 src={imageArray[imageIndex][0]}
                 alt=""
                 className={styles.modal_indiv_image}
+                width={2000}
+                height={2000}
               />
             </div>
           );
@@ -98,6 +101,8 @@ const ARModalImageContainer =({ imageSet }) => {
               enableZoom={true}
               pathToBackground='/glb/immersive/bg-3d-model.webp'
               blurSrc={imageArray[imageIndex][1]}
+              lightingArray={lightingArray}
+              modelShadow={true}
             />
             </div>
           );
@@ -121,6 +126,8 @@ const ARModalImageContainer =({ imageSet }) => {
                     src={imageArray[imageIndex][2]}
                     alt=""
                     className={styles.modal_qr_image}
+                    width={2000}
+                    height={2000}
                   />
                 </div>
 

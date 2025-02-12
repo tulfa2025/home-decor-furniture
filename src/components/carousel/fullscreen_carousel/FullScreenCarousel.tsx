@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { useState, useMemo, useCallback, useRef, memo, useEffect } from "react";
+import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import Image from "next/image";
 import styles from "./FullScreenCarousel.module.scss";
 import TulfaCloseButton from "@/assets/icons/tulfa_close_button";
@@ -60,14 +60,11 @@ const FullScreenCarousel = ({ fullscreenIndex, imageSet, handleFullscreenToggle,
 
     return (
       <div className={styles.fullscreen_container}>
-        {/* <ImagePreloader imageSet={memoizedImageSet}/> */}
         <Image
           className={styles.fullscreen_image}
           alt=""
           src={memoizedImageSet[currentImageIndex][0]}
           quality={60}
-          placeholder="blur"
-          blurDataURL={memoizedImageSet[currentImageIndex][1]}
           onLoad={()=>{toggleSpinner(null)}}
         />
         <CloseButton handleFullscreenToggle={handleFullscreenToggle} />
@@ -100,6 +97,8 @@ const FullScreenCarousel = ({ fullscreenIndex, imageSet, handleFullscreenToggle,
               toggleSpinner(e)
               handleSetCurrentIndex(1);
             }}
+            arrowFill="#F5F5F7"
+            arrowColor="#433E99"
           />
         </motion.div>
       </div>

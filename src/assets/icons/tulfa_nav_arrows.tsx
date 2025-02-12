@@ -104,7 +104,10 @@ const TulfaRightArrow = ({
   arrowColor,
   arrowFill,
   button = true,
+  thickness = 1.5
 }) => {
+
+  
   return (
     <>
       {button ? (
@@ -130,7 +133,7 @@ const TulfaRightArrow = ({
                 <path
                   d="M17.25 12.5L24.75 20L17.25 27.5"
                   stroke={arrowColor}
-                  stroke-width="1.5"
+                  stroke-width={thickness}
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 />
@@ -167,11 +170,12 @@ const TulfaRightArrow = ({
           />
           <g clip-path="url(#clip0_17_643)">
             <path
-              d="M17.25 12.5L24.75 20L17.25 27.5"
+              d="M17.25 12.5L25.75 20L17.25 27.5"
               stroke={arrowColor}
-              stroke-width="1.5"
+              stroke-width={thickness}
               stroke-linecap="round"
               stroke-linejoin="round"
+              transform="translate(0, 2)" 
             />
           </g>
           <defs>
@@ -180,7 +184,7 @@ const TulfaRightArrow = ({
                 width="18"
                 height="12"
                 fill={arrowColor}
-                transform="matrix(0 -1 1 0 14 29)"
+                transform="matrix(0 -1 1 0 15 32)"
               />
             </clipPath>
           </defs>

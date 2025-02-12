@@ -2,7 +2,6 @@
 import VideoDemo from "@/components/video_demo/VIdeoDemo";
 
 import DeviceContext from "@/context/deviceContext";
-import scrollTransformValues from "@/utils/scrollTransformValues";
 import { useContext } from "react";
 
 /* VIDEOS */
@@ -25,6 +24,7 @@ const VideoSix = ({ layoutName, zIndex }) => {
             ? "videos/banner/sofa_video_compressed.mp4"
             : "videos/product/Mobile/Sofa-banner-teaser_compressed.mp4"
         }
+        
         
       />
     </>

@@ -12,12 +12,14 @@
     overflow: hidden;
     display: flex;
     justify-content: center;
+    column-gap: 8px;
+    align-items: center;
 
     /* STYLE */
     @include variables.sm {
         @include variables.setBorderNoColor(100px, 1px, solid);
         height: 35px;
-        min-width: 200px;
+        min-width: 150px;
         padding: 8px 32px;
     }
 
@@ -34,13 +36,13 @@
 
     /* TYPOGRAPHY */
     @include variables.sm {
-        @include variables.setTypography(12px, normal, 400, normal);
+        @include variables.setTypography(14px, normal, 400, normal);
     }
     @include variables.md {
-        @include variables.setTypography(12px, normal, 400, normal);
+        @include variables.setTypography(14px, normal, 400, normal);
     }
     @include variables.lg {
-        @include variables.setTypography(12px, normal, 400, normal);
+        @include variables.setTypography(14px, normal, 400, normal);
     }
 
     .pop_span {
@@ -71,10 +73,11 @@
     @include variables.setLayout(flex, space-between, center);
     position: relative;
     background-color: transparent;
-    min-width: 200px;
+    min-width: 150px;
     padding: 8px 32px;
     z-index: 300;
     pointer-events: auto;
+    column-gap: 8px;
 
     /* STYLE */
     @include variables.sm {

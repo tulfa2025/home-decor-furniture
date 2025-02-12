@@ -1,12 +1,10 @@
 "use client";
 import styles from "../standard/modal_container.module.scss";
-import useWindowSize from "@/hooks/use_window_size";
 import FullscreenImageContainer from "../../image_container/fullscreen_image_container/FullscreenImageContainer";
 
 const ModalImageContainerMobile = ({
   handleFullscreenToggle,
   imageSet,
-  differentSizes,
   random,
   allImages,
   isFilter = false,
@@ -36,7 +34,6 @@ const ModalImageContainerMobile = ({
 
   imageNo = imageArray.length;
 
-  const viewportSize = useWindowSize();
 
   const memoizedComponents = [];
 
