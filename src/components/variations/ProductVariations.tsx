@@ -42,7 +42,7 @@ const ProductVariation = ({
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.05);
+  const isInView = useInView(inViewRef, 0.5);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -234,7 +234,7 @@ const ProductVariation = ({
                     height={2400}
                     width={3000}
                     className={imageSet.backgroundStyling}
-                    quality={deviceContext === "Other" ? 50 : 1}
+                    quality={deviceContext === "Other" ? 50 : 25}
                   />
                 </motion.div>
               )}

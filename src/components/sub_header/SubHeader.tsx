@@ -25,7 +25,7 @@ export default function SubHeader({ activePage }: SubHeaderProps) {
   const navLinks = [
     { href: "/", label: "Product Images" },
     { href: "/product_videos", label: "Product Videos" },
-    { href: "/immersive_experience", label: "Immersive Experience" },
+    // { href: "/immersive_experience", label: "Immersive Experience" },
   ];
 
   const [headerStyleType, setHeaderStyle] = useContext(SubheaderStyleContext);
@@ -166,7 +166,7 @@ export default function SubHeader({ activePage }: SubHeaderProps) {
             className={`${styles.dropdown_bar} ${headerDropdownBar}`}
             animate={{
               transform: headerActivated
-                ? `translateY(${(navLinks.length - 1) * 50}px)`
+                ? `translateY(${(navLinks.length - 1) * 75}px)`
                 : `translateY(-${(navLinks.length) * 50}px)`,
             }}
             transition={{

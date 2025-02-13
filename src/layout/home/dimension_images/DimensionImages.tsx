@@ -23,43 +23,36 @@ const DimensionImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       dynamicHeader={false}
       zIndex={zIndex}
     >
-      <div ref={inViewRef} className={styles.inview_trigger}></div>
-      {isInView && (
-        <motion.div
-          className={styles.flex_container}
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{
-            delay: 0.5
-          }}
-        >
-          <div className={styles.image_container}>
-            <Image
-              src='/images/dimension_images/Dimension Images 1.webp'
-              alt=""
-              className={styles.measurement}
-              quality={deviceContext === "Other" ? 50 : 10}
-              width={3000}
-              height={2400}
-            />
-            
-          </div>
-          <div className={styles.image_container}>
-            <Image
-              src='/images/dimension_images/armchair_setting.webp'
-              alt=""
-              className={styles.setting}
-              quality={deviceContext === "Other" ? 50 : 10}
-              width={3000}
-              height={2400}
-            />
-          </div>
-        </motion.div>
-      )}
+      <motion.div
+        className={styles.flex_container}
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+      >
+        <div className={styles.image_container}>
+          <Image
+            src="/images/dimension_images/Dimension Images 1.webp"
+            alt=""
+            className={styles.measurement}
+            quality={deviceContext === "Other" ? 50 : 25}
+            width={3000}
+            height={2400}
+          />
+        </div>
+        <div className={styles.image_container}>
+          <Image
+            src="/images/dimension_images/armchair_setting.webp"
+            alt=""
+            className={styles.setting}
+            quality={deviceContext === "Other" ? 50 : 25}
+            width={3000}
+            height={2400}
+          />
+        </div>
+      </motion.div>
     </LargeSlideContainer>
   );
 };

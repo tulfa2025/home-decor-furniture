@@ -44,29 +44,13 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     setIsModalOpen(false);
   }, []);
 
-  // Ensure the ref is available before applying useScroll
-  const scrollTargetRef = useRef(null);
-
-  // Detect when the user is in viewport for triggering events
-  const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.05);
-  const isPopupVisible = useInView(inViewRef, 0.75);
-
-
   const deviceContext = useContext(DeviceContext);
 
-  // Cleanup
-  useEffect(() => {
-    return () => {
-      if (scrollTargetRef.current) {
-        scrollTargetRef.current = null;
-      }
+  const [isPopupVisible, setIsPopupVisible] = useState(false)
 
-      if (inViewRef.current) {
-        inViewRef.current = null;
-      }
-    };
-  }, []);
+  const handlePopup = useCallback((isPopupVisible) => { setIsPopupVisible(isPopupVisible)}, []);
+
+
 
   return (
     <>
@@ -75,33 +59,31 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         title="Close Up Shots"
         paragraph="Pinpoint your furniture's intricate design elements and craftmanship."
         zIndex={zIndex}
+        handlePopup={handlePopup}
       >
-        <div ref={inViewRef} className={styles.inview_trigger}></div>
-        {isInView && (
-          <motion.section
-            className={styles.image_container}
-            style={{
-              filter:
-                isModalOpen && deviceContext === "Other" ? "blur(10px)" : "",
-            }}
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-          >
-            <Image
-              src="/images/closeup_shots/rug_one.webp"
-              alt=""
-              className={styles.background_image}
-              ref={scrollTargetRef}
-              quality={deviceContext === "Other" ? 50 : 10}
-              width={3000}
-              height={3000}
-            />{" "}
-          </motion.section>
-        )}
+        
+        <motion.section
+          className={styles.image_container}
+          style={{
+            filter:
+              isModalOpen && deviceContext === "Other" ? "blur(10px)" : "",
+          }}
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+        >
+          <Image
+            src="/images/closeup_shots/rug_one.webp"
+            alt=""
+            className={styles.background_image}
+            quality={deviceContext === "Other" ? 50 : 25}
+            width={3000}
+            height={3000}
+          />{" "}
+        </motion.section>
       </LargeSlideContainer>
       {/* LIFESTYLE SCENES Modal */}
       {/* BUTTON TRIGGER */}

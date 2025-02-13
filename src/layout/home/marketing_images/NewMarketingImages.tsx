@@ -2,7 +2,7 @@
 import styles from "./NewMarketingImages.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState, useEffect, useMemo, useContext } from "react";
+import { useState, useMemo, useContext, useCallback } from "react";
 import { usePathname } from "next/navigation";
 
 /* CUSTOM PROPS */
@@ -10,7 +10,6 @@ import LargeSlideContainer from "@/components/large_slide_container/LargeSlideCo
 import ModalContainer from "@/components/modals/standard/ModalContainer";
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 import useFilter from "@/hooks/use_filter";
-import useInView from "@/hooks/use_inview";
 
 /* IMAGES */
 import modalImageSet from "./marketing_images";
@@ -35,35 +34,19 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   };
 
   const handleModalClose = () => {
-
     setIsModalOpen(false);
   };
 
-  // Ensure the ref is available before applying useScroll
-  const scrollTargetRef = useRef(null);
-
-
   // Detect when the user is in viewport for triggering events
-  const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.1);
-  const isPopupVisible = useInView(inViewRef, 0.75);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  const handlePopup = useCallback((isPopupVisible) => {
+    setIsPopupVisible(isPopupVisible);
+  }, []);
 
   const pathName = usePathname();
 
   const deviceContext = useContext(DeviceContext);
-
-  // Cleanup
-  useEffect(() => {
-    return () => {
-      if (scrollTargetRef.current) {
-        scrollTargetRef.current = null;
-      }
-
-      if (inViewRef.current) {
-        inViewRef.current = null;
-      }
-    };
-  }, []);
 
   return (
     <>
@@ -73,51 +56,45 @@ const NewMarketingImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         paragraph="Lorem ipsum dolor sit amet sonsectetur. Id lacus enim amet aliquet phasellus porta notaque."
         zIndex={zIndex}
         scrollMap={scrollTransformValues.marketingImgs}
+        handlePopup={handlePopup}
       >
-        <div ref={inViewRef} className={styles.inview_trigger}></div>
-        {isInView && (
-          <motion.section
-            className={styles.image_container}
-            ref={scrollTargetRef}
-            style={{
-              filter: isModalOpen ? "blur(10px)" : "",
-            }}
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              delay: 0.5
-            }}
-          >
-            <Image
-              src="/images/marketing_images/kv2.webp"
-              alt=""
-              className={styles.background_image_top}
-              quality={deviceContext === "Other" ? 50 : 10}
-              width={3000}
-              height={2400}
-            />
-            <Image
-              src="/images/marketing_images/mockup revista 2.webp"
-              alt=""
-              className={styles.background_image_bottom_left}
-              quality={deviceContext === "Other" ? 50 : 10}
-              width={3000}
-              height={2400}
-            />
-            <Image
-              src="/images/marketing_images/mockup laptop.webp"
-              alt=""
-              className={styles.background_image_bottom_right}
-              quality={deviceContext === "Other" ? 50 : 10}
-              width={3000}
-              height={2400}
-            />
-          </motion.section>
-        )}
+        <motion.section
+          className={styles.image_container}
+          style={{
+            filter: isModalOpen ? "blur(10px)" : "",
+          }}
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+        >
+          <Image
+            src="/images/marketing_images/kv2.webp"
+            alt=""
+            className={styles.background_image_top}
+            quality={deviceContext === "Other" ? 50 : 10}
+            width={3000}
+            height={2400}
+          />
+          <Image
+            src="/images/marketing_images/mockup revista 2.webp"
+            alt=""
+            className={styles.background_image_bottom_left}
+            quality={deviceContext === "Other" ? 50 : 10}
+            width={3000}
+            height={2400}
+          />
+          <Image
+            src="/images/marketing_images/mockup laptop.webp"
+            alt=""
+            className={styles.background_image_bottom_right}
+            quality={deviceContext === "Other" ? 50 : 10}
+            width={3000}
+            height={2400}
+          />
+        </motion.section>
       </LargeSlideContainer>
       {/* Marketing IMages SCENES Modal */}
       {/* BUTTON TRIGGER */}

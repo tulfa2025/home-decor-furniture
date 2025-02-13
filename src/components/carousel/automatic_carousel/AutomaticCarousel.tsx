@@ -88,7 +88,7 @@ const AutomaticCarousel: React.FC<AutomaticCarouaProps> = memo(
                   width: "100%",
                   objectFit: "cover",
                 }}
-                quality={deviceContext === 'Other' ? 50 : 10}
+                quality={deviceContext === 'Other' ? 50 : 25}
               />
             </motion.div>
           );

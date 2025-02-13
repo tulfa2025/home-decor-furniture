@@ -1,7 +1,7 @@
 "use client";
 import styles from "./InstallationImages.module.scss";
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 import useWindowSize from "@/hooks/use_window_size";
@@ -34,85 +34,81 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         paragraph="Guide your customers with clear, step-by-step images for assembling and setting up the furniture."
         zIndex={zIndex}
       >
-        <div ref={inViewRef} className={styles.inview_trigger}></div>
-        {isInView && (
-          <motion.div className={styles.image_container}initial={{
+        <motion.div
+          className={styles.image_container}
+          initial={{
             opacity: 0,
           }}
           animate={{
             opacity: 1,
           }}
-          transition={{
-            delay: 0.5
-          }}
-          >
-            <Image
-              alt=""
-              src="/images/installation_images/6.webp"
-              style={{
-                ...image_container_style,
-              }}
-              quality={deviceContext === "Other" ? 50 : 1}
-              width={3840}
-              height={2560}
-            />
-            <Image
-              alt=""
-              src="/images/installation_images/5.webp"
-              style={{
-                ...image_container_style,
-              }}
-              quality={deviceContext === "Other" ? 50 : 1}
-              width={3840}
-              height={2560}
-            />
-            <Image
-              alt=""
-              src="/images/installation_images/2.webp"
-              style={{
-                ...image_container_style,
-              }}
-              quality={deviceContext === "Other" ? 50 : 1}
-              width={3840}
-              height={2560}
-            />
-            <Image
-              alt=""
-              src="/images/installation_images/3.webp"
-              style={{
-                ...image_container_style,
-              }}
-              quality={deviceContext === "Other" ? 50 : 1}
-              width={3840}
-              height={2560}
-            />
+        >
+          <Image
+            alt=""
+            src="/images/installation_images/6.webp"
+            style={{
+              ...image_container_style,
+            }}
+            quality={deviceContext === "Other" ? 50 : 1}
+            width={3840}
+            height={2560}
+          />
+          <Image
+            alt=""
+            src="/images/installation_images/5.webp"
+            style={{
+              ...image_container_style,
+            }}
+            quality={deviceContext === "Other" ? 50 : 1}
+            width={3840}
+            height={2560}
+          />
+          <Image
+            alt=""
+            src="/images/installation_images/2.webp"
+            style={{
+              ...image_container_style,
+            }}
+            quality={deviceContext === "Other" ? 50 : 1}
+            width={3840}
+            height={2560}
+          />
+          <Image
+            alt=""
+            src="/images/installation_images/3.webp"
+            style={{
+              ...image_container_style,
+            }}
+            quality={deviceContext === "Other" ? 50 : 1}
+            width={3840}
+            height={2560}
+          />
 
-            {viewportSize.width > 768 ? (
-              <>
-                <Image
-                  alt=""
-                  src="/images/installation_images/4.webp"
-                  style={{
-                    ...image_container_style,
-                  }}
-                  quality={deviceContext === "Other" ? 50 : 1}
-                  width={3840}
-                  height={2560}
-                />
-                <Image
-                  alt=""
-                  src="/images/installation_images/1.webp"
-                  style={{
-                    ...image_container_style,
-                  }}
-                  quality={deviceContext === "Other" ? 50 : 1}
-                  width={3840}
-                  height={2560}
-                />
-              </>
-            ) : null}
-          </motion.div>
-        )}
+          {viewportSize.width > 768 ? (
+            <>
+              <Image
+                alt=""
+                src="/images/installation_images/4.webp"
+                style={{
+                  ...image_container_style,
+                }}
+                quality={deviceContext === "Other" ? 50 : 1}
+                width={3840}
+                height={2560}
+              />
+              <Image
+                alt=""
+                src="/images/installation_images/1.webp"
+                style={{
+                  ...image_container_style,
+                }}
+                quality={deviceContext === "Other" ? 50 : 1}
+                width={3840}
+                height={2560}
+              />
+            </>
+          ) : null}
+        </motion.div>
       </LargeSlideContainer>
     </>
   );

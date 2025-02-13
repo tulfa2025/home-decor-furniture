@@ -64,31 +64,24 @@ const GroupShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       zIndex={zIndex}
       dynamicHeader={true}
     >
-      <div ref={changeTrackRef} className={styles.inview_trigger}></div>
-      {isTrackInView && (
-        <motion.section
-          className={styles.video_container}
-          
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
+      <motion.section
+        className={styles.video_container}
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+      >
+        <AutomaticCarousel
+          imageSet={imageSet}
+          changeDelay={1000}
           transition={{
-            delay: 0.5
+            duration: 0.5,
           }}
-        >
-          <AutomaticCarousel
-            imageSet={imageSet}
-            changeDelay={1000}
-            transition={{
-              duration: 0.5,
-            }}
-            paused={isTrackInView ? false : true}
-          />
-        </motion.section>
-      )}
+          paused={isTrackInView ? false : true}
+        />
+      </motion.section>
     </LargeSlideContainer>
   );
 };

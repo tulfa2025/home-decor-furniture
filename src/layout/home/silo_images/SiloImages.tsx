@@ -54,6 +54,8 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const isInView = useInView(inViewRef, 0.1);
   const isPopupInView = useInView(inViewRef, 0.5);
 
+  
+
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
     target: scrollTargetRef,
@@ -197,7 +199,6 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                     opacity: 1
                   }}
                   transition={{
-                    delay: 1,
                     duration: 1
                   }}
                 >
@@ -208,7 +209,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                     width={2000}
                     height={2000}
                     className={styles.silo_image}
-                    quality={deviceContext === "Other" ? 50 : 1}
+                    quality={deviceContext === "Other" ? 50 : 25}
                   />
                   
                 </motion.div>

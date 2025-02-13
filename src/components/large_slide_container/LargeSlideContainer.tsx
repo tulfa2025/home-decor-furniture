@@ -36,6 +36,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   scrollMap = null,
   backgroundStyles = {},
   resize = true,
+  handlePopup = null
 }) => {
   // Subheader scroll
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
@@ -46,7 +47,13 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.1);
+  const isInView = useInView(inViewRef, 0.5);
+
+  useEffect(()=>{
+    if(handlePopup){
+      handlePopup(isInView)
+    }
+  }, [isInView])
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -181,7 +188,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
               position: "relative",
             }}
           >
-            {children}
+            {isInView && children}
           </motion.div>
         </motion.section>
       </motion.div>

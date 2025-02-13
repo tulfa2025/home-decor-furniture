@@ -2,7 +2,14 @@
 import styles from "./NewLIfeStyleScenes.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useMemo, useRef, useState, useEffect, useContext } from "react";
+import {
+  useMemo,
+  useRef,
+  useState,
+  useEffect,
+  useContext,
+  useCallback,
+} from "react";
 import { usePathname } from "next/navigation";
 
 /* CUSTOM PROPS */
@@ -12,7 +19,6 @@ import ModalContainer from "@/components/modals/standard/ModalContainer";
 
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 import useFilter from "@/hooks/use_filter";
-import useInView from "@/hooks/use_inview";
 
 /* IMAGES */
 import modalImageSet from "./lifestyle_scenes_images";
@@ -38,35 +44,20 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     setIsModalOpen(false);
   };
 
-  // Ensure the ref is available before applying useScroll
-  const scrollTargetRef = useRef(null);
-
-
   // Detect when the user is in viewport for triggering events
-  const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.05);
-  const isPopupVisible = useInView(inViewRef, 0.75);
-
   const pathName = usePathname();
 
   const deviceContext = useContext(DeviceContext);
 
   const viewportSize = useWindowSize();
-  // Cleanup
-  useEffect(() => {
-    return () => {
-      if (scrollTargetRef.current) {
-        scrollTargetRef.current = null;
-      }
 
-      if (inViewRef.current) {
-        inViewRef.current = null;
-      }
-    };
-  }, []);
+  const [isPopupVisible, setIsPopupVisible] = useState(false)
+
+  const handlePopup = useCallback((isPopupVisible) => { setIsPopupVisible(isPopupVisible)}, []);
 
   return (
     <>
+      {/* <div ref={inViewRef} className={styles.inview_trigger}></div> */}
       <LargeSlideContainer
         layoutName={layoutName}
         title="Lifestyle Scenes"
@@ -74,33 +65,29 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         zIndex={zIndex}
         dynamicHeader={true}
         scrollMap={scrollTransformValues.lifestyle}
+        handlePopup={handlePopup}
       >
-        <div ref={inViewRef} className={styles.inview_trigger}></div>
-        {isInView && (
-          <motion.section
-            className={styles.image_container}
-            ref={inViewRef}
-            style={{
-              filter: isModalOpen ? "blur(10px)" : "",
-            }}
-            initial={{
-              opacity:0
-            }}
-            animate={{
-              opacity: 1
-            }}
-          >
-            <Image
-              src="/images/lifestyle_scenes/image_two.webp"
-              alt=""
-              width={2912}
-              height={1632}
-              className={styles.background_image}
-              ref={scrollTargetRef}
-              quality={deviceContext === "Other" ? 50 : 10}
-            />
-          </motion.section>
-        )}
+        <motion.section
+          className={styles.image_container}
+          style={{
+            filter: isModalOpen ? "blur(10px)" : "",
+          }}
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+        >
+          <Image
+            src="/images/lifestyle_scenes/image_two.webp"
+            alt=""
+            width={2912}
+            height={1632}
+            className={styles.background_image}
+            quality={deviceContext === "Other" ? 50 : 25}
+          />
+        </motion.section>
       </LargeSlideContainer>
       {/* LIFESTYLE SCENES Modal */}
       {/* BUTTON TRIGGER */}
