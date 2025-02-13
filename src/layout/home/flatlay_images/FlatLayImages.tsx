@@ -4,33 +4,18 @@ import LargeSlideContainer from "@/components/large_slide_container/LargeSlideCo
 import styles from "./FlatLayImages.module.scss";
 import Image from "next/image";
 /* FLATLAY IMAGES */
-import { useState, useRef, useEffect, useContext } from "react";
+import { useContext } from "react";
 
-import useInView from "@/hooks/use_inview";
 import useWindowSize from "@/hooks/use_window_size";
 import DeviceContext from "@/context/deviceContext";
 
 const FlatLayImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Detect when the user is in viewport for triggering events
-  const inViewRef = useRef(null);
-
-  const containerRef = useRef(null);
-  const isTrackInView = useInView(inViewRef, 0.85);
-
-  const isInView = useInView(inViewRef, 0.05);
-
   const viewportSize = useWindowSize();
 
   const deviceContext = useContext(DeviceContext);
 
   const quality = deviceContext === "Other" ? 50 : 25;
-
-  useEffect(() => {
-    return () => {
-      inViewRef.current = null;
-      containerRef.current = null;
-    };
-  }, []);
 
   return (
     <LargeSlideContainer
@@ -41,7 +26,6 @@ const FlatLayImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
     >
       <motion.div
         className={styles.flex_container}
-        ref={containerRef}
         initial={{
           opacity: 0,
         }}
@@ -51,13 +35,10 @@ const FlatLayImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       >
         <motion.div
           className={styles.image_container}
-          animate={{
-            opacity: isTrackInView ? 0 : 1,
+          initial={{
+            opacity: 1
           }}
-          transition={{
-            duration: 0.5,
-            delay: 0.2,
-          }}
+          
         >
           <Image
             src={
@@ -74,12 +55,17 @@ const FlatLayImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         </motion.div>
         <motion.div
           className={styles.image_container}
-          animate={{
-            opacity: isTrackInView ? 1 : 0,
+          initial={{
+            opacity: 0
+          }}
+          whileInView={{
+            opacity: 1,
+          }}
+          viewport={{
+            amount: 0.9
           }}
           transition={{
-            duration: 0.5,
-            delay: 0.2,
+            delay: 0.5
           }}
         >
           <Image
