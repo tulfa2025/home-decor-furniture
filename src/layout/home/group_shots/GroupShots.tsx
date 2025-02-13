@@ -44,17 +44,6 @@ const imageSet: ImageSet = {
 };
 
 const GroupShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
-  const changeTrackRef = useRef(null);
-  const isTrackInView = useInView(changeTrackRef, 0.05);
-
-  // Cleanup
-  useEffect(() => {
-    return () => {
-      if (changeTrackRef.current) {
-        changeTrackRef.current = null;
-      }
-    };
-  }, []);
 
   return (
     <LargeSlideContainer
@@ -79,7 +68,6 @@ const GroupShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           transition={{
             duration: 0.5,
           }}
-          paused={isTrackInView ? false : true}
         />
       </motion.section>
     </LargeSlideContainer>

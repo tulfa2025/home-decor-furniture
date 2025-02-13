@@ -22,13 +22,12 @@ interface AutomaticCarouaProps {
 }
 
 const AutomaticCarousel: React.FC<AutomaticCarouaProps> = memo(
-  ({ imageSet, changeDelay, transition, paused }) => {
+  ({ imageSet, changeDelay, transition}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const timeoutRef = useRef(null);
 
     useEffect(() => {
-      if(paused)return
       clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
         setCurrentIndex((prev) => {
@@ -41,7 +40,7 @@ const AutomaticCarousel: React.FC<AutomaticCarouaProps> = memo(
           }
         });
       }, changeDelay);
-    }, [currentIndex, paused]);
+    }, [currentIndex]);
 
 
     const deviceContext = useContext(DeviceContext)
