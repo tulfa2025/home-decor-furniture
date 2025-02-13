@@ -3,21 +3,17 @@ import styles from "./NewCloseUpShots.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import {
-  useRef,
   useState,
-  useEffect,
   useMemo,
   useContext,
   useCallback,
 } from "react";
-import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 
 /* CUSTOM COMPONENTS */
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 import ModalContainer from "@/components/modals/standard/ModalContainer";
-import useInView from "@/hooks/use_inview";
 
 /* IMAGES */
 import modalImageSet from "./closeup_shots_images";
@@ -46,11 +42,9 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const deviceContext = useContext(DeviceContext);
 
-  const [isPopupVisible, setIsPopupVisible] = useState(false)
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const handlePopup = useCallback((isPopupVisible) => { setIsPopupVisible(isPopupVisible)}, []);
-
-
 
   return (
     <>

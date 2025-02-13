@@ -11,7 +11,6 @@ import { TulfaDownArrow } from "@/assets/icons/tulfa_nav_arrows";
 import SubheaderActiveContext from "@/context/subHeader";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 
-
 type SubHeaderProps = {
   activePage:
     | "/"
