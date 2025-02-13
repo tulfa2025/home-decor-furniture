@@ -6,6 +6,7 @@ import {
   useSpring,
   useTransform,
   useMotionValueEvent,
+  AnimatePresence,
 } from "framer-motion";
 import {
   useRef,
@@ -53,8 +54,6 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const inViewRef = useRef(null);
   const isInView = useInView(inViewRef, 0.1);
   const isPopupInView = useInView(inViewRef, 0.5);
-
-  
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -190,30 +189,34 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                   isModalOpen && deviceContext === "Other" ? "blur(10px)" : "",
               }}
             >
-              {isInView && (
-                <motion.div className={styles.silo_image_container_inner}
-                  initial={{
-                    opacity:0
-                  }}
-                  animate={{
-                    opacity: 1
-                  }}
-                  transition={{
-                    duration: 1
-                  }}
-                >
-                  
-                  <Image
-                    src="/images/silo_images/np_A_cute_pink_and_blue_patterned_chair_with_wooden_le.webp"
-                    alt=""
-                    width={2000}
-                    height={2000}
-                    className={styles.silo_image}
-                    quality={deviceContext === "Other" ? 50 : 25}
-                  />
-                  
-                </motion.div>
-              )}
+              <AnimatePresence initial={true}>
+                {isInView && (
+                  <motion.div
+                    className={styles.silo_image_container_inner}
+                    initial={{
+                      opacity: 0,
+                    }}
+                    animate={{
+                      opacity: 1,
+                    }}
+                    transition={{
+                      duration: 1,
+                    }}
+                    exit={{
+                      opacity: 0,
+                    }}
+                  >
+                    <Image
+                      src="/images/silo_images/np_A_cute_pink_and_blue_patterned_chair_with_wooden_le.webp"
+                      alt=""
+                      width={2000}
+                      height={2000}
+                      className={styles.silo_image}
+                      quality={deviceContext === "Other" ? 50 : 25}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </section>
         </motion.div>

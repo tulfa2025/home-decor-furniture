@@ -1,6 +1,6 @@
 "use client";
 import styles from "./NewLIfeStyleScenes.module.scss";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import {
   useMemo,
@@ -51,9 +51,11 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const viewportSize = useWindowSize();
 
-  const [isPopupVisible, setIsPopupVisible] = useState(false)
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
-  const handlePopup = useCallback((isPopupVisible) => { setIsPopupVisible(isPopupVisible)}, []);
+  const handlePopup = useCallback((isPopupVisible) => {
+    setIsPopupVisible(isPopupVisible);
+  }, []);
 
   return (
     <>
@@ -67,27 +69,30 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         scrollMap={scrollTransformValues.lifestyle}
         handlePopup={handlePopup}
       >
-        <motion.section
-          className={styles.image_container}
-          style={{
-            filter: isModalOpen ? "blur(10px)" : "",
-          }}
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-        >
-          <Image
-            src="/images/lifestyle_scenes/image_two.webp"
-            alt=""
-            width={2912}
-            height={1632}
-            className={styles.background_image}
-            quality={deviceContext === "Other" ? 50 : 25}
-          />
-        </motion.section>
+          <motion.section
+            className={styles.image_container}
+            style={{
+              filter: isModalOpen ? "blur(10px)" : "",
+            }}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+          >
+            <Image
+              src="/images/lifestyle_scenes/image_two.webp"
+              alt=""
+              width={2912}
+              height={1632}
+              className={styles.background_image}
+              quality={deviceContext === "Other" ? 50 : 25}
+            />
+          </motion.section>
       </LargeSlideContainer>
       {/* LIFESTYLE SCENES Modal */}
       {/* BUTTON TRIGGER */}

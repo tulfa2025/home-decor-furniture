@@ -1,6 +1,7 @@
 function getDeviceType() {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
   
+    console.log(userAgent)
     // Check for iOS
     if (/iPad|iPhone|iPod|Macintosh/.test(userAgent) && !window.MSStream) {
       return 'iOS'; // It's an iOS device

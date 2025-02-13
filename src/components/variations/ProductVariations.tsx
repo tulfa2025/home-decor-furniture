@@ -8,6 +8,7 @@ import {
   useTransform,
   useSpring,
   useMotionValueEvent,
+  AnimatePresence,
 } from "framer-motion";
 import Image from "next/image";
 import VariationImageContainer from "../image_container/variation_image_container/VariationImageContainer";
@@ -214,72 +215,94 @@ const ProductVariation = ({
                 />
               </div>
 
-              {/* BACKGROUND IMAGE */}
-              {isInView && (
-                <motion.div 
-                  className={styles.background_image_container}
-                  initial={{
-                    opacity: 0
-                  }}
-                  animate={{
-                    opacity: 1
-                  }}
-                  transition={{
-                    delay: 0.5
-                  }}
+              <AnimatePresence initial={true}>
+                {/* BACKGROUND IMAGE */}
+                {isInView && (
+                  <motion.div
+                    className={styles.background_image_container}
+                    initial={{
+                      opacity: 0,
+                    }}
+                    animate={{
+                      opacity: 1,
+                    }}
+                    transition={{
+                      delay: 0.5,
+                    }}
+                    exit={{
+                      opacity: 0,
+                    }}
                   >
-                  <Image
-                    src={imageSet.background}
-                    alt=""
-                    height={2400}
-                    width={3000}
-                    className={imageSet.backgroundStyling}
-                    quality={deviceContext === "Other" ? 50 : 25}
-                  />
-                </motion.div>
-              )}
+                    <Image
+                      src={imageSet.background}
+                      alt=""
+                      height={2400}
+                      width={3000}
+                      className={imageSet.backgroundStyling}
+                      quality={deviceContext === "Other" ? 50 : 25}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {/* VARIATION CONTAINER */}
-              {isInView && <motion.div
-                className={styles.product_variation_content_container}
-                style={{
-                  y: springyTransformPopupAnimationOne,
-                }}
-                
-              >
-                {/* IMAGE CONTAINER */}
-                <div className={styles.images_container}>
-                  {imageSet["top"].map((imageSource, index) => {
-                    return (
-                      <motion.div
-                        key={index}
-                        className={styles.indiv_image_container}
-                        style={{
-                          opacity: deviceContext === "Other" ? 0 : 1,
-                          y: deviceContext === "Other" ? 100 : 0,
-                        }}
-                        whileInView={{
-                          opacity: 1,
-                          y: 0,
-                        }}
-                        transition={{
-                          delay: (index + 1) * 0.2,
-                          duration: 0.5,
-                        }}
-                      >
-                        <VariationImageContainer
-                          imageSrc={imageSource}
-                          imageStyles={imageSet.imageStyles}
-                          imageClassName={styles.indiv_image_var}
-                          quality={1}
-                        />
+              <AnimatePresence initial={true}>
+                {isInView && (
+                  <motion.div
+                    className={styles.product_variation_content_container}
+                    style={{
+                      y: springyTransformPopupAnimationOne,
+                    }}
+                    initial={{
+                      opacity: 0,
+                    }}
+                    animate={{
+                      opacity: 1,
+                    }}
+                    transition={{
+                      delay: 0.5,
+                    }}
+                    exit={{
+                      opacity: 0,
+                    }}
+                  >
+                    {/* IMAGE CONTAINER */}
+                    <div className={styles.images_container}>
+                      {imageSet["top"].map((imageSource, index) => {
+                        return (
+                          <motion.div
+                            key={index}
+                            className={styles.indiv_image_container}
+                            style={{
+                              opacity: deviceContext === "Other" ? 0 : 1,
+                              y: deviceContext === "Other" ? 100 : 0,
+                            }}
+                            whileInView={{
+                              opacity: 1,
+                              y: 0,
+                            }}
+                            transition={{
+                              delay: (index + 1) * 0.2,
+                              duration: 0.5,
+                            }}
+                          >
+                            <VariationImageContainer
+                              imageSrc={imageSource}
+                              imageStyles={imageSet.imageStyles}
+                              imageClassName={styles.indiv_image_var}
+                              quality={1}
+                            />
 
-                        <p className={styles.image_text}>{imageSource[1]}</p>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </motion.div>}
+                            <p className={styles.image_text}>
+                              {imageSource[1]}
+                            </p>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.section>
           ) : (
             <></>

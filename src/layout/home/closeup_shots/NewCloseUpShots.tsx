@@ -68,6 +68,12 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           animate={{
             opacity: 1,
           }}
+          exit={{
+            opacity: 0,
+          }}
+          transition={{
+            duration: 0.5,
+          }}
         >
           <Image
             src="/images/closeup_shots/rug_one.webp"

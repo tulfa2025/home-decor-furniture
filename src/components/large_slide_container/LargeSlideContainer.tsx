@@ -1,5 +1,6 @@
 "use client";
 import {
+  AnimatePresence,
   motion,
   useMotionValueEvent,
   useScroll,
@@ -36,7 +37,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   scrollMap = null,
   backgroundStyles = {},
   resize = true,
-  handlePopup = null
+  handlePopup = null,
 }) => {
   // Subheader scroll
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
@@ -49,11 +50,11 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
   const inViewRef = useRef(null);
   const isInView = useInView(inViewRef, 0.5);
 
-  useEffect(()=>{
-    if(handlePopup){
-      handlePopup(isInView)
+  useEffect(() => {
+    if (handlePopup) {
+      handlePopup(isInView);
     }
-  }, [isInView])
+  }, [isInView]);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -135,8 +136,8 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     }
   });
 
-   // Cleanup
-   useEffect(() => {
+  // Cleanup
+  useEffect(() => {
     return () => {
       if (scrollTargetRef.current) {
         scrollTargetRef.current = null;
@@ -145,7 +146,6 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
       if (inViewRef.current) {
         inViewRef.current = null;
       }
-
     };
   }, []);
 
@@ -178,7 +178,8 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
         <motion.section
           className={styles.large_slide_content_container}
           style={{
-            scale: deviceContext === 'Other' ?  springyTransformScaleAnimationOne : 1,
+            scale:
+              deviceContext === "Other" ? springyTransformScaleAnimationOne : 1,
           }}
         >
           <motion.div
@@ -188,7 +189,9 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
               position: "relative",
             }}
           >
-            {isInView && children}
+            <AnimatePresence initial={true}>
+              {isInView && children}
+            </AnimatePresence>
           </motion.div>
         </motion.section>
       </motion.div>

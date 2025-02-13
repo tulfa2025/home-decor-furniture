@@ -31,6 +31,12 @@ const DimensionImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         animate={{
           opacity: 1,
         }}
+        exit={{
+          opacity: 0,
+        }}
+        transition={{
+          duration: 0.5,
+        }}
       >
         <div className={styles.image_container}>
           <Image

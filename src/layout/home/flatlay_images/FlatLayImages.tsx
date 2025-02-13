@@ -32,6 +32,9 @@ const FlatLayImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         animate={{
           opacity: 1,
         }}
+        exit={{
+          opacity: 0,
+        }}
       >
         <motion.div
           className={styles.image_container}
