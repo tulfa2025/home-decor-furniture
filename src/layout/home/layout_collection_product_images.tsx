@@ -38,7 +38,7 @@ const layoutCollection: LayoutCollectionBase = [
     [Blogs, '']
 ];
 
-const layoutCollectionMemoized = memoizeComponents(layoutCollection);
+const layoutCollectionMemoized = memoizeComponents(layoutCollection)
 
 const layoutCollectionStructured = structureLayouts(layoutCollectionMemoized);
 
