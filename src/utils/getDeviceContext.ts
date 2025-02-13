@@ -6,6 +6,10 @@ function getDeviceType() {
     if (/iPad|iPhone|iPod|Macintosh/.test(userAgent) && !window.MSStream) {
       return 'iOS'; // It's an iOS device
     }
+
+    if (/Macintosh/.test(userAgent) && !window.MSStream && window.innerWidth > 960) {
+      return 'Other'; // It's an iOS device
+    }
     
     // Check for Android
     if (/android/i.test(userAgent)) {

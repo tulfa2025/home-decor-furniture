@@ -2,7 +2,13 @@
 
 import Button from "@/components/button/Button";
 import Image from "next/image";
-import { motion, useSpring, useTransform, useScroll } from "framer-motion";
+import {
+  motion,
+  useSpring,
+  useTransform,
+  useScroll,
+  AnimatePresence,
+} from "framer-motion";
 import { useRef, useEffect, useState, useContext, useMemo } from "react";
 import useInView from "@/hooks/use_inview";
 import useWindowSize from "@/hooks/use_window_size";
@@ -121,45 +127,54 @@ const BookDemoTemplate = ({ layoutName, zIndex, scrollMap = null }) => {
         }}
         ref={inViewRef}
       >
-        {isInView && (
-          <motion.section
-            className={styles.book_container}
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              delay: 0.25,
-            }}
-          >
-            <div className={styles.book_content}>
-              <Image
-                alt=""
-                src={backgroundImage}
-                className={styles.book_demo_image}
-                quality={deviceContext === "Other" ? 50 : 10}
-                height={2400}
-                width={3000}
-              />
-              <div className={styles.book_inner_container}>
-                <h4 className={styles.book_content_heading}>Book a Demo</h4>
-                <p className={styles.book_content_paragraph}>
-                  We have produced product visuals and immersive experiences for
-                  fortune 500 companies. Are you spending more than $50k on your
-                  product content? Talk to us.
-                </p>
-                <Button
-                  text="Schedule a Demo"
-                  modifier="l-color"
-                  buttonType={4}
-                  externalLink="https://www.tulfa.com/contact-us"
+        <AnimatePresence initial={true}>
+          {isInView && (
+            <motion.section
+              className={styles.book_container}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              transition={{
+                delay: 0.25,
+              }}
+              exit={{
+                opacity: 0,
+                transition: {
+                  delay: 1,
+                  duration: 0.5,
+                },
+              }}
+            >
+              <div className={styles.book_content}>
+                <Image
+                  alt=""
+                  src={backgroundImage}
+                  className={styles.book_demo_image}
+                  quality={deviceContext === "Other" ? 50 : 10}
+                  height={2400}
+                  width={3000}
                 />
+                <div className={styles.book_inner_container}>
+                  <h4 className={styles.book_content_heading}>Book a Demo</h4>
+                  <p className={styles.book_content_paragraph}>
+                    We have produced product visuals and immersive experiences
+                    for fortune 500 companies. Are you spending more than $50k
+                    on your product content? Talk to us.
+                  </p>
+                  <Button
+                    text="Schedule a Demo"
+                    modifier="l-color"
+                    buttonType={4}
+                    externalLink="https://www.tulfa.com/contact-us"
+                  />
+                </div>
               </div>
-            </div>
-          </motion.section>
-        )}
+            </motion.section>
+          )}
+        </AnimatePresence>
       </motion.div>
     </motion.div>
   );

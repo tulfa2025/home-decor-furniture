@@ -82,7 +82,12 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             }}
             exit={{
               opacity: 0,
+              transition:{
+                delay: 1,
+                duration: 0.5
+              }
             }}
+            
           >
             <Image
               src="/images/lifestyle_scenes/image_two.webp"

@@ -63,6 +63,10 @@ const GroupShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         }}
         exit={{
           opacity: 0,
+          transition:{
+            delay: 1,
+            duration: 0.5
+          }
         }}
         transition={{
           duration: 0.5,
