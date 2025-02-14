@@ -27,7 +27,7 @@ const ThreeDScene = ({
 
   const threedScene = useRef(null);
 
-  const isInView = useInView(inViewRef, 0.05);
+  const isInView = useInView(inViewRef, 0.01);
 
   const timeoutRef = useRef(null);
 

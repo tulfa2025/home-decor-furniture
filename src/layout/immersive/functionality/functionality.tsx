@@ -8,7 +8,6 @@ import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useMemo, useState, useContext } from "react";
 import ThreeDScene from "@/components/3dscene/three_d_scene";
-import useInView from "@/hooks/use_inview";
 
 import lightingArray from "./functionalityLIghting";
 
@@ -21,10 +20,6 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const deviceContext = useContext(DeviceContext);
 
-  const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.2);
- 
-
   return (
     <LargeSlideContainer
       layoutName={layoutName}
@@ -36,7 +31,22 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       scrollMap={scrollTransformValues.functionality}
       resize={false}
     >
-      <div className={styles.int_container} ref={inViewRef}>
+      <motion.div
+        className={styles.int_container}
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        exit={{
+          opacity: 0,
+          transition: {
+            delay: 1,
+            duration: 0.5,
+          },
+        }}
+      >
         {/* FUNCTIONALITY CAROUSEL - MObile */}
 
         <div className={styles.videos_container}>
@@ -72,7 +82,7 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
               modelRotation={[0, Math.PI, 0]}
               initialPosition={[0, 0, -2]}
               animationNames={animationList}
-              playAnimation={isInView}
+              playAnimation={true}
               defaultAnimationName={animationList[buttonSelection - 1]}
               enableRotateMouse={true}
               blurSrc="/glb/blur/blur-image-table.webp"
@@ -159,7 +169,7 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             expansions, adjustments, and rotations—with clarity and precision.
           </div>
         </div>
-      </div>
+      </motion.div>
     </LargeSlideContainer>
   );
 };

@@ -1,12 +1,10 @@
 "use client";
 import styles from "./NewLIfeStyleScenes.module.scss";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import {
   useMemo,
-  useRef,
   useState,
-  useEffect,
   useContext,
   useCallback,
 } from "react";
@@ -87,7 +85,6 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                 duration: 0.5
               }
             }}
-            
           >
             <Image
               src="/images/lifestyle_scenes/image_two.webp"

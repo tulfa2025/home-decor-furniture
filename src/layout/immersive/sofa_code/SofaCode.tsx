@@ -8,6 +8,7 @@ import {
   motion,
   useSpring,
   useMotionValueEvent,
+  AnimatePresence,
 } from "motion/react";
 /* CUSTOM CONTEXT */
 import useWindowSize from "@/hooks/use_window_size";
@@ -25,7 +26,6 @@ import ThreeDSofa from "../3d_sofa/ThreeDSofa";
 import ARIcon from "@/assets/icons/arIcon";
 import TulfaCloseButton from "@/assets/icons/tulfa_close_button";
 import Button from "@/components/button/Button";
-
 
 const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Get scroll height
@@ -138,42 +138,59 @@ const SofaCode: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         }}
         ref={inViewRef}
       >
-        {/* CONTENT AQUI */}
-        <motion.section className={styles.container}>
-          <>
-            <ThreeDSofa />
-            <div className={styles.arButton}>
-              <ARIcon
-                onClick={() => {
-                  setIsModalOpen(true);
-                }}
-              />
-            </div>
-            {isModalOpen && (
-              <div className={styles.modalPopUp}>
-                <h3 className={styles.headerContainer}>Augmented Reality</h3>
-                <Image
-                  src="/glb/qr/recliner.png"
-                  alt=""
-                  width={173}
-                  height={173}
-                />
-                <span className={styles.text}>
-                  Point your camera at the QR code.
-                </span>
-                <Button buttonType={5} text="See in your computer" />
-                <TulfaCloseButton
+        <AnimatePresence initial={true}>
+          {/* CONTENT AQUI */}
+          {isInView && (
+            <motion.section
+              className={styles.container}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+                transition: {
+                  delay: 1,
+                  duration: 0.5,
+                },
+              }}
+            >
+              <ThreeDSofa />
+              <div className={styles.arButton}>
+                <ARIcon
                   onClick={() => {
-                    setIsModalOpen(false);
+                    setIsModalOpen(true);
                   }}
-                  height={42}
-                  width={42}
-                  fill="rgba(102, 102, 102, 0.60)"
                 />
               </div>
-            )}
-          </>
-        </motion.section>
+              {isModalOpen && (
+                <div className={styles.modalPopUp}>
+                  <h3 className={styles.headerContainer}>Augmented Reality</h3>
+                  <Image
+                    src="/glb/qr/recliner.png"
+                    alt=""
+                    width={173}
+                    height={173}
+                  />
+                  <span className={styles.text}>
+                    Point your camera at the QR code.
+                  </span>
+                  <Button buttonType={5} text="See in your computer" />
+                  <TulfaCloseButton
+                    onClick={() => {
+                      setIsModalOpen(false);
+                    }}
+                    height={42}
+                    width={42}
+                    fill="rgba(102, 102, 102, 0.60)"
+                  />
+                </div>
+              )}
+            </motion.section>
+          )}
+        </AnimatePresence>
       </motion.div>
     </motion.div>
   );

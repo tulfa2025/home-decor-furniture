@@ -8,6 +8,7 @@ import {
   motion,
   useSpring,
   useMotionValueEvent,
+  AnimatePresence,
 } from "motion/react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
@@ -40,8 +41,7 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
   const isInView = useInView(inViewRef, 0.2);
-  const isPopupVisible= useInView(inViewRef, 0.75);
-
+  const isPopupVisible = useInView(inViewRef, 0.75);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -175,7 +175,7 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
               animate={{
                 opacity: isInView ? 1 : 0,
                 transition: {
-                  delay: 1,
+                  delay: 0.3,
                 },
               }}
             >
@@ -188,38 +188,44 @@ const ARSilo: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
                 calloutStyleType={1}
               />
             </motion.div>
-            <motion.div
-              className={styles.right_container}
-              initial={{
-                transform: !hasAnimatedRef.current
-                  ? "translateX(-50vw)"
-                  : "translateX(0)",
-              }}
-              animate={{
-                transform:
-                  isInView && !hasAnimatedRef.current
-                    ? "translateX(0)"
-                    : hasAnimatedRef.current
-                    ? "translateX(0)"
-                    : "translateX(-50vw)",
-              }}
-              transition={{
-                delay: 0.8,
-                duration: 0.45,
-                ease: "easeIn",
-              }}
-            >
+            <AnimatePresence initial={true}>
               {isInView && (
-                <Image
-                  className={styles.immersive_image}
-                  src="/images/immersive/Augmented-reality-phone.webp"
-                  alt=""
-                  quality={deviceContext === "Other" ? 50 : 10}
-                  height={2400}
-                  width={3000}
-                />
+                <motion.div
+                  className={styles.right_container}
+                  initial={{
+                    opacity: 0,
+                    transform: !hasAnimatedRef.current
+                      ? "translateX(-50vw)"
+                      : "translateX(0)",
+                  }}
+                  animate={{
+                    opacity: 1,
+                    transform:
+                      isInView && !hasAnimatedRef.current
+                        ? "translateX(0)"
+                        : hasAnimatedRef.current
+                        ? "translateX(0)"
+                        : "translateX(-50vw)",
+                  }}
+                  exit={{
+                    opacity: 0,
+                  }}
+                  transition={{
+                    duration: 0.45,
+                    ease: "easeIn",
+                  }}
+                >
+                  <Image
+                    className={styles.immersive_image}
+                    src="/images/immersive/Augmented-reality-phone.webp"
+                    alt=""
+                    quality={deviceContext === "Other" ? 50 : 10}
+                    height={2400}
+                    width={3000}
+                  />
+                </motion.div>
               )}
-            </motion.div>
+            </AnimatePresence>
           </motion.section>
         </motion.div>
       </motion.div>

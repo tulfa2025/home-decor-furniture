@@ -24,14 +24,21 @@ const FriendsSofa: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       zIndex={zIndex}
       scrollMap={scrollTransformValues.friends}
     >
-      <div ref={inViewRef} className={styles.inview_trigger}></div>
-      {isInView &&<motion.div
+   
+      <motion.div
         className={styles.int_container}
         initial={{
           opacity: 0,
         }}
         animate={{
           opacity: 1,
+        }}
+        exit={{
+          opacity: 0,
+          transition: {
+            delay: 1,
+            duration: 0.5,
+          },
         }}
       >
         <Image
@@ -42,7 +49,7 @@ const FriendsSofa: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           height={2400}
           width={3000}
         />
-      </motion.div>}
+      </motion.div>
     </LargeSlideContainer>
   );
 };

@@ -2,14 +2,13 @@
 import scrollTransformValues from "@/utils/scrollTransformValues";
 import styles from "./banner.module.scss";
 import LargeSlideContainer from "@/components/large_slide_container/LargeSlideContainer";
-import { useRef } from "react";
 
 import ThreeDScene from "@/components/3dscene/three_d_scene";
 import lightingArray from "./bannerLighting";
 
-const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
-  const inViewRef = useRef(null);
+import { motion } from "framer-motion";
 
+const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   return (
     <LargeSlideContainer
       layoutName={layoutName}
@@ -21,7 +20,22 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       scrollMap={scrollTransformValues.immersive}
       resize={false}
     >
-      <div className={styles.int_container} ref={inViewRef}>
+      <motion.div
+        className={styles.int_container}
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        exit={{
+          opacity: 0,
+          transition: {
+            delay: 1,
+            duration: 0.5,
+          },
+        }}
+      >
         <ThreeDScene
           glbRef="glb/Immersive_AR.glb"
           followMouse={true}
@@ -32,7 +46,7 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           blurSrc="/glb/blur/blur-image-banner.webp"
           lightingArray={lightingArray}
         />
-      </div>
+      </motion.div>
     </LargeSlideContainer>
   );
 };
