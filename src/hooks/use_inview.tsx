@@ -13,7 +13,7 @@ const useInView = (elementRef, threshold = 0.5) => {
                 clearTimeout(timeoutRef.current)
                 timeoutRef.current = setTimeout(()=>{
                     setIsInView(entry.isIntersecting)
-                }, 375)
+                }, 500)
                 
             },
             { threshold }
