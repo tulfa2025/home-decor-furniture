@@ -4,7 +4,7 @@ import { memoizeComponents } from "@/utils/memoize_components";
 import structureLayouts from "@/utils/structure_layouts";
 import ProductVideosBanner from "./banner/ProductVideosBanner";
 import VideoOne from "./video_1/VideoOne";
-import VideoTwo from "./video_2/VideoTwo";
+// import VideoTwo from "./video_2/VideoTwo";
 import VideoThree from "./video_3/VideoThree";
 import VideoFive from "./video_5/VideoFive";
 import VideoFour from "./video_4/VideoFour";
@@ -19,7 +19,7 @@ const layoutCollection: LayoutCollectionBase = [
     [VideoThree, 'Ergonomic Chair'],
     [VideoFive, 'Solar Shingles'],
     [VideoSix, 'Sofa'],
-    [VideoTwo, 'Sofa Exploded View'],
+    // [VideoTwo, 'Sofa Exploded View'],
     [VideoNine, 'Baby Crib'],
     [VideoOne, 'Dresser'],
     [VideoFour, 'Chandelier'],

@@ -82,11 +82,11 @@ export default function SubHeader({ activePage }: SubHeaderProps) {
   /* Is header visible */
   const [isActive, setIsActive] = useContext(SubheaderActiveContext);
 
-  useEffect(()=>{
-    return(()=>{
+  useEffect(() => {
+    return () => {
       headerRef.current = null;
-    })
-  },[])
+    };
+  }, []);
 
   return (
     <>
@@ -105,7 +105,12 @@ export default function SubHeader({ activePage }: SubHeaderProps) {
           <motion.div className={styles.subheader_heading_container}>
             <h3 className={`${styles.subheader_heading} ${headerFontColor}`}>
               {/* LOGO SVG HELLO*/}
-              <TulfaIcon height={30} width={120} />
+              <TulfaIcon
+                height={30}
+                width={120}
+                button={true}
+                link="https://www.tulfa.com"
+              />
             </h3>
           </motion.div>
 
@@ -166,7 +171,7 @@ export default function SubHeader({ activePage }: SubHeaderProps) {
             animate={{
               transform: headerActivated
                 ? `translateY(${(navLinks.length - 1) * 75}px)`
-                : `translateY(-${(navLinks.length) * 50}px)`,
+                : `translateY(-${navLinks.length * 50}px)`,
             }}
             transition={{
               type: "spring",
@@ -199,7 +204,6 @@ export default function SubHeader({ activePage }: SubHeaderProps) {
                         ? headerLinkActivated
                         : headerLinkDisabled
                     }`}
-
                   >
                     {label}
                   </Link>
