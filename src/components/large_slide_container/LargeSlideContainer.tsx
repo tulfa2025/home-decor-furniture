@@ -25,6 +25,7 @@ import SlideContext from "@/context/changeSlide";
 import scrollTransformValues from "@/utils/scrollTransformValues";
 import useScrollTransform from "@/hooks/use_scrolltransform";
 import DeviceContext from "@/context/deviceContext";
+import IsScrollingContext from "@/context/isScrolling";
 
 const LargeSlideContainer: React.FC<LayoutProps> = ({
   layoutName,
@@ -151,6 +152,8 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     };
   }, []);
 
+  const [isScrolling, handleIsScrolling] =useContext(IsScrollingContext)
+
   return (
     <motion.div
       style={{
@@ -192,7 +195,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
             }}
           >
             <AnimatePresence initial={true}>
-              {isInView && children}
+              {isInView && !isScrolling && children}
             </AnimatePresence>
           </motion.div>
         </motion.section>

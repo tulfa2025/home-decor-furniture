@@ -4,6 +4,7 @@ import styles from "./MenuPopup.module.scss";
 import { motion } from "framer-motion";
 import { useMemo, memo, useState, useEffect, useContext } from "react";
 import useWindowSize from "@/hooks/use_window_size";
+import IsScrollingContext from "@/context/isScrolling";
 
 const MenuPopup = ({ 
   layoutCollection, 
@@ -31,8 +32,13 @@ const MenuPopup = ({
 
   const [currentSlideInternal, setCurrentSlide] = useState(0);
 
+  const [isScrolling, setIsScrolling] = useContext(IsScrollingContext)
+
   useEffect(() => {
     if (isActive) {
+
+      setIsScrolling(true);
+      
       setTimeout(() => {
         let scrollDistance;
 
@@ -49,6 +55,10 @@ const MenuPopup = ({
         });
         // window.moveTo(0, scrollDistance)
       }, 100);
+
+      setTimeout(()=>{
+        setIsScrolling(false)
+      }, 500)
     }
   }, [currentSlideInternal, scrollDetails]);
 

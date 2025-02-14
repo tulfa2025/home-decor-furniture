@@ -28,6 +28,7 @@ import SlideContext from "@/context/changeSlide";
 import useScrollTransform from "@/hooks/use_scrolltransform";
 import scrollTransformValues from "@/utils/scrollTransformValues";
 import DeviceContext from "@/context/deviceContext";
+import IsScrollingContext from "@/context/isScrolling";
 
 const ProductVariation = ({
   imageSet,
@@ -182,6 +183,10 @@ const ProductVariation = ({
     };
   }, []);
 
+
+  const [isScrolling, handleIsScrolling] =useContext(IsScrollingContext)
+
+
   return (
     <>
       <motion.div
@@ -247,7 +252,7 @@ const ProductVariation = ({
 
               {/* VARIATION CONTAINER */}
               <AnimatePresence initial={true}>
-                {isInView && (
+                {isInView && !isScrolling && (
                   <motion.div
                     className={styles.product_variation_content_container}
                     style={{
