@@ -1,6 +1,13 @@
 "use client";
 import { useRef, useState, useEffect, useContext } from "react";
-import { useScroll, useTransform, useSpring, motion, useMotionValueEvent } from "motion/react";
+import {
+  useScroll,
+  useTransform,
+  useSpring,
+  motion,
+  useMotionValueEvent,
+  AnimatePresence,
+} from "motion/react";
 import styles from "./DemoTemplate.module.scss";
 /* CUSTOM COMPONENTS */
 
@@ -12,36 +19,37 @@ import calculateScrollHeight from "@/utils/calculate_scrollheight";
 import SlideContext from "@/context/changeSlide";
 import SubheaderStyleContext from "@/context/subHeaderStyle";
 
-
 import CallOut from "../../call_out/CallOut";
 import Button from "../../button/Button";
 import useScrollTransform from "@/hooks/use_scrolltransform";
-import scrollTransformValues, { scrollSpringProperties } from "@/utils/scrollTransformValues";
+import scrollTransformValues, {
+  scrollSpringProperties,
+} from "@/utils/scrollTransformValues";
 
-const DemoTemplate = ({ 
-  zIndex = 0, 
-  layoutName, 
+const DemoTemplate = ({
+  zIndex = 0,
+  layoutName,
   children,
   scrollMap = null,
-  headerStyleDefault=0,
-  dynamicHeader=false
+  headerStyleDefault = 0,
+  dynamicHeader = false,
 }) => {
   // Subheadr scroll
   const [headerStyle, setHeaderStyle] = useContext(SubheaderStyleContext);
-  
+
   // Get scroll height
   const viewportSize = useWindowSize();
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.65);
+  const isInView = useInView(inViewRef, 0.5);
 
   /* UPDATE SLIDE POSITION AT TOP LEVEL OF PAGE */
   const handleChangeSlide = useContext(SlideContext);
   useEffect(() => {
     if (isInView) {
       handleChangeSlide(layoutName);
-      setHeaderStyle(headerStyleDefault)
+      setHeaderStyle(headerStyleDefault);
     }
   }, [isInView]);
 
@@ -52,7 +60,10 @@ const DemoTemplate = ({
   });
 
   /* SCROLL HEIGHT OF PAGE */
-  const scrollHeight = calculateScrollHeight(viewportSize.height, viewportSize.width >=960 ? 2: 1);
+  const scrollHeight = calculateScrollHeight(
+    viewportSize.height,
+    viewportSize.width >= 960 ? 2 : 1
+  );
 
   /* ANIMATION START POSITION */
   const [yPosition, setYPosition] = useState(0);
@@ -76,9 +87,13 @@ const DemoTemplate = ({
   const videoContainerScale = useTransform(
     scrollY,
     [
-      0, 
-      viewportSize.width >= 960 ? yPosition + scrollHeight * 0.5 : yPosition + scrollHeight * 0.6, 
-      viewportSize.width >= 960 ? yPosition + scrollHeight * 0.55 : yPosition + scrollHeight * 1.1
+      0,
+      viewportSize.width >= 960
+        ? yPosition + scrollHeight * 0.5
+        : yPosition + scrollHeight * 0.6,
+      viewportSize.width >= 960
+        ? yPosition + scrollHeight * 0.55
+        : yPosition + scrollHeight * 1.1,
     ],
     [
       viewportSize.width >= 768 ? 1.05 : 1.02,
@@ -98,7 +113,7 @@ const DemoTemplate = ({
     viewportSize,
     yPosition,
     !scrollMap ? scrollTransformValues.demoTemplate : scrollMap
-  )
+  );
   const transformShowcaseAnimationThree = useTransform(
     scrollY,
     input,
@@ -117,22 +132,19 @@ const DemoTemplate = ({
       }
     }
   });
-  
+
   // Cleanup
-  useEffect(()=>{
-    return(()=>{
-
-      if(scrollTargetRef.current){
-
-        scrollTargetRef.current = null
+  useEffect(() => {
+    return () => {
+      if (scrollTargetRef.current) {
+        scrollTargetRef.current = null;
       }
 
-      if(inViewRef.current){
-
-        inViewRef.current = null
+      if (inViewRef.current) {
+        inViewRef.current = null;
       }
-    })
-  }, [])
+    };
+  }, []);
 
   return (
     <>
@@ -163,8 +175,9 @@ const DemoTemplate = ({
               scale: springyVideoContainerScale,
             }}
           >
-            {children}
-          
+            <AnimatePresence initial={true}>
+              {isInView && children}
+            </AnimatePresence>
           </motion.div>
           {/*  WRITTEN CONTENT GOES HERE */}
           <div className={styles.written_content_container}>

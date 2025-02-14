@@ -11,7 +11,6 @@ const VideoNine = ({ layoutName, zIndex }) => {
   const deviceOS = useContext(DeviceContext);
 
   return (
-    <>
       <VideoDemo
         posterSrc={"videos/product/BABY CRIB-natural.png"}
         layoutName={layoutName}
@@ -25,7 +24,7 @@ const VideoNine = ({ layoutName, zIndex }) => {
         scrollMap={scrollTransformValues.demoTemplate
         }
       />
-    </>
+
   );
 };
 

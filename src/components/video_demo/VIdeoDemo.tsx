@@ -7,8 +7,9 @@ import TulfaPlayButton from "@/assets/icons/tulfa_play_button";
 /* CONTEXT */
 import DemoTemplate from "../layout_templates/demo/DemoTemplate";
 import DeviceContext from "@/context/deviceContext";
-import { useContext, useEffect, useRef } from "react";
-import useInView from "@/hooks/use_inview";
+import { useContext } from "react";
+
+import { motion } from "framer-motion";
 
 const VideoDemo = ({
   zIndex = 0,
@@ -16,60 +17,57 @@ const VideoDemo = ({
   videoSourceRef,
   posterSrc,
   videoId = 1041177363,
-  scrollMap = null
+  scrollMap = null,
 }) => {
   const deviceOS = useContext(DeviceContext);
 
-  // Detect when the user is in viewport for triggering events
-  const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.5);
-
-  useEffect(()=>{
-    return(()=>{
-      inViewRef.current = null
-    })
-  },[])
-
   return (
-    <DemoTemplate 
-      zIndex={zIndex} 
-      layoutName={layoutName} 
+    <DemoTemplate
+      zIndex={zIndex}
+      layoutName={layoutName}
       scrollMap={scrollMap}
       headerStyleDefault={2}
-      dynamicHeader={false}  
+      dynamicHeader={false}
     >
-      <div
-      ref={inViewRef}
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          height: '100vh',
-          width: '100vw'
+      <motion.section
+        className={styles.video_container_outer}
+        initial={{
+          opacity: 0,
         }}
-      ></div>
-      <VideoPlayer
-        src={videoSourceRef}
-        type="video/mp4"
-        altText=""
-        onVideoComplete={() => {}}
-        loop={true}
-        styleOverride={{
-          width: "100vw",
+        animate={{
+          opacity: 1,
         }}
-        isInView={isInView}
-        autoplay={false}
-        poster={posterSrc}
-      />
+        
+        exit={{
+          opacity: 0,
+          transition:{
+            duration: 1,
+          }
+        }}
+      >
+        <VideoPlayer
+          src={videoSourceRef}
+          type="video/mp4"
+          altText=""
+          onVideoComplete={() => {}}
+          loop={true}
+          styleOverride={{
+            width: "100vw",
+          }}
+          isInView={true}
+          autoplay={false}
+          poster={posterSrc}
+        />
 
-      {/* PLAY BUTTON ON MOBIL */}
-      <div className={styles.play_container}>
-        {deviceOS !== "Other" ? (
-          <TulfaPlayButton height={35} width={35} videoId={videoId} />
-        ) : (
-          <></>
-        )}
-      </div>
+        {/* PLAY BUTTON ON MOBIL */}
+        <div className={styles.play_container}>
+          {deviceOS !== "Other" ? (
+            <TulfaPlayButton height={35} width={35} videoId={videoId} />
+          ) : (
+            <></>
+          )}
+        </div>
+      </motion.section>
     </DemoTemplate>
   );
 };

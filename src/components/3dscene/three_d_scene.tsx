@@ -4,6 +4,7 @@ import useInView from "@/hooks/use_inview";
 import Image from "next/image";
 import styles from "./three_d_scene.module.scss";
 import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 
 const ThreeDScene = ({
   glbRef,
@@ -20,7 +21,7 @@ const ThreeDScene = ({
   pathToBackground,
   blurSrc = "",
   lightingArray = [],
-  modelShadow = false
+  modelShadow = false,
 }) => {
   const canvasRef = useRef(null);
   const inViewRef = useRef(null);
@@ -142,27 +143,43 @@ const ThreeDScene = ({
     };
   }, []);
 
-  
   return (
     <>
       {/* in view container */}
       <div className={styles.in_view_container} ref={inViewRef}></div>
-      {/* LOADING PLACEHOLDER HERE */}
-      {!isLoaded && (
-        <div className={styles.loading_placeholder}>
-          <Image
-            src={blurSrc}
-            alt=""
-            height={2000}
-            width={2000}
-            priority
-            className={styles.image_container}
-          />
-          <h4 className={styles.notification}>Loading 3D Model</h4>
 
-          <div className={styles.loading_bar}></div>
-        </div>
-      )}
+      {/* LOADING PLACEHOLDER HERE */}
+      <AnimatePresence initial={true}>
+        {!isLoaded && (
+          <motion.div
+            className={styles.loading_placeholder}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+              transition: {
+                duration: 1,
+              },
+            }}
+          >
+            <Image
+              src={blurSrc}
+              alt=""
+              height={2000}
+              width={2000}
+              priority
+              className={styles.image_container}
+            />
+            <h4 className={styles.notification}>Loading 3D Model</h4>
+
+            <div className={styles.loading_bar}></div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/** */}
       <div
@@ -172,6 +189,8 @@ const ThreeDScene = ({
           display: "flex",
           alignItems: "center",
           pointerEvents: "auto",
+          position: "relative",
+          zIndex: 1,
         }}
         ref={canvasRef}
       ></div>

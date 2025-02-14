@@ -11,7 +11,6 @@ const VideoSeven = ({ layoutName, zIndex }) => {
   const deviceOS = useContext(DeviceContext);
 
   return (
-    <>
       <VideoDemo
         posterSrc={
           deviceOS === "Other"
@@ -27,7 +26,6 @@ const VideoSeven = ({ layoutName, zIndex }) => {
         }
         
       />
-    </>
   );
 };
 

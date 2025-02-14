@@ -1,8 +1,8 @@
 "use client";
 import React, { memo, useRef, useEffect, useState } from "react";
 import styles from "./VideoPlayer.module.scss";
-import { usePathname } from 'next/navigation'
-
+import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 
 const VideoPlayer = memo(
   ({
@@ -15,35 +15,37 @@ const VideoPlayer = memo(
     autoplay,
     isInView,
     poster,
-    videoStyleOverride
+    videoStyleOverride,
   }) => {
     // Create a reference to the video element
     const videoRef = useRef(null);
-    const pathname = usePathname()
+    const pathname = usePathname();
 
     useEffect(() => {
       if (videoRef.current && isInView) {
-          videoRef.current.play();
+        videoRef.current.play();
       } else if (videoRef.current && !isInView) {
         videoRef.current.pause();
         videoRef.current.load(); // Apparently resets buffer
       }
     }, [isInView, src]);
 
-
     useEffect(() => {
-      
-      return (()=>{
+      return () => {
         if (videoRef.current) {
           videoRef.current.pause();
           videoRef.current.load(); // Apparently resets buffer
-          videoRef.current.remove()
+          videoRef.current.remove();
         }
-      })
+      };
     }, [pathname]);
 
     return (
-      <div className={styles.video_container} style={styleOverride}>
+      <div
+        className={styles.video_container}
+        style={styleOverride}
+
+      >
         <video
           ref={videoRef}
           muted

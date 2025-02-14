@@ -10,7 +10,7 @@ import { useContext } from "react";
 const VideoThree = ({ layoutName, zIndex }) => {
   const deviceOS = useContext(DeviceContext);
   return (
-    <>
+
       <VideoDemo
         posterSrc={
           deviceOS === "Other"
@@ -27,7 +27,7 @@ const VideoThree = ({ layoutName, zIndex }) => {
         scrollMap={scrollTransformValues.gross}
         videoId={1056106630}
       />
-    </>
+
   );
 };
 

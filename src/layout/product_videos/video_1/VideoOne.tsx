@@ -24,7 +24,7 @@ const VideoOne = ({ layoutName, zIndex }) => {
   }
 
   return (
-    <>
+    
       <VideoDemo
         posterSrc={ deviceOS === "Other"
           ? "videos/product/Dresser.jpg"
@@ -38,7 +38,7 @@ const VideoOne = ({ layoutName, zIndex }) => {
       }
       videoId={1056104610}
       />
-    </>
+    
   );
 };
 

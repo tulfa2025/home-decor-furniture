@@ -10,7 +10,7 @@ const VideoTwo = ({ layoutName, zIndex }) => {
   const deviceOS = useContext(DeviceContext);
 
   return (
-    <>
+
       <VideoDemo
         posterSrc={
           deviceOS === "Other"
@@ -26,7 +26,7 @@ const VideoTwo = ({ layoutName, zIndex }) => {
         }
         videoId={1056106199}
       />
-    </>
+    
   );
 };
 

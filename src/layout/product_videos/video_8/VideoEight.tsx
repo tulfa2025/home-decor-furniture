@@ -11,7 +11,6 @@ const VideoEight = ({ layoutName, zIndex }) => {
   const deviceOS = useContext(DeviceContext);
 
   return (
-    <>
       <VideoDemo
         posterSrc={
           deviceOS === "Other"
@@ -28,7 +27,6 @@ const VideoEight = ({ layoutName, zIndex }) => {
         videoId={1024593444}
         scrollMap={scrollTransformValues.gross}
       />
-    </>
   );
 };
 

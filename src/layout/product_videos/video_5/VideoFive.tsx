@@ -15,7 +15,7 @@ const VideoFive = ({
     const deviceOS = useContext(DeviceContext);
 
   
-    return(<><VideoDemo   
+    return(<VideoDemo   
       posterSrc={
         deviceOS === "Other"
           ? "videos/product/output_Solar shingle video_compressed-desktop.jpg"
@@ -28,7 +28,7 @@ const VideoFive = ({
         deviceOS === "Other"
           ? "videos/product/Solar shingle video_compressed.mp4"
           : "videos/product/Mobile/solar-shingles-preview_compressed.mp4"
-      }/></>)
+      }/>)
 }
 
 export default VideoFive;

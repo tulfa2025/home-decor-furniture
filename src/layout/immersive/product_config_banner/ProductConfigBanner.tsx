@@ -11,7 +11,7 @@ const ProductConfigBanner = ({ layoutName, zIndex }) => {
   const deviceOS = useContext(DeviceContext);
 
   return (
-    <>
+    
       <VideoDemo
         posterSrc={"videos/immersive/product_config_compressed-desktop.jpg"}
         layoutName={layoutName}
@@ -23,7 +23,7 @@ const ProductConfigBanner = ({ layoutName, zIndex }) => {
         }
         scrollMap={scrollTransformValues.configBanner}
       />
-    </>
+    
   );
 };
 
