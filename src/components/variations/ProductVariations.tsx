@@ -44,7 +44,7 @@ const ProductVariation = ({
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.15);
+  const isInView = useInView(inViewRef, 0.05);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({

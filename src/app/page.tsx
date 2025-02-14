@@ -23,16 +23,16 @@ export default function Home() {
             top: 0,
             left: 0,
             backgroundColor: "white",
+            pointerEvents: 'none'
           }}
           initial={{
             opacity: 1,
           }}
           animate={{
             opacity: 0,
-            zIndex: -1,
           }}
           transition={{
-            delay: 2,
+            delay: 0.75,
             transition: 0.5,
           }}
         ></motion.div>

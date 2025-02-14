@@ -8,6 +8,7 @@ import {
   useTransform,
   useSpring,
   useMotionValueEvent,
+  AnimatePresence,
 } from "framer-motion";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import useWindowSize from "@/hooks/use_window_size";
@@ -74,18 +75,15 @@ const CtaTertiary: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
    * For each SPAN element, check whether its in the viewport
    */
   // Intersection Observer to highlight text on scroll
-  const observerCallback = useCallback(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add(styles.cta_content_paragraph_activated);
-        } else {
-          entry.target.classList.remove(styles.cta_content_paragraph_activated);
-        }
-      });
-    },
-    []
-  );
+  const observerCallback = useCallback((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add(styles.cta_content_paragraph_activated);
+      } else {
+        entry.target.classList.remove(styles.cta_content_paragraph_activated);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const textGroups = document.querySelectorAll(".text-group");
@@ -224,26 +222,42 @@ const CtaTertiary: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
               </span>
             </p>
           </motion.div>
-          <motion.div
-            style={{
-              position: "absolute",
-              y:
-                deviceContext === "Other"
-                  ? springyTranslateAnimationTwo
-                  : "40vh",
-            }}
-            className={styles.cta_image_container}
-          >
-            {isInView &&<Image
-              src='/images/cta_tertiary/Green_sofa.webp'
-              alt=""
-              className={styles.cta_image}
-              quality={deviceContext === "Other" ? 50 : 1}
-              width={2000}
-              height={2000}
-            
-            />}
-          </motion.div>
+          <AnimatePresence initial={true}>
+            {isInView && (
+              <motion.div
+                initial={{
+                  opacity: 0,
+                }}
+                animate={{
+                  opacity: 1,
+                }}
+                exit={{
+                  opacity: 0,
+                  transition: {
+                    delay: 1
+                  }
+                }}
+                
+                style={{
+                  position: "absolute",
+                  y:
+                    deviceContext === "Other"
+                      ? springyTranslateAnimationTwo
+                      : "40vh",
+                }}
+                className={styles.cta_image_container}
+              >
+                <Image
+                  src="/images/cta_tertiary/Green_sofa.webp"
+                  alt=""
+                  className={styles.cta_image}
+                  quality={deviceContext === "Other" ? 50 : 1}
+                  width={2000}
+                  height={2000}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.section>
       </motion.div>
     </motion.div>

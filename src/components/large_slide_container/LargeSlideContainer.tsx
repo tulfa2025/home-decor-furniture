@@ -49,7 +49,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.15);
+  const isInView = useInView(inViewRef, 0.05);
 
   const popUpIsInView = useInView(inViewRef, 0.75);
 

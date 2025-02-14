@@ -41,7 +41,7 @@ const ModalFilters = ({ selectionArray, selectedIndex, handleSelectedIndex }) =>
         if(position.left > filterPosition){
             return  position.left - filterPosition - 30
         } else {
-            return 0
+            return 5
         }
 
 
@@ -109,7 +109,7 @@ const ModalFilters = ({ selectionArray, selectedIndex, handleSelectedIndex }) =>
                     className={styles.background_highlight}
                     style={{
                    
-                        width: (containerWidth / selectionArray.length)
+                        width: (containerWidth / selectionArray.length) - 10
                     }}
 
                     animate={{
