@@ -26,19 +26,19 @@ const scrollTransformValues: ScrollTransformValues = {
     desktop: {
       input: [
         [0, 0],
-        [1, -0.5],
-        [1, 0],
+        [1, -0.70],
+        [1, -0.20],
         [1, 0.1],
         [1, 0.5],
         [1, 1]
       ],
       transform: [
-        [1.5, 0],
-        [1.5, 0],
+        [2, 0],
+        [2, 0],
         [0, 0],
         [-0.3, -60],
         [-0.3, -60],
-        [-1.5, 0],
+        [-2.5, 0],
       ],
     },
     mobile: {
@@ -79,20 +79,77 @@ const scrollTransformValues: ScrollTransformValues = {
     },
   },
 
-  //Variations
-  marketingImgs: {
+  // HOME
+  closeUp: {
     desktop: {
+      input: [
+        [0, 0],
+        [1, -0.75],
+        [1, -0.25],
+        [1, 0.1],
+        [1, 0.5],
+        [1, 1]
+      ],
+      transform: [
+        [2, 0],
+        [2, 0],
+        [0, 0],
+        [-0.3, -60],
+        [-0.3, -60],
+        [-2, 0],
+      ],
+    },
+    mobile: {
       input: [
         [0, 0],
         [1, -0.5],
         [1, 0],
         [1, 0.1],
         [1, 0.5],
-        [1, 1]
+        [1, 1],
       ],
       transform: [
         [1.5, 0],
         [1.5, 0],
+        [0,0],
+        [-0.2, -30],
+        [-0.2, -30],
+        [-1.5, 0],
+      ],
+    },
+    smallMob: {
+      input: [
+        [0, 0],
+        [1, -0.6],
+        [1, 0],
+        [1, 0.1],
+        [1, 0.5],
+        [1, 1],
+      ],
+      transform: [
+        [1.5, 0],
+        [1.5, 0],
+        [0,0],
+        [-0.2, -60],
+        [-0.2, -60],
+        [-1.5, 0],
+      ],
+    },
+  },
+  //Variations
+  marketingImgs: {
+    desktop: {
+      input: [
+        [0, 0],
+        [1, -0.7],
+        [1, -0.2],
+        [1, 0.1],
+        [1, 0.5],
+        [1, 1]
+      ],
+      transform: [
+        [2, 0],
+        [2, 0],
         [0, 0],
         [-0.3, 0],
         [-0.3, 0],
@@ -140,19 +197,19 @@ const scrollTransformValues: ScrollTransformValues = {
     desktop: {
       input: [
         [0, 0],
-        [1, -0.75],
-        [1, -0.25],
+        [1, -0.8],
+        [1, -0.2],
         [1, 0.1],
         [1, 0.5],
         [1, 1],
       ],
       transform: [
-        [1.5, 0],
-        [1.5, 0],
+        [2, 0],
+        [2, 0],
         [0, 0],
         [-0.3, -60],
         [-0.3, -60],
-        [-1.5, 0],
+        [-2, 0],
       ],
     },
     mobile: {
@@ -413,19 +470,19 @@ const scrollTransformValues: ScrollTransformValues = {
     desktop: {
       input: [
         [0, 0],
-        [1, -0.5],
-        [1, 0],
+        [1, -0.6],
+        [1, -0.1],
         [1, 0.1],
         [1, 0.5],
         [1, 1],
       ],
       transform: [
-        [1.5, 0],
-        [1.5, 0],
+        [2, 0],
+        [2, 0],
         [0, 0],
         [-0.3, 0],
         [-0.3, 0],
-        [-1.5, 0],
+        [-2, 0],
       ],
     },
     mobile: {
@@ -450,19 +507,19 @@ const scrollTransformValues: ScrollTransformValues = {
     desktop: {
       input: [
         [0, 0],
-        [1, -0.4],
-        [1, 0.1],
+        [1, -0.5],
+        [1, 0],
         [1, 0.1],
         [1, 0.5],
         [1, 1],
       ],
       transform: [
-        [1.5, 0],
-        [1.5, 0],
+        [2, 0],
+        [2, 0],
         [0, 0],
         [-0.3, 0],
         [-0.3, 0],
-        [-1.5, 0],
+        [-2, 0],
       ],
     },
     mobile: {
@@ -906,8 +963,8 @@ const scrollTransformValues: ScrollTransformValues = {
     desktop: {
       input: [
         [0, 0],
-        [1, -0.75],
-        [1, -0.25],
+        [1, -1],
+        [1, -0.5],
       ],
       transform: [
         [1.5, 0],
@@ -1079,7 +1136,7 @@ const scrollTransformValues: ScrollTransformValues = {
         [1.5, 0],
         [0, 0],
         [0, 0],
-        [-1.5, 0],
+        [-2, 0],
       ],
     },
     mobile: {

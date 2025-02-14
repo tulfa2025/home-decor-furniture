@@ -5,7 +5,7 @@ import ProductVariation from "@/components/variations/ProductVariations";
 const ProColVar: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
     const imageSet: VariationsImageSet = {
-      background: '/images/color_var/Website_pillow_lifestyle.jpg',
+      background: '/images/color_var/Website_pillow_lifestyle.webp',
       backgroundStyling: styles.backgroundStyling,
       top: [
         ['/images/color_var/Red Organic.webp',  "Italiano Rose", '/images/color_var/Red Organic_B.webp'],

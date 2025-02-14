@@ -23,8 +23,6 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
 
   const deviceContext = useContext(DeviceContext);
 
-  const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.2);
 
   return (
     <>
@@ -50,7 +48,7 @@ const InstallationImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             }
           }}
           transition={{
-            duration: 0.5,
+            duration: 0.25,
           }}
         >
           <Image

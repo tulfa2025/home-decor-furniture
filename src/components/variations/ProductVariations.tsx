@@ -43,7 +43,7 @@ const ProductVariation = ({
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.5);
+  const isInView = useInView(inViewRef, 0.15);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -227,7 +227,7 @@ const ProductVariation = ({
                       opacity: 1,
                     }}
                     transition={{
-                      delay: 0.5,
+                      delay: 0.25,
                     }}
                     exit={{
                       opacity: 0,

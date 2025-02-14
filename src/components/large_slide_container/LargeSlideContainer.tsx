@@ -48,13 +48,15 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.5);
+  const isInView = useInView(inViewRef, 0.15);
+
+  const popUpIsInView = useInView(inViewRef, 0.75);
 
   useEffect(() => {
     if (handlePopup) {
-      handlePopup(isInView);
+      handlePopup(popUpIsInView);
     }
-  }, [isInView]);
+  }, [popUpIsInView]);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({

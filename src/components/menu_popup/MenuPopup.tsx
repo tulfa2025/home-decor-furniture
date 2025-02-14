@@ -31,7 +31,6 @@ const MenuPopup = ({
 
   const [currentSlideInternal, setCurrentSlide] = useState(0);
 
-  const viewportSize = useWindowSize();
   useEffect(() => {
     if (isActive) {
       setTimeout(() => {
@@ -46,9 +45,10 @@ const MenuPopup = ({
 
         window.scrollTo({
           top: scrollDistance,
-          behavior: "smooth",
+          behavior: "auto",
         });
-      }, 200);
+        // window.moveTo(0, scrollDistance)
+      }, 100);
     }
   }, [currentSlideInternal, scrollDetails]);
 

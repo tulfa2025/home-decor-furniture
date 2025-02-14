@@ -39,7 +39,7 @@ const DimensionImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           }
         }}
         transition={{
-          duration: 0.5,
+          duration: 0.25,
         }}
       >
         <div className={styles.image_container}>

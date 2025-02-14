@@ -19,6 +19,7 @@ import ModalContainer from "@/components/modals/standard/ModalContainer";
 import modalImageSet from "./closeup_shots_images";
 import DeviceContext from "@/context/deviceContext";
 import useWindowSize from "@/hooks/use_window_size";
+import scrollTransformValues from "@/utils/scrollTransformValues";
 
 const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const memoizedImageSet = useMemo(() => {
@@ -54,6 +55,7 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         paragraph="Pinpoint your furniture's intricate design elements and craftmanship."
         zIndex={zIndex}
         handlePopup={handlePopup}
+        scrollMap={scrollTransformValues.closeUp}
       >
         
         <motion.section
@@ -76,7 +78,7 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             }
           }}
           transition={{
-            duration: 0.5,
+            duration: 0.25,
           }}
         >
           <Image
@@ -86,7 +88,7 @@ const NewCloseUpShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             quality={deviceContext === "Other" ? 50 : 25}
             width={3000}
             height={3000}
-          />{" "}
+          />
         </motion.section>
       </LargeSlideContainer>
       {/* LIFESTYLE SCENES Modal */}
