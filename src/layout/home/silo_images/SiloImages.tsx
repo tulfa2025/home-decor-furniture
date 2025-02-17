@@ -227,7 +227,7 @@ const SiloImages: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
       {isPopupInView && !isModalOpen ? (
         <div className={styles.popup_button_container}>
           <TulfaPopupButton
-            timer={0}
+            timer={1000}
             height={60}
             width={300}
             textStyle={popupPosition.textStyle}

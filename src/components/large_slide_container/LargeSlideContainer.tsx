@@ -25,6 +25,7 @@ import SlideContext from "@/context/changeSlide";
 import scrollTransformValues from "@/utils/scrollTransformValues";
 import useScrollTransform from "@/hooks/use_scrolltransform";
 import DeviceContext from "@/context/deviceContext";
+import IsScrollingContext from "@/context/isScrolling";
 
 const LargeSlideContainer: React.FC<LayoutProps> = ({
   layoutName,
@@ -48,13 +49,15 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.5);
+  const isInView = useInView(inViewRef, 0.05);
+
+  const popUpIsInView = useInView(inViewRef, 0.75);
 
   useEffect(() => {
     if (handlePopup) {
-      handlePopup(isInView);
+      handlePopup(popUpIsInView);
     }
-  }, [isInView]);
+  }, [popUpIsInView]);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -149,6 +152,8 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
     };
   }, []);
 
+  const [isScrolling, handleIsScrolling] =useContext(IsScrollingContext)
+
   return (
     <motion.div
       style={{
@@ -190,7 +195,7 @@ const LargeSlideContainer: React.FC<LayoutProps> = ({
             }}
           >
             <AnimatePresence initial={true}>
-              {isInView && children}
+              {isInView && !isScrolling && children}
             </AnimatePresence>
           </motion.div>
         </motion.section>

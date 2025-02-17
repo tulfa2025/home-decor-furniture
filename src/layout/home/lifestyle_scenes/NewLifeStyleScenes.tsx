@@ -77,6 +77,9 @@ const NewLifeStyleScenes: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
             }}
             animate={{
               opacity: 1,
+              transition: {
+                delay: 0.25
+              }
             }}
             exit={{
               opacity: 0,

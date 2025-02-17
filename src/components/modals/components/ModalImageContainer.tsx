@@ -48,7 +48,7 @@ const ModalImageContainer = ({
 
   const gridStyle = useMemo(
     () => ({
-      gridTemplateRows: `repeat(${Math.ceil(imageNo / 1.5)}, ${
+      gridTemplateRows: `repeat(auto-fill, ${
         viewportSize.height / (viewportSize.width > 960 ? 1 : 2)
       }px)`,
     }),
@@ -65,13 +65,25 @@ const ModalImageContainer = ({
         }
       }
 
+      let largeFinalImage = false;
+
+      if (i === imageNo && (imageNo % 6 === 1 || imageNo % 6 === 4)) {
+        largeFinalImage = true;
+      }
+
       // Every image in a 5 image cycle occupies  particular column start and column span
       const checkColumnValue = (i + 5) % 6;
 
       switch (checkColumnValue) {
         case 0:
           columnNumber = 1;
-          columnSpan = 7;
+
+          if (largeFinalImage) {
+            columnSpan = 12;
+          } else {
+            columnSpan = 7;
+          }
+
           break;
         case 1:
           columnNumber = 8;
@@ -82,8 +94,11 @@ const ModalImageContainer = ({
           columnSpan = 12;
           break;
         case 3:
-          columnNumber = 1;
-          columnSpan = 5;
+          if (largeFinalImage) {
+            columnSpan = 12;
+          } else {
+            columnSpan = 5;
+          }
           break;
         case 4:
           columnNumber = 6;
@@ -108,8 +123,13 @@ const ModalImageContainer = ({
         }
       }
 
-      // Every image occupies the same amount of space
-      columnSpan = 6;
+      if (i === imageNo && imageNo % 2 === 1) {
+        // If last image and it's odd
+        columnSpan = 12;
+      } else {
+        // Every image occupies the same amount of space
+        columnSpan = 6;
+      }
     }
 
     memoizedComponents.push(
@@ -127,8 +147,8 @@ const ModalImageContainer = ({
           imageStyles=""
           fullscreenToggle={true}
           isFocusOverlay={true}
-          blur={true}
-          quality={60}
+          blur={false}
+          quality={50}
           handleFullscreenToggle={handleFullscreenToggle}
           imageIndex={imageIndex}
         />

@@ -28,6 +28,7 @@ import SlideContext from "@/context/changeSlide";
 import useScrollTransform from "@/hooks/use_scrolltransform";
 import scrollTransformValues from "@/utils/scrollTransformValues";
 import DeviceContext from "@/context/deviceContext";
+import IsScrollingContext from "@/context/isScrolling";
 
 const ProductVariation = ({
   imageSet,
@@ -43,7 +44,7 @@ const ProductVariation = ({
 
   // Detect when the user is in viewport for triggering events
   const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, 0.5);
+  const isInView = useInView(inViewRef, 0.05);
 
   const scrollTargetRef = useRef(null);
   const { scrollY } = useScroll({
@@ -182,6 +183,10 @@ const ProductVariation = ({
     };
   }, []);
 
+
+  const [isScrolling, handleIsScrolling] =useContext(IsScrollingContext)
+
+
   return (
     <>
       <motion.div
@@ -227,7 +232,7 @@ const ProductVariation = ({
                       opacity: 1,
                     }}
                     transition={{
-                      delay: 0.5,
+                      delay: 0.25,
                     }}
                     exit={{
                       opacity: 0,
@@ -247,7 +252,7 @@ const ProductVariation = ({
 
               {/* VARIATION CONTAINER */}
               <AnimatePresence initial={true}>
-                {isInView && (
+                {isInView && !isScrolling && (
                   <motion.div
                     className={styles.product_variation_content_container}
                     style={{

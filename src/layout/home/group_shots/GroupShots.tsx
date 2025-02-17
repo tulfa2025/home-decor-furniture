@@ -69,7 +69,7 @@ const GroupShots: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
           }
         }}
         transition={{
-          duration: 0.5,
+          duration: 0.25,
         }}
       >
         <AutomaticCarousel

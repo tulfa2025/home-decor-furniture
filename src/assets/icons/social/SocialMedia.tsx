@@ -15,7 +15,7 @@ const XButton = ({ height, width, onClick, className, style }) => {
       }}
     >
       <Image
-        src="/icons/icons8-twitter.svg"
+        src="/icons/x.svg"
         alt=""
         width={width}
         height={height}
@@ -35,7 +35,7 @@ const MessengerButton = ({ height, width, onClick, className, style }) => {
       }}
     >
       <Image
-        src="/icons/7086697_messenger_facebook messenger_messenger logo_icon.svg"
+        src="/icons/messenger.svg"
         alt=""
         width={width}
         height={height}
@@ -55,7 +55,7 @@ const FBButton = ({ height, width, onClick, className, style }) => {
       }}
     >
       <Image
-        src="/icons/5296499_fb_facebook_facebook logo_icon.svg"
+        src="/icons/fb.svg"
         alt=""
         width={width}
         height={height}
@@ -75,7 +75,7 @@ const IGButton = ({ height, width, onClick, className, style }) => {
       }}
     >
       <Image
-        src="/icons/3225191_app_instagram_logo_media_popular_icon.svg"
+        src="/icons/ig.svg"
         alt=""
         width={width}
         height={height}
@@ -95,7 +95,7 @@ const LinkedButton = ({ height, width, onClick, className, style }) => {
       }}
     >
       <Image
-        src="/icons/3225190_app_linkedin_logo_media_popular_icon.svg"
+        src="/icons/linkedin.svg"
         alt=""
         width={width}
         height={height}
@@ -115,7 +115,7 @@ const WhatsButton = ({ height, width, onClick, className, style }) => {
       }}
     >
       <Image
-        src="/icons/3225179_app_logo_media_popular_social_icon.svg"
+        src="/icons/wa.svg"
         alt=""
         width={width}
         height={height}

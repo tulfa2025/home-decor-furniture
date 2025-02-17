@@ -1,7 +1,7 @@
 "use client";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { usePathname } from "next/navigation";
 
 /* CUSTOM HOOKS */
@@ -19,6 +19,7 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 import SlideContext from "@/context/changeSlide";
 import DeviceContext from "@/context/deviceContext";
 import toggleSpinner from "@/utils/toggle_spinner";
+import IsScrollingContext from "@/context/isScrolling";
 
 const PageTemplate = ({ children, layoutCollection, activePagePath }) => {
   /* HEADER STYLE */
@@ -96,6 +97,15 @@ const PageTemplate = ({ children, layoutCollection, activePagePath }) => {
       }
     };
   }, [pathName]);
+
+  const [isScrolling, setIsScrolling] =useState(false);
+
+  const handleIsScrolling = useMemo(()=>{
+    return [isScrolling, setIsScrolling]
+
+  }, [isScrolling])
+
+
   return (
     <DeviceContext.Provider value={deviceType}>
       <SubheaderStyleContext.Provider value={[headerStyle, setHeaderStyle]}>
@@ -114,16 +124,19 @@ const PageTemplate = ({ children, layoutCollection, activePagePath }) => {
             ref={scrollContainerRef}
             key={pathName}
           >
+            <IsScrollingContext.Provider value={handleIsScrolling}>
             <SlideContext.Provider value={handleChangeSlide}>
               {/* LAYOUT COLLECTION COMPONENTS GO HERE */}
               {children}
             </SlideContext.Provider>
+            
             <MenuPopup
               layoutCollection={layoutCollection}
               scrollDetails={scrollDetails}
               scrollingContainersRef={scrollingContainersRef}
               currentSlide={currentSlide}
             />
+            </IsScrollingContext.Provider>
           </div>
         </SubheaderActiveContext.Provider>
       </SubheaderStyleContext.Provider>
