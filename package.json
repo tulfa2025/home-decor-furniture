@@ -18,6 +18,9 @@
     "preview_vid": "./generate_4_sec.sh ./assets_to_convert"
   },
   "dependencies": {
+    "@tweenjs/tween.js": "^25.0.0",
+    "@types/three": "^0.173.0",
+    "@types/tweenjs": "^1.0.8",
     "autoprefixer": "^10.4.20",
     "lottie-react": "^2.4.0",
     "motion": "^12.0.0-alpha.2",

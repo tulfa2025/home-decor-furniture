@@ -6,14 +6,16 @@ import styles from "./three_d_scene.module.scss";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 
-const ThreeDScene = ({
+
+
+const ThreeDScene: React.FC<ThreeDSceneProps> = ({
   glbRef,
   followMouse = false,
   cameraPosition,
   modelPosition,
   modelRotation,
   initialPosition,
-  animationNames,
+  animationList,
   playAnimation,
   defaultAnimationName,
   enableRotateMouse,
@@ -53,7 +55,7 @@ const ThreeDScene = ({
           modelRotation,
           initialPosition,
           playAnimation,
-          animationNames,
+          animationList,
           defaultAnimationName,
           enableRotateMouse,
           enableZoom,

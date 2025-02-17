@@ -7,8 +7,11 @@ import ThreeDScene from "@/components/3dscene/three_d_scene";
 import lightingArray from "./bannerLighting";
 
 import { motion } from "framer-motion";
+import { useContext, useMemo } from "react";
+import DeviceContext from "@/context/deviceContext";
 
 const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
+  const deviceContext = useContext(DeviceContext);
   return (
     <LargeSlideContainer
       layoutName={layoutName}
@@ -37,7 +40,7 @@ const Banner: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         }}
       >
         <ThreeDScene
-          glbRef="glb/Immersive_AR.glb"
+          glbRef={deviceContext === 'Other' ? "glb/Immersive_AR_desktop.glb": "glb/Immersive_AR.glb"}
           followMouse={true}
           cameraPosition={[0, 0, 2.5]}
           modelRotation={[0, -Math.PI / 2, 0]}

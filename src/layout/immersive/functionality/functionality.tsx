@@ -11,12 +11,89 @@ import ThreeDScene from "@/components/3dscene/three_d_scene";
 
 import lightingArray from "./functionalityLIghting";
 
+
+/* Animations */
+import * as THREE from "three";
+import * as TWEEN from "@tweenjs/tween.js";
+import MovementPath from "@/components/3dscene/AnimationHelper";
+
+const animationListOrder = [
+  "Outer Body",
+  "Side Drawer",
+  "Inside Drawer",
+  "Lamp",
+  "Lamp",
+];
+
+/**
+ * Create a set of animations for the camera
+ */
+
+//Outer body animations
+const outBodyCurve = new THREE.QuadraticBezierCurve3(
+  new THREE.Vector3(0, 1, 2.2),
+  new THREE.Vector3(0, 0, 1.7),
+  new THREE.Vector3(0.2, 0.5, 1.2),
+);
+const outerBodyPathObject: PathObject = {
+  name: 'Outer Body',
+  delay: 3500,
+  duration: 1500,
+  path: outBodyCurve
+}
+
+
+const outBodyCurveStart = new THREE.QuadraticBezierCurve3(
+  new THREE.Vector3(0.2, 0.5, 1.2),
+  new THREE.Vector3(0, 0.55, 1.2),
+  new THREE.Vector3(-0.2, 0.6, 1.2),
+);
+const outerBodyPathObjectStart: PathObject = {
+  name: 'Outer Body',
+  delay: 1000,
+  duration: 1500,
+  path: outBodyCurveStart
+}
+
+
+const outerBodyAnimation = new MovementPath(
+  "Outer Body",
+  null,
+  [outerBodyPathObject, outerBodyPathObjectStart],
+  {
+    toStartOnEnd: false
+  }
+)
+
+
 const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
   const [buttonSelection, setButtonSelection] = useState(1);
 
-  const animationList = useMemo(() => {
-    return ["Outer Body", "Side Drawer", "Inside Drawer", "Lamp", "Lamp"];
-  }, []);
+  const animationList: AnimationDetailsList =
+    useMemo<AnimationDetailsList>(() => {
+      return {
+        outer_body: {
+          name: "Outer Body",
+          animationLength: 1500,
+          animation: outerBodyAnimation
+        },
+        side_drawer: {
+          name: "Side Drawer",
+          animationLength: 1500,
+          animation: null
+        },
+        inside_drawer: {
+          name: "Inside Drawer",
+          animationLength: 4500,
+          animation: null
+        },
+        lamp: {
+          name: "Lamp",
+          animationLength: 10000,
+          animation: null
+        },
+      };
+    }, []);
 
   const deviceContext = useContext(DeviceContext);
 
@@ -81,9 +158,9 @@ const Functionality: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
               cameraPosition={[0, 1, 2.2]}
               modelRotation={[0, Math.PI, 0]}
               initialPosition={[0, 0, -2]}
-              animationNames={animationList}
+              animationList={animationList}
               playAnimation={true}
-              defaultAnimationName={animationList[buttonSelection - 1]}
+              defaultAnimationName={animationListOrder[buttonSelection - 1]}
               enableRotateMouse={true}
               blurSrc="/glb/blur/blur-image-table.webp"
               lightingArray={lightingArray}

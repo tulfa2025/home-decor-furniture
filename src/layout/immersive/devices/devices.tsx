@@ -37,7 +37,7 @@ const Devices: React.FC<LayoutProps> = ({ layoutName, zIndex }) => {
         }}
       >
         <Image
-          src="/images/immersive/device_lineup.png"
+          src="/images/immersive/cross-devices.png"
           alt=""
           className={styles.int}
           quality={deviceContext === "Other" ? 50 : 10}

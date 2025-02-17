@@ -1,8 +1,80 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import MovementPath from "./AnimationHelper";
 
 class ThreeDBasic extends EventTarget {
+  private _domObj: HTMLElement | null = null;
+  private _glbRef: string | null = null;
+
+  /* LIGHTING OPTIONS */
+  private _modelShadow: boolean = false;
+  private _lightingArray: Array<THREE.Light> = [];
+
+  /* UTILITY PROPERTIES */
+  public isLoaded: boolean = false;
+  private _pathToBackground: string = "";
+
+  /* INTERACTIVE CONTROLS */
+  private _followMouse: boolean = false;
+  private _dragRotateEnabled: boolean = false;
+  private _enableZoom: boolean = false;
+
+  /* POSITIONING PROPERTIES */
+  private _cameraPosition: [number, number, number] | null = null;
+  private _modelPosition: [number, number, number] | null = null;
+  private _initialPosition: [number, number, number] | null = null;
+  private _modelRotation: [number, number, number] | null = null;
+
+  /* ANIMATION DETAILS */
+  private _animations: Array<any> | null = null;
+  private _animationList: AnimationDetailsList | null = null;
+  private _playAnimation: boolean = true;
+  private _defaultAnimationName: string | null = null;
+  private _mixer: THREE.AnimationMixer | null = null;
+
+  // REaltes to camera movement animation from MovementPath
+  private _currentCameraMovementPath: MovementPath | null = null;
+
+  /* THREEJS OBJECTS */
+  private _threejs: THREE.WebGLRenderer | null = null;
+  private _camera: THREE.PerspectiveCamera | null = null;
+  private _scene: THREE.Scene | null = null;
+  private _controls: OrbitControls | null = null;
+
+  /* THREE JS SPECIFIC OBJECTS IN SCENE */
+  private _plane: THREE.Mesh<
+    THREE.PlaneGeometry,
+    THREE.MeshBasicMaterial,
+    THREE.Object3DEventMap
+  > | null = null;
+
+  /* MOUSE FOLLOW PROPERTIES */
+  _target: THREE.Object3D<THREE.Object3DEventMap> | null = null;
+  _intersectionPoint: THREE.Vector3 | null = null;
+  _planeNormal: THREE.Vector3 | null = null;
+  _intersectionPlane: THREE.Plane | null = null;
+  _raycaster: THREE.Raycaster | null = null;
+  _pointer: THREE.Vector2 | null = null;
+
+  /**
+   * @param {HTMLElement} canvasRef  Canvas element reference
+   * @param {string} glbRef       Path to GLB file in public folder
+   * @param {boolean} followMouse Toggle model follow mouse cursor position
+   * @param {[number, number, number]} cameraPosition   x, y, z position of camera relative to origin
+   * @param {[number, number, number]} modelPosition    x, y, z position of model relative to origin
+   * @param {[number, number, number]} modelRotation    x, y, and -axis rotation of model
+   * @param {[number, number, number]} initialPosition  Initial cursor position in space on render
+   * @param {boolean} playAnimation
+   * @param {AnimationDetailsList} animationList  Animation details
+   * @param {string} defaultAnimationName  Default animation to play
+   * @param {boolean} dragRotateEnabled Drag model toggle
+   * @param {boolean} enableZoom Toggle zoom
+   * @param {string} pathToBackground
+   * @param {Array<any>}lightingArray ThreeJS Light Objects for scene lighting
+   * @param {boolean} modelShadow Toggle whether model receives shadows
+   */
+
   constructor(
     canvasRef,
     glbRef,
@@ -12,7 +84,7 @@ class ThreeDBasic extends EventTarget {
     modelRotation = [0, 0, 0], // Note potential for gimbal locks if not careful
     initialPosition = [0, 0, 0],
     playAnimation,
-    animationNames,
+    animationList: AnimationDetailsList = null,
     defaultAnimationName,
     dragRotateEnabled = false,
     enableZoom = false,
@@ -22,7 +94,7 @@ class ThreeDBasic extends EventTarget {
   ) {
     super();
 
-    this._modelShadow = modelShadow
+    this._modelShadow = modelShadow;
     this._glbRef = glbRef;
     this._domObj = canvasRef;
     this.isLoaded = false;
@@ -42,9 +114,19 @@ class ThreeDBasic extends EventTarget {
     this._modelRotation = modelRotation; // initial Rotation of model
 
     // Animations
-    this._animationNames = animationNames;
+    this._animationList = animationList;
     this._playAnimation = playAnimation;
     this._defaultAnimationName = defaultAnimationName;
+
+    if (this._animationList) {
+      const details = Object.values(animationList).find((animation) => {
+        if (animation.name === defaultAnimationName) return true;
+        return false;
+      });
+
+      this._currentCameraMovementPath = details.animation;
+    }
+
     this._initialize();
   }
 
@@ -72,6 +154,9 @@ class ThreeDBasic extends EventTarget {
 
     // Create the scene
     this._scene = new THREE.Scene();
+
+    // Initialise animation, tie default animation to camera object
+    this._currentCameraMovementPath.initialize(this._camera);
 
     // Backgrond
     if (this._pathToBackground) {
@@ -104,18 +189,14 @@ class ThreeDBasic extends EventTarget {
       });
     }
 
-
-
     // // Add a Directional Light
     // Add directional light (shines in one direction);
 
-    if(this._lightingArray.length > 0){
-      for(let light of this._lightingArray){
-        this._scene.add(light)
+    if (this._lightingArray.length > 0) {
+      for (let light of this._lightingArray) {
+        this._scene.add(light);
       }
     }
-
-    
 
     // Orbit controls
     // // Set up OrbitControls (interactive camera control)
@@ -128,60 +209,69 @@ class ThreeDBasic extends EventTarget {
     this._camera.position.set(...this._cameraPosition); // Position the camera
     this._controls.update();
 
-    this.target = new THREE.Object3D();
-    this.target.position.x = this._initialPosition[0];
-    this.target.position.y = this._initialPosition[1];
-    this.target.position.z = this._initialPosition[2];
-    this.intersectionPoint = new THREE.Vector3();
-    this.planeNormal = new THREE.Vector3();
-    this.plane = new THREE.Plane();
-    this.raycaster = new THREE.Raycaster();
+    /* Set up  */
+    if (this._followMouse) this._setUpMouseFollow();
+
+    this._LoadModel();
+    // Call the animation loop
+    this._RAF();
+  }
+
+  _setUpMouseFollow() {
+    this._target = new THREE.Object3D();
+    this._target.position.x = this._initialPosition[0];
+    this._target.position.y = this._initialPosition[1];
+    this._target.position.z = this._initialPosition[2];
+    this._intersectionPoint = new THREE.Vector3();
+    this._planeNormal = new THREE.Vector3();
+    this._intersectionPlane = new THREE.Plane();
+    this._raycaster = new THREE.Raycaster();
     // Set up raycasting for mouse tracking
-    this.pointer = new THREE.Vector2();
+    this._pointer = new THREE.Vector2();
 
     const onMouseMove = (e) => {
-      this.pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
-      this.pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
-      this.planeNormal.copy(this._camera.position).normalize();
-      this.plane.setFromNormalAndCoplanarPoint(
-        this.planeNormal,
+      this._pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+      this._pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
+      this._planeNormal.copy(this._camera.position).normalize();
+      this._intersectionPlane.setFromNormalAndCoplanarPoint(
+        this._planeNormal,
         this._scene.position
       );
-      this.raycaster.setFromCamera(this.pointer, this._camera);
-      this.raycaster.ray.intersectPlane(this.plane, this.intersectionPoint);
-      this.target.position.set(
-        this.intersectionPoint.x,
-        -this.intersectionPoint.y,
+      this._raycaster.setFromCamera(this._pointer, this._camera);
+      this._raycaster.ray.intersectPlane(
+        this._intersectionPlane,
+        this._intersectionPoint
+      );
+      this._target.position.set(
+        this._intersectionPoint.x,
+        -this._intersectionPoint.y,
         2
       );
     };
 
     const onTouchMove = (e) => {
       const touch = e.touches[0];
-      this.pointer.x = (touch.clientX / window.innerWidth) * 2 - 1;
-      this.pointer.y = (touch.clientY / window.innerHeight) * 2 - 1;
-      this.planeNormal.copy(this._camera.position).normalize();
-      this.plane.setFromNormalAndCoplanarPoint(
-        this.planeNormal,
+      this._pointer.x = (touch.clientX / window.innerWidth) * 2 - 1;
+      this._pointer.y = (touch.clientY / window.innerHeight) * 2 - 1;
+      this._planeNormal.copy(this._camera.position).normalize();
+      this._intersectionPlane.setFromNormalAndCoplanarPoint(
+        this._planeNormal,
         this._scene.position
       );
-      this.raycaster.setFromCamera(this.pointer, this._camera);
-      this.raycaster.ray.intersectPlane(this.plane, this.intersectionPoint);
-      this.target.position.set(
-        this.intersectionPoint.x,
-        -this.intersectionPoint.y,
+      this._raycaster.setFromCamera(this._pointer, this._camera);
+      this._raycaster.ray.intersectPlane(
+        this._intersectionPlane,
+        this._intersectionPoint
+      );
+      this._target.position.set(
+        this._intersectionPoint.x,
+        -this._intersectionPoint.y,
         2
       );
     };
 
-    if (this._followMouse) {
-      window.addEventListener("mousemove", onMouseMove);
-      window.addEventListener("touchmove", onTouchMove);
-    }
-
-    this._LoadModel();
-    // Call the animation loop
-    this._RAF();
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("touchmove", onTouchMove);
   }
 
   _OnWindowResize() {
@@ -201,7 +291,7 @@ class ThreeDBasic extends EventTarget {
   }
 
   _LoadModel() {
-    const loader = new GLTFLoader();
+    const loader: GLTFLoader = new GLTFLoader();
     loader.load(
       this._glbRef,
       (gltf) => {
@@ -225,27 +315,13 @@ class ThreeDBasic extends EventTarget {
         this.isLoaded = true;
 
         // IF no animations then return
-        if (!this._animationNames.length) return;
+        if (!this._animationList) return;
 
-        this.animations = gltf.animations;
-
-        const defaultAnimation = this.animations.find((animation) => {
-          if (animation.name === this._defaultAnimationName) return animation;
-        });
-
-        this.mixer = new THREE.AnimationMixer(this._model);
-
-        let action = this.mixer.clipAction(defaultAnimation, this._model);
-
-        const animationDuration = defaultAnimation.duration;
-        action.loop = THREE.LoopOnce;
-
-        action.play();
-
+        this._animations = gltf.animations;
+        this._mixer = new THREE.AnimationMixer(this._model);
         setTimeout(() => {
-          action.time = animationDuration / 2; // Set the animation to the halfway point
-          action.paused = true;
-        }, (animationDuration / 2) * 1000);
+          this.playAnimation(this._playAnimation);
+        }, 1500);
       },
       () => {},
       () => {
@@ -255,10 +331,88 @@ class ThreeDBasic extends EventTarget {
     );
   }
 
+  // Animations
+  playAnimation(playAnimation: boolean) {
+    if (!this._animations) return;
+
+    const oldAnimation = this._animations.find((animation) => {
+      if (animation.name === this._defaultAnimationName) return animation;
+    });
+
+    let oldAction = this._mixer.clipAction(oldAnimation, this._model);
+
+    const animationDetailsName = Object.keys(this._animationList).find(
+      (animationName: string) => {
+        const animationNameString = this._animationList[animationName];
+
+        if (animationNameString.name === this._defaultAnimationName)
+          return true;
+
+        return false;
+      }
+    );
+
+    const animationDetails = this._animationList[animationDetailsName];
+    const animationDuration = animationDetails.animationLength;
+
+    oldAction.play();
+    if (playAnimation) {
+      setTimeout(() => {
+        oldAction.paused = true;
+      }, animationDuration);
+    } else {
+      oldAction.stop();
+      oldAction.reset();
+    }
+  }
+
+  changeAnimation(animationName: string) {
+    if (!this._animations) return;
+
+    const oldAnimation = this._animations.find((animation) => {
+      if (animation.name === this._defaultAnimationName) return animation;
+    });
+
+    let oldAction = this._mixer.clipAction(oldAnimation, this._model);
+
+    oldAction.stop();
+    oldAction.reset();
+    oldAction.paused = false;
+
+    const newAnimation = this._animations.find((animation) => {
+      if (animation.name === animationName) return animation;
+    });
+    this._defaultAnimationName = animationName;
+
+    let action = this._mixer.clipAction(newAnimation, this._model);
+
+    action.clampWhenFinished = true;
+
+    const animationDetailsName = Object.keys(this._animationList).find(
+      (animationName: string) => {
+        const animationNameString = this._animationList[animationName];
+
+        if (animationNameString.name === this._defaultAnimationName)
+          return true;
+
+        return false;
+      }
+    );
+
+    const animationDetails = this._animationList[animationDetailsName];
+
+    const animationDuration = animationDetails.animationLength;
+    action.play();
+
+    setTimeout(() => {
+      action.paused = true;
+    }, animationDuration);
+  }
+
   _rotateModelToFacePoint() {
     // Get the direction vector from the model to the mouse
     const direction = new THREE.Vector3()
-      .subVectors(this.target.position, this._model.position)
+      .subVectors(this._target.position, this._model.position)
       .normalize();
 
     // Calculate the angle the model needs to rotate to face the mouse
@@ -277,60 +431,6 @@ class ThreeDBasic extends EventTarget {
     );
   }
 
-  playAnimation(playAnimation: boolean) {
-    if (!this.animations) return;
-
-    const oldAnimation = this.animations.find((animation) => {
-      if (animation.name === this._defaultAnimationName) return animation;
-    });
-
-    let oldAction = this.mixer.clipAction(oldAnimation, this._model);
-
-    oldAction.loop = THREE.LoopOnce;
-    const animationDuration = oldAnimation.duration;
-
-    if (playAnimation) {
-      setTimeout(() => {
-        oldAction.time = animationDuration / 2; // Set the animation to the halfway point
-        oldAction.paused = true;
-      }, (animationDuration / 2) * 1000);
-    } else {
-      oldAction.stop();
-      oldAction.reset();
-    }
-  }
-
-  changeAnimation(animationName: string) {
-    if (!this.animations) return;
-
-    const oldAnimation = this.animations.find((animation) => {
-      if (animation.name === this._defaultAnimationName) return animation;
-    });
-
-    let oldAction = this.mixer.clipAction(oldAnimation, this._model);
-
-    oldAction.stop();
-    oldAction.reset();
-    oldAction.paused = false;
-
-    const newAnimation = this.animations.find((animation) => {
-      if (animation.name === animationName) return animation;
-    });
-    this._defaultAnimationName = animationName;
-
-    let action = this.mixer.clipAction(newAnimation, this._model);
-
-    action.clampWhenFinished = true;
-    const animationDuration = newAnimation.duration;
-    action.play();
-
-    setTimeout(() => {
-      action.time = animationDuration / 1.5; // Set the animation to the halfway point
-      action.paused = true;
-    }, (animationDuration / 1.5) * 1000);
-  }
-
-  // Cleanup assets
   remove() {
     if (this._scene) {
       this._scene = null;
@@ -350,18 +450,19 @@ class ThreeDBasic extends EventTarget {
     }
   }
 
-  _RAF() {
-    requestAnimationFrame(() => {
+  _RAF(t: number = 0) {
+    requestAnimationFrame((t) => {
       // Rotate the model to face the mouse position
       if (this._model && this._followMouse) {
         this._rotateModelToFacePoint();
       }
-      if (this.mixer) {
-        this.mixer.update(1 / 60); // Adjust time increment as needed
+      if (this._mixer) {
+        this._mixer.update(1 / 60); // Adjust time increment as needed
       }
 
       this._controls.update();
 
+      // Background plane
       if (this._plane) {
         this._plane.position.set(
           this._camera.position.x * -1,
@@ -373,8 +474,13 @@ class ThreeDBasic extends EventTarget {
         // this._plane.rotateY(Math.PI/2)
       }
 
+      // Update camera position
+      if (this._animationList) {
+        this._currentCameraMovementPath.update();
+      }
+
       this._threejs.render(this._scene, this._camera);
-      this._RAF();
+      this._RAF(t);
     });
   }
 }
