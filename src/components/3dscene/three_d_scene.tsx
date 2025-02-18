@@ -24,6 +24,7 @@ const ThreeDScene: React.FC<ThreeDSceneProps> = ({
   blurSrc = "",
   lightingArray = [],
   modelShadow = false,
+  dragRotateLimit = false
 }) => {
   const canvasRef = useRef(null);
   const inViewRef = useRef(null);
@@ -61,7 +62,8 @@ const ThreeDScene: React.FC<ThreeDSceneProps> = ({
           enableZoom,
           pathToBackground,
           lightingArray,
-          modelShadow
+          modelShadow,
+          dragRotateLimit
         );
         threedScene.current.addEventListener("modelloaded", onLoad);
       }, 1250);

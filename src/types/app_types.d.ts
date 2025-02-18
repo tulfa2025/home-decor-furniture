@@ -1,4 +1,5 @@
 import MovementPath from "@/components/3dscene/AnimationHelper";
+import { Vector3 } from "three";
 
 declare global {
   type LayoutProps = {
@@ -43,7 +44,8 @@ declare global {
   interface AnimationDetails {
     name: string;
     animationLength: number;
-    animation: MovementPath | null
+    animation: MovementPath | null;
+    startDelay: number
   }
 
   type LightingArray = Array<any>;
@@ -78,8 +80,10 @@ declare global {
      * Object start position
      */
     duration: number;
-    tween: TWEEN.Tween;
     path: THREE.Curve<THREE.Vector3>;
+    delay: number;
+
+    lookAtPosition?: Vector3;
   }
 
   interface AnimationOptions {

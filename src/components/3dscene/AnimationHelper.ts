@@ -1,5 +1,6 @@
 import * as TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/Addons.js";
 
 /**
  *
@@ -41,8 +42,8 @@ class MovementPath {
   }
 
   // initialise animations
-  public initialize(threeDObject?: THREE.Object3D) {
-    if (threeDObject) this.movingObject = threeDObject;
+  public initialize(threeDObject?: OrbitControls, dragRotate: boolean, dragLimit: boolean) {
+    if (threeDObject && !this.movingObject) this.movingObject = threeDObject.object;
   
     let previousTween = null;
 
@@ -55,17 +56,58 @@ class MovementPath {
       function update (e) {
         // Update position based on `t` and path
         const newPos = animation.path.getPoint(e.t);
-        threeDObject.position.set(newPos.x, newPos.y, newPos.z);
+        threeDObject.object.position.set(newPos.x, newPos.y, newPos.z);
+
+       
       }
       // Create the tween for this animation
       const tweenObj = new TWEEN.Tween({ t: 0  })
         .to({ t: 1 }, animation.duration)
         .easing(TWEEN.Easing.Cubic.InOut)
         .onUpdate(update)
+        .onStart(()=>{
+
+          if(i === 0) {
+            threeDObject.enableRotate = false;
+            threeDObject.maxAzimuthAngle = Infinity;
+            threeDObject.minAzimuthAngle = -Infinity;
+
+            threeDObject.maxPolarAngle = Infinity;
+            threeDObject.minPolarAngle = -Infinity;
+          }
+          if(animation.lookAtPosition) {
+            threeDObject.target = animation.lookAtPosition;
+
+          }
+
+        })
         .onComplete(()=>{
+          
+          if(i + 1 === this.animationSequence.length){
+            if(dragRotate)threeDObject.enableRotate = true;
+
+            if(dragLimit){
+              const azAngle = threeDObject.getAzimuthalAngle();
+              const polAngle = threeDObject.getPolarAngle();
+
+              threeDObject.maxAzimuthAngle = azAngle + Math.PI/16;
+              threeDObject.minAzimuthAngle = azAngle - Math.PI/16;
+
+              threeDObject.maxPolarAngle = polAngle + Math.PI/16;
+              threeDObject.minPolarAngle = polAngle - Math.PI/16;
+            }
+          };
 
           if(i + 1 === this.animationSequence.length) return
-          this._tween = tweens[i+1]
+          this._tween = tweens[i+1];
+
+          const newAnimation = this.animationSequence[i + 1];
+
+          if(newAnimation.lookAtPosition) {
+            threeDObject.target = newAnimation.lookAtPosition;
+          }
+
+          
         })
         .delay(animation.delay);  // Apply delay before starting this animation
   

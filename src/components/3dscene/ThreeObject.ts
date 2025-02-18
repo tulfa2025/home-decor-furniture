@@ -90,7 +90,8 @@ class ThreeDBasic extends EventTarget {
     enableZoom = false,
     pathToBackground = "",
     lightingArray,
-    modelShadow = false
+    modelShadow = false,
+    dragRotateLimit= false
   ) {
     super();
 
@@ -106,6 +107,7 @@ class ThreeDBasic extends EventTarget {
     // INteractive controls
     this._followMouse = followMouse;
     this._dragRotateEnabled = dragRotateEnabled;
+    this._dragRotateLimit = dragRotateLimit;
     this._enableZoom = enableZoom;
 
     this._cameraPosition = cameraPosition; // PLacement of camera in world space
@@ -155,9 +157,6 @@ class ThreeDBasic extends EventTarget {
     // Create the scene
     this._scene = new THREE.Scene();
 
-    // Initialise animation, tie default animation to camera object
-    this._currentCameraMovementPath.initialize(this._camera);
-
     // Backgrond
     if (this._pathToBackground) {
       // Load an image and resize it
@@ -167,8 +166,8 @@ class ThreeDBasic extends EventTarget {
         // const size = Math.min(rect.width, rect.height); // Get the smaller dimension for equal width/height
 
         // Resize the texture (example for a plane geometry)
-        texture.image.width = 15;
-        texture.image.height = 15;
+        texture.image.width = 35;
+        texture.image.height = 35;
 
         texture.generateMipmaps = false; // Disable mipmap generation
         texture.minFilter = THREE.LinearFilter; // Use linear filtering for better performance
@@ -178,7 +177,7 @@ class ThreeDBasic extends EventTarget {
         texture.needsUpdate = true;
 
         // Create a plane with the resized texture
-        const geometry = new THREE.PlaneGeometry(15, 15);
+        const geometry = new THREE.PlaneGeometry(35, 35);
         const material = new THREE.MeshBasicMaterial({ map: texture });
         const plane = new THREE.Mesh(geometry, material);
 
@@ -195,6 +194,7 @@ class ThreeDBasic extends EventTarget {
     if (this._lightingArray.length > 0) {
       for (let light of this._lightingArray) {
         this._scene.add(light);
+        this._scene.add(light.target);
       }
     }
 
@@ -205,6 +205,8 @@ class ThreeDBasic extends EventTarget {
     this._controls.dampingFactor = 0.25; // Damping factor (slows down the camera movement)
     this._controls.enableZoom = this._enableZoom; // Allow zooming
     this._controls.enableRotate = this._dragRotateEnabled;
+
+    this._controls.maxDistance =10
 
     this._camera.position.set(...this._cameraPosition); // Position the camera
     this._controls.update();
@@ -300,6 +302,7 @@ class ThreeDBasic extends EventTarget {
         this._model.rotation.set(...this._modelRotation);
 
         this._model.traverse((c) => {
+        
           if (c.isMesh) {
             c.geometry.computeVertexNormals();
             c.castShadow = true; // Mesh casts shadows
@@ -312,16 +315,17 @@ class ThreeDBasic extends EventTarget {
         // DISPATCH LOADED EVENT
         this.dispatchEvent(new CustomEvent("modelloaded"));
 
-        this.isLoaded = true;
-
         // IF no animations then return
         if (!this._animationList) return;
 
         this._animations = gltf.animations;
         this._mixer = new THREE.AnimationMixer(this._model);
+
+        //
         setTimeout(() => {
+          this.isLoaded = true;
           this.playAnimation(this._playAnimation);
-        }, 1500);
+        }, 2000);
       },
       () => {},
       () => {
@@ -335,34 +339,39 @@ class ThreeDBasic extends EventTarget {
   playAnimation(playAnimation: boolean) {
     if (!this._animations) return;
 
-    const oldAnimation = this._animations.find((animation) => {
+    const animation = this._animations.find((animation) => {
       if (animation.name === this._defaultAnimationName) return animation;
     });
 
-    let oldAction = this._mixer.clipAction(oldAnimation, this._model);
+    const action = this._mixer.clipAction(animation, this._model);
 
-    const animationDetailsName = Object.keys(this._animationList).find(
-      (animationName: string) => {
-        const animationNameString = this._animationList[animationName];
-
-        if (animationNameString.name === this._defaultAnimationName)
-          return true;
+    const animationDetails = Object.values(this._animationList).find(
+      (animationDets) => {
+        if (animationDets.name === this._defaultAnimationName) return true;
 
         return false;
       }
     );
-
-    const animationDetails = this._animationList[animationDetailsName];
     const animationDuration = animationDetails.animationLength;
+    const animationStartDelay = animationDetails.startDelay;
 
-    oldAction.play();
+    // Initialise animation, tie default animation to camera objec
+    if (animationDetails.animation) {
+      this._currentCameraMovementPath = animationDetails.animation;
+
+      this._currentCameraMovementPath.initialize(this._controls, this._dragRotateEnabled, this._dragRotateLimit);
+    }
+
+    setTimeout(() => {
+      action.play();
+    }, animationStartDelay);
     if (playAnimation) {
       setTimeout(() => {
-        oldAction.paused = true;
-      }, animationDuration);
+        action.paused = true;
+      }, animationDuration + animationStartDelay);
     } else {
-      oldAction.stop();
-      oldAction.reset();
+      action.stop();
+      action.reset();
     }
   }
 
@@ -373,40 +382,50 @@ class ThreeDBasic extends EventTarget {
       if (animation.name === this._defaultAnimationName) return animation;
     });
 
-    let oldAction = this._mixer.clipAction(oldAnimation, this._model);
+    const oldAction = this._mixer.clipAction(oldAnimation, this._model);
 
     oldAction.stop();
     oldAction.reset();
     oldAction.paused = false;
 
+    // Get glb-stored animation
     const newAnimation = this._animations.find((animation) => {
       if (animation.name === animationName) return animation;
     });
     this._defaultAnimationName = animationName;
 
-    let action = this._mixer.clipAction(newAnimation, this._model);
+    // Configure animation action
+    const action = this._mixer.clipAction(newAnimation, this._model);
 
-    action.clampWhenFinished = true;
-
-    const animationDetailsName = Object.keys(this._animationList).find(
-      (animationName: string) => {
-        const animationNameString = this._animationList[animationName];
-
-        if (animationNameString.name === this._defaultAnimationName)
-          return true;
+    // Get animation details from list
+    const animationDetails = Object.values(this._animationList).find(
+      (animationDets) => {
+        if (animationDets.name === this._defaultAnimationName) return true;
 
         return false;
       }
     );
 
-    const animationDetails = this._animationList[animationDetailsName];
-
     const animationDuration = animationDetails.animationLength;
-    action.play();
+    const animationStartDelay = animationDetails.startDelay;
 
+    action.clampWhenFinished = true;
+
+    // Configure camera animation
+    if (animationDetails.animation) {
+      this._currentCameraMovementPath = animationDetails.animation;
+      this._currentCameraMovementPath.initialize(this._controls, this._dragRotateEnabled, this._dragRotateLimit);
+    }
+
+    //Delay animation start
+    setTimeout(() => {
+      action.play();
+    }, animationStartDelay);
+
+    // Pause animation at specified point
     setTimeout(() => {
       action.paused = true;
-    }, animationDuration);
+    }, animationDuration + animationStartDelay);
   }
 
   _rotateModelToFacePoint() {
@@ -460,7 +479,7 @@ class ThreeDBasic extends EventTarget {
         this._mixer.update(1 / 60); // Adjust time increment as needed
       }
 
-      this._controls.update();
+      //
 
       // Background plane
       if (this._plane) {
@@ -471,15 +490,17 @@ class ThreeDBasic extends EventTarget {
         );
 
         this._plane.lookAt(this._camera.position);
+
         // this._plane.rotateY(Math.PI/2)
       }
 
       // Update camera position
-      if (this._animationList) {
+      if (this._animationList && this.isLoaded) {
         this._currentCameraMovementPath.update();
       }
 
-      this._threejs.render(this._scene, this._camera);
+      this._controls.update();
+      this._threejs.render(this._scene, this._controls.object);
       this._RAF(t);
     });
   }

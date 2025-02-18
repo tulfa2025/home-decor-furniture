@@ -266,8 +266,8 @@ const scrollTransformValues: ScrollTransformValues = {
     desktop: {
       input: [
         [0, 0],
-        [1, -0.6],
-        [1, -0.1],
+        [1, -0.9],
+        [1, -0.25],
         [1, 0.6],
         [1, 0.7],
         [1, 1],
@@ -318,8 +318,8 @@ const scrollTransformValues: ScrollTransformValues = {
     desktop: {
       input: [
         [0, 0],
-        [1, -0.5],
-        [1, 0],
+        [1, -0.7],
+        [1, -0.2],
         [1, 1],
       ],
       transform: [
@@ -418,7 +418,7 @@ const scrollTransformValues: ScrollTransformValues = {
     desktop: {
       input: [
         [0, 0],
-        [1, -0.5],
+        [1, -0.55],
         [1, 0],
         [1, 0.5],
         [1, 0.7],
@@ -615,8 +615,8 @@ const scrollTransformValues: ScrollTransformValues = {
     desktop: {
       input: [
         [0, 0],
-        [1, -0.4],
-        [1, 0.1],
+        [1, -0.5],
+        [1, 0],
         [1, 0.6],
         [1, 1],
       ],
