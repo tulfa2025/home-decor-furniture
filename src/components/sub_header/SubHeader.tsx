@@ -23,7 +23,7 @@ type SubHeaderProps = {
 export default function SubHeader({ activePage }: SubHeaderProps) {
   const navLinks = [
     { href: "/", label: "Product Images" },
-    { href: "/product_videos", label: "Product Videos" },
+   // { href: "/product_videos", label: "Product Videos" },
     // { href: "/immersive_experience", label: "Immersive Experience" },
   ];
 
