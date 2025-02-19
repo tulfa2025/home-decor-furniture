@@ -14,7 +14,7 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 type SubHeaderProps = {
   activePage:
     | "/"
-    | "/"
+    | "/product_videos"
     | "/immersive_experience"
     | "/case_studies"
     | "/faqs";
@@ -23,7 +23,7 @@ type SubHeaderProps = {
 export default function SubHeader({ activePage }: SubHeaderProps) {
   const navLinks = [
     { href: "/", label: "Product Images" },
-    { href: "/product_videos", label: "Product Videos" },
+    { href: "/", label: "Product Videos" },
     { href: "/immersive_experience", label: "Immersive Experience" },
   ];
 
