@@ -14,7 +14,7 @@ import SubheaderStyleContext from "@/context/subHeaderStyle";
 type SubHeaderProps = {
   activePage:
     | "/"
-    | "/product_videos"
+    | "/"
     | "/immersive_experience"
     | "/case_studies"
     | "/faqs";
